@@ -1,0 +1,12 @@
+//		BreadCrumb bread = new BreadCrumb("糖果云的书签1", "tangguoyun1.com");
+//		BreadCrumbUtil.add(bread, "糖果云的书签2", "tangguoyun2.com");
+//		BreadCrumbUtil.add(bread, "糖果云的书签3", "tangguoyun3.com");
+//		BreadCrumbUtil.add(bread, "糖果云的书签4", "tangguoyun4.com");
+//		
+//		req.setAttribute("bread", bread);
+
+
+
+	// userID = U.randomNum(6);//随机生成一个6位数字，类似qq号
+			// U.cookie(req, res, C.userID, userID);
+			// U.cookie(req, res, "password", "");//密码默认为空

@@ -1,0 +1,4 @@
+<?xml version='1.0' encoding='utf-8'?>
+<Context sessionCookiePathUsesTrailingSlash='false'>
+</Context>
+<!-- 防止url没有已斜杠结束的时候，在crome浏览器中session错乱的情况，每次刷新页面都会重新生成一个session id -->
