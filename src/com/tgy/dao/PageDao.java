@@ -2,12 +2,13 @@ package com.tgy.dao;
 
 import java.util.ArrayList;
 
+import javax.print.attribute.standard.PDLOverrideSupported;
+
 import org.apache.commons.lang3.StringUtils;
 import org.bson.types.ObjectId;
 import org.mongodb.morphia.dao.BasicDAO;
 
 import com.tgy.App;
-import com.tgy.entity.Bookmark;
 import com.tgy.entity.Folder;
 import com.tgy.entity.Page;
 
@@ -18,7 +19,6 @@ public class PageDao extends BasicDAO<Page, ObjectId> {
 	}
 
 	public void saveWithRef(Page page) {
-
 		save(page);
 
 		//文件夹中保存的网址
@@ -26,23 +26,30 @@ public class PageDao extends BasicDAO<Page, ObjectId> {
 
 			FolderDao folderDao = new FolderDao();
 			Folder pFolder = folderDao.getByID(page.pid);
-			if (pFolder.pages == null) {
-				pFolder.pages = new ArrayList<Page>();
+			if(pFolder!=null){
+				pFolder.add(page);
+				folderDao.save(pFolder);
+				return;
 			}
-			pFolder.pages.add(page);
-			folderDao.save(pFolder);
 		}
-		//书签直接保存的网址
-		else if (StringUtils.isNotBlank(page.bookmarkID)) {
-
-			BookmarkDao bookmarkDao = new BookmarkDao();
-			 
-			Bookmark bookmark = bookmarkDao.getByID(page.bookmarkID);
-			if (bookmark.pages == null) {
-				bookmark.pages = new ArrayList<Page>();
-			}
-			bookmark.pages.add(page);
-			bookmarkDao.save(bookmark);
-		}
+		
+		System.out.println("page : " + page.name + " can not find parent folder [pid="+page.pid+"], ignore saving parent folder.");
+		
+	}
+	
+	public void saveWithRef(Page page, Folder folder) {
+		if(folder == null){save(page);return;	}
+		page.pid = folder.id.toString();
+		save(page);
+		
+		folder.add(page);
+		FolderDao fDao = new FolderDao();
+		fDao.save(folder);
+	}
+	
+	public Page getByID(String id) {
+		if(StringUtils.isBlank(id))return null;
+		Page page = findOne("_id", new ObjectId(id));
+		return page;
 	}
 }

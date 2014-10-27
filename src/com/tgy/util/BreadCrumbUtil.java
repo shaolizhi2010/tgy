@@ -7,32 +7,22 @@ import java.util.List;
 import org.apache.commons.lang3.StringUtils;
 
 import com.tgy.dao.FolderDao;
-import com.tgy.entity.Bookmark;
 import com.tgy.entity.Folder;
 import com.tgy.vo.BreadCrumb;
 
 public class BreadCrumbUtil {
 	
-	public static BreadCrumb build(Bookmark bookmark){
-		if(bookmark == null){
+	public static BreadCrumb build(Object obj,String contextPath){
+		if(obj == null || !(obj instanceof Folder)){
 			return null;
 		}
-		//TODO
-		BreadCrumb bread = new BreadCrumb(bookmark.name, "/tgy/bookmark/?bid="+bookmark.id);
-		return bread;
-	}
-	
-	public static BreadCrumb build(Folder folder){
-		if(folder == null){
-			return null;
-		}
-		
+		Folder folder = (Folder)obj;
 		FolderDao folderDao = new FolderDao();
 		
 		List<BreadCrumb> list = new ArrayList<>();
 		while(folder!=null ){
-			//TODO
-			BreadCrumb bread = new BreadCrumb(folder.name, "/tgy/folder/?fid="+folder.id);
+			//TODO tgy is hardcode
+			BreadCrumb bread = new BreadCrumb(folder.name, contextPath+"/folder/?fid="+folder.id);
 			list.add(bread);
 			if(StringUtils.isNotBlank( folder.pid)){
 				folder = folderDao.getByID(folder.pid);

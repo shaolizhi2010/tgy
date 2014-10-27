@@ -30,6 +30,7 @@ public class LoginContoller extends HttpServlet {
 		 
 		if (loginUser != null) {
 			// login success
+			U.refreshSession(req.getSession());
 			req.getSession().invalidate();
 			req.getSession().setAttribute(C.userID, loginUser.id);
 			req.getSession().setAttribute("user", loginUser);

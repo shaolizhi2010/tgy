@@ -3,8 +3,6 @@ package com.tgy.util;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -17,7 +15,6 @@ import java.util.Map;
 import java.util.Random;
 import java.util.regex.Pattern;
 
-import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.Cookie;
@@ -30,38 +27,74 @@ import org.apache.commons.lang3.StringUtils;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
-import com.tgy.entity.Bookmark;
 
 public class U {
 
 	public static final String pattern_dateTime = "yyyy-MM-dd HH:mm:ss";
 
-	public static <T> T fromReqJson(HttpServletRequest req, Class<T> clazz){
+	public static String shortTitle(String title){
+		if(title==null){return "";}
+		String shortTitle = title;
+		String[] arr =  title.split("[- ,.():：（）]"); 
+		if(arr.length>1){
+			shortTitle = arr[0];
+		}
+		
+		return shortTitle;
+	}
+	
+	public static void refreshSession(HttpSession session) {
+
+		session.removeAttribute("fid");
+		session.removeAttribute("userFolders");
+		session.removeAttribute("curFolder");
+		session.removeAttribute("fid");
+		session.removeAttribute("folders");
+		session.removeAttribute("pages");
+	}
+
+	public static <T> T fromReqJson(HttpServletRequest req, Class<T> clazz) {
 		BufferedReader br;
 		try {
 			br = new BufferedReader(new InputStreamReader(req.getInputStream()));
-	        String json = "";
-	        if(br != null){
-	            json = br.readLine();
-	        }
-			
-	        T t = new Gson().fromJson(json, clazz);
-	        return t;
+			String json = "";
+			if (br != null) {
+				json = br.readLine();
+			}
+
+			T t = new Gson().fromJson(json, clazz);
+			return t;
 		} catch (IOException e) {
 			e.printStackTrace();
 			return null;
 		}
+	}
+	
+	public static Map<String,String> requestToMap(HttpServletRequest req) {
+		BufferedReader br;
+		try {
+			br = new BufferedReader(new InputStreamReader(req.getInputStream()));
+			String json = "";
+			if (br != null) {
+				json = br.readLine();
+			}
+
+			Map<String,String> t = new Gson().fromJson(json, HashMap.class);
+			return t;
+		} catch (IOException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+
+	public static void resSuccess(HttpServletResponse res) {
+
+		message(res, "操作成功");
 
 	}
-	
-	public static void resSuccess(HttpServletResponse res){
-		
-		message(res, "操作成功");
-		
-	}
-	
-	public static void message(HttpServletResponse res,String message){
-		
+
+	public static void message(HttpServletResponse res, String message) {
+
 		try {
 			res.getOutputStream().write(message.getBytes());
 			res.getOutputStream().flush();
@@ -69,16 +102,16 @@ public class U {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
+
 	}
-	
+
 	// return null if new user
 	public static String getUserID(HttpServletRequest req) {
 
 		if (req == null) {
 			return null;
 		}
-		if (U.param(req, C.userID,String.class) != null) {
+		if (U.param(req, C.userID, String.class) != null) {
 			return U.paramString(req, C.userID);
 		}
 
@@ -115,11 +148,21 @@ public class U {
 			System.out.println("forward to " + path + " exception");
 			e.printStackTrace();
 		}
-
 	}
+	
+	//TODO redirect
+//	public static void forward(ServletRequest req, ServletResponse res,
+//			String path) {
+//		try {
+//			req.getRequestDispatcher("").;
+//		} catch (Exception e) {
+//			System.out.println("forward to " + path + " exception");
+//			e.printStackTrace();
+//		}
+//	}
 
 	public static String paramString(Object obj, String key) {
-		Object value = param(obj, key,String.class);
+		Object value = param(obj, key, String.class);
 		if (value == null) {
 			return "";
 		}
@@ -141,26 +184,26 @@ public class U {
 				HttpServletRequest req = (HttpServletRequest) obj;
 				// attribute
 				if (req.getAttribute(key) != null) {
-					return (T)req.getAttribute(key);
+					return (T) req.getAttribute(key);
 				}
 				// parameter
 				else if (req.getParameter(key) != null) {
-					return (T)req.getParameter(key);
+					return (T) req.getParameter(key);
 				}
 				// session
 				else if (req.getSession() != null
 						&& req.getSession().getAttribute(key) != null) {
-					return  (T)req.getSession().getAttribute(key);
+					return (T) req.getSession().getAttribute(key);
 				}
 				// cookie
 				else if (cookie(req, key) != null) {
-					return (T)cookie(req, key);
+					return (T) cookie(req, key);
 				}
 
 			} else if (obj instanceof HttpSession) {
 				HttpSession session = (HttpSession) obj;
 				if (session.getAttribute(key) != null) {
-					return (T)session.getAttribute(key);
+					return (T) session.getAttribute(key);
 				}
 				// else if(session.getValue(key)!=null){//deprecation
 				// return session.getValue(key);
@@ -541,7 +584,7 @@ public class U {
 	// // }
 	//
 	public static String randomNum(int length) { // length表示生成字符串的长度
-		String base = "123456789";//0123456789 //abcdefghijklmnopqrstuvwxyz
+		String base = "123456789";// 0123456789 //abcdefghijklmnopqrstuvwxyz
 		Random random = new Random();
 		StringBuffer sb = new StringBuffer();
 		for (int i = 0; i < length; i++) {

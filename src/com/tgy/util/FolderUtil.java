@@ -4,97 +4,51 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
-import com.tgy.entity.Bookmark;
+import org.apache.commons.collections.CollectionUtils;
+
 import com.tgy.entity.Folder;
 import com.tgy.entity.Page;
-import com.tgy.service.BookmarkService;
 
-public class BookmarkUtil {
-	
-	static BookmarkService bookmarkService = new BookmarkService();
-	
-	public static void setCurrentBookmarkForRequest( Bookmark curBookmark,
+public class FolderUtil {
+
+	public static void setFolderForSession(Folder curFolder,
 			HttpServletRequest req) {
 
-		if (curBookmark != null) {
-			req.setAttribute("curBookmark", curBookmark);
-			req.setAttribute("folders", curBookmark.folders);
-			req.setAttribute("pages", curBookmark.pages);
+		if (curFolder != null) {
+			req.getSession().setAttribute("curFolder", curFolder);
+			req.getSession().setAttribute("folders", curFolder.folders);
+			req.getSession().setAttribute("pages", curFolder.pages);
 		}
 	}
-	
-
 
 	/**
-	 * 取出来默认书签
+	 * 取出来默认Folder
 	 * 
-	 * @param bookmarks
+	 * @param folders
 	 * @return
 	 */
-	public static Bookmark getDefaultBookmark(List<Bookmark> bookmarks) {
+	public static Folder getDefaultFolder(List<Folder> folders) {
 
-		if (bookmarks == null || bookmarks.size() == 0) {
+		if (CollectionUtils.isEmpty(folders)) {
 			return null;
 		}
 
-		// 只有一个书签，直接返回
-		if (bookmarks.size() == 1) {
-			return bookmarks.get(0);
+		// 只有一个收藏夹，直接返回
+		if (folders.size() == 1) {
+			return folders.get(0);
 		}
 
-		for (Bookmark bookmark : bookmarks) {
+		for (Folder folder : folders) {
 
-			if (bookmark != null && bookmark.isDefault) {
-				return bookmark;
+			if (folder != null && folder.isDefault) {
+				return folder;
 			}
 		}
 
-		// 没有默认书签，取第一个作为默认书签
-		return bookmarks.get(0);
+		// 没有默认收藏夹，取第一个作为默认收藏夹
+		return folders.get(0);
 
-	}
-
-	public static Bookmark getCurrentBookmark(List<Bookmark> bookmarks,
-			String bid) {
-
-		if (bookmarks == null || bookmarks.size() == 0) {
-			return null;
-		}
-
-		for (Bookmark bookmark : bookmarks) {
-
-			if (bookmark != null && bookmark.id.toString().equals(bid)) {
-				return bookmark;
-			}
-		}
-
-		// 没有默认书签，取第一个作为默认书签
-		return null;
-
-	}
-
-	public static List<Bookmark> defaultBookmarks() {
-		Bookmark bookmark1 = new Bookmark();
-		bookmark1.name = "糖果云的书签";
-		bookmark1.folders = new ArrayList<Folder>();
-		bookmark1.folders.add(buildFolderSearch());// Search
-		bookmark1.folders.add(buildFolderWanggou());// Search
-
-		bookmark1.pages = buildDefaultPages();
-
-		bookmark1.isDefault = true;
-
-		Bookmark bookmark2 = new Bookmark();
-		bookmark2.name = "qq书签";
-		bookmark2.folders = buildDefaultFolders();
-		bookmark2.pages = buildDefaultPages();
-
-		List<Bookmark> bookmarks = new ArrayList<Bookmark>();
-		bookmarks.add(bookmark1);
-		bookmarks.add(bookmark2);
-		return bookmarks;
 	}
 
 	public static List<Folder> buildDefaultFolders() {
@@ -165,7 +119,7 @@ public class BookmarkUtil {
 	public static Page buildPage(String name, String link) {
 		Page page = new Page();
 		page.name = name;
-		page.link = link;
+		page.url = link;
 		return page;
 	}
 }

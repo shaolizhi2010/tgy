@@ -114,24 +114,18 @@ public class UploadBookmarkUtil {
 				if (a.getAttribute("href") != null) {
 					link = a.getAttribute("href").getValue();
 				}
-				if(folder.pages == null){
-					folder.pages = new ArrayList<>();
-				}
 
 				if(StringUtils.isNotBlank(link) && link.startsWith("http")){
 					Page page = new Page();
 					page.name = name;
-					page.link = link;
-					folder.pages.add(page);
+					page.url = link;
+					folder.add(page);
 				}
 				
 				
 			}
 			
-			if (parentFolder.folders == null) {
-				parentFolder.folders = new ArrayList<>();
-			}
-			parentFolder.folders.add(folder);
+			parentFolder.add(folder);
 
 			for (Element e : element.getChildren()) {
 				scan(e, folder);

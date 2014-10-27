@@ -1,3 +1,44 @@
+$(".c-a")
+							.click(
+									function(event) {
+										if ($(this).attr("pre-href") !== null) {
+
+											$(this).attr("href",
+													$(this).attr("pre-href"));
+											if ($(this).attr("href").indexOf(
+													"http://") == -1
+													&& $(this)
+															.attr("href")
+															.indexOf("https://") == -1) {
+												$(this)
+														.attr(
+																"href",
+																"http://"
+																		+ $(
+																				this)
+																				.attr(
+																						"href"));
+											}
+
+											$(this).trigger("click");
+										}
+										// return false;
+									});
+
+function CheckLength(txtObj) {
+		var val = txtObj.val();
+		var valLength = 0;
+		for (var ii = 0; ii < val.length; ii++) {
+			var word = val.substring(ii, 1);
+			if (/[^\x00-\xff]/g.test(word)) {
+				valLength += 2;
+			} else {
+				valLength++;
+			}
+		}
+		return valLength;
+	}
+
 //		BreadCrumb bread = new BreadCrumb("糖果云的书签1", "tangguoyun1.com");
 //		BreadCrumbUtil.add(bread, "糖果云的书签2", "tangguoyun2.com");
 //		BreadCrumbUtil.add(bread, "糖果云的书签3", "tangguoyun3.com");
