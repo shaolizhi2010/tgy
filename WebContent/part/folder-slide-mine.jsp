@@ -8,7 +8,7 @@
 	style="padding: 2px;   margin-bottom: 20px;">
 
 
-<p style="padding:  3px;">我的收藏夹：</p>
+<p style="padding:  3px;">收藏夹：</p>
 <%
 	List<Folder> userFolders = U.paramList(request, "userFolders");
 	for(Folder f : userFolders){
@@ -19,8 +19,9 @@
 		%>
 		<div class="col-md-12" style="padding:  3px;">
 		
-		  <a  href="<%=request.getContextPath() %>/folder/?fid=<%=f.id %>"
-           class="folderMark editable" dataid="<%=f.id%>"><span class=" glyphicon glyphicon-star-empty"></span> 
+		  <a  href="<%=request.getContextPath() %>/folder/?fid=<%=f.id %>&name=<%=name %>"
+           class="folderMark editable" dataid="<%=f.id%>"
+           dataname="<%=f.name%>"><span class=" glyphicon glyphicon-star-empty"></span> 
            <%=name%>
              </a>
               
@@ -33,6 +34,6 @@
 					style="margin-top: 10px;"> >>新建 </a>
 	<a class="col-md-12"
 					ng-click="preUploadBookmarkFunction()" style="margin-top: 10px;">
-					>>浏览器导入 </a>
+					>>导入 </a> 
 
  </div>

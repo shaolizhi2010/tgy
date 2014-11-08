@@ -2,10 +2,10 @@
 
 <!-- 菜单 开始 -->
 <div id="menu" class="container col-md-12 "
-	style="padding-top: 10px; padding-bottom: 10px;">
-	<div id="logo" class="col-md-3">
-		<span style="font-size: 26px;">网址盒子</span> <span
-			style="display: block; font-size: 16px; color: #999; padding-bottom: 4px;">网站收藏、网站推荐</span>
+	style="padding: 3px; background-color: #f5f5f5; " > 
+	<div id="logo" class="col-md-4">
+		<span style="font-size: 26px;">网址盒子</span> 
+		<span style=" font-size: 14px; color: #666;">网站收藏、网站推荐</span>
 	</div>
 
 	<!-- 
@@ -25,7 +25,7 @@
 		</div>
 	</div>
  -->
-	<div id="searchSite-div" class="col-md-offset-5 col-md-3" style="padding-top:10px;  ">
+	<div id="searchSite-div" class="col-md-offset-4 col-md-3" style="padding:3px;   ">
 		<div class="input-group">
 			<input id="searchSite-input" placeholder="网站类别"
 				ng-keyup="$event.keyCode == 13 ? searchSite() : null" type="text"
@@ -35,23 +35,15 @@
 		</div>
 	</div>
 
-	<div class="col-md-1" style="padding-top:10px;  "> 
+	<div class="col-md-1" style="padding:3px;  ">
 		<a href="#" class="btn btn-default  dropdown-toggle"
-			data-toggle="dropdown"> <span>菜单</span><span class="caret"></span>
+			data-toggle="dropdown">
+			<span>菜单</span><span class="caret"></span>
 		</a>
 		<ul class="dropdown-menu" role="menu">
-			<li><a ng-click="preLoginFunction( )" href="#">登录</a></li>
-			<li><a ng-click="preAddUserFunction( )" href="#">注册</a></li>
+			<li><a ng-click="preLoginFunction()" href="#">登录</a></li>
+			<li><a ng-click="preAddUserFunction()" href="#">注册</a></li>
 			<li class="divider"></li>
-			<li><a ng-click="preEditAll()" href="#">编辑</a></li>
-			<li class="divider"></li>
-			<li><a
-				href="http://localhost/tgy/folder/?fid=5448792a7890c8799d303726">水平显示书签</a></li>
-			<li><a
-				href="http://localhost/tgy/folder/?fid=5448792a7890c8799d303726&show=h">垂直显示书签</a></li>
-			<li class="divider"></li>
-
-			<li><a href="#">Separated link</a></li>
 		</ul>
 	</div>
 	<!-- 
@@ -68,6 +60,6 @@
 
 <!-- 菜单 结束 -->
 
-<!-- 分割线 -->
-<hr class="divider col-sm-12"
-	style="border-top: 4px solid #eee; margin-top: 1px;">
+<!-- 分割线  -->
+<hr class="col-sm-12"
+	style="border-top: 2px solid #eee; padding: 0px;margin: 0px; ">

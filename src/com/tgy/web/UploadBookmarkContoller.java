@@ -1,12 +1,8 @@
 package com.tgy.web;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
-import javax.naming.ldap.Rdn;
-import javax.print.attribute.standard.PDLOverrideSupported;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
@@ -18,16 +14,14 @@ import javax.servlet.http.Part;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
-import org.bson.types.ObjectId;
-import org.mongodb.morphia.Key;
 
-import com.google.gson.Gson;
 import com.tgy.dao.FolderDao;
 import com.tgy.dao.PageDao;
 import com.tgy.entity.Folder;
 import com.tgy.entity.Page;
-import com.tgy.util.FolderUtil;
+import com.tgy.exception.BaseException;
+import com.tgy.service.FolderService;
+import com.tgy.service.PageService;
 import com.tgy.util.C;
 import com.tgy.util.U;
 import com.tgy.util.UploadBookmarkUtil;
@@ -69,18 +63,22 @@ public class UploadBookmarkContoller extends HttpServlet {
 		Folder rootFolder = new Folder();
 		rootFolder.name = bookmarkName;
 		rootFolder.userID = userID;
+		rootFolder.createDate = U.dateTime();
+		rootFolder.isRoot = true;
 		fDao.save(rootFolder);
-		
+		//保存root文件夹中的网页
 		if(uploadFolder.pages!=null){
 			for(Page p : uploadFolder.pages){
 				p.userID = userID;
 				p.pid = rootFolder.id.toString();
+				p.createDate = U.dateTime();
 				pDao.save(p);
 	 
 				rootFolder.add(p);
 			}
 			fDao.save(rootFolder);
 		}
+		//保存子文件夹
 		if(uploadFolder.folders!=null){
 			for(Folder f : uploadFolder.folders){
 				saveFolder(f,userID,rootFolder);
@@ -90,14 +88,14 @@ public class UploadBookmarkContoller extends HttpServlet {
 		U.refreshSession(req.getSession());
 		
 		//System.out.println(new Gson().toJson(folder));
-		
-		U.message(res, "操作成功");
+		//res.sendRedirect("localhost/tgy/");
+		U.resSuccess(res);
 
 	}
 	
-	public void saveFolder(Folder uploadFolder, String userID,Folder pFolder){
-		FolderDao fDao = new FolderDao(); 
-		PageDao pDao = new PageDao();
+	public void saveFolder(Folder uploadFolder,   String userID,Folder rootFolder){
+		FolderService fService = new FolderService();
+		PageService pService = new PageService();
 		
 		if(uploadFolder!=null){// &&  uploadFolder.name!=null
 			
@@ -105,28 +103,43 @@ public class UploadBookmarkContoller extends HttpServlet {
 			Folder folder = new Folder();
 			folder.name = uploadFolder.name;
 			folder.userID = userID;
-			folder.pid = pFolder.id.toString();
-			fDao.save(folder);
- 
+			folder.pid = rootFolder.id.toString();
+			try {
+				long tempTime = System.currentTimeMillis();
+				fService.save(folder);
+				System.out.println("fService.save(folder) " + folder.name+ " - " + (System.currentTimeMillis()-tempTime));
+			} catch (BaseException e) {
+				System.out.println("导入书签:保存Folder："+e.getMessage());
+			}
+			
+			//save pages
 			if( !CollectionUtils.isEmpty(uploadFolder.pages )   ){
 				for(Page p : uploadFolder.pages){
 					p.pid = folder.id.toString();
 					p.userID = userID;
-					pDao.save(p);
+					try {
+						long tempTime = System.currentTimeMillis();
+						pService.save(p);
+						System.out.println("pService.save(p) " + p.name+ " - " + (System.currentTimeMillis()-tempTime));
+					} catch (BaseException e) {
+						System.out.println("导入书签:保存网页："+e.getMessage());
+					}
  
 					folder.add(p);
 				}
 			}
-			fDao.save(folder);
+			 
+				new FolderDao().save(folder);
+ 
 			
 			//设置父文件的folders 并保存
-			pFolder.add(folder);
-			fDao.save(pFolder);
+			//pFolder.add(folder);
+			//fDao.save(pFolder);
 			
 			//有过有子文件夹，则继续递归遍历 子文件夹
 			if( !CollectionUtils.isEmpty( uploadFolder.folders )  ){
 				for(Folder f : uploadFolder.folders){
-					saveFolder(f,userID,folder);
+					saveFolder(f,userID,rootFolder);
 				}
 			}
 			

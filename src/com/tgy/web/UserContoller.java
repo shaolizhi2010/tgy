@@ -24,13 +24,16 @@ import com.tgy.util.FolderUtil;
 import com.tgy.util.U;
 import com.tgy.vo.BreadCrumb;
 
-@WebServlet(urlPatterns = { "", "/bookmark/", "/folder/" })
-public class IndexContoller extends HttpServlet {
+@WebServlet(urlPatterns = {"/u/"})
+public class UserContoller extends HttpServlet {
 
+	//TODO rest
 	@Override 
 	protected void service(HttpServletRequest req, HttpServletResponse res)
 			throws ServletException, IOException {
 		long start = System.currentTimeMillis();
+		
+		
 		
 		String showType = req.getParameter("show");
 		

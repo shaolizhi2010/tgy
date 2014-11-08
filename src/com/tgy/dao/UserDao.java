@@ -5,8 +5,8 @@ import org.mongodb.morphia.dao.BasicDAO;
 import org.mongodb.morphia.query.Query;
 
 import com.tgy.App;
-import com.tgy.entity.Tag;
 import com.tgy.entity.User;
+import com.tgy.statistic.entity.Tag;
 
 public class UserDao extends BasicDAO<User, ObjectId> {
 
@@ -28,7 +28,7 @@ public class UserDao extends BasicDAO<User, ObjectId> {
 		return loginUser;
 	}
 	public User getByID(String userID) {
-		if(userID==null){
+		if(userID==null || userID.equalsIgnoreCase("null")){
 			return null;
 		}
 

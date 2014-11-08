@@ -13,8 +13,8 @@ import org.mongodb.morphia.query.UpdateOperations;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBObject;
 import com.tgy.App;
-import com.tgy.entity.Link;
-import com.tgy.entity.Tag;
+import com.tgy.statistic.entity.Link;
+import com.tgy.statistic.entity.Tag;
 
 public class LinkDao extends BasicDAO<Link, ObjectId> {
 

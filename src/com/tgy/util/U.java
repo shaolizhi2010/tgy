@@ -32,17 +32,51 @@ public class U {
 
 	public static final String pattern_dateTime = "yyyy-MM-dd HH:mm:ss";
 
-	public static String shortTitle(String title){
-		if(title==null){return "";}
+	public static String randomColor() {
+		int i = new Random().nextInt(4);
+		switch (i) {
+		//case 0:
+		//	return "#d9534f";  //red 
+		case 1:
+			return "#428bca";//blue
+		case 2:
+			return "#5cB85c";//green
+		case 3:
+			return "#58c0de";//light blue
+		case 0:
+			return "#f0ad4e";//orange
+
+		default:
+			return "#5cB85c";//default green
+		}
+	}
+
+	public static String shortTitle(String title) {
+		if (title == null) {
+			return "";
+		}
 		String shortTitle = title;
-		String[] arr =  title.split("[- ,.():：（）]"); 
-		if(arr.length>1){
+		String[] arr = title.split("[- ,.():：（）]");
+		if (arr.length > 1) {
 			shortTitle = arr[0];
 		}
-		
+
 		return shortTitle;
 	}
-	
+
+	public static String shortTitle(String title, int len) {
+		if (title == null)
+			return "";
+		if (title.length() > len) {
+			title = shortTitle(title) + "..";
+		}
+		if (title.length() > len) {
+			return title.substring(0, len) + "..";
+		}
+		return title;
+	}
+	 
+
 	public static void refreshSession(HttpSession session) {
 
 		session.removeAttribute("fid");
@@ -69,8 +103,8 @@ public class U {
 			return null;
 		}
 	}
-	
-	public static Map<String,String> requestToMap(HttpServletRequest req) {
+
+	public static Map<String, String> requestToMap(HttpServletRequest req) {
 		BufferedReader br;
 		try {
 			br = new BufferedReader(new InputStreamReader(req.getInputStream()));
@@ -79,7 +113,7 @@ public class U {
 				json = br.readLine();
 			}
 
-			Map<String,String> t = new Gson().fromJson(json, HashMap.class);
+			Map<String, String> t = new Gson().fromJson(json, HashMap.class);
 			return t;
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -88,9 +122,11 @@ public class U {
 	}
 
 	public static void resSuccess(HttpServletResponse res) {
+		message(res, C.operationSuccess);
+	}
 
-		message(res, "操作成功");
-
+	public static void resFailed(HttpServletResponse res,String errMsg) {
+		message(res, C.operationFailed+":"+errMsg);
 	}
 
 	public static void message(HttpServletResponse res, String message) {
@@ -112,7 +148,7 @@ public class U {
 			return null;
 		}
 		if (U.param(req, C.userID, String.class) != null) {
-			return U.paramString(req, C.userID);
+			return U.paramString(req.getSession(), C.userID);
 		}
 
 		return null;
@@ -149,17 +185,17 @@ public class U {
 			e.printStackTrace();
 		}
 	}
-	
-	//TODO redirect
-//	public static void forward(ServletRequest req, ServletResponse res,
-//			String path) {
-//		try {
-//			req.getRequestDispatcher("").;
-//		} catch (Exception e) {
-//			System.out.println("forward to " + path + " exception");
-//			e.printStackTrace();
-//		}
-//	}
+
+	// TODO redirect
+	// public static void forward(ServletRequest req, ServletResponse res,
+	// String path) {
+	// try {
+	// req.getRequestDispatcher("").;
+	// } catch (Exception e) {
+	// System.out.println("forward to " + path + " exception");
+	// e.printStackTrace();
+	// }
+	// }
 
 	public static String paramString(Object obj, String key) {
 		Object value = param(obj, key, String.class);
@@ -226,7 +262,10 @@ public class U {
 		if (StringUtils.isBlank(str)) {
 			return "";
 		}
-		return StringUtils.substring(str, 0, length);
+		if(str.length()<length){
+			return str;
+		}
+		return StringUtils.substring(str, 0, length)+"..";
 	}
 
 	// 是否是乱码

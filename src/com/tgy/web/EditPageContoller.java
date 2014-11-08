@@ -17,6 +17,7 @@ import com.tgy.entity.Folder;
 import com.tgy.entity.Page;
 import com.tgy.service.FolderService;
 import com.tgy.util.U;
+import com.tgy.validator.CommonValidator;
 
 @WebServlet("/page/edit/")
 public class EditPageContoller extends HttpServlet {
@@ -34,10 +35,26 @@ public class EditPageContoller extends HttpServlet {
 			String name = map.get("name");
 			String url = map.get("url");
 			String pid = map.get("pid");
+			
+			new CommonValidator().isLogin(req, null).isNotNull(id, "未找到要编辑的网址")
+			.isLonger(name, 0, "网站名称不能为空")
+			.isShorter(name, 10, "网站名称需小于100")
+			.isLonger(url, 0, "网址不能为空")
+			.isShorter(url, 300, "网址长度需小于300")
+			.isLonger(id, 0,  "未找到要编辑的网址")
+			.isShorter(id, 20,  "未找到要编辑的网址");
 
+			String userID = U.getUserID(req);
+			
 			PageDao pDao = new PageDao();
 			if(StringUtils.isNotBlank(id)){
 				Page page = pDao.getByID(id);	
+				
+				//check if page belong to user
+				if(!StringUtils.equals(page.userID, userID)){
+					U.resFailed(res, "请登录后编辑");
+				}
+				
 				page.name = name;
 				page.url = url;
 				page.pid = pid;

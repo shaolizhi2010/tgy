@@ -1,4 +1,4 @@
-package com.tgy.entity;
+package com.tgy.statistic.entity;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -9,6 +9,8 @@ import org.bson.types.ObjectId;
 import org.mongodb.morphia.annotations.Entity;
 import org.mongodb.morphia.annotations.Id;
 import org.mongodb.morphia.annotations.Reference;
+
+import com.tgy.entity.User;
 
 /**
  * 每个url 对应一个link对象

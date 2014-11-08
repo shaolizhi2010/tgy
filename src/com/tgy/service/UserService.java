@@ -11,12 +11,12 @@ public class UserService {
 	public User checkAndGetUser(String userID) throws BaseException{
 		// check user exsit
 		if (StringUtils.isBlank(userID)) {
-			throw new BaseException(this, "没有找到用户，保存书签失败");
+			throw new BaseException(this, "操作失败,需要用户");
 		}
 		UserDao uDao = new UserDao();
 		User user = uDao.getByID(userID);
 		if (user == null) {
-			throw new BaseException(this, "没有找到用户，保存书签失败");
+			throw new BaseException(this, "操作失败,需要用户");
 		}
 		return user;
 	}

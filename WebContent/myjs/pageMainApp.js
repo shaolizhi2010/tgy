@@ -1,3 +1,5 @@
+
+
 var app = angular.module("pageMainApp", []);
 app
 		.controller(
@@ -7,6 +9,7 @@ app
 					var userID = $('#userID').val();
 					var contextPath = $('#contextPath').val();
 					var fid = $('#fid').val();
+					var editingFlag = false;
 
 					/*
 					 * $scope.init = function () { alert( $.cookie('pages') ) ;
@@ -36,9 +39,12 @@ app
 									}
 								}).success(
 								function(data, status, headers, config) {
-									// alert('添加成功');
-									location.reload(true);
-									// $scope.data = data;
+									if(data.indexOf("操作成功")>=0 ){
+										location.reload(true);
+									}
+									else{
+										alert(data);
+									}
 								}).error(
 								function(data, status, headers, config) {
 									alert('服务器正在飞速运转，请耐心等待' + data);
@@ -47,9 +53,6 @@ app
 
 					};
 					$scope.editFolderFunction = function() {
-						alert($("#editFolder_dataid").val());
-						alert($("#editFolder_folderName").val());
-						alert(fid);
 						
 						$http(
 								{
@@ -64,9 +67,12 @@ app
 									}
 								}).success(
 								function(data, status, headers, config) {
-									// alert('添加成功');
-									location.reload(true);
-									// $scope.data = data;
+									if(data.indexOf("操作成功")>=0 ){
+										location.reload(true);
+									}
+									else{
+										alert(data);
+									}
 								}).error(
 								function(data, status, headers, config) {
 									alert('服务器正在飞速运转，请耐心等待' + data);
@@ -96,8 +102,14 @@ app
 									}
 								}).success(
 								function(data, status, headers, config) {
-									// alert('添加成功');
-									location.reload(true);
+									
+									if(data.indexOf("操作成功")>=0 ){
+										location.reload(true);
+									}
+									else{
+										alert(data);
+									}
+									
 									// $scope.data = data;
 								}).error(
 								function(data, status, headers, config) {
@@ -107,10 +119,28 @@ app
 
 					};
 
-					$scope.preAddPageFunction = function(bookmarkId, folderId) {
+					$scope.preAddPageFunction = function(name, url) {
+						
+						if(typeof name != 'undefined' && name.length>0){
+							$('#pageName').val(name);
+						}
+						
+						if(typeof url != 'undefined' && url.length>0){
+							$('#pageUrl').val(url);
+						}
+						
 						$('#createPageModel').modal();
 					};
-					$scope.createPageFunction = function() {
+					$scope.createPageFunction = function(name, url) {
+						
+						if(typeof name != 'undefined' && name.length>0){
+							$('#pageName').val(name);
+						}
+						
+						if(typeof url != 'undefined' && url.length>0){
+							$('#pageUrl').val(url);
+						}
+						
 						$http({
 							url : contextPath + "/page/create/",
 							method : "POST",
@@ -121,12 +151,15 @@ app
 								"url" : $('#pageUrl').val(),
 								"name" : $('#pageName').val(),
 								userID : userID,
-								pid : fid
+								pid : $('#createPage_pid').val()
 							}
 						}).success(function(data, status, headers, config) {
-							// alert('添加成功');
-							location.reload(true);
-							// $scope.data = data;
+							if(data.indexOf("操作成功")>=0 ){
+								location.reload(true);
+							}
+							else{
+								alert(data);
+							}
 						}).error(function(data, status, headers, config) {
 							alert('服务器正在飞速运转，请耐心等待' + data);
 							// $scope.status = status;
@@ -134,9 +167,9 @@ app
 						// alert('ng add');
 					}
 					$scope.editPageFunction = function() {
-						//alert($("#editPage_dataid").val());
-						//alert($("#editPage_pageName").val());
-						//alert($("#editPage_url").val());
+						// alert($("#editPage_dataid").val());
+						// alert($("#editPage_pageName").val());
+						// alert($("#editPage_url").val());
 						$http(
 								{
 									url : contextPath
@@ -151,7 +184,12 @@ app
 									}
 								}).success(
 								function(data, status, headers, config) {
-									location.reload(true);
+									if(data.indexOf("操作成功")>=0 ){
+										location.reload(true);
+									}
+									else{
+										alert(data);
+									}
 								}).error(
 								function(data, status, headers, config) {
 									alert('服务器正在飞速运转，请耐心等待' + data);
@@ -172,8 +210,12 @@ app
 							}
 						}).success(function(data, status, headers, config) {
 							$('#createUserModel').modal('hide');
-							alert(data);
-							location.reload(true);
+							if(data.indexOf("操作成功")>=0 ){
+								location.reload(true);
+							}
+							else{
+								alert(data);
+							}
 							// $scope.data = data;
 						}).error(function(data, status, headers, config) {
 							alert('服务器正在飞速运转，请耐心等待' + data);
@@ -218,9 +260,12 @@ app
 							method : "POST",
 							data : {}
 						}).success(function(data, status, headers, config) {
-							// $('#loginModel').modal('hide');
-							location.href = contextPath;
-							// $scope.data = data;
+							if(data.indexOf("操作成功")>=0 ){
+								location.reload(true);
+							}
+							else{
+								alert(data);
+							}
 						}).error(function(data, status, headers, config) {
 							alert('服务器正在飞速运转，请耐心等待' + data);
 							// $scope.status = status;
@@ -246,37 +291,57 @@ app
 								+ $('#search-input-google').val());
 					};
 					$scope.preEditAll = function() {
-						$(".editable").append("<span class='glyphicon glyphicon-pencil' style='font-size:8px;'></span>");
-						$(".editable").addClass('editing');
-						$(".editing").click( function(event) {
-							event.preventDefault();
-							//alert($(this).attr('dataid'));
-							if($(this).hasClass('folderMark')){
-								$("#editFolder_dataid").val( $(this).attr('dataid'));
-								$("#editFolder_folderName").val( $.trim($(this).text()) );
-								$('#editFolderModel').modal();
-							}
-							else if($(this).hasClass('pageMark')){
-								$("#editPage_dataid").val( $(this).attr('dataid'));
-								$("#editPage_pageName").val(  $(this).attr('dataname'));
-								$("#editPage_url").val( $.trim($(this).attr('href')) );
-								$('#editPageModel').modal();
-							}
-							
-							
-						});
-						//alert('edit');
+						editingFlag = !editingFlag;
+						if(editingFlag){
+							$(".editable").append("<span class='glyphicon glyphicon-pencil' style='font-size:8px;'></span>");
+							$(".editable").addClass('editing');
+							$(".editing").click( function(event) {
+								event.preventDefault();
+								// alert($(this).attr('dataid'));
+								if($(this).hasClass('folderMark')){
+									$("#editFolder_dataid").val( $(this).attr('dataid'));
+									$("#editFolder_folderName").val(  $(this).attr('dataname') );
+									$('#editFolderModel').modal();
+								}
+								else if($(this).hasClass('pageMark')){
+									$("#editPage_dataid").val( $(this).attr('dataid'));
+									$("#editPage_pageName").val(  $(this).attr('dataname'));
+									$("#editPage_url").val( $.trim($(this).attr('href')) );
+									$('#editPageModel').modal();
+								}
+								
+								
+							});
+						}
+						else{
+							$(".glyphicon-pencil").remove();
+							$(".editable").removeClass('editing');
+							$(".editable").unbind('click');//取消弹出编辑框，回复初始状态。
+						}
+						
+
+						// alert('edit');
 					};
 					
-//					$scope.edit = function(event){
-//						alert(event);
-//					}
-					
+// $scope.edit = function(event){
+// alert(event);
+// }
 
-
-					$scope.openLink = function(event) {
-						$("a").click(function(event) {
-							event.stopPropagation(); // do something
+					$scope.openLink = function(id,type) {
+							
+						$http({
+							url : contextPath + "/statistic/click/",
+							method : "POST",
+							data : {
+								
+								"id" : id,
+								"type" : type
+								
+							}
 						});
+						
+//						$("a").click(function(event) {
+//							event.stopPropagation(); // do something
+//						});
 					};
 				});

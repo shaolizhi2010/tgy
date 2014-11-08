@@ -1,3 +1,26 @@
+<span class="glyphicon glyphicon-book"
+		style="font-size: 10px; color: <%=folder.color %>; margin-right: 5px;  "></span>
+<ul class="dropdown-menu col-md-12" role="menu" aria-labelledby="dLabel">
+			    <li class="btn btn-default col-md-12">技术</li>
+			    <li class="btn btn-default col-md-12">新闻</li>
+			    <li class="btn btn-default col-md-12">其他</li>
+			  </ul>
+			  
+			  			<%
+				if (StringUtils.isBlank(pid)) {
+			%>
+			<a href="#"><span class="glyphicon glyphicon-arrow-left"
+				style="font-size: 18px;  padding-right: 10px; color: #666;"></span></a>
+			<%
+				} else {
+			%>
+			<a href="<%=request.getContextPath()%>/folder/?fid=<%=pid%>"><span
+				class="glyphicon glyphicon-arrow-left"
+				style="font-size: 18px;  padding-right: 10px;"></span></a>
+			<%
+				}
+			%>
+
 $(".c-a")
 							.click(
 									function(event) {

@@ -17,7 +17,6 @@ public class FolderUtil {
 
 		if (curFolder != null) {
 			req.getSession().setAttribute("curFolder", curFolder);
-			req.getSession().setAttribute("folders", curFolder.folders);
 			req.getSession().setAttribute("pages", curFolder.pages);
 		}
 	}

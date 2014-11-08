@@ -17,6 +17,7 @@ import com.tgy.dao.UserDao;
 import com.tgy.entity.User;
 import com.tgy.util.C;
 import com.tgy.util.U;
+import com.tgy.validator.CommonValidator;
 
 @WebServlet("/user/login/")
 public class LoginContoller extends HttpServlet {
@@ -25,8 +26,20 @@ public class LoginContoller extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
 		User user = U.fromReqJson(req, User.class);
-		 
+		
+		try {
+			new CommonValidator().isNotNull(user, null)
+				.isShorter(user.name, 20, "用户名过长")
+				.isLonger(user.name, 0, "请输入用户名")
+				.isShorter(user.password, 40, "密码过长")
+				.isLonger(user.password, 0, "请输入密码");
+		} catch (Exception e) {
+			U.resFailed(resp, e.getMessage());
+		}
+		
 		User loginUser = new UserDao().login(user);
+		
+		
 		 
 		if (loginUser != null) {
 			// login success

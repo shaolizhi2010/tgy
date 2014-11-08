@@ -15,22 +15,26 @@ import org.mongodb.morphia.annotations.Transient;
 public class Folder implements Serializable {
 	@Id
 	public ObjectId id;
-	public String name;
+	public String name ;
 	public String userID;
-
-	public String pid; //父文件夹的id //TODO ref Folder pFolder
 	
+	public String pid; // 父文件夹的id //TODO ref Folder pFolder
+
 	public boolean isDefault;
-	public boolean isRoot; //是否是根收藏夹，即页面左侧边栏里显示的收藏夹
-	
+	public boolean isRoot; // 是否是根收藏夹，即页面左侧边栏里显示的收藏夹
+
 	public String createDate;
-	
-	
-	@Reference(ignoreMissing = true)
-	public List<Folder> folders;//所有子文件夹
 
 	@Reference(ignoreMissing = true)
-	public List<Page> pages; //文件夹包含的页面
+	public List<Folder> folders;// 所有子文件夹
+
+	@Reference(ignoreMissing = true)
+	public List<Page> pages; // 文件夹包含的页面
+
+	public String color;
+	
+	// stastics
+	public int scanTimes; // 呗后台分析程序扫描的次数，0标识没扫描过
 
 	public void add(Folder folder) {
 		if (folders == null) {

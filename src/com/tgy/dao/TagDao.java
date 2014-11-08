@@ -5,7 +5,7 @@ import org.mongodb.morphia.dao.BasicDAO;
 import org.mongodb.morphia.query.Query;
 
 import com.tgy.App;
-import com.tgy.entity.Tag;
+import com.tgy.statistic.entity.Tag;
 
 public class TagDao extends BasicDAO<Tag, ObjectId> {
 

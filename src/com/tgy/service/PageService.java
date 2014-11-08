@@ -1,5 +1,7 @@
 package com.tgy.service;
 
+import java.util.List;
+
 import org.apache.commons.lang3.StringUtils;
 
 import com.tgy.dao.FolderDao;
@@ -8,15 +10,16 @@ import com.tgy.dao.PageDao;
 import com.tgy.dao.TagDao;
 import com.tgy.dao.UserDao;
 import com.tgy.entity.Folder;
-import com.tgy.entity.Link;
 import com.tgy.entity.Page;
-import com.tgy.entity.Tag;
 import com.tgy.entity.User;
 import com.tgy.exception.BaseException;
+import com.tgy.statistic.entity.Link;
+import com.tgy.statistic.entity.Tag;
 import com.tgy.util.U;
 
 public class PageService {
 
+	
 	public void copy(Page page, String userID) {
 		Page newPage = new Page();
 		newPage.name = page.name;
@@ -57,57 +60,6 @@ public class PageService {
 		}
 		//save page
 		pDao.saveWithRef(page);
-
-		// 下边的处理可以异步执行，尽快返回保存结果给用户 TODO
-
-		// save link
-		boolean newLinkFlag = false;
-		LinkDao lDao = new LinkDao();
-		Link link = lDao.getByUrl(page.url);
-		if (link == null) { // first create
-			newLinkFlag = true;
-			link = new Link();
-			link.url = StringUtils.trim(page.url);
-			link.title = page.name;// TODO title should be html title.
-			link.createDate = page.createDate;
-			link.clicks = 0;
-			link.keeps = 1;
-			link.favScore = Link.keepScore;
-			link.firstCreateBy = user;
-			link.add(user);
-		} else {
-
-			if (link.users == null || !link.users.contains(user)) { // 该用户第一次收藏
-				link.keeps++;
-				link.favScore += Link.keepScore;
-				link.add(user);
-			}
-			// 用户重复收藏，不记分,也不再记录user
-		}
-
-		// pre get tag
-		TagDao tDao = new TagDao();
-		// get folder name
-		Folder folder = fDao.getByID(page.pid);
-		Tag tag = null;
-		if (folder != null) {
-			// get tab by folder name
-			tag = tDao.getByName(folder.name);
-
-			if (tag != null) {
-				if (link.tags == null || !link.tags.contains(tag)) {
-					// add tag into link
-					link.add(tag);
-				}
-			}
-		}
-		// save link
-		lDao.save(link);
-		// add link into tag and save tag
-		if (tag != null && newLinkFlag) {
-			tag.add(link);
-			tDao.save(tag);
-		}
 
 		return page;
 

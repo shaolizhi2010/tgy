@@ -10,7 +10,10 @@ import com.mongodb.MongoClient;
 
 //singleton share by whole server
 public class App {
-
+	
+	MongoClient client;
+	Datastore ds;
+	
 	private App() {
 	}
 
@@ -23,8 +26,13 @@ public class App {
 	public Datastore getDatastore() {
 
 		try {
-			MongoClient client = new MongoClient("localhost");
-			Datastore ds = new Morphia().createDatastore(client, "tgy");
+			if(client == null){
+				client = new MongoClient("localhost");
+			}
+			if(ds==null){
+				ds= new Morphia().createDatastore(client, "tgy");
+			}
+			 
 			return ds;
 		} catch (UnknownHostException e) {
 			System.out.println("找不到Mongo数据库");

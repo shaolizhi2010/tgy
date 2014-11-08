@@ -19,20 +19,7 @@
 		<ol class="breadcrumb col-sm-9"
 			style="padding: 3px;   margin: 0px; background-color: #eee;">
 			<!-- background-color: #fff; -->
-			<%
-				if (StringUtils.isBlank(pid)) {
-			%>
-			<a href="#"><span class="glyphicon glyphicon-arrow-left"
-				style="font-size: 18px;  padding-right: 10px; color: #666;"></span></a>
-			<%
-				} else {
-			%>
-			<a href="<%=request.getContextPath()%>/folder/?fid=<%=pid%>"><span
-				class="glyphicon glyphicon-arrow-left"
-				style="font-size: 18px;  padding-right: 10px;"></span></a>
-			<%
-				}
-			%>
+
 
 			/
 			<%
@@ -41,7 +28,7 @@
 					bread = U.param(request, "bread", BreadCrumb.class);
 					while (bread != null) {
 			%>
-			<li><a href="<%=bread.link%>"><%=bread.name%></a></li>
+			<li><a href="<%=bread.link%>"><%=U.shortTitle(bread.name, 10) %></a></li>
 			<%
 				bread = bread.child;
 					}

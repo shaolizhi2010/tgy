@@ -3,20 +3,16 @@ package com.tgy.service;
 import org.apache.commons.lang3.StringUtils;
 
 import com.tgy.dao.FolderDao;
-import com.tgy.dao.LinkDao;
-import com.tgy.dao.PageDao;
-import com.tgy.dao.TagDao;
-import com.tgy.dao.UserDao;
 import com.tgy.entity.Folder;
-import com.tgy.entity.Link;
 import com.tgy.entity.Page;
-import com.tgy.entity.Tag;
 import com.tgy.entity.User;
 import com.tgy.exception.BaseException;
 import com.tgy.util.U;
 
 public class FolderService {
 
+	FolderDao fDao = new FolderDao();
+	
 	public void copy(Page page, String userID) {
 
 		// TODO save
@@ -28,11 +24,14 @@ public class FolderService {
 		UserService uService = new UserService();
 		User user = uService.checkAndGetUser(folder.userID);
 		
-		boolean isRoot = folder.isRoot;
-		FolderDao fDao = new FolderDao();
-		folder.createDate = U.dateTime();
+		if(StringUtils.isBlank(folder.pid) ){
+			folder.isRoot = true;
+		}
 		
-		if(isRoot){ //root folder
+		folder.createDate = U.dateTime();
+		folder.color = U.randomColor();
+		
+		if(folder.isRoot){ //root folder
 			fDao.saveWithRef(folder);
 		}
 		else{ //不是Root folder
@@ -58,7 +57,7 @@ public class FolderService {
 				//系统自动创建的root folder 不建立相应的Tag，
 			}
 		}
-
+/*TODO
 		// save tag
 		// TODO asyn
 		TagDao tDao = new TagDao();
@@ -83,7 +82,22 @@ public class FolderService {
 			// 用户重复收藏，不记分,也不再记录user
 
 		}
-
+*/
 		return folder;
+	}
+	
+	public Folder rootFolder(String folderID){
+		Folder folder  = fDao.getByID(folderID);
+		if(folder == null){
+			return null;
+		}
+		if(folder.isRoot){
+			return folder;
+		}
+		else{
+			return rootFolder(folder.pid);
+		}
+		
+		
 	}
 }

@@ -1,11 +1,28 @@
+<%@page import="org.apache.commons.lang3.StringUtils"%>
+<%@page import="com.tgy.util.U"%>
+<%@page import="com.tgy.entity.Folder"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" pageEncoding="UTF-8"%>
+
+<%
+List<Folder> folders = U.paramList(request, "folders");
+String fid = U.paramString(request.getSession(), "fid");
+Folder curFolder = U.param(request, "curFolder", Folder.class);
+String curFolderID = "";
+String curFolderName = "未定义";
+if(curFolder!=null){
+	curFolderID = String.valueOf( curFolder.id );
+	curFolderName = curFolder.name;
+}
+%>
+
 <div class="modal-dialog">
 	<div class="modal-content">
 		<div class="modal-header">
 			<button type="button" class="close" data-dismiss="modal">
 				<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
 			</button>
-			<h4 class="modal-title" id="myModalLabel">添加书签</h4>
+			<h4 class="modal-title" id="myModalLabel">添加网址</h4>
 		</div>
 		<div class="modal-body">
 
@@ -14,10 +31,29 @@
 				id="createPage_bookmarkId" />
 
 			<div style="margin-top: 20px;">
-				书签 :
-				todo
-
+				<label for="pageUrl">分类</label> 
 			</div>
+			<div class="">
+			   <select class="btn btn-default col-md-12"   id="createPage_pid">
+			   <option value="<%=curFolderID%>"  ><%=curFolderName%></option>
+			   <%
+			  
+						
+			   for(Folder f: folders){
+				   String selected = "";
+				   if(StringUtils.equals(fid, String.valueOf(f.id ))){
+					   selected = "selected='selected'";
+				   }
+				   %>
+				   <option value="<%=f.id%>" <%=selected %> ><%=f.name%></option>
+				   <%
+			   }
+			   %>
+			   
+			    </select>
+			  
+			</div>
+			
 			<div style="margin-top: 20px;">
 				<label for="pageUrl">网址</label><input class="form-control"
 					id="pageUrl" type="text" />
