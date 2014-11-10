@@ -132,7 +132,7 @@ public class U {
 	public static void message(HttpServletResponse res, String message) {
 
 		try {
-			res.getOutputStream().write(message.getBytes());
+			res.getOutputStream().write(message.getBytes("UTF-8"));
 			res.getOutputStream().flush();
 			res.getOutputStream().close();
 		} catch (IOException e) {

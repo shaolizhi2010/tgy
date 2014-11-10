@@ -13,8 +13,10 @@ import com.tgy.dao.FolderDao;
 import com.tgy.dao.LinkDao;
 import com.tgy.dao.PageDao;
 import com.tgy.dao.TagDao;
+import com.tgy.dao.UserDao;
 import com.tgy.entity.Folder;
 import com.tgy.entity.Page;
+import com.tgy.entity.User;
 import com.tgy.statistic.entity.Link;
 import com.tgy.statistic.entity.Tag;
 
@@ -42,6 +44,17 @@ public class LinkService {
 		return tag.links;
 
 	}
+	
+	public List<Link> list(){
+		
+		LinkDao lDao = new LinkDao();
+		
+		Query<Link> query = App.getInstance().getDatastore()
+				.createQuery(Link.class).order("-favScore").limit(50);
+		
+		return lDao.find(query).asList();
+		
+	}
 
 	/**
 	 * 扫描page表所有的网页，生成对应的信息。
@@ -52,6 +65,7 @@ public class LinkService {
 		FolderDao fDao = new FolderDao();
 		LinkDao lDao = new LinkDao();
 		TagDao tDao = new TagDao();
+		UserDao uDao = new UserDao();
 		
 		// TODO 分组 -> mapreduce
 		//只统计处理新增数据，TODO 更改或删除也应该纳入处理
@@ -65,6 +79,8 @@ public class LinkService {
 			Page page = it.next();
 			page.scanTimes++;
 			pDao.save(page);
+			
+			User user = uDao.getByID(page.userID);
 			
 			// save link
 			boolean newLinkFlag = false;
@@ -82,6 +98,7 @@ public class LinkService {
 				link.keeps++;
 				link.favScore += Link.keepScore;
 			}
+			link.add(user);
 
 			// pre get tag
 

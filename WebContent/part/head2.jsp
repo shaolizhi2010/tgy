@@ -1,3 +1,4 @@
+<%@page import="com.tgy.web.vo.BookmarkData"%>
 <%@page import="com.tgy.entity.User"%>
 <%@page import="com.tgy.util.C"%>
 <%@page import="com.tgy.entity.Folder"%>
@@ -8,7 +9,11 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
 
 <%
-	User user = U.param(request.getSession(), "user", User.class);
+	BookmarkData bookmarkData = U.param(request, "bookmarkData", BookmarkData.class);
+	User user = null;
+	if(bookmarkData!=null && bookmarkData.curUser!=null){
+		user = bookmarkData.curUser;
+	}
 	String userName = "";
 	String userID = "";
 
@@ -17,18 +22,20 @@
 		userName = user.name;
 		disableIfNotLogin = "";
 	} else {
-		userName = "游客";
+		userName = "未找到";
 	}
 %>
 
 <!--------面包屑----------->
 <div class=" col-sm-12"
-	style="padding: 3px; padding-top: 20px; padding-bottom: 20px; margin: 0px;">
+	style="padding: 3px; padding-top: 15px; padding-bottom: 15px; margin: 0px;">
 
 	<div class=" col-md-7">
-		<a><span class="glyphicon glyphicon-home"
-			style="font-size: 16px; font-weight: bold;"></span></a> <a><span
+		<a href="<%=request.getContextPath() %>/<%=userName%>"><span class="glyphicon glyphicon-home"
+			style="font-size: 16px; font-weight: bold;"></span></a> <a href="<%=request.getContextPath() %>/<%=userName%>"><span
 			style="font-size: 20px; font-weight: bold; margin-left: 3px;"><%=userName%></span></a>
+			
+			 
 
 		<!-- background-color: #fff; -->
 		<span style="font-size: 18px; font-weight: bold; margin-left: 3px;">
@@ -67,7 +74,6 @@
 				<li><a
 					href="http://localhost/tgy/folder/?fid=5448792a7890c8799d303726&show=h">垂直显示</a></li>
 			</ul>
-		
 	</div>
 
 </div>

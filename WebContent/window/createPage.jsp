@@ -4,17 +4,8 @@
 <%@page import="java.util.List"%>
 <%@ page language="java" pageEncoding="UTF-8"%>
 
-<%
-List<Folder> folders = U.paramList(request, "folders");
-String fid = U.paramString(request.getSession(), "fid");
-Folder curFolder = U.param(request, "curFolder", Folder.class);
-String curFolderID = "";
-String curFolderName = "未定义";
-if(curFolder!=null){
-	curFolderID = String.valueOf( curFolder.id );
-	curFolderName = curFolder.name;
-}
-%>
+<%@include file="../part/bookmark-data.jsp" %>
+ 
 
 <div class="modal-dialog">
 	<div class="modal-content">
@@ -34,8 +25,8 @@ if(curFolder!=null){
 				<label for="pageUrl">分类</label> 
 			</div>
 			<div class="">
-			   <select class="btn btn-default col-md-12"   id="createPage_pid">
-			   <option value="<%=curFolderID%>"  ><%=curFolderName%></option>
+			   <select class="  form-control"   id="createPage_pid">
+			   <option value="<%=fid%>"  ><%=curFolderName%></option>
 			   <%
 			  
 						

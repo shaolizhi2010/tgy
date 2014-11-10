@@ -1,3 +1,4 @@
+import java.nio.charset.Charset;
 import java.util.List;
 import java.util.Random;
 
@@ -10,6 +11,8 @@ public class TestMain {
 
 	public static void main(String[] args) {
 		try { 
+			
+			System.out.println(Charset.defaultCharset());
 			
 			new TagService().scan(); 
 			new LinkService().scan();

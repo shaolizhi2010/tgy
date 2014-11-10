@@ -41,8 +41,7 @@ public class EditPageContoller extends HttpServlet {
 			.isShorter(name, 10, "网站名称需小于100")
 			.isLonger(url, 0, "网址不能为空")
 			.isShorter(url, 300, "网址长度需小于300")
-			.isLonger(id, 0,  "未找到要编辑的网址")
-			.isShorter(id, 20,  "未找到要编辑的网址");
+			.isLength(id, 24,  "数据错误:id");
 
 			String userID = U.getUserID(req);
 			

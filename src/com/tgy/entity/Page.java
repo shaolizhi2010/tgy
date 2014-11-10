@@ -24,5 +24,6 @@ public class Page implements Serializable {
 	
 	//stastics
 	public int clicks;
+	public long favScore;
 	public int scanTimes; //呗后台分析程序扫描的次数，0标识没扫描过
 }

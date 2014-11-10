@@ -19,36 +19,45 @@
 
 		if (userID != null) {
 
-			 List<Page> pages = new PageDao().getByUserID(userID, null);
-			
+			List<Page> pages = new PageDao().getByUserID(userID, null);
+
 			if (!CollectionUtils.isEmpty(pages)) {
-				if(pages.size()>8)pages=pages.subList(0, 8);
+				if (pages.size() > 8)
+					pages = pages.subList(0, 8);
 	%>
 	<%
 		for (Page p : pages) {
-			String link =p.url;
-			if(link!=null && !link.startsWith("http:")){
-				link = "http://"+link;
-			}
-					 
+					String link = p.url;
+					if (link != null && !link.startsWith("http:")) {
+						link = "http://" + link;
+					}
 	%>
 
-	<div style="margin-top: 10px;   height: 20px;">
-		<a target="_blank" href="<%=link%>" class="col-md-8"
-			> <span
+	<div style="margin-top: 10px; height: 20px;">
+		<a target="_blank" href="<%=link%>" class="col-md-8"> <span
 			class="glyphicon glyphicon-star" style="color: #ffd76e;"></span> <span
-			style="color: #1155cc;"> <%= U.shortTitle(p.name) %></span> <!-- #ff076e #1155cc; 0000cc-->
+			style="color: #1155cc;"> <%=U.shortTitle(p.name)%></span> <!-- #ff076e #1155cc; 0000cc-->
 		</a> 
-		<span class="col-md-2" style="color: #1155cc;"> / <%=p.clicks %></span>
+		<span class="col-md-3" style="color: #1155cc;"> / <%=p.clicks%></span>
 	</div>
 	<%
-				}//end for
+		}//end for
 	%>
- 
+
 	<%
 		}// end if empty
 
 		}//end if userID
+		else {
+	%>
+
+	<div style="font-size: 12px;">
+		&nbsp;&nbsp;&nbsp;&nbsp;您还未登录，欢迎 <a ng-click="preLoginFunction()" href="#">登录</a> 或 <a
+			ng-click="preAddUserFunction()" href="#">注册</a>
+	</div>
+
+	<%
+		}
 	%>
 
 

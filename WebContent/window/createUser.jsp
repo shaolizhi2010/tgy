@@ -22,7 +22,7 @@
             <div style="margin-top: 20px;"  >
                 <label for="createUser-password-again">确认密码</label>
                 <input ng-keyup="$event.keyCode == 13 ? addUserFunction() : null"
-                       class="form-control" id="createUser-password-again" type="text"/>
+                       class="form-control" id="createUser-password-again" type="password"/>
             </div>
             <div  style="margin-top: 20px;" >
                 <button ng-click="addUserFunction()" id="createUser-ok" type="button"

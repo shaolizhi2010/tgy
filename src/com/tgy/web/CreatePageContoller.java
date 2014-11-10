@@ -36,13 +36,16 @@ public class CreatePageContoller extends HttpServlet {
 			.isLonger(page.url, 0, "网址不能为空")
 			.isShorter(page.url, 300, "网址长度需小于300");
 			
-			Folder pFolder = new FolderDao().getByID(page.pid);
-			if(pFolder==null){
-				U.resFailed(res, "所属分类未找到");
+			if(StringUtils.isNotBlank( page.pid)){
+				Folder pFolder = new FolderDao().getByID(page.pid);
+				if(pFolder==null){
+					U.resFailed(res, "所属分类未找到");
+				}
+				if (!StringUtils.equals(pFolder.userID, U.getUserID(req)) ){
+					U.resFailed(res, "请登录后操作");
+				}
 			}
-			if (!StringUtils.equals(pFolder.userID, U.getUserID(req)) ){
-				U.resFailed(res, "请登录后操作");
-			}
+
 			
 			pService.save(page);
 			U.refreshSession(req.getSession());

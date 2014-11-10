@@ -80,6 +80,30 @@ app
 								});
 
 					};
+					$scope.deleteFolderFunction = function() {
+						
+						$http(
+								{
+									url : contextPath
+											+ "/folder/delete/",
+									method : "POST",
+									data : {
+										"id":$("#editFolder_dataid").val()
+									}
+								}).success(
+								function(data, status, headers, config) {
+									if(data.indexOf("操作成功")>=0 ){
+										location.reload(true);
+									}
+									else{
+										alert(data);
+									}
+								}).error(
+								function(data, status, headers, config) {
+									alert('服务器正在飞速运转，请耐心等待' + data);
+									// $scope.status = status;
+								});
+					};
 					
 					$scope.preCreateRootFolderFunction = function(
 							parentFolderName, parentFolderId) {
@@ -165,11 +189,8 @@ app
 							// $scope.status = status;
 						});
 						// alert('ng add');
-					}
+					};
 					$scope.editPageFunction = function() {
-						// alert($("#editPage_dataid").val());
-						// alert($("#editPage_pageName").val());
-						// alert($("#editPage_url").val());
 						$http(
 								{
 									url : contextPath
@@ -181,6 +202,29 @@ app
 												.val(),
 										"url" : $('#editPage_url').val(),
 										"pid" : fid
+									}
+								}).success(
+								function(data, status, headers, config) {
+									if(data.indexOf("操作成功")>=0 ){
+										location.reload(true);
+									}
+									else{
+										alert(data);
+									}
+								}).error(
+								function(data, status, headers, config) {
+									alert('服务器正在飞速运转，请耐心等待' + data);
+								});
+
+					};
+					$scope.deletePageFunction = function() {
+						$http(
+								{
+									url : contextPath
+											+ "/page/delete/",
+									method : "POST",
+									data : {
+										"id":$("#editPage_dataid").val()
 									}
 								}).success(
 								function(data, status, headers, config) {
@@ -211,7 +255,7 @@ app
 						}).success(function(data, status, headers, config) {
 							$('#createUserModel').modal('hide');
 							if(data.indexOf("操作成功")>=0 ){
-								location.reload(true);
+								location.href = contextPath;
 							}
 							else{
 								alert(data);
@@ -238,11 +282,14 @@ app
 						}).success(function(data, status, headers, config) {
 
 							if (data == '登录成功') {
-								$('#loginModel').modal('hide');
 								location.href = contextPath;
+								
+								//$('#loginModel').modal('hide');
+								
 								// location.reload(true);
 							} else {
 								alert(data);
+								//alert(data);
 							}
 
 							// alert(data);

@@ -39,7 +39,7 @@ public class EditFolderContoller extends HttpServlet {
 			new CommonValidator().isLogin(req, null).isNotNull(id,  "未找到要编辑的收藏夹")
 			.isLonger(name, 0, "名称不能为空")
 			.isShorter(name, 60, "名称需小于60")
-			.isLonger(id, 0, "未找到要编辑的收藏夹");
+			.isLength(id, 24,  "数据错误:id") ;
 			//.isShorter(id, 20, "未找到要编辑的收藏夹");//oid invalid
 			
 			String userID = U.paramString(req.getSession(), C.userID);

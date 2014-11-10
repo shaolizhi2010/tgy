@@ -1,3 +1,4 @@
+<%@page import="com.tgy.web.vo.BookmarkData"%>
 <%@page import="com.tgy.entity.Folder"%>
 <%@page import="org.apache.commons.lang3.StringUtils"%>
 <%@page import="com.tgy.util.U"%>
@@ -5,12 +6,12 @@
 <%@page import="com.tgy.entity.Page"%>
 <%@ page language="java" pageEncoding="UTF-8"%>
 
+<%@include file="bookmark-data.jsp" %>
+
 <!-- 显示网址页面开始 -->
 <div class="col-sm-12" style="padding: 0px; padding-bottom: 10px;  ">
 
 	<%
-	
-		List<Page> pages = U.paramList(request, "pages");
 		for (Page p : pages) {
 			String pageName = p.name;
 			//name

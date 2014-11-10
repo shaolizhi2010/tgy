@@ -6,14 +6,14 @@
 	style="padding: 2px;   margin-bottom: 20px;">
 
 
-<p style="padding:  3px;">关注的书签：</p>
+<p style="padding:  3px;">关注：</p>
 
 <a pre-href=" "
-	href="<%=request.getContextPath()%>/folder/?fid=5448f8dd78908430816bcb4d"
+	href="<%=request.getContextPath()%>/folder/5448f8dd78908430816bcb4d/网址盒子"
 	class="  col-md-12  " style="padding:  3px;"> <span class=" glyphicon glyphicon-star-empty"></span> 网址盒子  </a>
 
-		<a class="col-md-12"
-		ng-click="preCreateFolderFunction()" style="margin-top: 10px;">
+		<a class="col-md-12" target="_blank" href="<%=request.getContextPath()%>/paihang/"
+		 style="margin-top: 10px;">
 		>>查看更多 </a>
 		
 		 <a class="col-md-12" ng-click="preCreateFolderFunction()"

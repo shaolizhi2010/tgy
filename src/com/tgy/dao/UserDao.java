@@ -35,4 +35,16 @@ public class UserDao extends BasicDAO<User, ObjectId> {
 		User user = findOne("_id", new ObjectId(userID));
 		return user;
 	}
+	
+	public User getByName(String userName) {
+		if(userName==null || userName.equalsIgnoreCase("null")){
+			return null;
+		}
+
+		Query<User> query = App.getInstance().getDatastore()
+				.createQuery(User.class).filter("name", userName);
+		User user = findOne(query);
+		return user;
+	}
+	 
 }

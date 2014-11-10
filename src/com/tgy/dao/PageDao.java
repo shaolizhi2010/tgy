@@ -40,6 +40,22 @@ public class PageDao extends BasicDAO<Page, ObjectId> {
 				+ "], ignore saving parent folder.");
 
 	}
+	public void deleteWithRef(Page page) {
+		delete(page);
+
+		// 文件夹中保存的网址
+		if (StringUtils.isNotBlank(page.pid)) {
+
+			FolderDao folderDao = new FolderDao();
+			Folder pFolder = folderDao.getByID(page.pid);
+			if (pFolder != null) {
+				pFolder.remove(page);
+				folderDao.save(pFolder);
+				return;
+			}
+		}
+
+	}
 
 	public void saveWithRef(Page page, Folder folder) {
 		if (folder == null) {

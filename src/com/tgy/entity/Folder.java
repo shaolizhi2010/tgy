@@ -33,6 +33,8 @@ public class Folder implements Serializable {
 
 	public String color;
 	
+	public long favScore;
+	
 	// stastics
 	public int scanTimes; // 呗后台分析程序扫描的次数，0标识没扫描过
 
@@ -43,11 +45,23 @@ public class Folder implements Serializable {
 		folders.add(folder);
 	}
 
+	public void remove(Folder folder){
+		if (folders != null) {
+			folders.remove(folder);
+		}
+	}
+	
 	public void add(Page page) {
 		if (pages == null) {
 			pages = new ArrayList<>();
 		}
 		pages.add(page);
+	}
+	
+	public void remove(Page page){
+		if (pages != null) {
+			pages.remove(page);
+		}
 	}
 
 	@Override

@@ -8,7 +8,9 @@ import org.mongodb.morphia.query.Query;
 import com.tgy.App;
 import com.tgy.dao.FolderDao;
 import com.tgy.dao.TagDao;
+import com.tgy.dao.UserDao;
 import com.tgy.entity.Folder;
+import com.tgy.entity.User;
 import com.tgy.service.FolderService;
 import com.tgy.statistic.entity.Tag;
 
@@ -28,6 +30,7 @@ public class TagService {
 	//扫描 folder表， 并声称Tag
 	public void scan() {
 		FolderDao fDao = new FolderDao();
+		UserDao uDao = new UserDao();
 		
 		//TODO 分组 -> mapreduce
 		
@@ -41,6 +44,7 @@ public class TagService {
 			folder.scanTimes ++;
 			fDao.save(folder);
 			
+			User user = uDao.getByID(folder.userID);
 
 			TagDao tDao = new TagDao();
 			Tag tag = tDao.getByName(folder.name);
@@ -56,9 +60,21 @@ public class TagService {
 				tag.favScore += Tag.keepScore;
 
 			}
+			tag.add(user);
 			tDao.save(tag);// save tag
 		}
 
+	}
+	
+	public List<Tag> list(){
+		
+		TagDao tDao = new TagDao();
+		
+		Query<Tag> query = App.getInstance().getDatastore()
+				.createQuery(Tag.class).order("-favScore").limit(50);
+		
+		return tDao.find(query).asList();
+		
 	}
 
 	/*

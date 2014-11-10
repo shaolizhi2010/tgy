@@ -1,3 +1,24 @@
+	<div class="col-md-3" style="padding: 2px;">
+			<input class="form-control  col-md-4" type="email"
+				placeholder="用户名">
+		</div>
+		<div class="col-md-3 " style="padding: 2px;">
+			<input class="form-control  col-md-4" type="email"
+				placeholder="密码">
+		</div> 
+		<div class="col-md-4 " style="padding: 2px;">       
+			<a href="#" class="btn btn-success col-md-6" style="color: #fff;font-weight: bold;">登录</a>
+			<a href="#" class="btn btn-default col-md-6" style="color: #555;font-weight: 400;">注册</a>
+		</div>
+
+<!-- create folder model
+<div class="modal fade" id="createFolderModel" tabindex="-1"
+	role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<jsp:include page="createFolder.jsp" />
+
+</div>
+ -->
+
 <span class="glyphicon glyphicon-book"
 		style="font-size: 10px; color: <%=folder.color %>; margin-right: 5px;  "></span>
 <ul class="dropdown-menu col-md-12" role="menu" aria-labelledby="dLabel">

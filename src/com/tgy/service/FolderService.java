@@ -1,7 +1,11 @@
 package com.tgy.service;
 
-import org.apache.commons.lang3.StringUtils;
+import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
+import org.mongodb.morphia.query.Query;
+
+import com.tgy.App;
 import com.tgy.dao.FolderDao;
 import com.tgy.entity.Folder;
 import com.tgy.entity.Page;
@@ -12,6 +16,15 @@ import com.tgy.util.U;
 public class FolderService {
 
 	FolderDao fDao = new FolderDao();
+	
+	public List<Folder> ByName(String folderName){
+		
+		Query<Folder> query = App.getInstance().getDatastore()
+				.createQuery(Folder.class).filter("name", folderName).order("-favScore");
+		
+		return fDao.find(query).asList();
+		
+	}
 	
 	public void copy(Page page, String userID) {
 

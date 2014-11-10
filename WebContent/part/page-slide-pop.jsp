@@ -6,12 +6,13 @@
 <%@page import="java.util.List"%>
 <%@ page language="java" pageEncoding="UTF-8"%>
 
+<%@include file="bookmark-data.jsp" %>
+
 <div class="container col-md-12 clearfix"
 	style="padding: 2px; padding-left: 20px; margin-bottom: 20px; border-left: 1px solid #eee;">
 
  
 	<%
-		Folder curFolder = U.param(request, "curFolder", Folder.class);
 
 		if (curFolder != null) {
 
@@ -44,8 +45,8 @@
 		}
 				}//end for
 	%>
-	<a class="col-md-12" ng-click="preCreateFolderFunction()"
-		style="margin-top: 10px;"> >>查看更多 </a>
+	<a class="col-md-12" target="_blank" href="<%=request.getContextPath()%>/tag/<%=tagName%>"
+		style="margin-top: 10px;"> >>查看更多<%=tagName%>网站 </a>
 	<%
 		}
 

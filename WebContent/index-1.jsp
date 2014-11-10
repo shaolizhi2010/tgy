@@ -1,3 +1,5 @@
+<%@page import="java.util.ArrayList"%>
+<%@page import="com.tgy.web.vo.BookmarkData"%>
 <%@page import="com.tgy.util.C"%>
 <%@page import="com.tgy.entity.Folder"%>
 <%@page import="com.tgy.util.U"%>
@@ -15,29 +17,20 @@
 
 </head>
 
-<%
+<%@include file="part/bookmark-data.jsp" %>
+
+<% 
 	String userID = U.getUserID(request);
 	String contextPath = request.getContextPath();
-
-	//request.getSession().setAttribute("tests", "testss");
-	//System.out.println("jsp session "+ request.getSession(false).getId());
-	
-	Folder curFolder = U.param(request, "curFolder", Folder.class);
-	String curFolderName = "";
-	if(curFolder!=null) curFolderName = curFolder.name;
-	String fid = U.paramString(request.getSession(), "fid");
-
-	List<Folder> folders = U.paramList(request, "folders");
-	List<Page> pages = U.paramList(request, "pages");
-	// Ext ext = new Ext();  // (Ext)request.getAttribute("ext");
+ 
 %>
 
 <body>
 	<jsp:include page="part/head.jsp" />
 	<jsp:include page="part/head2.jsp" />
-
+ 
 	<!-- 书签主页面开始 -->
-	<div class="container col-md-12 clearfix"> 
+	<div class="container col-md-12 clearfix" style="padding-top: 0px;margin-top: 0px; ">  
 		<!-- 左侧书签列表 -->
 		<div id="bookmarks-sidebar" class="container col-md-2" 
 			style="background-color:#fdfdfd;padding: 2px; border-right: 1px solid #eee;">
@@ -66,7 +59,7 @@
 
 			<jsp:include page="part/folders-part.jsp" />
 			
-			<div class="  col-sm-12" style="margin-top: 30px;"></div>
+			<div class="  col-sm-12" style="margin-top: 10px;"></div>
 			
 			<!------------------ 分割线 ---------------------->
 			<div class="  col-sm-12"

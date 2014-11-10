@@ -39,6 +39,22 @@ public class CommonValidator implements Validator{
 		}
 		return this;
 	}
+	
+	public CommonValidator isLength(String s,int length,String errMsg) throws BaseException{
+		if(s==null){
+			return this;
+		}
+		if(s.length()!=length){
+			if(StringUtils.isNotBlank(errMsg)){
+				throw new BaseException(this, errMsg);
+			}
+			else{
+				throw new BaseException(this, "长度应等于"+length);
+			}
+		}
+		return this;
+	}
+	 
 
 	public CommonValidator isLonger(String s,int length,String errMsg) throws BaseException{
 		if(s==null){

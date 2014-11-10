@@ -2,11 +2,20 @@
 
 <!-- 菜单 开始 -->
 <div id="menu" class="container col-md-12 "
-	style="padding: 3px; background-color: #f5f5f5; " > 
+	style="padding: 3px; background-color: #f5f5f5;">
 	<div id="logo" class="col-md-4">
-		<span style="font-size: 26px;">网址盒子</span> 
-		<span style=" font-size: 14px; color: #666;">网站收藏、网站推荐</span>
+		<span style="font-size: 26px;">网址盒子</span> <span
+			style="font-size: 14px; color: #666;">网站收藏、网站推荐</span>
 	</div>
+ 
+	<div class="col-md-3 col-md-offset-5  " style="font-size: 12px;color: #555;padding-top: 12px;"> 
+	 <span class="glyphicon glyphicon-envelope" style=" font-size: 12px;color: #555;"></span>
+		<span style=" font-size: 12px;color: #555;"> 您还未登录，欢迎 </span>
+		<a ng-click="preLoginFunction()" href="#" style=" font-weight: bold;">登录</a> 
+		<span style=" font-size: 12px;color: #555;">或</span>
+		<a ng-click="preAddUserFunction()" href="#" style=" font-weight: bold;">注册</a>
+	</div> 
+
 
 	<!-- 
 	<div class="col-md-2">
@@ -24,17 +33,21 @@
 				class="input-group-addon glyphicon glyphicon-search"></span>
 		</div>
 	</div>
- -->
+	 -->
+
+	<!-- 
 	<div id="searchSite-div" class="col-md-offset-4 col-md-3" style="padding:3px;   ">
 		<div class="input-group">
 			<input id="searchSite-input" placeholder="网站类别"
 				ng-keyup="$event.keyCode == 13 ? searchSite() : null" type="text"
 				class="form-control"> <span ng-click="searchSite()"
 				class="input-group-addon ">找网站</span>
-			<!-- glyphicon glyphicon-chevron-right -->
+			 
 		</div>
 	</div>
+ -->
 
+	<!-- 
 	<div class="col-md-1" style="padding:3px;  ">
 		<a href="#" class="btn btn-default  dropdown-toggle"
 			data-toggle="dropdown">
@@ -46,6 +59,7 @@
 			<li class="divider"></li>
 		</ul>
 	</div>
+	 -->
 	<!-- 
 	<div class="col-md-2">
 
@@ -62,4 +76,4 @@
 
 <!-- 分割线  -->
 <hr class="col-sm-12"
-	style="border-top: 2px solid #eee; padding: 0px;margin: 0px; ">
+	style="border-top: 2px solid #eee; padding: 0px; margin: 0px;">

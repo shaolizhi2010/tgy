@@ -22,7 +22,7 @@ public class BreadCrumbUtil {
 		List<BreadCrumb> list = new ArrayList<>();
 		while(folder!=null ){
 			//TODO tgy is hardcode
-			BreadCrumb bread = new BreadCrumb(folder.name, contextPath+"/folder/?fid="+folder.id);
+			BreadCrumb bread = new BreadCrumb(folder.name, contextPath+"/folder/"+folder.id);
 			list.add(bread);
 			if(StringUtils.isNotBlank( folder.pid)){
 				folder = folderDao.getByID(folder.pid);

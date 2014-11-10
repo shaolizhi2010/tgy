@@ -1,6 +1,7 @@
 package com.tgy.web;
 
 import java.io.IOException;
+import java.nio.charset.Charset;
 import java.util.Locale;
 
 import javax.servlet.Filter;
@@ -23,6 +24,8 @@ public class EncodingFilter implements Filter {
 	public void doFilter(ServletRequest req, ServletResponse res,
 			FilterChain chain) throws IOException, ServletException {
 
+		//System.out.println("EncodingFilter : default charset is "+Charset.defaultCharset());
+		
 		//System.out.println("do filter");
 
 		// only userful when it is a post request

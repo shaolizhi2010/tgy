@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -23,7 +24,7 @@ import com.tgy.validator.CommonValidator;
 public class LoginContoller extends HttpServlet {
 
 	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
+	protected void doPost(HttpServletRequest req, HttpServletResponse res)
 			throws ServletException, IOException {
 		User user = U.fromReqJson(req, User.class);
 		
@@ -34,22 +35,29 @@ public class LoginContoller extends HttpServlet {
 				.isShorter(user.password, 40, "密码过长")
 				.isLonger(user.password, 0, "请输入密码");
 		} catch (Exception e) {
-			U.resFailed(resp, e.getMessage());
+			U.resFailed(res, e.getMessage());
 		}
 		
 		User loginUser = new UserDao().login(user);
-		
-		
 		 
 		if (loginUser != null) {
+
+			Cookie cookie = new Cookie("lastLoginUserID", loginUser.id.toString());
+			cookie.setPath("/");
+			res.addCookie(cookie);
+ 
 			// login success
 			U.refreshSession(req.getSession());
 			req.getSession().invalidate();
 			req.getSession().setAttribute(C.userID, loginUser.id);
 			req.getSession().setAttribute("user", loginUser);
-			U.message(resp, "登录成功");
+			
+			//U.forward(req, res, "/"+loginUser.name);
+			 
+			U.message(res, "登录成功");
 		} else {
-			U.message(resp, "用户名或密码错误");
+			U.message(res, "用户名或密码错误");
+			return;
 		}
 	}
 
