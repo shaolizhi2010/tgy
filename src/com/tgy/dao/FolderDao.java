@@ -11,6 +11,7 @@ import org.mongodb.morphia.query.Query;
 import com.tgy.App;
 import com.tgy.entity.Folder;
 import com.tgy.entity.Page;
+import com.tgy.util.U;
 
 public class FolderDao extends BasicDAO<Folder, ObjectId> {
 
@@ -18,78 +19,58 @@ public class FolderDao extends BasicDAO<Folder, ObjectId> {
 		super(Folder.class, App.getInstance().getDatastore());
 	}
 
-	//TODO
-//	public List<Folder> getPublicFoldersByUserID(String userID) {
-//
-//		Query<Folder> query = App.getInstance().getDatastore()
-//				.createQuery(Folder.class).filter("userID", userID)
-//				.filter("pid", null).order("-createDate");
-//
-//		return find(query).asList();
-//
-//	}
+	// TODO
+	// public List<Folder> getPublicFoldersByUserID(String userID) {
+	//
+	// Query<Folder> query = App.getInstance().getDatastore()
+	// .createQuery(Folder.class).filter("userID", userID)
+	// .filter("pid", null).order("-createDate");
+	//
+	// return find(query).asList();
+	//
+	// }
 
 	public List<Folder> getFoldersByUserID(String userID) {
 
 		Query<Folder> query = App.getInstance().getDatastore()
 				.createQuery(Folder.class).filter("userID", userID)
-				.filter("pid", null).order("-createDate");
+				.order("-favScore");
 
+		return find(query).asList();
+
+	}
+	
+	public List<Folder> getFoldersByUserID(String userID,String sort) {
+		if(StringUtils.isBlank(sort)){
+			return getFoldersByUserID(userID);
+		}
+		
+		Query<Folder> query = App.getInstance().getDatastore()
+				.createQuery(Folder.class).filter("userID", userID)
+				.order(sort);
+		
 		return find(query).asList();
 
 	}
 
 	public void saveWithRef(Folder folder) {
-
-		// 保存父文件夹,目前只支持保存在根文件夹
-		if (StringUtils.isNotBlank(folder.pid)) {
-
-			Folder rootFolder = folder;
-			// not root and pid not null
-			while (!rootFolder.isRoot && StringUtils.isNotBlank(rootFolder.pid)) {
-				Folder pFolder = getByID(rootFolder.pid);
-				rootFolder = pFolder;
-			}
-			folder.pid = rootFolder.id.toString();
-			save(folder);
-			
-			rootFolder.add(folder);
-			save(rootFolder);
-		}
-		else{ //not pid, then it is a root folder
-			folder.isRoot = true;
-			save(folder);
-		}
-
+		folder.updateDate = U.dateTime();
+		save(folder);
 	}
-	
+
 	public void deleteWithRef(Folder folder) {
-		
-		//delete all sub pages;
+
+		// delete all sub pages;
 		PageDao pDao = new PageDao();
-		if(!CollectionUtils.isEmpty(folder.pages)){
-			for(Page p : folder.pages){
+		if (!CollectionUtils.isEmpty(folder.pages)) {
+			for (Page p : folder.pages) {
 				pDao.delete(p);
 			}
 		}
 
-		//delete all sub folders
-		if(!CollectionUtils.isEmpty(folder.folders)){
-			for(Folder f : folder.folders){
-				 deleteWithRef(f);
-			}	
-		}
-		
-		//delete folder
+		// delete folder
 		delete(folder);
 
-		// delete ref from root folder
-		if (StringUtils.isNotBlank(folder.pid)) {
-
-			Folder pFolder = getByID(folder.pid);
-			pFolder.remove(folder);
-			save(pFolder);
-		}
 	}
 
 	public Folder getByID(String folderID) {

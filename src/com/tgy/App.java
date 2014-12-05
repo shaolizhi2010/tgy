@@ -3,6 +3,12 @@ package com.tgy;
 import java.net.UnknownHostException;
 import java.util.Arrays;
 
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.params.ClientPNames;
+import org.apache.http.client.params.CookiePolicy;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.impl.conn.PoolingClientConnectionManager;
+import org.apache.http.params.CoreProtocolPNames;
 import org.mongodb.morphia.Datastore;
 import org.mongodb.morphia.Morphia;
 
@@ -17,11 +23,16 @@ public class App {
 	MongoClient client;
 	Datastore ds;
 	
+	private HttpClient httpClient = null;
+	
 	private static final String mogoUserName = P.getProperty("mogoUserName");
 	private static final String mogoPassword = P.getProperty("mogoPassword");
 	
 	private App() {
 	}
+	
+	public static String basePath = "";
+	public static String imgPath = "images/icon/";
 
 	private static App app = new App();
 
@@ -29,6 +40,25 @@ public class App {
 		return app;
 	}
 
+
+	public HttpClient getHttpClient(){
+		if(httpClient == null){
+			PoolingClientConnectionManager poolManager = new PoolingClientConnectionManager();
+			poolManager.setMaxTotal(100);
+			
+			httpClient = new DefaultHttpClient(poolManager);
+			httpClient.getParams().setParameter(CoreProtocolPNames.USER_AGENT,  
+	                "Mozilla/4.0 (compatible; MSIE 7.0; Win32");  
+			httpClient.getParams().setParameter(  
+	                CoreProtocolPNames.USE_EXPECT_CONTINUE, Boolean.FALSE);  
+	        
+	        // 浏览器兼容性  
+			httpClient.getParams().setParameter(ClientPNames.COOKIE_POLICY,  
+	                CookiePolicy.BROWSER_COMPATIBILITY);  
+		}
+		return httpClient;
+	}
+	
 	public Datastore getDatastore() {
 
 		try {

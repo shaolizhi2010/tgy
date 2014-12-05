@@ -33,7 +33,7 @@ LinkService lService = new LinkService();
 <head lang="en">
 <jsp:include page="part/head-meta.jsp" />
 
-<jsp:include page="part/importcss.jsp" />
+<jsp:include page="part/importAtHead.jsp" />
 
 </head>
 
@@ -43,10 +43,10 @@ LinkService lService = new LinkService();
 	<jsp:include page="part/head.jsp" />
 
 	<!-- 书签主页面开始 -->
-	<div class="container col-md-12 clearfix">
+	<div class="container col-sm-12 clearfix">
 		<!-- 左侧  -->
-		<div class="  col-md-4" style="border: 1px solid #eee;">
-			<h4>用户排行榜</h4>
+		<div class="  col-sm-4" style="border: 1px solid #eee;">
+			<h4>用户排行</h4>
 			<div>
 
 
@@ -66,7 +66,7 @@ LinkService lService = new LinkService();
 							<td><%=userIndex++%></td>
 							<td><a target="_blank" href="<%=request.getContextPath()%>/<%=userName%>"><span
 									style="font-size: 14px; font-weight:300; margin-left: 3px;"><%=userName%></span></a></td>
-							<td><a ng-click=" " href="#" class="col-md-2"
+							<td><a ng-click=" " href="#" class="col-sm-2"
 								style="padding-left: 1px; padding-right: 1px;font-weight: bold; "> <span
 									style=" font-size: 18px;"> + </span>
 							</a></td>
@@ -88,8 +88,8 @@ LinkService lService = new LinkService();
 
 
 		<!--------  tag  -------->
-		<div class="  col-md-4" style="border: 1px solid #eee;">
-			<h4>收藏夹排行榜</h4>
+		<div class="  col-sm-4" style="border: 1px solid #eee;">
+			<h4>网址分类 排行</h4>
 			<div>
 
 
@@ -109,7 +109,7 @@ LinkService lService = new LinkService();
 							<td><%=tagIndex++%></td>
 							<td><a target="_blank" href="<%=request.getContextPath()%>/tag/<%=tagName%>"><span
 									style="font-size: 14px; font-weight:300; margin-left: 3px;"><%=tagName%></span></a></td>
-							<td><a ng-click=" " href="#" class="col-md-2"
+							<td><a ng-click=" " href="#" class="col-sm-2"
 								style="padding-left: 1px; padding-right: 1px;font-weight: bold; "> <span
 									style="font-size: 18px; "> + </span>
 							</a></td>
@@ -131,8 +131,8 @@ LinkService lService = new LinkService();
 
 
 		<!--   -->
-		<div class="  col-md-4" style="border: 1px solid #eee;">
-			<h4>网址排行榜</h4>
+		<div class="  col-sm-4" style="border: 1px solid #eee;">
+			<h4>网址排行</h4>
 			<div>
 
 
@@ -145,13 +145,17 @@ LinkService lService = new LinkService();
 							List<Link> links = lService.list();
 							int linkIndex = 1;  
 							for (Link link : links) {
+								if(StringUtils.isBlank(link.title)){
+									continue;
+								}
 								String titleName = link.title;
+								titleName = StringUtils.substring(titleName, 0,50);
 						%>
 						<tr>
 							<td><%=linkIndex++%></td>
 							<td><a target="_blank" href=" <%=link.url%>"><span
 									style="font-size: 14px; font-weight:300; margin-left: 3px;"><%=titleName%></span></a></td>
-							<td><a ng-click=" " href="#" class="col-md-2"
+							<td><a ng-click=" " href="#" class="col-sm-2"
 								style="padding-left: 1px; padding-right: 1px;font-weight: bold; "> <span
 									style=" font-size: 18px; "> + </span> 
 							</a></td>
@@ -175,5 +179,5 @@ LinkService lService = new LinkService();
 
 
 </body>
-<jsp:include page="part/importjs.jsp" />
+<jsp:include page="part/importAtFoot.jsp" />
 </html>

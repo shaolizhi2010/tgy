@@ -40,33 +40,41 @@ public class IndexService {
 
 		BookmarkData data = new BookmarkData();
 		data.rootFolders = fDao.getFoldersByUserID(userID);
-		data.curFolder = FolderUtil.getDefaultFolder(data.rootFolders);
-		data.rootFolder = data.curFolder;
-		data.curUser = uDao.getByID(userID);
+		data.folder = null;
+		//data.curFolder = FolderUtil.getDefaultFolder(data.rootFolders);
+		//data.rootFolder = data.curFolder;
 		return data;
-
 	}
 
 	public BookmarkData getBookmarkDataByFolderID(String fid) {
 		if(StringUtils.isBlank(fid))return new BookmarkData();
-		Folder curFolder = fDao.get(new ObjectId(fid));// 用户当前选中的分类
-		Folder rootFolder = fService.rootFolder(fid);// 用户当前选中的收藏夹
+		
+		Folder folder = fDao.get(new ObjectId(fid));// 用户当前选中的分类
 		List<Folder> folders = null;
 		
-		if(curFolder == null){//未找到文件夹
-			return new BookmarkData();
-		}
-
 		BookmarkData data = new BookmarkData();
-		data.curFolder = curFolder;
-		data.rootFolder = rootFolder;
-		data.curUser = uDao.getByID(data.curFolder.userID);
+		if(folder == null){//未找到文件夹
+			return data;
+		}
+		
+		data.folder = folder;
 				
-		if (curFolder != null) {
-			folders = fDao.getFoldersByUserID(curFolder.userID);
+		if (folder != null) {
+			folders = fDao.getFoldersByUserID(folder.userID);
 			data.rootFolders = folders;
 		}
 		return data;
+	}
+	
+	public User getUserByFolderID(String fid){
+		if(StringUtils.isBlank(fid))return null;
+		Folder folder = fDao.get(new ObjectId(fid));// 用户当前选中的分类
+		if(folder!=null){
+			User user = uDao.getByID(folder.userID);	
+			return user;
+		}
+		return null;
+			
 	}
 
 	public void service(HttpServletRequest req, HttpServletResponse res,

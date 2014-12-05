@@ -43,7 +43,7 @@
 <head lang="en">
 <jsp:include page="part/head-meta.jsp" />
 
-<jsp:include page="part/importcss.jsp" />
+<jsp:include page="part/importAtHead.jsp" />
 
 </head>
 
@@ -53,14 +53,14 @@
 	<jsp:include page="part/head.jsp" />
 
 	<!-- 书签主页面开始 -->
-	<div class="container col-md-12 clearfix">
+	<div class="container col-sm-12 clearfix">
 		<!-- 左侧  -->
 
 		<!-- 左侧 -->
 
 
 		<!--------  tag  -------->
-		<div class="  col-md-2" style="border: 1px solid #eee;">
+		<div class="  col-sm-2" style="border: 1px solid #eee;">
 			<div>
 				<table class="table">
 					<thead>
@@ -104,7 +104,7 @@
 
 
 		<!--   -->
-		<div class="  col-md-8" style="border: 1px solid #eee;">
+		<div class="  col-sm-8" style="border: 1px solid #eee;">
 			<h4>大家常用的<%=tagName %>网站</h4>
 			<div>
 
@@ -124,7 +124,7 @@
 							<td><%=linkIndex++%></td>
 							<td><a target="_blank" href=" <%=link.url%>"><span
 									style="font-size: 14px; font-weight: 300; margin-left: 3px;"><%=titleName%></span></a></td>
-							<td><a ng-click=" " href="#" class="col-md-2"
+							<td><a ng-click=" " href="#" class="col-sm-2"
 								style="padding-left: 1px; padding-right: 1px; font-weight: bold;">
 									<span style=""> + </span>
 							</a></td>
@@ -150,5 +150,5 @@
 
 
 </body>
-<jsp:include page="part/importjs.jsp" />
+<jsp:include page="part/importAtFoot.jsp" />
 </html>

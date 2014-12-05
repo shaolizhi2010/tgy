@@ -2,6 +2,7 @@ package com.tgy.dao;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Pattern;
 
 import org.apache.commons.lang3.StringUtils;
 import org.bson.types.ObjectId;
@@ -10,8 +11,6 @@ import org.mongodb.morphia.dao.BasicDAO;
 import org.mongodb.morphia.query.Query;
 import org.mongodb.morphia.query.UpdateOperations;
 
-import com.mongodb.BasicDBObject;
-import com.mongodb.DBObject;
 import com.tgy.App;
 import com.tgy.statistic.entity.Link;
 import com.tgy.statistic.entity.Tag;
@@ -21,6 +20,16 @@ public class LinkDao extends BasicDAO<Link, ObjectId> {
 	public LinkDao() {
 		super(Link.class, App.getInstance().getDatastore());
 	}
+	
+	//根据link url 取 link
+		public List<Link> getByName(String name) {
+			name = StringUtils.trim(name);
+			Query<Link> query = App.getInstance().getDatastore()
+					.createQuery(Link.class).filter("title", Pattern.compile(".*"+name+".*", Pattern.CASE_INSENSITIVE) )
+					.order("-favScore");
+
+			return find(query).asList();
+		}
 	
 	public List<Link> getByTag(String tagID){
 		//List<Link> links = new ArrayList<>();
@@ -49,6 +58,11 @@ public class LinkDao extends BasicDAO<Link, ObjectId> {
 	}
 
 	//根据link url 取 link
+	/**
+	 * 精确查询
+	 * @param url
+	 * @return
+	 */
 	public Link getByUrl(String url) {
 		url = StringUtils.trim(url);
 		Query<Link> query = App.getInstance().getDatastore()
@@ -56,6 +70,19 @@ public class LinkDao extends BasicDAO<Link, ObjectId> {
 				.order("-favScore");
 
 		return find(query).get();
+	}
+	
+	/**
+	 * 模糊查询
+	 * @return
+	 */
+	public List<Link> searchByUrl(String url){
+		url = StringUtils.trim(url);
+		Query<Link> query = App.getInstance().getDatastore()
+				.createQuery(Link.class).filter("url", Pattern.compile(".*"+url+".*", Pattern.CASE_INSENSITIVE) )
+				.order("-favScore");
+
+		return find(query).asList();
 	}
 
 	public Link getByID(String linkID) {

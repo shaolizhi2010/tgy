@@ -1,12 +1,51 @@
-body { 
-	background-color: #fdfdfd; 
-	font-family: Arial,Helvetica,sans-serif;
+body {
+	background-color: #fdfdfd;
+	font-family: Arial, Helvetica, sans-serif;
 }
 
-a, a:link,a:visited,a:hover,a:active {
-	
-	color: #4183c4; 
+a,a:link,a:visited,a:hover,a:active {
+	color: #4183c4;
 }
-a{
+
+a {
 	text-decoration: none;
+}
+
+.no-padding {
+	padding: 0px;
+}
+.no-outline{
+	outline: 0;
+	box-shadow:none;
+}
+.no-outline:focus{
+	outline: 0;
+	box-shadow:none;
+}
+
+#go-top {
+	display: none;
+	width: 50px;
+	height: 50px;
+	top: 80%;
+	right: 10%;
+	position: fixed;
+	background: url("../images/back-top.png") no-repeat scroll 0 0;
+}
+
+#go-top:hover {
+	background-position: -50px 0;
+}
+
+.page-all-link {
+	padding-left: 10px;
+	border: 1px solid #eee;
+	border-bottom: 1px solid #ddd;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	display: block;
+	color: #222;
+}
+.hoverAble:hover{
+	background-color: #eee;
 }

@@ -1,66 +1,130 @@
 package com.tgy.web;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.bson.types.ObjectId;
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.tgy.dao.FolderDao;
 import com.tgy.dao.UserDao;
-import com.tgy.entity.Folder;
-import com.tgy.entity.Page;
 import com.tgy.entity.User;
-import com.tgy.service.FolderService;
+import com.tgy.entity.VisitHistory;
 import com.tgy.service.IndexService;
-import com.tgy.service.UserService;
-import com.tgy.util.BreadCrumbUtil;
-import com.tgy.util.FolderUtil;
+import com.tgy.service.VisitHistoryService;
+import com.tgy.util.C;
 import com.tgy.util.U;
-import com.tgy.vo.BreadCrumb;
 import com.tgy.web.vo.BookmarkData;
 
 @RestController
-@RequestMapping( value = {"/"}  )
+@RequestMapping(value = { "/" })
 public class UserContoller extends HttpServlet {
 
 	IndexService indexService = new IndexService();
-	
-	@RequestMapping(value = { "/{userName}", "/{userName}/" })
-	protected void service(HttpServletRequest req, HttpServletResponse res,
-			@PathVariable("userName") String userName) throws ServletException,
-			IOException {
-		
-		User user = new UserDao().getByName(userName);
-		if(user!=null){
-			Cookie cookie = new Cookie("lastViewUserID", user.id.toString());
-			cookie.setPath("/");
-			res.addCookie(cookie);
-			
-			BookmarkData data =  indexService.getBookmarkDataByUserID(user.id.toString());
-			req.setAttribute("bookmarkData", data);
-			
-			BreadCrumb bread = BreadCrumbUtil.build(
-					data.curFolder,
-					req.getContextPath());
-			req.setAttribute("bread", bread);
+
+	@RequestMapping(value = { "/u/{userID}" })
+	protected void dealByID(
+			HttpServletRequest req,
+			HttpServletResponse res,
+			@PathVariable("userID") String userID,
+			@CookieValue(value = "lastLoginUserID", defaultValue = "", required = false) String lastLoginUserID,
+			@CookieValue(value = "lastPsCode", defaultValue = "", required = false) String lastPsCode
+
+	) throws ServletException, IOException {
+
+		if ("favicon".equals(userID)) {
+			return;
 		}
-		
-		
-		
-		U.forward(req, res, "/index-1.jsp");
-		
+		// if(StringUtils.isBlank(userID) || userID.length()!=24){
+		// U.resFailed(res, "用户id不正确");
+		// }
+
+		User showUser = new UserDao().getByID(userID);
+		service(req, res, lastLoginUserID, lastPsCode, showUser);
+
+	}
+
+	@RequestMapping(value = { "/{userName}" })
+	protected void dealByName(
+			HttpServletRequest req,
+			HttpServletResponse res,
+			@PathVariable("userName") String userName,
+			@CookieValue(value = "lastLoginUserID", defaultValue = "", required = false) String lastLoginUserID,
+			@CookieValue(value = "lastPsCode", defaultValue = "", required = false) String lastPsCode)
+			throws ServletException, IOException {
+
+		User showUser = new UserDao().getByName(userName);
+		service(req, res, lastLoginUserID, lastPsCode, showUser);
+	}
+
+	protected void service(HttpServletRequest req, HttpServletResponse res,
+			String lastLoginUserID, String lastPsCode, User showUser)
+			throws ServletException, IOException {
+
+		if (showUser != null) {
+			BookmarkData data = indexService
+					.getBookmarkDataByUserID(showUser.id.toString());
+			req.setAttribute("bookmarkData", data);
+
+			// BreadCrumb bread = BreadCrumbUtil.build(
+			// data.folder,
+			// req.getContextPath());
+			// req.setAttribute("bread", bread);
+			req.setAttribute("showUser", showUser);// 当前正在查看哪个user的书签
+
+		}
+
+		// 自动登陆
+		User loginUser = U.param(req.getSession(), C.user, User.class);
+
+		if (loginUser == null && StringUtils.isNotBlank(lastLoginUserID)) { // 还未登录
+																				// 尝试自动登陆
+			if (StringUtils.isBlank(lastPsCode)) { // temp user的情况， 密码为空
+				loginUser = new UserDao().getByID(lastLoginUserID);
+				if (loginUser != null && loginUser.isTemp) {
+
+				} else {
+					loginUser = null;// 如果不是temp用户 又没有密码，则不自动登陆
+				}
+
+			} else { // 有密码 正常登录过的用户
+				loginUser = new UserDao().checkUserByPsCode(lastLoginUserID,
+						lastPsCode);
+
+			}
+
+			if (loginUser != null) {
+				Cookie cookie = new Cookie("lastViewUserID",
+						loginUser.id.toString());
+				cookie.setPath("/");
+				res.addCookie(cookie);
+
+				req.getSession().invalidate();
+				req.getSession().setAttribute(C.user, loginUser);
+
+			}
+		}
+		// 记录访问历史 访问者(userid)-被访问者(userid)
+		if (loginUser!=null &&  loginUser.id != null && showUser != null
+				&& showUser.id != null
+				&& StringUtils.isNotBlank(showUser.name)) {
+			VisitHistoryService vService = new  VisitHistoryService();
+			VisitHistory vh = new VisitHistory();
+			vh.requestUserID = loginUser.id.toString();
+			vh.responseUserID = showUser.id.toString();
+			vh.responseUserName = showUser.name;
+			vh.lastVisitDateTime = U.dateTime();
+			vh.times++;
+			vService.save(vh);
+		}
+		U.forward(req, res, "/index-2.jsp");
+
 	}
 }

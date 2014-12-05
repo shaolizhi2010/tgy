@@ -22,7 +22,7 @@ import com.tgy.util.U;
 @RequestMapping( value = {"/"}  )
 public class TagContoller extends HttpServlet {
 	
-	@RequestMapping(value = { "/tag/{tagName}","/tag/{tagName}/"}, method = RequestMethod.GET )
+	@RequestMapping(value = { "/tag/{tagName}"}, method = RequestMethod.GET )
 	public void tag(HttpServletRequest req, HttpServletResponse res,@PathVariable(value = "tagName") String tagName) {
 		
 		FolderService fService = new FolderService();

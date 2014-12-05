@@ -10,6 +10,7 @@ import org.mongodb.morphia.annotations.Entity;
 import org.mongodb.morphia.annotations.Id;
 import org.mongodb.morphia.annotations.Reference;
 
+import com.tgy.entity.BaseEntity;
 import com.tgy.entity.User;
 
 /**
@@ -21,18 +22,18 @@ import com.tgy.entity.User;
  *
  */
 @Entity
-public class Tag implements Serializable {
+public class Tag extends BaseEntity  implements Serializable {
 	
 	public static final int keepScore=10; //收藏一次得多少分
 	
-	@Id
-	public ObjectId id;
+ 
 	public String name;
 
 	public String createDate;
 	@Reference(ignoreMissing = true,lazy=true)
 	public User firstCreateBy;//第一个创建人
 	
+	public long clicks;
 	public int keeps; //收藏次数
 	public long favScore; //受欢迎得分
 	

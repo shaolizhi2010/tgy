@@ -1,3 +1,5 @@
+<%@page import="java.util.Collections"%>
+<%@page import="org.apache.commons.collections.CollectionUtils"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="com.tgy.web.vo.BookmarkData"%>
 <%@page import="com.tgy.util.C"%>
@@ -8,29 +10,37 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
  
 <%
-String curFolderName = "";	
-String fid = "";
-Folder curFolder=null;
-Folder rootFolder = null;
+
+Folder showFolder=null;
+String showFolderName = "";
+String showFolderID = "";
+
 List<Folder> rootFolders = new ArrayList();
-List<Folder> folders =  new ArrayList();
+//List<Folder> folders =  new ArrayList();
 List<Page> pages =  new ArrayList();
 
 	BookmarkData bookmarkData = U.param(request, "bookmarkData", BookmarkData.class);
 	
-	if(bookmarkData!=null){
-		 curFolder = bookmarkData.curFolder;
-		 rootFolder = bookmarkData.rootFolder;
+	if(bookmarkData!=null){ 
 		
-		if(curFolder!=null) curFolderName = curFolder.name;
-		
-		if(curFolder!=null) fid =  curFolder.id.toString();
-
 		rootFolders = bookmarkData.getRootFolders();
-		  
-		if(rootFolder!=null) folders=  rootFolder.folders; //not cur folder
-		 
-		if(curFolder!=null) pages=  curFolder.pages; //cur folder
+		if(!CollectionUtils.isEmpty(rootFolders)){ 
+			Collections.sort(rootFolders); 
+			Collections.reverse(rootFolders); 
+		}
+		
+		showFolder = bookmarkData.folder;
+		
+		if(showFolder!=null){
+			showFolderName = showFolder.name;
+			showFolderID =  showFolder.id.toString();
+			pages=  showFolder.pages; //cur folder
+			if(!CollectionUtils.isEmpty(pages)){
+				Collections.sort(pages); 
+				Collections.reverse(pages); 
+			}
+		}
+		
 	}
 	
 	

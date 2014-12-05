@@ -4,6 +4,8 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang3.StringUtils;
 
+import com.tgy.entity.EntityWithUser;
+import com.tgy.entity.User;
 import com.tgy.exception.BaseException;
 import com.tgy.util.C;
 
@@ -12,7 +14,9 @@ public class CommonValidator implements Validator{
 	public CommonValidator isLogin(HttpServletRequest req,String errMsg) throws BaseException{ 
 		if(req==null ||
 				req.getSession(false)==null||
-				req.getSession(false).getAttribute(C.user)==null){
+				req.getSession(false).getAttribute(C.user)==null ||
+				((User)req.getSession(false).getAttribute(C.user)).id == null
+				){
 			if(StringUtils.isNotBlank(errMsg)){
 				throw new BaseException(this, errMsg);
 			}
@@ -85,4 +89,34 @@ public class CommonValidator implements Validator{
 		}
 		return this;
 	}
+	
+	public CommonValidator isSameUser(User user, EntityWithUser e2,String errMsg) throws BaseException{ 
+		if(user==null || user.id == null){
+			if(StringUtils.isNotBlank(errMsg)){
+				throw new BaseException(this, errMsg);
+			}
+			else{
+				throw new BaseException(this, "无权限进行此操作");
+			}
+		}
+		else{
+			if(e2==null){ //要检查的对象不存在 // || e2.id==null
+				return this;
+			}
+			else{
+ 				if(!StringUtils.equals(user.id.toString(), e2.userID)){
+					if(StringUtils.isNotBlank(errMsg)){
+						throw new BaseException(this, errMsg);
+					}
+					else{
+						throw new BaseException(this, "无权限进行此操作");
+					}
+				}
+				else{
+					//ok
+				}
+			}
+		}
+		return this;
+	} 
 }

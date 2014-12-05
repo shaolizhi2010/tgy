@@ -22,28 +22,40 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.lang3.StringEscapeUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
+import com.tgy.entity.User;
 
 public class U {
 
 	public static final String pattern_dateTime = "yyyy-MM-dd HH:mm:ss";
 
+	public static String filterCharacter(String str){//过滤特殊字符
+		str = StringUtils.replace(str, "("," ");
+		str = StringUtils.replace(str, ")"," ");
+		str = StringUtils.replace(str, "<"," ");
+		str = StringUtils.replace(str, ">"," ");
+		str = StringUtils.replace(str, "'"," ");
+		str = StringUtils.replace(str, ";"," ");
+		return str;
+	}
+	
 	public static String randomColor() {
-		int i = new Random().nextInt(4);
+		int i = new Random().nextInt(5);
 		switch (i) {
-		//case 0:
-		//	return "#d9534f";  //red 
+		case 0:
+			return "#d9534f";  //red 
 		case 1:
 			return "#428bca";//blue
 		case 2:
 			return "#5cB85c";//green
 		case 3:
 			return "#58c0de";//light blue
-		case 0:
+		case 4:
 			return "#f0ad4e";//orange
 
 		default:
@@ -55,8 +67,12 @@ public class U {
 		if (title == null) {
 			return "";
 		}
-		String shortTitle = title;
-		String[] arr = title.split("[- ,.():：（）]");
+		String shortTitle = title.trim();
+		shortTitle = shortTitle.replace(":", "");
+		shortTitle = shortTitle.replace("【", "");
+		shortTitle = shortTitle.replace("】", "");
+		
+		String[] arr = title.split("[- ，,.():：（）]");
 		if (arr.length > 1) {
 			shortTitle = arr[0];
 		}
@@ -67,6 +83,7 @@ public class U {
 	public static String shortTitle(String title, int len) {
 		if (title == null)
 			return "";
+		title = StringUtils.trim(title);
 		if (title.length() > len) {
 			title = shortTitle(title) + "..";
 		}
@@ -76,15 +93,28 @@ public class U {
 		return title;
 	}
 	 
+	public static String shortURL(String url, int len) {
+		if (url == null)
+			return "";
+		url = StringUtils.trim(url);
+		url = url.replace("http://", "");
+		url = url.replace("https://", "");
+		url = url.replace("www.", "");
+		
+		url = StringUtils.substring(url, 0,len);
+		
+		return url;
+	}
 
 	public static void refreshSession(HttpSession session) {
-
+		/*
 		session.removeAttribute("fid");
 		session.removeAttribute("userFolders");
 		session.removeAttribute("curFolder");
 		session.removeAttribute("fid");
 		session.removeAttribute("folders");
 		session.removeAttribute("pages");
+		*/
 	}
 
 	public static <T> T fromReqJson(HttpServletRequest req, Class<T> clazz) {
@@ -95,7 +125,8 @@ public class U {
 			if (br != null) {
 				json = br.readLine();
 			}
-
+			//StringEscapeUtils.escapeHtml4(json);
+			json = U.filterCharacter(json);
 			T t = new Gson().fromJson(json, clazz);
 			return t;
 		} catch (IOException e) {
@@ -147,8 +178,9 @@ public class U {
 		if (req == null) {
 			return null;
 		}
-		if (U.param(req, C.userID, String.class) != null) {
-			return U.paramString(req.getSession(), C.userID);
+		User user = U.param(req, C.user, User.class);
+		if (user!= null) {
+			return user.id.toString();
 		}
 
 		return null;
@@ -508,6 +540,9 @@ public class U {
 		if ("iso-8859-1".equalsIgnoreCase(charset)) {
 			return true;
 		}
+		if ("gb2312".equalsIgnoreCase(charset)) {
+			return true;
+		}
 		return false;
 	}
 
@@ -623,6 +658,9 @@ public class U {
 	// // }
 	//
 	public static String randomNum(int length) { // length表示生成字符串的长度
+		if(length==0){
+			return "";
+		}
 		String base = "123456789";// 0123456789 //abcdefghijklmnopqrstuvwxyz
 		Random random = new Random();
 		StringBuffer sb = new StringBuffer();

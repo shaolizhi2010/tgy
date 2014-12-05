@@ -27,17 +27,18 @@ import com.tgy.util.U;
 import com.tgy.util.UploadBookmarkUtil;
 
 @MultipartConfig(  maxFileSize = 1024 * 1024 * 10)
-@WebServlet("/bookmark/upload/")
+@WebServlet("/bookmark/upload")
 public class UploadBookmarkContoller extends HttpServlet {
 
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse res)
 			throws ServletException, IOException {
 		
-		String userID = U.paramString(req.getSession(), C.userID);
+		String userID = U.getUserID(req);
  
 		if(StringUtils.isBlank(userID)){
 			U.message(res, "操作失败:请先登录");
+			return;
 		}
 		
 		FolderDao fDao = new FolderDao();
@@ -89,6 +90,7 @@ public class UploadBookmarkContoller extends HttpServlet {
 		
 		//System.out.println(new Gson().toJson(folder));
 		//res.sendRedirect("localhost/tgy/");
+		//U.forward(req, res, "/");
 		U.resSuccess(res);
 
 	}
@@ -107,7 +109,7 @@ public class UploadBookmarkContoller extends HttpServlet {
 			try {
 				long tempTime = System.currentTimeMillis();
 				fService.save(folder);
-				System.out.println("fService.save(folder) " + folder.name+ " - " + (System.currentTimeMillis()-tempTime));
+				//System.out.println("fService.save(folder) " + folder.name+ " - " + (System.currentTimeMillis()-tempTime));
 			} catch (BaseException e) {
 				System.out.println("导入书签:保存Folder："+e.getMessage());
 			}
@@ -120,7 +122,7 @@ public class UploadBookmarkContoller extends HttpServlet {
 					try {
 						long tempTime = System.currentTimeMillis();
 						pService.save(p);
-						System.out.println("pService.save(p) " + p.name+ " - " + (System.currentTimeMillis()-tempTime));
+						//System.out.println("pService.save(p) " + p.name+ " - " + (System.currentTimeMillis()-tempTime));
 					} catch (BaseException e) {
 						System.out.println("导入书签:保存网页："+e.getMessage());
 					}

@@ -18,19 +18,29 @@ import com.tgy.util.U;
 @RequestMapping( value = {"/"}  )
 public class IndexContoller extends HttpServlet {
 	
-	@RequestMapping( method = RequestMethod.GET )
-	public void index(HttpServletRequest req, HttpServletResponse res,@CookieValue(value = "lastViewUserID", defaultValue = "",required  = false) String lastViewUserID
-			,@CookieValue(value = "lastLoginUserID", defaultValue = "",required  = false) String lastLoginUserID) {
+	@RequestMapping(  )
+	public void index(HttpServletRequest req, HttpServletResponse res,
+			@CookieValue(value = "lastViewUserID", defaultValue = "",required  = false) String lastViewUserID,
+			@CookieValue(value = "lastLoginUserID", defaultValue = "",required  = false) String lastLoginUserID,
+			@CookieValue(value = "lastPsCode", defaultValue = "",required  = false) String lastPsCode
+			) {
+		
+		if(StringUtils.isBlank(lastLoginUserID)){
+			//用户从没登录过 也没创建过快速体验书签，显示 ‘创建收藏夹按钮’ 和 ‘体验一下按钮’
+			req.setAttribute("isNewUser", "true");
+		}
 		
 		if(StringUtils.isBlank(lastLoginUserID) && StringUtils.isBlank(lastViewUserID)){//第一次访问
-			U.forward(req, res, "/常用网址"); 
+			
+			U.forward(req, res, "/公用导航"); 
 			return;
 		}
 		else{
 			try {
 				String userID = "";
-				if(StringUtils.isNotBlank(lastLoginUserID)){ //如有登录id 默认使用登录userid
+				if(StringUtils.isNotBlank(lastLoginUserID)  ){ //如有登录id和密码 默认使用登录userid，temp user的密码未空
 					userID = lastLoginUserID;
+					
 				}
 				else if(StringUtils.isNotBlank(lastViewUserID)){//如没有登录userid，使用 上次看过的userid
 					userID = lastViewUserID;
@@ -38,7 +48,7 @@ public class IndexContoller extends HttpServlet {
 				
 				User user = new UserDao().getByID(userID);
 				if(user==null){
-					U.forward(req, res, "/常用网址"); 
+					U.forward(req, res, "/公用导航"); 
 					return;
 				}
 				else{

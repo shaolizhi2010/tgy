@@ -4,12 +4,12 @@ import java.math.BigDecimal;
 
 public interface C {
 	
-	String domain = ".tangguoyun.com";
+	String domain = ".webhezi.com";
 	String userID = "userID";
-	String user = "user";
+	String user = "loginUser";
 	String utf8 = "UTF-8";
 	
-	String title = "网址盒子-网站收藏-网站推荐 ";
+	String title = "网址盒子-网址收藏-网站分享 ";
 	String errorMsg = "errorMsg";
 	String htmlRefSearchA = "<a target='_blank' href='http://www.baidu.com/s?wd=zwanggou%20%E8%BF%94%E5%88%A9%E9%82%80%E8%AF%B7%E7%A0%81' title='百度一下'>搜索邀请码?</a>";
 	 

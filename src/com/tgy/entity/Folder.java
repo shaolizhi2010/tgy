@@ -12,11 +12,9 @@ import org.mongodb.morphia.annotations.Reference;
 import org.mongodb.morphia.annotations.Transient;
 
 @Entity
-public class Folder implements Serializable {
-	@Id
-	public ObjectId id;
+public class Folder extends EntityWithUser  implements Serializable,Comparable {
+ 
 	public String name ;
-	public String userID;
 	
 	public String pid; // 父文件夹的id //TODO ref Folder pFolder
 
@@ -24,15 +22,17 @@ public class Folder implements Serializable {
 	public boolean isRoot; // 是否是根收藏夹，即页面左侧边栏里显示的收藏夹
 
 	public String createDate;
+	public String updateDate;
 
-	@Reference(ignoreMissing = true)
+	@Reference(ignoreMissing = true, lazy = true)
 	public List<Folder> folders;// 所有子文件夹
 
-	@Reference(ignoreMissing = true)
+	@Reference(ignoreMissing = true, lazy = true)
 	public List<Page> pages; // 文件夹包含的页面
 
 	public String color;
 	
+	public int clicks;
 	public long favScore;
 	
 	// stastics
@@ -82,6 +82,25 @@ public class Folder implements Serializable {
 			}
 		}
 		return false;
+	}
+	
+	@Override
+	public int compareTo(Object o2) {
+		
+		Folder f2 = (Folder)o2;
+		
+		
+		if(this.favScore > f2.favScore){
+			return 1;
+		}
+		
+		else if(this.favScore == f2.favScore) {
+			return 0;
+		}
+		else{
+			return -1;
+		}
+		
 	}
 
 }

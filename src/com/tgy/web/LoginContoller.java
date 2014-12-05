@@ -9,18 +9,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.mongodb.morphia.Morphia;
-import org.mongodb.morphia.query.Query;
-
-import com.mongodb.DBObject;
-import com.tgy.App;
 import com.tgy.dao.UserDao;
 import com.tgy.entity.User;
 import com.tgy.util.C;
+import com.tgy.util.MD5Util;
 import com.tgy.util.U;
 import com.tgy.validator.CommonValidator;
 
-@WebServlet("/user/login/")
+@WebServlet("/user/login")
 public class LoginContoller extends HttpServlet {
 
 	@Override
@@ -38,6 +34,8 @@ public class LoginContoller extends HttpServlet {
 			U.resFailed(res, e.getMessage());
 		}
 		
+		user.password = MD5Util.toMD5(user.password);
+		
 		User loginUser = new UserDao().login(user);
 		 
 		if (loginUser != null) {
@@ -45,12 +43,17 @@ public class LoginContoller extends HttpServlet {
 			Cookie cookie = new Cookie("lastLoginUserID", loginUser.id.toString());
 			cookie.setPath("/");
 			res.addCookie(cookie);
+			
+			Cookie cookie2 = new Cookie("lastPsCode",  loginUser.password );
+			cookie2.setPath("/");
+			res.addCookie(cookie2);
  
 			// login success
-			U.refreshSession(req.getSession());
+			//U.refreshSession(req.getSession());
 			req.getSession().invalidate();
-			req.getSession().setAttribute(C.userID, loginUser.id);
-			req.getSession().setAttribute("user", loginUser);
+			//req.getSession().setAttribute(C.userID, loginUser.id);
+			req.getSession().setAttribute(C.user, loginUser);
+ 
 			
 			//U.forward(req, res, "/"+loginUser.name);
 			 

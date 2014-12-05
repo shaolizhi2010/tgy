@@ -10,6 +10,7 @@ import org.mongodb.morphia.annotations.Entity;
 import org.mongodb.morphia.annotations.Id;
 import org.mongodb.morphia.annotations.Reference;
 
+import com.tgy.entity.BaseEntity;
 import com.tgy.entity.User;
 
 /**
@@ -28,13 +29,10 @@ import com.tgy.entity.User;
  *
  */
 @Entity
-public class Link implements Serializable,Comparable  {
+public class Link extends BaseEntity  implements Serializable,Comparable  {
 	
 	public static final int keepScore=10; //收藏一次得多少分
-	
-	@Id
-	public ObjectId id;
-	
+ 
 	public String title; //网页的 meta title
 	public String description; //网页的 meta desc
 	public String iconPath; //网站小图标路径
@@ -54,10 +52,14 @@ public class Link implements Serializable,Comparable  {
 	@Reference(ignoreMissing = true,lazy=true)
 	public User firstCreateBy;//第一个创建人
 	
+	//public String iconAvailable;//icon 图片是否可用  'true' 'false' or null
+	
 	public long clicks; //点击次数
 	public long keeps; //收藏次数
 	
 	public long favScore; //收欢迎程度得分
+	
+	public int digTimes; //抓取网页信息（title description） 次数，如超过一定次数（如3次）就不再抓取了
 
 	public void add(Tag tag) {
 		if (tags == null) {

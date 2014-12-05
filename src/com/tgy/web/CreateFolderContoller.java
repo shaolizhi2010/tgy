@@ -15,13 +15,15 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.tgy.dao.FolderDao;
 import com.tgy.entity.Folder;
+import com.tgy.entity.User;
 import com.tgy.exception.BaseException;
 import com.tgy.service.FolderService;
+import com.tgy.util.C;
 import com.tgy.util.U;
 import com.tgy.validator.CommonValidator;
 
 @RestController
-@RequestMapping("/folder/create/")
+@RequestMapping("/folder/create")
 public class CreateFolderContoller extends HttpServlet {
 
 	@RequestMapping( method = RequestMethod.POST )
@@ -31,27 +33,26 @@ public class CreateFolderContoller extends HttpServlet {
 		Folder folder = U.fromReqJson(req, Folder.class);
 		
 		try {
-			new CommonValidator().isLogin(req, null).isNotNull(folder, null)
+			
+			User user = U.param(req, C.user, User.class);
+			
+			folder.name = StringUtils.trim(folder.name);
+			new CommonValidator().isLogin(req, null).isNotNull(folder, null).isSameUser(user, folder, null)
 				.isLonger(folder.name, 0, "名称不能为空")
 				.isShorter(folder.name, 60, "名称需小于60");
 			
 			FolderService fService = new FolderService();
-			if(StringUtils.isNotBlank(folder.pid)){
-				Folder pFolder = new FolderDao().getByID(folder.pid);
-				if(pFolder==null){
-					U.resFailed(res, "收藏夹未找到");
-				}
-				if (!StringUtils.equals(pFolder.userID, U.getUserID(req)) ){
-					U.resFailed(res, "请登录后操作");
-				}
+			
+			String userID = U.getUserID(req);
+			if(   !StringUtils.equals(folder.userID, userID)){
+				U.resFailed(res, "无权限进行当前操作,请先登陆");
+				return;
 			}
-		
 			
 			fService.save(folder);
 			U.refreshSession(req.getSession());
 			U.resSuccess(res);
 		} catch (BaseException e) {
-			e.printStackTrace();
 			U.resFailed(res, e.getMessage());
 		}
 

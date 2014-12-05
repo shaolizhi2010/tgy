@@ -12,14 +12,17 @@
 
             <!-- edit page begin-->
 			<input type="hidden" id="editPage_dataid" value="">
+ 
+             <div  style="margin-top: 20px;" >
+                <label for="editPage_url">网址</label><input class="form-control"  ng-keyup="$event.keyCode == 13 ? editPageFunction() : null" id="editPage_url"
+                                                          type="text"/>
+            </div>
+ 
             <div  style="margin-top: 20px;" >
                 <label for="editPage_pageName">名称</label><input class="form-control"  ng-keyup="$event.keyCode == 13 ? editPageFunction() : null" id="editPage_pageName"
                                                           type="text"/>
             </div>
-            <div  style="margin-top: 20px;" >
-                <label for="editPage_url">网址</label><input class="form-control"  ng-keyup="$event.keyCode == 13 ? editPageFunction() : null" id="editPage_url"
-                                                          type="text"/>
-            </div>
+
             <div  style="margin-top: 20px;" >
                 <button ng-click="editPageFunction()" id="editPage-ok" type="button"
                         class="btn btn-primary">确定

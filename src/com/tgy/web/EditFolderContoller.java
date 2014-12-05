@@ -21,7 +21,7 @@ import com.tgy.util.C;
 import com.tgy.util.U;
 import com.tgy.validator.CommonValidator;
 
-@WebServlet("/folder/edit/")
+@WebServlet("/folder/edit")
 public class EditFolderContoller extends HttpServlet {
 
 	@Override
@@ -36,25 +36,24 @@ public class EditFolderContoller extends HttpServlet {
 			String id = map.get("id");
 			String name = map.get("name");
 			
-			new CommonValidator().isLogin(req, null).isNotNull(id,  "未找到要编辑的收藏夹")
+			User user = U.param(req, C.user, User.class);
+			
+			new CommonValidator().isLogin(req, null).isNotNull(id,  "未找到要编辑的分类")
 			.isLonger(name, 0, "名称不能为空")
 			.isShorter(name, 60, "名称需小于60")
 			.isLength(id, 24,  "数据错误:id") ;
 			//.isShorter(id, 20, "未找到要编辑的收藏夹");//oid invalid
 			
-			String userID = U.paramString(req.getSession(), C.userID);
 			UserService uService = new UserService();
-			User user = uService.checkAndGetUser(userID);
 
 			FolderService fService = new FolderService();
 			FolderDao fDao = new FolderDao();
 			Folder folder = fDao.getByID(id);
 			if (folder != null) {
 				//判断用户id和要操作的文件夹所属用户 是否一致，否则报错
-				if(!StringUtils.equals(user.id.toString(), folder.userID)){
-					U.message(res, "操作失败:请登陆后再编辑");
-				}
+				new CommonValidator().isSameUser(user, folder, null);
 				folder.name = name;
+				folder.updateDate = U.dateTime();
 				fDao.save(folder);
 			}
 			// fService.save(folder);

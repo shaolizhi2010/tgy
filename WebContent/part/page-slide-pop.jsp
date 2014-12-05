@@ -6,17 +6,17 @@
 <%@page import="java.util.List"%>
 <%@ page language="java" pageEncoding="UTF-8"%>
 
-<%@include file="bookmark-data.jsp" %>
+<%@include file="bookmark-data.jsp" %> 
 
-<div class="container col-md-12 clearfix"
+<div class="container col-sm-12 clearfix"
 	style="padding: 2px; padding-left: 20px; margin-bottom: 20px; border-left: 1px solid #eee;">
 
  
 	<%
 
-		if (curFolder != null) {
+		if (showFolder != null) {
 
-			String tagName = curFolder.name;
+			String tagName = showFolder.name;
 			LinkService lService = new LinkService();
 			List<Link> links = lService.searchByTagName(tagName);
 			
@@ -31,11 +31,11 @@
 	%>
 
 	<div style="margin-top: 10px;   height: 20px;">
-		<a target="_blank" href="<%=link.url%>" class="col-md-8"
+		<a target="_blank" href="<%=link.url%>" class="col-sm-8"
 			> <span
 			class="glyphicon glyphicon-star" style="color: #ffd76e;"></span> <span
 			style="color: #1155cc;"> <%= U.shortTitle(link.title) %></span> <!-- #ff076e #1155cc; 0000cc-->
-		</a> <a ng-click="createPageFunction('<%=link.title%>','<%=link.url%>')" href="#" class="col-md-2"
+		</a> <a ng-click="createPageFunction('<%=link.title%>','<%=link.url%>')" href="#" class="col-sm-2"
 			style="padding-left: 1px; padding-right: 1px;"> <span
 			class="glyphicon glyphicon glyphicon-plus" 
 			style="padding-right: 1px;"></span>
@@ -45,7 +45,7 @@
 		}
 				}//end for
 	%>
-	<a class="col-md-12" target="_blank" href="<%=request.getContextPath()%>/tag/<%=tagName%>"
+	<a class="col-sm-12" target="_blank" href="<%=request.getContextPath()%>/tag/<%=tagName%>"
 		style="margin-top: 10px;"> >>查看更多<%=tagName%>网站 </a>
 	<%
 		}

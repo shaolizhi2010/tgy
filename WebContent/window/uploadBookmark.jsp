@@ -14,14 +14,10 @@
 
 			<!-- upload bookmark begin-->
 
-			<form action="<%=request.getContextPath()%>/bookmark/upload/"
-				method="post" enctype="multipart/form-data">
-
-				<span class="btn btn-success fileinput-button"> <i
-					class="glyphicon glyphicon-plus"></i> <span>添加文件</span> <input
-					type="file" name="bookmarkFile" value="">
+			<div >
+				<span class="btn btn-success fileinput-button"> <i class="glyphicon glyphicon-plus"></i> <span>添加文件</span> <input
+					type="file" id="bookmarkFile" name="bookmarkFile" value="">
 				</span>
-
 
 				<!-- 
 				<div>
@@ -33,14 +29,14 @@
  -->
 
 				<div style="margin-top: 20px;">
-					<button type="submit" class="btn btn-primary">确定</button>
+					<button id="bookmarkFileBtn" type="button"  class="btn btn-primary">确定</button>
 					<button type="button" class="btn btn-default" data-dismiss="modal">取消
 					</button>
 				</div>
 
 				<!--  ng-click="uploadBookmarkFunction()" -->
 				<!-- upload bookmark end-->
-			</form>
+			</div>
 		</div>
 
 	</div>

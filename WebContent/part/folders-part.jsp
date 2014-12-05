@@ -5,15 +5,15 @@
 <%@page import="java.util.List"%>
 <%@ page language="java" pageEncoding="UTF-8"%>
 
-<%@include file="bookmark-data.jsp" %>
+<%@include file="bookmark-data.jsp" %> 
 
 <!-- 显示收藏夹开始 -->
 <div class="col-sm-12" style="padding: 0px;padding-top: 15px;">
 
 	<%
-		if (bookmarkData!=null && bookmarkData.rootFolder != null && !CollectionUtils.isEmpty(bookmarkData.rootFolder.pages)) {
+		if (bookmarkData!=null && bookmarkData.folder != null && !CollectionUtils.isEmpty(bookmarkData.folder.pages)) {
 	%>
-	<a href="<%=request.getContextPath()%>/folder/<%=bookmarkData.rootFolder.id.toString() %>" class="btn"
+	<a href="<%=request.getContextPath()%>/folder/<%=bookmarkData.folder.id.toString() %>" class="btn"
 		style="  text-align: left;  ">
 		<span class="glyphicon glyphicon-book" style="color:red"></span>
 		<div class="label " style="color: #2e8cd8;  font-size: 15px;padding:5px;  padding-left:10px;padding-right:15px; ">未分类</div> 
@@ -24,7 +24,7 @@
 	%>
 
 	<%
-		for (Folder folder : folders) {
+		for (Folder folder : showFolder.folders) {
 			String name = folder.name;
 			if (name != null && name.length() > 4) {
 	//			name = name.substring(0, 4) + "..";

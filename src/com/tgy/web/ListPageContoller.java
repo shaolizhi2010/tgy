@@ -20,7 +20,7 @@ import com.tgy.util.U;
 import com.tgy.validator.CommonValidator;
 
 //TODO
-@WebServlet("/page/list/")
+@WebServlet("/page/list")
 public class ListPageContoller extends HttpServlet {
 
 	@Override

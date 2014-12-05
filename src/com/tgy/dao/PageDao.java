@@ -13,12 +13,16 @@ import org.mongodb.morphia.query.Query;
 import com.tgy.App;
 import com.tgy.entity.Folder;
 import com.tgy.entity.Page;
+import com.tgy.statistic.entity.Link;
 
 public class PageDao extends BasicDAO<Page, ObjectId> {
 
 	public PageDao() {
 		super(Page.class, App.getInstance().getDatastore());
 	}
+	
+ 
+	
 
 	public void saveWithRef(Page page) {
 		save(page);
@@ -82,7 +86,7 @@ public class PageDao extends BasicDAO<Page, ObjectId> {
 			return new ArrayList<>();
 		
 		if(orderBy == null){
-			orderBy = "-clicks";
+			orderBy = "-favScore";
 		}
 
 		Query<Page> query = App.getInstance().getDatastore()
@@ -90,5 +94,15 @@ public class PageDao extends BasicDAO<Page, ObjectId> {
 
 		List<Page> pages = find(query).asList();
 		return pages;
+	}
+	
+	//根据link url 取 link
+	public List<Page> getByUrl(String url) {
+		url = StringUtils.trim(url);
+		Query<Page> query = App.getInstance().getDatastore()
+				.createQuery(Page.class).filter("url", url)
+				.order("-favScore");
+
+		return find(query).asList();
 	}
 }

@@ -20,7 +20,7 @@ import com.tgy.util.C;
 import com.tgy.util.U;
 import com.tgy.validator.CommonValidator;
 
-@WebServlet("/folder/delete/")
+@WebServlet("/folder/delete")
 public class DeleteFolderContoller extends HttpServlet {
 
 	@Override
@@ -33,22 +33,19 @@ public class DeleteFolderContoller extends HttpServlet {
 			Map<String, String> map = U.requestToMap(req);
 			
 			String id = map.get("id");
+			User user = U.param(req, C.user, User.class);
 			
-			new CommonValidator().isLogin(req, null).isNotNull(id,  "未找到要编辑的收藏夹")
+			new CommonValidator().isLogin(req, null)
+			.isNotNull(id,  "未找到要编辑的分类")
 			.isLength(id, 24,  "数据错误:id") ;
 			
-			String userID = U.paramString(req.getSession(), C.userID);
-			UserService uService = new UserService();
-			User user = uService.checkAndGetUser(userID);
-
 			FolderService fService = new FolderService();
 			FolderDao fDao = new FolderDao();
 			Folder folder = fDao.getByID(id);
 			if (folder != null) {
 				//判断用户id和要操作的文件夹所属用户 是否一致，否则报错
-				if(!StringUtils.equals(user.id.toString(), folder.userID)){
-					U.message(res, "操作失败:请登陆后再编辑");
-				}
+				new CommonValidator().isSameUser(user, folder, null);
+				
 				fDao.deleteWithRef(folder);
 			}
 			 U.refreshSession(req.getSession());

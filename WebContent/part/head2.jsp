@@ -8,76 +8,99 @@
 <%@page import="java.util.List"%>
 <%@ page language="java" pageEncoding="UTF-8"%>
 
-<%
-	BookmarkData bookmarkData = U.param(request, "bookmarkData", BookmarkData.class);
-	User user = null;
-	if(bookmarkData!=null && bookmarkData.curUser!=null){
-		user = bookmarkData.curUser;
-	}
-	String userName = "";
-	String userID = "";
+<%@include file="common.jsp"%>
+<%@include file="user-data.jsp"%>
+<%@include file="bookmark-data.jsp"%>
 
-	String disableIfNotLogin="disabled";
-	if (user != null) {
-		userName = user.name;
-		disableIfNotLogin = "";
-	} else {
-		userName = "未找到";
+<%
+	boolean isNewUserFlag = false;
+	if (request.getAttribute("isNewUser") != null) {
+		isNewUserFlag = true;
+	}
+
+	String showUserNameShort = showUserName;
+	if (showUserNameShort != null && showUserNameShort.length() > 16) {
+		showUserNameShort = showUserNameShort.substring(0, 16);
+	}
+
+	String showFolderLink = "#";
+	if (showFolder != null) {
+		showFolderLink = contextPath + "/folder/" + showFolderID;
 	}
 %>
 
 <!--------面包屑----------->
 <div class=" col-sm-12"
-	style="padding: 3px; padding-top: 15px; padding-bottom: 15px; margin: 0px;">
+	style="padding: 3px; padding-top: 15px; padding-bottom: 10px; margin: 0px;">
 
-	<div class=" col-md-7">
-		<a href="<%=request.getContextPath() %>/<%=userName%>"><span class="glyphicon glyphicon-home"
-			style="font-size: 16px; font-weight: bold;"></span></a> <a href="<%=request.getContextPath() %>/<%=userName%>"><span
-			style="font-size: 20px; font-weight: bold; margin-left: 3px;"><%=userName%></span></a>
+	<div class=" col-sm-2" style="padding-left: 0px; ">
+		<!-- 当前用户 和 用户下拉列表  begin-->
+		<div class="  col-sm-12" style=" ">
+			<a class="  col-sm-12" style="padding-left:0px;  " href="#"
+				id="showUserHistoryBtn" type="button" data-toggle="dropdown"
+				aria-haspopup="true" role="button" aria-expanded="false">
+				<span class="glyphicon glyphicon-home" style="font-size: 16px; font-weight: bold;"></span>
+				<span>用户:</span>  <span
+					style="  font-weight: bold; font-size: 20px;"><%=showUserNameShort%></span>
+				<span class="caret"></span>
+			</a>
 			
+			<ul id="showUserHistoryContent" class="dropdown-menu col-sm-6" role="menu" aria-labelledby="showUserHistoryBtn" style="   ">
+ 
+		  </ul>
 			 
+		</div>
+<!-- 当前用户 和 用户下拉列表 end -->
 
-		<!-- background-color: #fff; -->
-		<span style="font-size: 18px; font-weight: bold; margin-left: 3px;">
-			/</span>
-		<%
-			BreadCrumb bread = null;
-			if (U.param(request, "bread", BreadCrumb.class) != null) {
-				bread = U.param(request, "bread", BreadCrumb.class);
-				while (bread != null) {
-		%>
-		<a href="<%=bread.link%>"> 
-			<span style="font-size: 18px; font-weight: bold; margin-left: 3px;">
-					<%=U.shortString(bread.name, 20)%></span> 
-		</a>
-		<span style="font-size: 18px; font-weight: bold; margin-left: 3px;">/</span>
-		<%
-			bread = bread.child;
-				}
-			}
-		%>
 	</div>
-	<div class=" col-sm-1  pull-right"> 
-		<a  class=" " ng-click="preCreateFolderFunction()" href="#"><span class="glyphicon glyphicon-plus" style="font-size: 16px;font-weight:bold; "></span></a>
-		
-			<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-				<span class="glyphicon glyphicon-chevron-down" style="font-size: 16px;font-weight:bold; "></span>
+	
+	<div id="god-div" class="col-md-7 ui-widget no-padding" style=""> 
+		<input id="god-input" class="form-control hover-focus" style="height: 45px;" placeholder="网址、关键字、网站名称" />
+		<div id= "god-content-div" class="  col-sm-12"  style="display: none;position: absolute; z-index: 1000;   background-color: #fff;border: 1px solid #333; ">
+			 
+		</div> 
+		<a id="god_link" href="#" target="_blank" style="display: none;"></a>
+	</div>
+	
+	
+	<div class="  col-sm-3  ">
+
+		<%
+			if (isNewUserFlag) {
+		%>
+		<a class="btn btn-success pull-right" ng-click="firstTryFunction()"
+			style="color: #fff; font-weight: bold;"> <span
+			class="glyphicon   glyphicon-arrow-right "></span> 创建 自己的收藏 &nbsp;&nbsp;
+		</a>
+
+		<%
+			} else {
+		%>
+		<div class="col-sm-6" style="padding: 3px;">
+			<a class=" btn btn-success  col-sm-12"
+				style="color: #fff; font-weight: bold; margin-right: 0px;"
+				ng-click="preAddPageFunction()" href="#"> 添加网址 </a>
+			<!-- #449044 -->
+		</div>
+		<div class="col-sm-6" style="padding: 3px; margin-left: 0px;">
+			<a class="btn btn-default col-sm-12" data-toggle="dropdown"
+				style="margin-left: 0px;" href="#" role="button"
+				aria-expanded="false"> 更多操作 <span class="caret"></span>
 			</a>
 			<ul class="dropdown-menu" role="menu">
-				<li><a ng-click="preCreateFolderFunction()" href="#">创建分类</a></li>
-				<li class="divider"></li>
-				
-				<li class="<%=disableIfNotLogin%>"><a ng-click="preEditAll()"  href="#">编辑</a></li>
-				<li class="divider"></li>
-				<li><a
-					href="http://localhost/tgy/folder/?fid=5448792a7890c8799d303726">水平显示</a></li>
-				<li><a
-					href="http://localhost/tgy/folder/?fid=5448792a7890c8799d303726&show=h">垂直显示</a></li>
+				<li><a ng-click="preEditAll()"> 编辑 </a></li>
+				<li><a ng-click="preCreateFolderFunction()">添加分类</a></li>
+				<li><a ng-click="preUploadBookmarkFunction()">导入书签</a></li>
 			</ul>
+		</div>
+		<%
+			}
+		%>
+
 	</div>
 
 </div>
 
-<!-- 分割线 -->
-<hr class="divider col-md-12"
-	style="border-top: 1px solid #eee; margin-top: 1px;">
+<!-- 分割线
+<hr class="divider col-sm-12"
+	style="border-top: 2px solid #eee; margin-top: 1px;"> -->

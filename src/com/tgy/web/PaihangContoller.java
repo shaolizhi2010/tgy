@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.tgy.util.U;
 
 @RestController
-@RequestMapping( value = {"/paihang/","/paihang"}  )
+@RequestMapping( value = {"/paihang"}  )
 public class PaihangContoller extends HttpServlet {
 	
 	@RequestMapping( method = RequestMethod.GET )

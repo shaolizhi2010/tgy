@@ -1,3 +1,40 @@
+<img style="width: 18px;" src="'+dataJson[i].iconPath+'"> 
+		<%
+			if (StringUtils.isNoneBlank(showFolderName)) {
+		%>
+
+		<span style="font-size: 18px; font-weight: bold; margin-left: 3px;">
+			/</span> <a href="<%=showFolderLink%>"> 分类: <span
+			style="font-size: 18px; font-weight: bold; margin-left: 3px;">
+				<%=U.shortString(showFolderName, 20)%></span>
+		</a>
+
+		<%
+			}
+		%>
+
+		<ul style="" id="users_history" class=" "  >
+			<li><a href="<%=request.getContextPath()%>/u/<%=showUserID%>">
+					<%=showUserNameShort%>
+			</a></li>
+			<li><a href="<%=request.getContextPath()%>/u/<%=showUserID%>">
+					<%=showUserNameShort%>
+			</a></li>
+			<li><a href="<%=request.getContextPath()%>/u/<%=showUserID%>">
+					<%=showUserNameShort%>
+			</a></li>
+		</ul>
+
+
+
+				line = line.replaceAll(" ", "");
+				if(line.contains("<title>")){
+					title = StringUtils.substringBetween(line, "<title>","</title>");
+					if(StringUtils.isNoneBlank(title)){
+						return title;
+					}
+				}
+
 	<div class="col-md-3" style="padding: 2px;">
 			<input class="form-control  col-md-4" type="email"
 				placeholder="用户名">

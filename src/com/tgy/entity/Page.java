@@ -2,28 +2,49 @@ package com.tgy.entity;
 
 import java.io.Serializable;
 
-import org.bson.types.ObjectId;
 import org.mongodb.morphia.annotations.Entity;
-import org.mongodb.morphia.annotations.Id;
 
 import com.tgy.statistic.entity.Link;
 
 @Entity
-public class Page implements Serializable {
-	 @Id
-	public ObjectId  id;
+public class Page extends EntityWithUser  implements Serializable,Comparable {
+ 
 	
 	public String name;
-	public String userID;
+	public String description;
+	public String comment;
+	
 	public String pid;
 	public String url;
 	public String createDate;
 	
 	public Link refLink;
 	
+	public String iconPath;
+	//public String iconAvailable;//icon 图片是否可用  'true' 'false' or null
+	
 	
 	//stastics
 	public int clicks;
 	public long favScore;
 	public int scanTimes; //呗后台分析程序扫描的次数，0标识没扫描过
+	
+	@Override
+	public int compareTo(Object o2) {
+		
+		Page p2 = (Page)o2;
+		
+		
+		if(this.favScore > p2.favScore){
+			return 1;
+		}
+		
+		else if(this.favScore == p2.favScore) {
+			return 0;
+		}
+		else{
+			return -1;
+		}
+		
+	}
 }

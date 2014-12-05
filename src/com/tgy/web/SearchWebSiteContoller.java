@@ -18,7 +18,7 @@ import com.tgy.statistic.service.LinkService;
 import com.tgy.statistic.service.TagService;
 import com.tgy.util.U;
 
-@WebServlet("/site/")
+@WebServlet("/site")
 public class SearchWebSiteContoller extends HttpServlet {
 
 	@Override
