@@ -6,11 +6,11 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.tgy.entity.User;
 import com.tgy.service.IndexService;
+import com.tgy.service.UserService;
 import com.tgy.util.U;
 import com.tgy.web.vo.BookmarkData;
 
@@ -37,6 +37,11 @@ public class FolderContoller extends HttpServlet {
 //		req.setAttribute("bread", bread);
 		
 		User showUser = indexService.getUserByFolderID(fid);
+		if(showUser!=null){
+			showUser.showTimes++;
+			showUser.score++;
+			new UserService().save(showUser);
+		}
 		
 		req.setAttribute("showUser", showUser);
 		

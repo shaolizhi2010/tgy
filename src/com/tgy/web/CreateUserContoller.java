@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -26,8 +27,17 @@ public class CreateUserContoller extends HttpServlet {
 	protected void createUser(HttpServletRequest req, HttpServletResponse res)
 			throws ServletException, IOException {
 
-		User user = U.fromReqJson(req, User.class);
+		User user = new User();
+		
+		user.name = U.filterCharacter(req.getParameter("name")) ;
+		user.password = U.filterCharacter(req.getParameter("password")) ;
+		String authCreateStr = U.filterCharacter(req.getParameter("authCreate")) ;
+		
+		
 		try {
+			if(StringUtils.isNotBlank(authCreateStr)){
+				user.authCreate = Integer.parseInt(authCreateStr);
+			}
 			new CommonValidator().isNotNull(user, null)
 					.isLonger(user.name, 1, "用户名长度需大于1")
 					.isShorter(user.name, 20, "用户名长度应小于20")

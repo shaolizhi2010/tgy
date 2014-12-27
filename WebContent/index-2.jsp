@@ -1,3 +1,4 @@
+<%@ page trimDirectiveWhitespaces="true" %> 
 <%@page import="java.util.ArrayList"%>
 <%@page import="com.tgy.web.vo.BookmarkData"%>
 <%@page import="com.tgy.util.C"%>
@@ -10,7 +11,7 @@
 <!DOCTYPE html>
 <%@include file="part/user-data.jsp"  %>  
 <%@include file="part/bookmark-data.jsp" %>
-<html ng-app="pageMainApp" ng-controller="pageMainCtrl">
+<html  >
 <head lang="en">
 <jsp:include page="part/head-meta.jsp" />
 <jsp:include page="part/importAtHead.jsp" />
@@ -18,27 +19,32 @@
 <% 
 	String contextPath = request.getContextPath();
 %>
-<body>
+<body> 
 	<jsp:include page="part/head.jsp" />
-	<jsp:include page="part/head2.jsp" />
- <jsp:include page="part/folders-fav.jsp" />
+	<div class=" col-sm-12 no-padding" style="border: 1px solid #999;  "></div>
+	<div class="col-sm-12" style="height: 10px;"></div> 
 	<!-- 书签主页面开始 -->
-	<div class="container col-sm-12 clearfix" style="padding-top: 0px;margin-top: 0px; ">  
-		<!-- 左侧书签列表 -->
-		<!-- 左侧书签列表结束-->
+	<div class="container col-sm-12 clearfix no-padding" style="padding-top: 0px;margin-top: 0px; ">  
+	 
+	 <div>
 		<!-------- 右侧 书签主页面 --------->
-		<div id="pageMain" class="col-sm-9 "
-			style="background-color:#fafafa;border-top: 1px solid #eee; border-left: 1px solid #eee; border-right: 1px solid #eee;padding:0px; padding-top:10px; padding-left: 20px;padding-bottom: 40px;">
-			<div class="  col-sm-12" style="margin-top: 10px;"></div>
+		<div id="pageMain" class="col-sm-9 no-padding"
+			style=" border-top: 1px solid #eee; border-left: 1px solid #eee; border-right: 1px solid #eee;padding:0px;   padding-left: 20px;padding-bottom: 40px;">
+			<jsp:include page="part/folder-fav.jsp" />
+			<div class="col-sm-12" style="height: 10px;"></div>
 			<jsp:include page="part/pages-all-part.jsp" />
 		</div>
 		<!-------- 右侧 书签列表页面 end  --->
 		<!-- 显示推荐页面开始 -->
-		<div class="col-sm-3" style="background-color:#fdfdfd;  padding-bottom: 20px;">
+		<div class="col-sm-3" style="  padding-bottom: 20px;">
+			<jsp:include page="part/user-info.jsp" />
+			<div class="col-sm-12" style="height: 20px;"></div>
 			<jsp:include page="part/page-slide-myHotClicks.jsp" />
+			<div class="col-sm-12" style="height: 20px;"></div>
 			 <jsp:include page="part/folder-slide-follow.jsp" /> 
 		</div>
 		<!-- 显示推荐页面结束 -->
+		</div>
 	</div>
 	<!-- 书签主页面结束-->
 	<!-- toolbar -->

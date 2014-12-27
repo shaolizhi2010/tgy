@@ -21,7 +21,7 @@
             </div>
 
             <div  style="margin-top: 20px;" >
-                <button ng-click="createRootFolderFunction()" id="createRootFolder-ok" type="button"
+                <button onclick="createRootFolderFunction()" id="createRootFolder-ok" type="button"
                         class="btn btn-primary">添加
                 </button>
                 <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>

@@ -1,12 +1,28 @@
-import com.tgy.service.WebInfo;
-import com.tgy.util.WebInfoUtil;
+import java.io.StringReader;
+import java.net.URLEncoder;
+import java.util.List;
+
+import org.apache.commons.lang3.StringUtils;
+import org.htmlcleaner.CleanerProperties;
+import org.htmlcleaner.HtmlCleaner;
+import org.htmlcleaner.SimpleXmlSerializer;
+import org.htmlcleaner.TagNode;
+import org.jdom2.Attribute;
+import org.jdom2.Document;
+import org.jdom2.Element;
+
+import com.tgy.util.SimpleConnecter;
+import com.tgy.util.X;
 
 public class TestMain {
 
 	public static void main(String[] args) {
 		try {
 			System.out.println("start");
-			String url = "alivv.cn";
+
+			
+			//System.out.println(s);
+			
 //			String url = "http://www.wanggousousuo.com/";
 //			String url = "http://news.taobao.com/";
 //			String url = "http://news.ifeng.com/";
@@ -39,11 +55,11 @@ public class TestMain {
 //			
 //			
 		
-			WebInfo info = new WebInfoUtil().info(url,true);
-			System.out.println(info.charset);
-			System.out.println(info.title);
-			System.out.println(info.description);
-			System.out.println(info.iconPath);
+//			WebInfo info = new WebInfoUtil().info(url,true);
+//			System.out.println(info.charset);
+//			System.out.println(info.title);
+//			System.out.println(info.description);
+//			System.out.println(info.iconPath);
 //			System.out.println(System.currentTimeMillis() - start);
 //			
 //			System.out.println(  
@@ -53,10 +69,10 @@ public class TestMain {
 //			System.out.println(webInfo.description);
 //			
 //			System.out.println(System.currentTimeMillis() - start);
-//			new TagService().scan(); 
-//			new LinkService().scan();
+		//	new TagService().scan(); 
+		//	new LinkService().scan();
 //			new LinkInfoService().scan();
-			System.out.println("over");
+		//	System.out.println("over");
 			
 //			List<Page> list = new PageDao().find().asList();
 //			for(Page page : list){
@@ -87,6 +103,29 @@ public class TestMain {
 			e.printStackTrace();
 		}
 
+	}
+	
+	public static String getPageSourceFromNode(TagNode node) {
+		// long start = System.currentTimeMillis();
+		HtmlCleaner hc = new HtmlCleaner();
+		CleanerProperties props = hc.getProperties();
+		props.setNamespacesAware(false);
+		props.setOmitCdataOutsideScriptAndStyle(true);
+		props.setOmitComments(true);
+		props.setOmitXmlDeclaration(true);
+		props.setOmitDoctypeDeclaration(true);
+		// PrettyXmlSerializer SimpleXmlSerializer
+		SimpleXmlSerializer serializer = new SimpleXmlSerializer(props);
+		String pageSource = "";
+		try {
+			pageSource = serializer.getAsString(node, "UTF-8");
+		} catch (Exception e) {
+			// no thing
+		}
+		// pageSource = U.clean(pageSource);
+		// L.trace("Connecter getPageSourceFromNode ", " finished, time is " +
+		// (System.currentTimeMillis() -start));
+		return pageSource;
 	}
 
 }

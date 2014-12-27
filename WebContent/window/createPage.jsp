@@ -23,20 +23,22 @@
 			
 			<div style="margin-top: 20px;">
 				<label for="pageUrl">分类</label> 
-				<a href="#"  ng-click="preCreateFolderFunction()" ><span style="font-size: 12px;line-height: 14px;">创建新分类</span> </a>
+				<a href="#"  onclick="preCreateFolderFunction()" ><span style="font-size: 12px;line-height: 14px;">创建新分类</span> </a>
 			</div>
 			<div class="">
 			   <select class="  form-control"   id="createPage_pid">
 			   <option value="<%=showFolderID%>"  ><%=showFolderName%></option>
 			   <%
-			   for(Folder f: rootFolders){
-				   String selected = "";
-				   if(StringUtils.equals(showFolderID, String.valueOf(f.id ))){
-					   selected = "selected='selected'";
+			   if(loginUserBookmarkData!=null && loginUserBookmarkData.rootFolders!=null){
+				   for(Folder f: loginUserBookmarkData.rootFolders){
+					   String selected = "";
+					   if(StringUtils.equals(showFolderID, String.valueOf(f.id ))){
+						   selected = "selected='selected'";
+					   }
+					   %>
+					   <option value="<%=f.id%>" <%=selected %> ><%=f.name%></option>
+					   <%
 				   }
-				   %>
-				   <option value="<%=f.id%>" <%=selected %> ><%=f.name%></option>
-				   <%
 			   }
 			   %>
 			    </select>
@@ -56,13 +58,14 @@
 			<div id="link-prompt-div" class="col-sm-12" style="margin-bottom: 10px;padding-right: 5px;" >
 			
 			</div>
+			<!-- 
 			<div style="margin-top: 20px;">
 				<label for="pageName">备注</label> 
 				<textarea   id="pageDescription"  class="form-control  " rows="3"></textarea>
 			</div>
-			
+			 -->
 			<div style="margin-top: 20px;">
-				<button ng-click="createPageFunction()" id="createPage-ok"
+				<button onclick="createPageFunction()" id="createPage-ok"
 					type="button" class="btn btn-primary">添加网址</button>
 				<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
 			</div>

@@ -4,7 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang3.StringUtils;
 
-import com.tgy.entity.EntityWithUser;
+import com.tgy.entity.StateFulBaseEntity;
 import com.tgy.entity.User;
 import com.tgy.exception.BaseException;
 import com.tgy.util.C;
@@ -76,6 +76,19 @@ public class CommonValidator implements Validator{
 		return this;
 	}
 
+	public CommonValidator eq(String s1,String s2, String errMsg) throws BaseException{ 
+		if(StringUtils.equals(s1, s2)){
+			return this;
+		}
+		else{
+			if(StringUtils.isNotBlank(errMsg)){
+				throw new BaseException(this, errMsg);
+			}
+			else{
+				throw new BaseException(this, "数据不匹配");
+			}
+		}
+	}
 	
 	public CommonValidator isNotNull(Object o,String errMsg) throws BaseException{ 
 		if(o==null){
@@ -90,7 +103,7 @@ public class CommonValidator implements Validator{
 		return this;
 	}
 	
-	public CommonValidator isSameUser(User user, EntityWithUser e2,String errMsg) throws BaseException{ 
+	public CommonValidator isSameUser(User user, StateFulBaseEntity e2,String errMsg) throws BaseException{ 
 		if(user==null || user.id == null){
 			if(StringUtils.isNotBlank(errMsg)){
 				throw new BaseException(this, errMsg);

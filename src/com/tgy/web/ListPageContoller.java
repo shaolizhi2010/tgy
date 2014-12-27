@@ -27,8 +27,7 @@ public class ListPageContoller extends HttpServlet {
 	protected void service(HttpServletRequest req, HttpServletResponse res)
 			throws ServletException, IOException {
 
-		HashMap param = U.fromReqJson(req, HashMap.class);
-		String pid = String.valueOf(param.get("pid"));
+		String pid = U.filterCharacter(req.getParameter("pid"));
 		
 		try {
 			

@@ -66,7 +66,7 @@ LinkService lService = new LinkService();
 							<td><%=userIndex++%></td>
 							<td><a target="_blank" href="<%=request.getContextPath()%>/<%=userName%>"><span
 									style="font-size: 14px; font-weight:300; margin-left: 3px;"><%=userName%></span></a></td>
-							<td><a ng-click=" " href="#" class="col-sm-2"
+							<td><a onclick=" " href="#" class="col-sm-2"
 								style="padding-left: 1px; padding-right: 1px;font-weight: bold; "> <span
 									style=" font-size: 18px;"> + </span>
 							</a></td>
@@ -109,7 +109,7 @@ LinkService lService = new LinkService();
 							<td><%=tagIndex++%></td>
 							<td><a target="_blank" href="<%=request.getContextPath()%>/tag/<%=tagName%>"><span
 									style="font-size: 14px; font-weight:300; margin-left: 3px;"><%=tagName%></span></a></td>
-							<td><a ng-click=" " href="#" class="col-sm-2"
+							<td><a onclick=" " href="#" class="col-sm-2"
 								style="padding-left: 1px; padding-right: 1px;font-weight: bold; "> <span
 									style="font-size: 18px; "> + </span>
 							</a></td>
@@ -155,7 +155,7 @@ LinkService lService = new LinkService();
 							<td><%=linkIndex++%></td>
 							<td><a target="_blank" href=" <%=link.url%>"><span
 									style="font-size: 14px; font-weight:300; margin-left: 3px;"><%=titleName%></span></a></td>
-							<td><a ng-click=" " href="#" class="col-sm-2"
+							<td><a onclick=" " href="#" class="col-sm-2"
 								style="padding-left: 1px; padding-right: 1px;font-weight: bold; "> <span
 									style=" font-size: 18px; "> + </span> 
 							</a></td>

@@ -51,7 +51,12 @@
 
 	<jsp:include page="editUser.jsp" />
 </div>
+<!-- edit public message Modal -->
+<div class="modal " id="editPublicMessageModel" tabindex="-1" role="dialog"
+	aria-labelledby="myModalLabel" aria-hidden="true">
 
+	<jsp:include page="editPublicMessage.jsp" />
+</div>
 <!-- temp To Normal UserModel -->
 <div class="modal " id="editTempUserModel" tabindex="-1"
 	role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -71,4 +76,11 @@
 	aria-labelledby="myModalLabel" aria-hidden="true">
 
 	<jsp:include page="firstTry.jsp" />
+</div>
+
+<!-- create comment -->
+<div class="modal " id="createCommentForLink" tabindex="-1" role="dialog"
+	aria-labelledby="myModalLabel" aria-hidden="true">
+
+	<jsp:include page="createCommentForLink.jsp" />
 </div>

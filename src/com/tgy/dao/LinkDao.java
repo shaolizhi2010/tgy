@@ -21,6 +21,13 @@ public class LinkDao extends BasicDAO<Link, ObjectId> {
 		super(Link.class, App.getInstance().getDatastore());
 	}
 	
+	public List<Link> list(int num){
+		Query<Link> query = App.getInstance().getDatastore()
+				.createQuery(Link.class).order("-favScore").limit(num);
+		
+		return find(query).asList();
+		
+	}
 	//根据link url 取 link
 		public List<Link> getByName(String name) {
 			name = StringUtils.trim(name);

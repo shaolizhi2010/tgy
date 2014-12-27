@@ -30,7 +30,7 @@ public class DeletePageContoller extends HttpServlet {
 		//TODO 改Tag 和 Link的计数
 
 		try {
-			String id = req.getParameter("id");
+			String id =  U.filterCharacter(req.getParameter("id"));
 			
 			new CommonValidator().isLogin(req, null).isNotNull(id, "未找到要编辑的网址")
 			.isLength(id, 24,  "数据错误:id");
@@ -53,7 +53,7 @@ public class DeletePageContoller extends HttpServlet {
 					}
 					new CommonValidator().isSameUser(user, pFolder, null);
 					 
-					pFolder.updateDate = U.dateTime();
+					pFolder.lastModifyDate = U.dateTime();
 					fDao.save(pFolder);
 				}
 				

@@ -12,7 +12,7 @@ import org.mongodb.morphia.annotations.Reference;
 import org.mongodb.morphia.annotations.Transient;
 
 @Entity
-public class Folder extends EntityWithUser  implements Serializable,Comparable {
+public class Folder extends StateFulBaseEntity  implements Serializable,Comparable {
  
 	public String name ;
 	
@@ -21,8 +21,6 @@ public class Folder extends EntityWithUser  implements Serializable,Comparable {
 	public boolean isDefault;
 	public boolean isRoot; // 是否是根收藏夹，即页面左侧边栏里显示的收藏夹
 
-	public String createDate;
-	public String updateDate;
 
 	@Reference(ignoreMissing = true, lazy = true)
 	public List<Folder> folders;// 所有子文件夹
@@ -31,9 +29,7 @@ public class Folder extends EntityWithUser  implements Serializable,Comparable {
 	public List<Page> pages; // 文件夹包含的页面
 
 	public String color;
-	
-	public int clicks;
-	public long favScore;
+	 
 	
 	// stastics
 	public int scanTimes; // 呗后台分析程序扫描的次数，0标识没扫描过
@@ -60,7 +56,13 @@ public class Folder extends EntityWithUser  implements Serializable,Comparable {
 	
 	public void remove(Page page){
 		if (pages != null) {
-			pages.remove(page);
+			for(int i=0;i<pages.size();i++){
+				if(pages.get(i).id!=null &&
+						page.id!= null &&
+						StringUtils.equals(pages.get(i).id.toString(), page.id.toString())   ){
+					pages.remove(i);
+				}
+			}
 		}
 	}
 

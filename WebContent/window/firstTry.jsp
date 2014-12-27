@@ -22,9 +22,9 @@
 			</div>
 			 
 			<div style="margin-top: 20px;">
-				<button ng-click="preLoginFunction()" 
+				<button onclick="preLoginFunction()" 
 					type="button" class="btn btn-success">登录</button>
-				<button ng-click="preAddUserFunction()" 
+				<button onclick="preAddUserFunction()" 
 					type="button" class="btn btn-primary">注册</button>
 				<a  
 					href="<%=request.getContextPath()%>/user/create/temp"

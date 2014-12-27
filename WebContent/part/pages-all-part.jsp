@@ -12,34 +12,33 @@
 <%@include file="bookmark-data.jsp"%>
 
 <!-- 显示all网址页面开始 -->
-<div class="col-sm-12" style="padding: 0px; padding-bottom: 10px;">
+<div class="col-sm-12 no-padding" style="  padding-bottom: 10px;">
 
 	<%
 		for (Folder folder : rootFolders) {
 			String folderName = folder.name;
 			
-			if (folderName != null && folderName.length() > 8) {
-				folderName = folderName.substring(0, 8) + "..";
+			if (folderName != null && folderName.length() > 3) {
+				folderName = folderName.substring(0, 3) + "..";
 			}
 			
 	%>
-	<div class="col-sm-12"
-		style="padding: 3px; margin-bottom: 10px; border-bottom: 1px solid #eee;">
+	<div class="col-sm-12 no-padding sub-page folder-pages" >
 		<a 
-		class="btn col-sm-2 folderMark editable " title="<%=folder.name%>"
+		class="btn  col-sm-2 folderMark editable " title="<%=folder.name%>"
 			 
 			dataid="<%=folder.id%>" 
 			dataname="<%=folder.name%>"
 			name="<%=folder.id%>"
 			id="<%=folder.id%>"
 			href="<%=request.getContextPath()%>/folder/<%=folder.id%>/<%=folderName%>"
-			ng-click="$event.preventDefault();openFolder('<%=folder.id %>','<%=folder.name %>',$event  );"
+			onclick="$event.preventDefault();openFolder('<%=folder.id %>','<%=folder.name %>',$event  );"
 			
-			style="background-color: #eee; border: 1px solid #ddd; margin-top: 2px; margin-bottom: 2px;">
-			<span style="color: #666;"> <%=folderName%>
+			style="  margin-top: 2px; margin-bottom: 2px;">
+			<span style="color: #666;font-weight: bold;font-size: 15px;"> <%=folderName%>
 		</span>
 		</a>
-		<div class="col-sm-10" style="background-color:#fbfbfb; "> 
+		<div class="col-sm-10 container" style="  "> 
 			<%
 				for (Page p : folder.pages) {
 						String pageName = p.name;
@@ -71,9 +70,9 @@
 			%>
 
 			<a dataid="<%=p.id%>" dataname="<%=pageTitle%>" title="<%=pageTitle+ pageDescription%>"
-				class="btn col-xs-12 col-sm-4 col-md-3 page-all-link editable pageMark click-trace" href="<%=link%>"
-				ng-click="openLink('<%=p.id%>','page')" target="_blank"
-				 >
+				class="  col-xs-12 col-sm-4 col-sm-3  folder-pages-link editable pageMark click-trace hoverAble  " href="<%=link%>"
+				style="padding-right: 0px;"
+				onclick="openLink('<%=p.id%>','page')" target="_blank">
 				<%
 					if(StringUtils.isNoneBlank(p.iconPath)  ){
 						String iconPath = p.iconPath;
@@ -82,28 +81,28 @@
 						}
 						 
 						%>
-						<img style="width: 18px;height:18px;  float: left; " data-original="<%=iconPath %> " alt='<%=pageTitle%>' >
+						<img   style="width: 18px;height:18px;  float: left;margin-right: 10px; " data-original="<%=iconPath %> " alt='<%=pageTitle%>' >
 						<%
 					}
 					else{
 						%>
-						<img style="width: 18px;height:18px;float: left; " data-original="<%=request.getContextPath()%>/images/defaultFav.png " alt='<%=pageTitle%>' >
+						<img   style="width: 18px;height:18px;float: left; margin-right: 10px; " data-original="<%=request.getContextPath()%>/images/defaultFav.png " alt='<%=pageTitle%>' >
 						<%
 					}
 				%>
-				<span style="color: #222">  <%=(pageName)%></span><!-- float: left;padding-left: 10px; -->
+				  <span class="col-sm-9 no-padding" style=""><%=pageName%></span>  
 			</a>
 
 			<%
 				}//end for pages
 			%>
-
-			<a title="添加网址" class="btn col-sm-3   " href="#"
-				ng-click="preAddPageFunction('','','<%=folder.id%>') "
-				style="border: 1px solid #eee; margin-top: 5px; margin-bottom: 5px; display: block; color: #222;">
-				<span style="color: #eee; font-weight: bold;"> +</span>
+			<!-- 
+			<a title="添加网址" class="btn col-sm-3  add-link " href="#"
+				onclick="preAddPageFunction('','','<%=folder.id%>') "
+				style="">
+				<span style=""> +</span>
 			</a>
-
+ -->
 		</div>
 
 	</div>
@@ -116,8 +115,6 @@
 		}//end for folders
 	%>
 
-<%@include file="create-folderAndPage-part.jsp"%>
-<%@include file="create-folderAndPage-part.jsp"%>
  
 </div>
 <!-- 显示网址页面结束 -->

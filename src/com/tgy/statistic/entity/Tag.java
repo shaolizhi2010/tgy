@@ -29,13 +29,9 @@ public class Tag extends BaseEntity  implements Serializable {
  
 	public String name;
 
-	public String createDate;
 	@Reference(ignoreMissing = true,lazy=true)
 	public User firstCreateBy;//第一个创建人
 	
-	public long clicks;
-	public int keeps; //收藏次数
-	public long favScore; //受欢迎得分
 	
 	@Reference(ignoreMissing = true, lazy = true)
 	public List<Link> links; //此tag下所有的link

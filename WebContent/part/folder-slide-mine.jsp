@@ -46,7 +46,7 @@
 		
 		  <a
 		    href= "<%=request.getContextPath()%>/folder/<%=f.id%>/<%=f.name %>"
-		    ng-click="openFolder('<%=f.id %>','<%=f.name %>',$event  );$event.preventDefault();" 
+		    onclick="openFolder('<%=f.id %>','<%=f.name %>',$event  );$event.preventDefault();" 
 		  	title="<%=f.name%>"   
            class="folderMark editable statistic_folder col-sm-12" 
            dataid="<%=f.id%>" 
@@ -75,10 +75,10 @@
 		<%
 	}
 %>
-	<a class="col-sm-12" ng-click="preCreateFolderFunction()"
+	<a class="col-sm-12" onclick="preCreateFolderFunction()"
 					style="margin-top: 10px;"> >>新建分类 </a>
 	<a class="col-sm-12"
-					ng-click="preUploadBookmarkFunction()" style="margin-top: 10px;">
+					onclick="preUploadBookmarkFunction()" style="margin-top: 10px;">
 					>>上传</a> 
 
  </div>

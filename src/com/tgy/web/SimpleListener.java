@@ -39,9 +39,9 @@ public class SimpleListener implements ServletContextListener {
 		calendar.set(Calendar.HOUR, 23);// 
 		calendar.set(Calendar.MINUTE,49);//  
 		
-//		timer1.schedule(getPageInfoTask, calendar.getTime(),
-//				24 * 60 * 60 * 1000); // 24小时执行一次
-//		timer1.schedule(getPageInfoTask, 0);// 立刻开始
+		timer1.schedule(getPageInfoTask, calendar.getTime(),
+				24 * 60 * 60 * 1000); // 24小时执行一次
+		//timer1.schedule(getPageInfoTask, 0);// 立刻开始
 		
 		
 		Calendar calendar2 = Calendar.getInstance();

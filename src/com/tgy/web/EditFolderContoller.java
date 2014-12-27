@@ -31,10 +31,8 @@ public class EditFolderContoller extends HttpServlet {
 		//TODO 改Tag 和 Link的计数
 
 		try {
-			Map<String, String> map = U.requestToMap(req);
-			
-			String id = map.get("id");
-			String name = map.get("name");
+			String id = U.filterCharacter(req.getParameter("id"));
+			String name = U.filterCharacter(req.getParameter("name"));
 			
 			User user = U.param(req, C.user, User.class);
 			
@@ -53,7 +51,7 @@ public class EditFolderContoller extends HttpServlet {
 				//判断用户id和要操作的文件夹所属用户 是否一致，否则报错
 				new CommonValidator().isSameUser(user, folder, null);
 				folder.name = name;
-				folder.updateDate = U.dateTime();
+				folder.lastModifyDate = U.dateTime();
 				fDao.save(folder);
 			}
 			// fService.save(folder);

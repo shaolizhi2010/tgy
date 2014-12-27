@@ -34,7 +34,7 @@
                        class="form-control" id="editTempUser-password-again" type="password"/>
             </div>
             <div  style="margin-top: 20px;" >
-                <button ng-click="editTempUserFunction()" id="editTempUser-ok" type="button"
+                <button onclick="editTempUserFunction()" id="editTempUser-ok" type="button"
                         class="btn btn-primary">确定
                 </button>
                 <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>

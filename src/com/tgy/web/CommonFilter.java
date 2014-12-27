@@ -12,11 +12,13 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang3.StringUtils;
 
 @WebFilter("/*")
-public class EncodingFilter implements Filter {
+public class CommonFilter implements Filter {
 
 	@Override
 	public void destroy() {
@@ -24,9 +26,23 @@ public class EncodingFilter implements Filter {
 	}
 
 	@Override
-	public void doFilter(ServletRequest req, ServletResponse res,
+	public void doFilter(ServletRequest request, ServletResponse response,
 			FilterChain chain) throws IOException, ServletException {
+		
+		HttpServletRequest req = (HttpServletRequest)request;
+		HttpServletResponse res = (HttpServletResponse)response;
 
+		//301 redirect
+		String requestPage = req.getRequestURI();   
+		String queryString = (req.getQueryString() == null ? "" : "?"+req.getQueryString());   
+
+		//attempt to merge non-www urls   
+		if(req.getRequestURL().indexOf("http://webhezi.com") >=0){
+			res.setStatus(301);   
+			res.setHeader( "Location", "http://www.webhezi.com"+requestPage+queryString);   
+			res.setHeader( "Connection", "close" );   
+		}
+		
 		//System.out.println("EncodingFilter : default charset is "+Charset.defaultCharset());
 		
 		//System.out.println("do filter");

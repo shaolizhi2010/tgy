@@ -13,12 +13,12 @@
             <!-- create folder begin-->
 
             <div  style="margin-top: 20px;" >
-                <label for="createFolder_folderName">分类名称</label><input class="form-control hover-focus"  ng-keyup="$event.keyCode == 13 ? createFolderFunction() : null" id="createFolder_folderName"
+                <label for="createFolder_folderName">收藏夹名称</label><input class="form-control hover-focus"  ng-keyup="$event.keyCode == 13 ? createFolderFunction() : null" id="createFolder_folderName"
                                                           type="text"/>
             </div>
 
             <div  style="margin-top: 20px;" >
-                <button ng-click="createFolderFunction()" id="createFolder-ok" type="button"
+                <button onclick="createFolderFunction()" id="createFolder-ok" type="button"
                         class="btn btn-primary">添加
                 </button>
                 <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>

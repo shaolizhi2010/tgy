@@ -5,12 +5,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
-import org.bson.types.ObjectId;
 import org.mongodb.morphia.annotations.Entity;
-import org.mongodb.morphia.annotations.Id;
 import org.mongodb.morphia.annotations.Reference;
 
 import com.tgy.entity.BaseEntity;
+import com.tgy.entity.Discuss;
 import com.tgy.entity.User;
 
 /**
@@ -40,8 +39,6 @@ public class Link extends BaseEntity  implements Serializable,Comparable  {
 	
 	public String url;
 
-	public String createDate;//创建日期
-
 	@Reference(ignoreMissing = true,lazy=true)
 	public List<Tag> tags; //收藏了这个link的所有标签
 	
@@ -49,15 +46,16 @@ public class Link extends BaseEntity  implements Serializable,Comparable  {
 	@Reference(ignoreMissing = true,lazy=true)
 	public List<User> users; //收藏了这个link的所有用户
 	
+	//收藏此网站的用户
+	@Reference(ignoreMissing = true,lazy=true)
+	public List<Discuss> discusses; //link的所有评论
+	
 	@Reference(ignoreMissing = true,lazy=true)
 	public User firstCreateBy;//第一个创建人
 	
 	//public String iconAvailable;//icon 图片是否可用  'true' 'false' or null
 	
-	public long clicks; //点击次数
-	public long keeps; //收藏次数
-	
-	public long favScore; //收欢迎程度得分
+	public long commentsCount;//点评数
 	
 	public int digTimes; //抓取网页信息（title description） 次数，如超过一定次数（如3次）就不再抓取了
 
@@ -73,7 +71,12 @@ public class Link extends BaseEntity  implements Serializable,Comparable  {
 		}
 		users.add(user);
 	}
-	
+	public void add(Discuss discuss) {
+		if (discusses == null) {
+			discusses = new ArrayList<>();
+		}
+		discusses.add(discuss);
+	}
 	@Override
 	public boolean equals(Object obj) {
 

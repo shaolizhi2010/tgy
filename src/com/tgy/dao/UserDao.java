@@ -7,6 +7,7 @@ import org.mongodb.morphia.query.Query;
 import com.tgy.App;
 import com.tgy.entity.User;
 import com.tgy.statistic.entity.Tag;
+import com.tgy.util.U;
 
 public class UserDao extends BasicDAO<User, ObjectId> {
 
@@ -34,6 +35,7 @@ public class UserDao extends BasicDAO<User, ObjectId> {
 		if(loginUser!=null){ //TODO 异步
 			loginUser.loginTimes++;
 			loginUser.score+=10;
+			loginUser.lastLoginDate = U.dateTime();
 			save(loginUser);
 		}
 		return loginUser;

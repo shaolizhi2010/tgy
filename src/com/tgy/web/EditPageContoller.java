@@ -31,12 +31,10 @@ public class EditPageContoller extends HttpServlet {
 		//TODO 改Tag 和 Link的计数
 
 		try {
-			Map<String, String> map = U.requestToMap(req);
-
-			String id = map.get("id");
-			String name = map.get("name");
-			String url = map.get("url");
-			String pid = map.get("pid");
+			String id = U.filterCharacter(req.getParameter("id"));
+			String name = U.filterCharacter(req.getParameter("name"));
+			String url = U.filterCharacter(req.getParameter("url"));
+			String pid = U.filterCharacter(req.getParameter("pid"));
 			
 			User user = U.param(req, C.user, User.class);
 			
@@ -64,9 +62,18 @@ public class EditPageContoller extends HttpServlet {
 						return;
 					}
 					new CommonValidator().isSameUser(user, pFolder, null);
-					 
-					pFolder.updateDate = U.dateTime();
-					fDao.save(pFolder);
+					if(StringUtils.equals(pid, pFolder.id.toString())){//更改所属文件夹
+						pFolder.remove(page);
+						pFolder.lastModifyDate = U.dateTime();
+						fDao.save(pFolder);
+						
+						Folder targetFolder = fDao.getByID(pid);
+						if(targetFolder!=null){
+							targetFolder.add(page);
+							targetFolder.lastModifyDate = U.dateTime();
+							fDao.save(targetFolder);
+						}
+					}
 				}
 				
 				page.name = name;

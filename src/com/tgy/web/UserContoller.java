@@ -18,6 +18,7 @@ import com.tgy.dao.UserDao;
 import com.tgy.entity.User;
 import com.tgy.entity.VisitHistory;
 import com.tgy.service.IndexService;
+import com.tgy.service.UserService;
 import com.tgy.service.VisitHistoryService;
 import com.tgy.util.C;
 import com.tgy.util.U;
@@ -36,9 +37,7 @@ public class UserContoller extends HttpServlet {
 			@PathVariable("userID") String userID,
 			@CookieValue(value = "lastLoginUserID", defaultValue = "", required = false) String lastLoginUserID,
 			@CookieValue(value = "lastPsCode", defaultValue = "", required = false) String lastPsCode
-
 	) throws ServletException, IOException {
-
 		if ("favicon".equals(userID)) {
 			return;
 		}
@@ -47,8 +46,7 @@ public class UserContoller extends HttpServlet {
 		// }
 
 		User showUser = new UserDao().getByID(userID);
-		service(req, res, lastLoginUserID, lastPsCode, showUser);
-
+		service(req, res, lastLoginUserID, lastPsCode, showUser,"1");
 	}
 
 	@RequestMapping(value = { "/{userName}" })
@@ -59,19 +57,32 @@ public class UserContoller extends HttpServlet {
 			@CookieValue(value = "lastLoginUserID", defaultValue = "", required = false) String lastLoginUserID,
 			@CookieValue(value = "lastPsCode", defaultValue = "", required = false) String lastPsCode)
 			throws ServletException, IOException {
-
+		
+		String indexType = req.getParameter("t");
+		//redirect
+		if(StringUtils.equals(userName, "pan")){
+			U.forward(req, res, "/pan.jsp");
+			return;
+		}
 		User showUser = new UserDao().getByName(userName);
-		service(req, res, lastLoginUserID, lastPsCode, showUser);
+		service(req, res, lastLoginUserID, lastPsCode, showUser,indexType);
 	}
 
 	protected void service(HttpServletRequest req, HttpServletResponse res,
-			String lastLoginUserID, String lastPsCode, User showUser)
+			String lastLoginUserID, String lastPsCode, User showUser,String indexType)
 			throws ServletException, IOException {
-
+		
+		UserService userService = new UserService();
+		
 		if (showUser != null) {
+			showUser.showTimes++;
+			userService.save(showUser);
+			
 			BookmarkData data = indexService
 					.getBookmarkDataByUserID(showUser.id.toString());
 			req.setAttribute("bookmarkData", data);
+			
+			
 
 			// BreadCrumb bread = BreadCrumbUtil.build(
 			// data.folder,
@@ -101,6 +112,12 @@ public class UserContoller extends HttpServlet {
 			}
 
 			if (loginUser != null) {
+				
+				BookmarkData loginUserBookmarkData = indexService
+						.getBookmarkDataByUserID(loginUser.id.toString());
+				req.setAttribute("loginUserBookmarkData", loginUserBookmarkData);
+				
+				
 				Cookie cookie = new Cookie("lastViewUserID",
 						loginUser.id.toString());
 				cookie.setPath("/");
@@ -124,7 +141,7 @@ public class UserContoller extends HttpServlet {
 			vh.times++;
 			vService.save(vh);
 		}
-		U.forward(req, res, "/index-2.jsp");
+		U.forward(req, res, "/index-1.jsp");
 
 	}
 }

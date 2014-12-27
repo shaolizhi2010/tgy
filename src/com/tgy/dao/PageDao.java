@@ -13,6 +13,7 @@ import org.mongodb.morphia.query.Query;
 import com.tgy.App;
 import com.tgy.entity.Folder;
 import com.tgy.entity.Page;
+import com.tgy.entity.User;
 import com.tgy.statistic.entity.Link;
 
 public class PageDao extends BasicDAO<Page, ObjectId> {
@@ -21,7 +22,25 @@ public class PageDao extends BasicDAO<Page, ObjectId> {
 		super(Page.class, App.getInstance().getDatastore());
 	}
 	
- 
+	public List<Page> list(String userID, String sortStr,int limit){
+		
+		Query<Page> query = App.getInstance().getDatastore().createQuery(Page.class);
+		
+		if(StringUtils.isNotBlank(userID)){
+			query.filter("userID", userID);
+		}
+		if(StringUtils.isNotBlank(sortStr)){
+			query.order(sortStr);
+		}else{
+			query.order("favScore");
+		}
+		if(limit!=0){
+			query.limit(limit);
+		}
+		
+		return find(query).asList();
+	}
+	 
 	
 
 	public void saveWithRef(Page page) {

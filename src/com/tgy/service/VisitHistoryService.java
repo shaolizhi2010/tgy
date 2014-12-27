@@ -59,7 +59,7 @@ public class VisitHistoryService {
 		if(StringUtils.equals(entity.requestUserID, entity.responseUserID)){
 			entity.timesByOther ++;
 		}
-		entity.times++;
+		entity.showTimes++;
 		return dao.save(entity);
 	}
 

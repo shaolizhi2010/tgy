@@ -18,11 +18,11 @@
             </div>
 
             <div  style="margin-top: 20px;" >
-                <button ng-click="editFolderFunction()" id="editFolder-ok" type="button"
+                <button onclick="editFolderFunction()" id="editFolder-ok" type="button"
                         class="btn btn-primary">确定
                 </button>
                 <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-                 <button ng-click="deleteFolderFunction()"  type="button" class="btn btn-danger pull-right"  ><span style="font-size: bold;">删除</span></button>
+                 <button onclick="deleteFolderFunction()"  type="button" class="btn btn-danger pull-right"  ><span style="font-size: bold;">删除</span></button>
             </div>
 
 

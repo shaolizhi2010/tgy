@@ -1,3 +1,5 @@
+<%@ page language="java" pageEncoding="UTF-8"%>
+<%@ page trimDirectiveWhitespaces="true" %> 
 <%@page import="java.util.Collections"%>
 <%@page import="org.apache.commons.collections.CollectionUtils"%>
 <%@page import="java.util.ArrayList"%>
@@ -7,30 +9,21 @@
 <%@page import="com.tgy.util.U"%>
 <%@page import="com.tgy.entity.Page"%>
 <%@page import="java.util.List"%>
-<%@ page language="java" pageEncoding="UTF-8"%>
- 
 <%
-
 Folder showFolder=null;
 String showFolderName = "";
 String showFolderID = "";
-
-List<Folder> rootFolders = new ArrayList();
+List<Folder> rootFolders = new ArrayList<Folder>();
 //List<Folder> folders =  new ArrayList();
-List<Page> pages =  new ArrayList();
-
+List<Page> pages =  new ArrayList<Page>();
 	BookmarkData bookmarkData = U.param(request, "bookmarkData", BookmarkData.class);
-	
 	if(bookmarkData!=null){ 
-		
 		rootFolders = bookmarkData.getRootFolders();
 		if(!CollectionUtils.isEmpty(rootFolders)){ 
 			Collections.sort(rootFolders); 
 			Collections.reverse(rootFolders); 
 		}
-		
 		showFolder = bookmarkData.folder;
-		
 		if(showFolder!=null){
 			showFolderName = showFolder.name;
 			showFolderID =  showFolder.id.toString();
@@ -40,9 +33,6 @@ List<Page> pages =  new ArrayList();
 				Collections.reverse(pages); 
 			}
 		}
-		
 	}
-	
-	
+	BookmarkData loginUserBookmarkData = U.param(request, "loginUserBookmarkData", BookmarkData.class);
 %>
- 

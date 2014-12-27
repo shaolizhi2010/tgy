@@ -56,7 +56,6 @@ public class GetPageInfoThread  implements Runnable{
 				}
 				linkDao.save(link);
 			}
-
 		}
 		
 		PageDao pDao = new PageDao();

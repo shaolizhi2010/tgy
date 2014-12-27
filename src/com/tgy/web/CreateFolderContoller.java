@@ -30,10 +30,14 @@ public class CreateFolderContoller extends HttpServlet {
 	protected void service(HttpServletRequest req, HttpServletResponse res)
 			throws ServletException, IOException {
 
-		Folder folder = U.fromReqJson(req, Folder.class);
+		String name = U.filterCharacter(req.getParameter("name")) ;
+		String folderUserID = U.filterCharacter(req.getParameter("userID")) ;
+		
+		Folder folder = new Folder();
+		folder.name = name;
+		folder.userID = folderUserID;
 		
 		try {
-			
 			User user = U.param(req, C.user, User.class);
 			
 			folder.name = StringUtils.trim(folder.name);

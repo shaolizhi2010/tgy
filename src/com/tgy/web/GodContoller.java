@@ -19,6 +19,7 @@ import com.tgy.entity.Page;
 import com.tgy.entity.User;
 import com.tgy.service.PageService;
 import com.tgy.statistic.entity.Link;
+import com.tgy.util.BingSearchSevice;
 import com.tgy.util.C;
 import com.tgy.util.U;
 
@@ -75,6 +76,16 @@ public class GodContoller extends HttpServlet {
 					for(Link l : links){
 						addToResult(returnList, linkToMap(l));
 					}
+				}
+			}
+			
+			if(returnList.size()<5){
+				//搜索网盘
+				BingSearchSevice bs = new BingSearchSevice();
+				List<Page>  pages = bs.search(inputValue);
+				
+				for(Page p : pages){
+					addToResult(returnList, pageToMap(p) );
 				}
 			}
 			

@@ -33,33 +33,52 @@ import com.tgy.entity.User;
 public class U {
 
 	public static final String pattern_dateTime = "yyyy-MM-dd HH:mm:ss";
+	public static final String pattern_dateTime_withoutYear = "MM-dd HH:mm:ss";
 
-	public static String filterCharacter(String str){//过滤特殊字符
-		str = StringUtils.replace(str, "("," ");
-		str = StringUtils.replace(str, ")"," ");
-		str = StringUtils.replace(str, "<"," ");
-		str = StringUtils.replace(str, ">"," ");
-		str = StringUtils.replace(str, "'"," ");
-		str = StringUtils.replace(str, ";"," ");
-		return str;
+	public static String addLinkForMessage(String msg){
+		if(StringUtils.isBlank(msg) || !msg.contains("http")){
+			return msg;
+		}
+		String[] subs = msg.split("[ ]");
+		StringBuffer sb = new StringBuffer();
+		for(String sub : subs){
+			if(sub.startsWith("http")){
+				sub = "<a href='"+sub+"' target='_blank'>"+sub+"</a>";
+			}
+			sb.append(sub);
+		}
+		return sb.toString();
 	}
 	
+	/**
+	 * 去掉可能产生注入攻击的字符 替换成空格
+	 */
+	public static String filterCharacter(String str) {// 过滤特殊字符
+		str = StringUtils.replace(str, "(", " ");
+		str = StringUtils.replace(str, ")", " ");
+		str = StringUtils.replace(str, "<", " ");
+		str = StringUtils.replace(str, ">", " ");
+		str = StringUtils.replace(str, "'", " ");
+		str = StringUtils.replace(str, ";", " ");
+		return str;
+	}
+
 	public static String randomColor() {
 		int i = new Random().nextInt(5);
 		switch (i) {
 		case 0:
-			return "#d9534f";  //red 
+			return "#d9534f"; // red
 		case 1:
-			return "#428bca";//blue
+			return "#428bca";// blue
 		case 2:
-			return "#5cB85c";//green
+			return "#5cB85c";// green
 		case 3:
-			return "#58c0de";//light blue
+			return "#58c0de";// light blue
 		case 4:
-			return "#f0ad4e";//orange
+			return "#f0ad4e";// orange
 
 		default:
-			return "#5cB85c";//default green
+			return "#5cB85c";// default green
 		}
 	}
 
@@ -71,7 +90,7 @@ public class U {
 		shortTitle = shortTitle.replace(":", "");
 		shortTitle = shortTitle.replace("【", "");
 		shortTitle = shortTitle.replace("】", "");
-		
+
 		String[] arr = title.split("[- ，,.():：（）]");
 		if (arr.length > 1) {
 			shortTitle = arr[0];
@@ -92,7 +111,7 @@ public class U {
 		}
 		return title;
 	}
-	 
+
 	public static String shortURL(String url, int len) {
 		if (url == null)
 			return "";
@@ -100,21 +119,19 @@ public class U {
 		url = url.replace("http://", "");
 		url = url.replace("https://", "");
 		url = url.replace("www.", "");
-		
-		url = StringUtils.substring(url, 0,len);
-		
+
+		url = StringUtils.substring(url, 0, len);
+
 		return url;
 	}
 
 	public static void refreshSession(HttpSession session) {
 		/*
-		session.removeAttribute("fid");
-		session.removeAttribute("userFolders");
-		session.removeAttribute("curFolder");
-		session.removeAttribute("fid");
-		session.removeAttribute("folders");
-		session.removeAttribute("pages");
-		*/
+		 * session.removeAttribute("fid");
+		 * session.removeAttribute("userFolders");
+		 * session.removeAttribute("curFolder"); session.removeAttribute("fid");
+		 * session.removeAttribute("folders"); session.removeAttribute("pages");
+		 */
 	}
 
 	public static <T> T fromReqJson(HttpServletRequest req, Class<T> clazz) {
@@ -125,7 +142,7 @@ public class U {
 			if (br != null) {
 				json = br.readLine();
 			}
-			//StringEscapeUtils.escapeHtml4(json);
+			// StringEscapeUtils.escapeHtml4(json);
 			json = U.filterCharacter(json);
 			T t = new Gson().fromJson(json, clazz);
 			return t;
@@ -156,8 +173,8 @@ public class U {
 		message(res, C.operationSuccess);
 	}
 
-	public static void resFailed(HttpServletResponse res,String errMsg) {
-		message(res, C.operationFailed+":"+errMsg);
+	public static void resFailed(HttpServletResponse res, String errMsg) {
+		message(res, C.operationFailed + ":" + errMsg);
 	}
 
 	public static void message(HttpServletResponse res, String message) {
@@ -179,7 +196,7 @@ public class U {
 			return null;
 		}
 		User user = U.param(req, C.user, User.class);
-		if (user!= null) {
+		if (user != null && user.id != null) {
 			return user.id.toString();
 		}
 
@@ -294,10 +311,10 @@ public class U {
 		if (StringUtils.isBlank(str)) {
 			return "";
 		}
-		if(str.length()<length){
+		if (str.length() < length) {
 			return str;
 		}
-		return StringUtils.substring(str, 0, length)+"..";
+		return StringUtils.substring(str, 0, length) + "..";
 	}
 
 	// 是否是乱码
@@ -417,6 +434,17 @@ public class U {
 		Calendar cal = Calendar.getInstance();
 		SimpleDateFormat sdf = new SimpleDateFormat(pattern_dateTime);
 		return sdf.format(cal.getTime());
+	}
+
+	public static String dateTimeWithOutYear(String datetime) {
+		if (StringUtils.isNotBlank(datetime)) {
+			try {
+				return StringUtils.substringAfter(datetime, "-");
+			} catch (Exception e) {
+				// not date, do nothing
+			}
+		}
+		return datetime;
 	}
 
 	// parse timestamp to yyyy-MM-dd HH:mm:ss SSS
@@ -658,7 +686,7 @@ public class U {
 	// // }
 	//
 	public static String randomNum(int length) { // length表示生成字符串的长度
-		if(length==0){
+		if (length == 0) {
 			return "";
 		}
 		String base = "123456789";// 0123456789 //abcdefghijklmnopqrstuvwxyz
@@ -671,4 +699,17 @@ public class U {
 		return sb.toString();
 	}
 
+	public static String getIpAddr(HttpServletRequest request) {
+		String ip = request.getHeader(" x-forwarded-for ");
+		if (ip == null || ip.length() == 0 || " unknown ".equalsIgnoreCase(ip)) {
+			ip = request.getHeader(" Proxy-Client-IP ");
+		}
+		if (ip == null || ip.length() == 0 || " unknown ".equalsIgnoreCase(ip)) {
+			ip = request.getHeader(" WL-Proxy-Client-IP ");
+		}
+		if (ip == null || ip.length() == 0 || " unknown ".equalsIgnoreCase(ip)) {
+			ip = request.getRemoteAddr();
+		}
+		return ip;
+	}
 }

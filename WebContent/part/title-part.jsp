@@ -38,10 +38,10 @@
 		</ol>
 		<ol class="breadcrumb col-sm-3"
 			style="padding: 3px; padding-left: 0px; margin: 0px; background-color: #eee;">
-			<a ng-click="preAddPageFunction( )" href="#" style="padding-left: 1px;padding-right: 1px; "> <span
+			<a onclick="preAddPageFunction( )" href="#" style="padding-left: 1px;padding-right: 1px; "> <span
 				class="glyphicon glyphicon glyphicon-plus" style="padding-right:1px;">网址</span>
 			</a>
- 			<a ng-click="preCreateFolderFunction( )" href="#" style="padding-left: 1px;padding-right: 1px; "> <span
+ 			<a onclick="preCreateFolderFunction( )" href="#" style="padding-left: 1px;padding-right: 1px; "> <span
 				class="glyphicon glyphicon glyphicon-plus"  style="padding-right:1px;">分类</span>
 			</a>
 		</ol>

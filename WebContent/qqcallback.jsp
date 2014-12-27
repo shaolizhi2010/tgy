@@ -39,13 +39,11 @@ try{
 		String openId = qq.getOpenId(token);
 		//out.println(" openId : " +openId);
 		
-		
-		
 		Map<String, String> userinfo = qq.getUserQQInfo(token, openId);
 		String nickname = userinfo.get("nickname");
-		String headUrl = userinfo.get("figureurl_qq_1");
+		String headImgUrl = userinfo.get("figureurl_qq_1");
 		
-		User loginUser = uService.dealWithOpenID(openId, nickname);
+		User loginUser = uService.dealWithOpenID(openId, nickname,headImgUrl); 
 		if(loginUser!=null){
 			Cookie cookie = new Cookie("lastLoginUserID", loginUser.id.toString());
 			cookie.setPath("/");
@@ -65,7 +63,7 @@ try{
 		//out.println(" nickname : " +nickname);
 		//out.println(" headUrl : " +headUrl);
 		
-		session.setAttribute("headUrl", headUrl);
+		session.setAttribute("headImgUrl", headImgUrl);
 		
 		response.sendRedirect("/");
 		

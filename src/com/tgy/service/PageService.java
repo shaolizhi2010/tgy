@@ -32,6 +32,10 @@ public class PageService {
 	
 	PageDao pDao = new PageDao();
 
+	public List<Page> list(String userID, String sortStr, int limit) {
+		return pDao.list(userID, sortStr, limit);
+	}
+
 	public List<Page> search(String userID, String name, String url, String orderStr){
 		Query<Page> query = App.getInstance().getDatastore()
 				.createQuery(Page.class);

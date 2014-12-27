@@ -1,500 +1,611 @@
-var app = angular.module("pageMainApp", []);
-app.controller(
-				'pageMainCtrl',
-				function($scope, $element, $http) {
+var userID = $('#userID').val();
+var contextPath = $('#contextPath').val();
+var fid = $('#fid').val();
+var editingFlag = false;
+var loginFlag = $('#loginFlag').val();
 
-					var userID = $('#userID').val();
-					var contextPath = $('#contextPath').val();
-					var fid = $('#fid').val();
-					var editingFlag = false;
+function preUploadBookmarkFunction() {
+	$('.modal').modal('hide');
+	$('#uploadBookmarkModel').modal();
+};
 
-					/*
-					 * $scope.init = function () { alert( $.cookie('pages') ) ;
-					 * ;// 读取 cookie }; $scope.init();
-					 */
-
-					$scope.preUploadBookmarkFunction = function() {
-						$('.modal').modal('hide');
-						$('#uploadBookmarkModel').modal();
-					};
+function preOpenMyFolder(){
+	if(!(loginFlag=='true')){
+		preLoginFunction();
+		return;
+	}
+	else{
+		location = '/';
+	}
+}
 					
-					
-
-					$scope.preCreateFolderFunction = function(parentFolderName,
-							parentFolderId) {
-						
-						if( window.clipboardData ){
-							
-							//alert( window.clipboardData.getData("text") );
-							
-							//if(/text\/plain/.test(window.clipboardData.types)){
-								$('#createFolder_folderName')
-								.val(window.clipboardData.getData("text"));
-							//}
-						}
-						
-						$('.modal').modal('hide');
-						$('#createFolderModel').modal();
-					}
-
-					$scope.createFolderFunction = function() {
-						$http(
-								{
-									url : contextPath
-											+ "/folder/create",
-									method : "POST",
-									data : {
-										"name" : $('#createFolder_folderName')
-												.val(),
-										"userID" : userID
-										 
-									}
-								}).success(
-								function(data, status, headers, config) {
-									if(data.indexOf("操作成功")>=0 ){
-										location = contextPath;
-										//location.reload(true);
-									}
-									else{
-										alert(data);
-									}
-								}).error(
-								function(data, status, headers, config) {
-									alert('服务器正在飞速运转，请耐心等待' + data);
-									// $scope.status = status;
-								});
-
-					};
-					$scope.editFolderFunction = function() {
-						
-						$http(
-								{
-									url : contextPath
-											+ "/folder/edit",
-									method : "POST",
-									data : {
-										"id":$("#editFolder_dataid").val(),
-										"name" : $('#editFolder_folderName')
-												.val() 
-									}
-								}).success(
-								function(data, status, headers, config) {
-									if(data.indexOf("操作成功")>=0 ){
-										location.reload(true);
-									}
-									else{
-										alert(data);
-									}
-								}).error(
-								function(data, status, headers, config) {
-									alert('服务器正在飞速运转，请耐心等待' + data);
-									// $scope.status = status;
-								});
-
-					};
-					$scope.deleteFolderFunction = function() {
-						
-						$http(
-								{
-									url : contextPath
-											+ "/folder/delete",
-									method : "POST",
-									data : {
-										"id":$("#editFolder_dataid").val()
-									}
-								}).success(
-								function(data, status, headers, config) {
-									if(data.indexOf("操作成功")>=0 ){
-										//删除的是当前查看的folder，则跳回主页
-										if(fid == $("#editFolder_dataid").val()){
-											location = contextPath;
-										}
-										else{
-											location.reload(true);
-										}
-										
-									}
-									else{
-										alert(data);
-									}
-								}).error(
-								function(data, status, headers, config) {
-									alert('服务器正在飞速运转，请耐心等待' + data);
-									// $scope.status = status;
-								});
-					};
+function preCreateFolderFunction(parentFolderName,
+		parentFolderId) {
+	if(!(loginFlag=='true')){
+		preLoginFunction();
+		return;
+	}
+	if( window.clipboardData ){
+		
+		//alert( window.clipboardData.getData("text") );
+		
+		//if(/text\/plain/.test(window.clipboardData.types)){
+			$('#createFolder_folderName')
+			.val(window.clipboardData.getData("text"));
+		//}
+	}
+	$('.modal').modal('hide');
+	$('#createFolderModel').modal();
+}			
+var createFolderFunction = function() {
+	if(!(loginFlag=='true')){
+		preLoginFunction();
+		return;
+	}
+	$.ajax(
+			{
+				url : contextPath
+						+ "/folder/create",
+				method : "POST",
+				data : {
+					"name" : $('#createFolder_folderName')
+							.val(),
+					"userID" : userID
 					 
+				}
+			}).success(
+			function(data ) {
+				if(data.indexOf("操作成功")>=0 ){
+					location = contextPath;
+					//location.reload(true);
+				}
+				else{
+					alert(data);
+				}
+			}).error(
+			function(data) {
+				alert('服务器正在飞速运转，请耐心等待' + data);
+				// $scope.status = status;
+			});
 
-					$scope.preAddPageFunction = function(name, url,pid) {
-						
-						if(typeof name != 'undefined' && name.length>0){
-							$('#pageName').val(name);
-						}
-						
-						if(typeof url != 'undefined' && url.length>0){
-							$('#pageUrl').val(url);
-						}
-						
-						if(typeof pid != 'undefined' && pid.length>0){
-							$('#createPage_pid').val(pid);
-						}
-						$('.modal').modal('hide');
-						$('#createPageModel').modal();
-					};
-					$scope.createPageFunction = function(name, url) {
-						
-						if(typeof name != 'undefined' && name.length>0){
-							$('#pageName').val(name);
-						}
-						
-						if(typeof url != 'undefined' && url.length>0){
-							$('#pageUrl').val(url);
-						}
-						//alert($('#link_prompt_index').val());
-						if($('#link_prompt_index').val() != '-1'){
-							return;
-						}
-						
-						
-						$http({
-							url : contextPath + "/page/create",
-							method : "POST",
-							data : {
-								// "bookmarkId":
-								// $('#createPage_bookmarkId').val(),
-								// "folderId": $('#createPage_folderId').val(),
-								"url" : $('#pageUrl').val(),
-								"name" : $('#pageName').val(),
-								userID : userID,
-								pid : $('#createPage_pid').val()
-							}
-						}).success(function(data, status, headers, config) {
-							if(data.indexOf("操作成功")>=0 ){
-								location.href = $('#contextPath').val()+'/u/'+$('#userID').val()  ;//TODO
-							}
-							else{
-								alert(data);
-							}
-						}).error(function(data, status, headers, config) {
-							alert('服务器正在飞速运转，请耐心等待' + data);
-							// $scope.status = status;
-						});
-						// alert('ng add');
-					};
-					$scope.editPageFunction = function() {
-						$http(
-								{
-									url : contextPath
-											+ "/page/edit",
-									method : "POST",
-									data : {
-										"id":$("#editPage_dataid").val(),
-										"name" : $('#editPage_pageName')
-												.val(),
-										"url" : $('#editPage_url').val(),
-										"pid" : fid
-									}
-								}).success(
-								function(data, status, headers, config) {
-									if(data.indexOf("操作成功")>=0 ){
-										location.reload(true);
-									}
-									else{
-										alert(data);
-									}
-								}).error(
-								function(data, status, headers, config) {
-									alert('服务器正在飞速运转，请耐心等待' + data);
-								});
+};		
+function preCreateDiscuss(id) {
+	$('.modal').modal('hide');
+	$('#createlinkComment_targetID').val(id);
+	$('#createCommentForLink').modal();
+};
+var createDiscussFunction = function() {
+	$.ajax(
+			{
+				url : contextPath
+						+ "/discuss/create",
+				method : "POST",
+				data : {
+					"targetID":$('#createlinkComment_targetID').val(),
+					"message" : $('#createlinkCommentMessage')
+							.val(),
+					"type":$('#discussType').val()
+				}
+			}).success(
+			function(data) {
+				if(data.indexOf("操作成功")>=0 ){
+					location.reload(true);
+				}
+				else{
+					alert(data);
+				}
+			}).error(
+			function(data) {
+				alert('服务器正在飞速运转，请耐心等待' + data);
+				// $scope.status = status;
+			});
+}
 
-					};
-					$scope.deletePageFunction = function() {
-						$http(
-								{
-									url : contextPath
-											+ "/page/delete",
-									method : "POST",
-									data : {
-										"id":$("#editPage_dataid").val()
-									}
-								}).success(
-								function(data, status, headers, config) {
-									if(data.indexOf("操作成功")>=0 ){
-										location.reload(true);
-									}
-									else{
-										alert(data);
-									}
-								}).error(
-								function(data, status, headers, config) {
-									alert('服务器正在飞速运转，请耐心等待' + data);
-								});
+var editFolderFunction = function() {
+	if(!(loginFlag=='true')){
+		preLoginFunction();
+		return;
+	}
+	
+	$.ajax(
+			{
+				url : contextPath
+						+ "/folder/edit",
+				method : "POST",
+				data : {
+					"id":$("#editFolder_dataid").val(),
+					"name" : $('#editFolder_folderName')
+							.val() 
+				}
+			}).success(
+			function(data) {
+				if(data.indexOf("操作成功")>=0 ){
+					location.reload(true);
+				}
+				else{
+					alert(data);
+				}
+			}).error(
+			function(data) {
+				alert('服务器正在飞速运转，请耐心等待' + data);
+				// $scope.status = status;
+			});
 
-					};
-					$scope.firstTryFunction = function() {
-						$('.modal').modal('hide');
-						$('#firstTryModel').modal();
+};		
+		
+var deleteFolderFunction = function() {
+	if(!(loginFlag=='true')){
+		preLoginFunction();
+		return;
+	}
+	
+	$.ajax(
+			{
+				url : contextPath
+						+ "/folder/delete",
+				method : "POST",
+				data : {
+					"id":$("#editFolder_dataid").val()
+				}
+			}).success(
+			function(data) {
+				if(data.indexOf("操作成功")>=0 ){
+					//删除的是当前查看的folder，则跳回主页
+					if(fid == $("#editFolder_dataid").val()){
+						location = contextPath;
 					}
-					$scope.preAddUserFunction = function() {
-						$('.modal').modal('hide');	
-						$('#createUserModel').modal();
+					else{
+						location.reload(true);
 					}
-					$scope.addUserFunction = function() {
-						
-						if($('#createUser-password').val() != $('#createUser-password-again').val()){
-							alert("两次输入的用户名不一致,请重新输入");
-							return
-						}
-						
-						$http({
-							url : contextPath + "/user/create",
-							method : "POST",
-							data : {
-								"name" : $('#createUser-name').val(),
-								"password" : $('#createUser-password').val()
-							}
-						}).success(function(data, status, headers, config) {
-							$('#createUserModel').modal();
-							if(data.indexOf("成功")>=0 ){
-								if($('#contextPath').val() == ''){
-									location.href =  '/' ;
-								}
-								else{
-									location.href =  $('#contextPath').val()  ;
-								}
-							}
-							else{
-								alert(data);
-							}
-							// $scope.data = data;
-						}).error(function(data, status, headers, config) {
-							alert('服务器正在飞速运转，请耐心等待' + data);
-							// $scope.status = status;
-						});
-
-					};
-					$scope.preEditUserFunction = function() {
-						$('.modal').modal('hide');
-						$('#editUserModel').modal();
-					};
 					
-					$scope.editUserFunction = function() {
-						$http({
-							url : contextPath + "/user/edit",
-							method : "POST",
-							data : {
-								"id":$('#editUser-id').val(),
-								"name" : $('#editUser-name').val(),
-								"password" : $('#editUser-password').val()
-							}
-						}).success(function(data, status, headers, config) {
-							$('#editUserModel').modal('hide');
-							if(data.indexOf("操作成功")>=0 ){
-								if($('#contextPath').val() == ''){
-									location.href =  '/' ;
-								}
-								else{
-									location.href =  $('#contextPath').val()  ;
-								}
-								
-							}
-							else{
-								alert(data);
-							}
-							// $scope.data = data;
-						}).error(function(data, status, headers, config) {
-							alert('服务器正在飞速运转，请耐心等待' + data);
-							// $scope.status = status;
-						});
+				}
+				else{
+					alert(data);
+				}
+			}).error(
+			function(data) {
+				alert('服务器正在飞速运转，请耐心等待' + data);
+				// $scope.status = status;
+			});
+};
 
-					};
-					$scope.preEditTempUserFunction = function() {
-						$('.modal').modal('hide');
-						$('#editTempUserModel').modal();
-					};
-					$scope.editTempUserFunction = function() {
-						$http({
-							url : contextPath + "/user/edit",
-							method : "POST",
-							data : {
-								"id":$('#editTempUser-id').val(),
-								"name" : $('#editTempUser-name').val(),
-								"password" : $('#editTempUser-password').val()
-							}
-						}).success(function(data, status, headers, config) {
-							$('#editTempsUserModel').modal('hide');
-							if(data.indexOf("操作成功")>=0 ){
-								if($('#contextPath').val() == ''){
-									location.href =  '/' ;
-								}
-								else{
-									location.href =  $('#contextPath').val()  ;
-								}
-								
-							}
-							else{
-								alert(data);
-							}
-							// $scope.data = data;
-						}).error(function(data, status, headers, config) {
-							alert('服务器正在飞速运转，请耐心等待' + data);
-							// $scope.status = status;
-						});
+var preAddPageFunction = function(name, url,pid) {
+ 
+	
+	//if(!(loginFlag=='true')){
+	//	preLoginFunction();
+	//	return;
+	//}
+	
+	if(typeof name != 'undefined' && name.length>0){
+		$('#pageName').val(name);
+	}
+	
+	if(typeof url != 'undefined' && url.length>0){//说明是copy网址，不是新加，因为url打开添加页就已经有了
+		
+		if(!(loginFlag=='true')){
+			preLoginFunction();
+			return;
+		}
+		
+		$('#pageUrl').val(url);
+	}
+	
+	if(typeof pid != 'undefined' && pid.length>0){
+		$('#createPage_pid').val(pid);
+	}
+	$('.modal').modal('hide');
+	$('#createPageModel').modal();
+};
 
-					};
 
-					$scope.preLoginFunction = function() {
-						$('.modal').modal('hide');
-						$('#loginModel').modal();
-					}
-					$scope.loginFunction = function() {
-						$http({
-							url : contextPath + "/user/login",
-							method : "POST",
-							data : {
-								"name" : $('#login-name').val(),
-								"password" : $('#login-password').val()
-							}
-						}).success(function(data, status, headers, config) {
+var createPageFunction = function(name, url) {
+	//if(!(loginFlag=='true')){
+	//	preLoginFunction();
+	//	return;
+	//}
+	
+	if(typeof name != 'undefined' && name.length>0){
+		$('#pageName').val(name);
+	}
+	
+	if(typeof url != 'undefined' && url.length>0){
+		$('#pageUrl').val(url);
+	}
+	//alert($('#link_prompt_index').val());
+	if($('#link_prompt_index').val() != '-1'){
+		return;
+	}
+	
+	
+	$.ajax({
+		url : contextPath + "/page/create",
+		method : "POST",
+		data : {
+			// "bookmarkId":
+			// $('#createPage_bookmarkId').val(),
+			// "folderId": $('#createPage_folderId').val(),
+			"url" : $('#pageUrl').val(),
+			"name" : $('#pageName').val(),
+			userID : userID,
+			pid : $('#createPage_pid').val()
+			
+		}
+	}).success(function(data) {
+		if(data.indexOf("操作成功")>=0 ){
+			location.href = $('#contextPath').val()+'/u/'+$('#userID').val()  ;//TODO
+		}
+		else{
+			//alert(JSON.stringify(data));
+			alert(data);
+		}
+	}).error(function(data) {
+		alert('服务器正在飞速运转，请耐心等待' + data);
+		// $scope.status = status;
+	});
+	// alert('ng add');
+};
 
-							if (data.indexOf("成功")>=0 ) {
-								if($('#contextPath').val() == ''){
-									location.href =  '/' ;
-								}
-								else{
-									location.href =  $('#contextPath').val()  ;
-								}
-								
-								//location.reload(true);
-								//$('#loginModel').modal('hide');
-								
-								// location.reload(true); 
-							} else {
-								alert(data);
-								//alert(data);
-							}
+var editPageFunction = function() {
+	if(!(loginFlag=='true')){
+		preLoginFunction();
+		return;
+	}
+	$.ajax(
+			{
+				url : contextPath
+						+ "/page/edit",
+				method : "POST",
+				data : {
+					"id":$("#editPage_dataid").val(),
+					"name" : $('#editPage_pageName')
+							.val(),
+					"url" : $('#editPage_url').val(),
+					"pid" : $('#editPage_pid').val()
+				}
+			}).success(
+			function(data) {
+				if(data.indexOf("操作成功")>=0 ){
+					location.reload(true);
+				}
+				else{
+					alert(data);
+				}
+			}).error(
+			function(data) {
+				alert('服务器正在飞速运转，请耐心等待' + data);
+			});
 
-							// alert(data);
+};
 
-							// $scope.data = data;
-						}).error(function(data, status, headers, config) {
-							alert('服务器正在飞速运转，请耐心等待' + data);
-							// $scope.status = status;
-						});
+var deletePageFunction = function() {
+	if(!(loginFlag=='true')){
+		preLoginFunction();
+		return;
+	}
+	$.ajax(
+			{
+				url : contextPath
+						+ "/page/delete",
+				method : "POST",
+				data : {
+					"id":$("#editPage_dataid").val()
+				}
+			}).success(
+			function(data) {
+				if(data.indexOf("操作成功")>=0 ){
+					location.reload(true);
+				}
+				else{
+					alert(data);
+				}
+			}).error(
+			function(data) {
+				alert('服务器正在飞速运转，请耐心等待' + data);
+			});
 
-					};
-					$scope.logoutFunction = function() {
-						$http({
-							url : contextPath + "/user/logout",
-							method : "POST",
-							data : {}
-						}).success(function(data, status, headers, config) {
-							if(data.indexOf("操作成功")>=0 ){
-								location.href =  $('#contextPath').val();
-							}
-							else{
-								alert(data);
-							}
-						}).error(function(data, status, headers, config) {
-							alert('服务器正在飞速运转，请耐心等待' + data);
-							// $scope.status = status;
-						});
+};
 
-					};
+var firstTryFunction = function() {
+	$('.modal').modal('hide');
+	$('#firstTryModel').modal();
+}
 
-					$scope.searchSite = function() {
-						location.href = contextPath + '/site?tag='
-								+ $('#searchSite-input').val();
-					};
+var preAddUserFunction = function() {
+	$('.modal').modal('hide');	
+	$('#createUserModel').modal();
+}
 
-					$scope.searchBaidu = function() {
-						// location.href = 'http://www.baidu.com/s?wd=' +
-						// $('#search-input').val();
-						window.open('http://www.baidu.com/s?wd='
-								+ $('#search-input-baidu').val());
-					};
-					$scope.searchGoogle = function() {
-						// location.href = 'http://www.baidu.com/s?wd=' +
-						// $('#search-input').val();
-						window.open('https://www.google.com.hk/search?q='
-								+ $('#search-input-google').val());
-					};
-					$scope.preEditAll = function() {
-						editingFlag = !editingFlag;
-						if(editingFlag){
-							$(".editable").append("<span class='glyphicon glyphicon-pencil' style='font-size:8px;'></span>");
-							$(".editable").addClass('editing');
-							$(".editing").click( function(event) {
-								event.preventDefault();
-								// alert($(this).attr('dataid'));
-								if($(this).hasClass('folderMark')){
-									$("#editFolder_dataid").val( $(this).attr('dataid'));
-									$("#editFolder_folderName").val(  $(this).attr('dataname') );
-									$('.modal').modal('hide');
-									$('#editFolderModel').modal();
-								}
-								else if($(this).hasClass('pageMark')){
-									$("#editPage_dataid").val( $(this).attr('dataid'));
-									$("#editPage_pageName").val(  $(this).attr('dataname'));
-									$("#editPage_url").val( $.trim($(this).attr('href')) );
-									$('.modal').modal('hide');
-									$('#editPageModel').modal();
-								}
-								
-								
-							});
-						}
-						else{
-							$(".glyphicon-pencil").remove();
-							$(".editable").removeClass('editing');
-							$(".editable").unbind('click');//取消弹出编辑框，回复初始状态。
-						}
-						
+var addUserFunction = function() {
+	
+	if($('#createUser-password').val() != $('#createUser-password-again').val()){
+		alert("两次输入的用户名不一致,请重新输入");
+		return;
+	}
+	$.ajax({
+		url : contextPath + "/user/create",
+		method : "POST",
+		data : {
+			"name" : $('#createUser-name').val(),
+			"password" : $('#createUser-password').val(),
+			"authCreate":$('#auth-create-value').val()
+		}
+	}).success(function(data) {
+		$('#createUserModel').modal();
+		if(data.indexOf("成功")>=0 ){
+			if($('#contextPath').val() == ''){
+				location.href =  '/' ;
+			}
+			else{
+				location.href =  $('#contextPath').val()  ;
+			}
+		}
+		else{
+			alert(data);
+		}
+		// $scope.data = data;
+	}).error(function(data) {
+		alert('服务器正在飞速运转，请耐心等待' + data);
+		// $scope.status = status;
+	});
 
-						// alert('edit');
-					};
-					
-// $scope.edit = function(event){
-// alert(event);
-// }
+};
+var preEditUserFunction = function() {
+	if(!(loginFlag=='true')){
+		preLoginFunction();
+		return;
+	}
+	$('.modal').modal('hide');
+	$('#editUserModel').modal();
+};
+var preEditPublicMessageFunction = function() {
+	if(!(loginFlag=='true')){
+		preLoginFunction();
+		return;
+	}
+	$('.modal').modal('hide');
+	$('#editPublicMessageModel').modal();
+};
 
-					$scope.openLink = function(id,type) {
-						$http({
-							url : contextPath + "/statistic/click",
-							method : "POST",
-							data : {
-								
-								"id" : id,
-								"type" : type
-								
-							}
-						});
-					};
-					
-					$scope.openFolder = function(id,name,obj ) {
-						//正在编辑，执行编辑操作，不执行本方法
-						if( $(obj.target.parentElement).hasClass('editing') ||$(obj.target).hasClass('editing')){
-							return;
-						}
-						else{
-							//$event.preventDefault(); 
-							$http({
-								url : contextPath + "/statistic/click",
-								method : "POST",
-								data : {
-									"id" : id,
-									"type" : 'folder'
-								}
-							}).success(function(data, status, headers, config) {
-							}).error(function(data, status, headers, config) {
-							});; 
-							location.href = contextPath+"/folder/"+id+"/"+name;
-						}
-						
-					
-					};
-					
-				});
+
+
+var editUserFunction = function() {
+	if(!(loginFlag=='true')){
+		preLoginFunction();
+		return;
+	}
+	$.ajax({
+		url : contextPath + "/user/edit",
+		method : "POST",
+		data : {
+			"id":$('#editUser-id').val(),
+			"name" : $('#editUser-name').val(),
+			"password" : $('#editUser-password').val(),
+			"authCreate":$('#auth-create-value').val()
+		}
+	}).success(function(data) {
+		$('#editUserModel').modal('hide');
+		if(data.indexOf("操作成功")>=0 ){
+			if($('#contextPath').val() == ''){
+				location.href =  '/' ;
+			}
+			else{
+				location.href =  $('#contextPath').val()  ;
+			}
+			
+		}
+		else{
+			alert(data);
+		}
+		// $scope.data = data;
+	}).error(function(data) {
+		alert('服务器正在飞速运转，请耐心等待' + data);
+		// $scope.status = status;
+	});
+
+};
+var showAdditionalDiv = function(){
+	$('.additionalDiv').toggle();
+}
+
+var editPublicMessageFunction = function() {
+	if(!(loginFlag=='true')){
+		preLoginFunction();
+		return;
+	}
+	$.ajax({
+		url : contextPath + "/public/message",
+		method : "POST",
+		data : {
+			"userID":$('#publicMessageUserID').val(),
+			"message" : $('#publicMessageValue').val()
+		}
+	}).success(function(data) {
+		$('#editPublicMessage').modal('hide');
+		if(data.indexOf("操作成功")>=0 ){
+			if($('#contextPath').val() == ''){
+				location.href =  '/' ;
+			}
+			else{
+				location.href =  $('#contextPath').val()  ;
+			}
+			
+		}
+		else{
+			alert(data);
+		}
+		// $scope.data = data;
+	}).error(function(data) {
+		alert('服务器正在飞速运转，请耐心等待' + data);
+		// $scope.status = status;
+	});
+
+};
+var preEditTempUserFunction = function() {
+	$('.modal').modal('hide');
+	$('#editTempUserModel').modal();
+};
+var editTempUserFunction = function() {
+	$.ajax({
+		url : contextPath + "/user/edit",
+		method : "POST",
+		data : {
+			"id":$('#editTempUser-id').val(),
+			"name" : $('#editTempUser-name').val(),
+			"password" : $('#editTempUser-password').val()
+		}
+	}).success(function(data) {
+		$('#editTempsUserModel').modal('hide');
+		if(data.indexOf("操作成功")>=0 ){
+			if($('#contextPath').val() == ''){
+				location.href =  '/' ;
+			}
+			else{
+				location.href =  $('#contextPath').val()  ;
+			}
+			
+		}
+		else{
+			alert(data);
+		}
+		// $scope.data = data;
+	}).error(function(data) {
+		alert('服务器正在飞速运转，请耐心等待' + data);
+		// $scope.status = status;
+	});
+
+};
+var preLoginFunction = function() {
+	$('.modal').modal('hide');
+	$('#loginModel').modal();
+}
+var loginFunction = function() {
+	$.ajax({
+		url : contextPath + "/user/login",
+		method : "POST",
+		data : {
+			"name" : $('#login-name').val(),
+			"password" : $('#login-password').val()
+		}
+	}).success(function(data) {
+
+		if (data.indexOf("成功")>=0 ) {
+			if($('#contextPath').val() == ''){
+				location.href =  '/' ;
+			}
+			else{
+				location.href =  $('#contextPath').val()  ;
+			}
+			
+			//location.reload(true);
+			//$('#loginModel').modal('hide');
+			
+			// location.reload(true); 
+		} else {
+			alert(data);
+			//alert(data);
+		}
+
+		// alert(data);
+
+		// $scope.data = data;
+	}).error(function(data) {
+		alert('服务器正在飞速运转，请耐心等待' + data);
+		// $scope.status = status;
+	});
+
+};
+var logoutFunction = function() {
+	$.ajax({
+		url : contextPath + "/user/logout",
+		method : "POST",
+		data : {}
+	}).success(function(data) {
+		if(data.indexOf("操作成功")>=0 ){
+			location.href =  $('#contextPath').val();
+		}
+		else{
+			alert(data);
+		}
+	}).error(function(data) {
+		alert('服务器正在飞速运转，请耐心等待' + data);
+		// $scope.status = status;
+	});
+
+};
+var preEditAll = function() {
+	if(!(loginFlag=='true')){
+		preLoginFunction();
+		return;
+	}
+	editingFlag = !editingFlag;
+	if(editingFlag){
+		$(".editable").append("<span class='glyphicon glyphicon-pencil' style='font-size:8px;'></span>");
+		$(".editable").addClass('editing');
+		$(".editing").click( function(event) {
+			event.preventDefault();
+			// alert($(this).attr('dataid'));
+			if($(this).hasClass('folderMark')){
+				$("#editFolder_dataid").val( $(this).attr('dataid'));
+				$("#editFolder_folderName").val(  $(this).attr('dataname') );
+				$('.modal').modal('hide');
+				$('#editFolderModel').modal();
+			}
+			else if($(this).hasClass('pageMark')){
+				$("#editPage_dataid").val( $(this).attr('dataid'));
+				$("#editPage_pageName").val(  $(this).attr('dataname'));
+				$("#editPage_url").val( $.trim($(this).attr('href')) );
+				$('.modal').modal('hide');
+				$('#editPageModel').modal();
+			}
+			
+			
+		});
+	}
+	else{
+		$(".glyphicon-pencil").remove();
+		$(".editable").removeClass('editing');
+		$(".editable").unbind('click');//取消弹出编辑框，回复初始状态。
+	}
+	
+
+	// alert('edit');
+};
+
+var openLink = function(id,type) {
+	$.ajax({
+		url : contextPath + "/statistic/click",
+		method : "POST",
+		data : {
+			
+			"id" : id,
+			"type" : type
+			
+		}
+	});
+};
+var openFolder = function(id,name,obj ) {
+	//正在编辑，执行编辑操作，不执行本方法
+	if( $(obj.target.parentElement).hasClass('editing') ||$(obj.target).hasClass('editing')){
+		return;
+	}
+	else{
+		//$event.preventDefault(); 
+		$.ajax({
+			url : contextPath + "/statistic/click",
+			method : "POST",
+			data : {
+				"id" : id,
+				"type" : 'folder'
+			}
+		}).success(function(data) {
+		}).error(function(data) {
+		});; 
+		location.href = contextPath+"/folder/"+id+"/"+name;
+	}
+	
+
+};
 
 
 //$(".link-prompt").click( linkPromptFunc);
@@ -557,35 +668,40 @@ function godMethod(event){
 		$('#god_link')[0].click();
 	}
 	
-	
-	
-	//$('#god_link').attr('href', $(this).attr('dataurl'));
-	//$('#god_link')[0].click();
-	
-	//alert('god here');
-	//$("#god-input").setSelection(1,2);
-	//alert(  $(this).attr('dataurl') );
-	
 } 
 $("#god-input").blur(function(){
+	
 	setTimeout(function(){
-		$("#god-content-div").hide(); 
+		$("#god-content-div").hide();
+		$("#god-div").removeClass('col-md-6').addClass('col-md-3');
+		$("#head-sub-menu").show();
 	},300);
 	
 }) ;
-$("#god-input").on('keyup',godPrompt  );
-$("#god-input").on('click',godPrompt  ); 
+$("#god-input").on('keyup', godPrompt);
+$("#god-input").on('click', godPrompt); 
 $("#god-content-div").on('click',function(){
 	//alert($(this).attr('dataurl'));
 	//alert('aaa');
 	  }  ); 
 
 var god_index;
+/*
+function godPromptLazy(event){
+	 return function(){
+		 godPrompt(event);
+    }
+}*/
+
 function godPrompt(event){
 	var keycode = event.which||event.keyCode;
 	if(keycode==38||keycode==40||keycode==13){
 		return;
 	}
+	
+	$("#god-div").removeClass('col-md-3').addClass('col-md-6');
+	$("#head-sub-menu").hide();
+	
 	god_index = 0;
 	
 	if($("#god-input").val().length > 0){
@@ -766,6 +882,7 @@ $("#pageName").on('keyup', function() {
 				 // alert(linksData);
 				  
 				  $("#link-prompt-div").empty();
+				  $("#link-prompt-div").hide();
 				 // $("#pageUrl").text(''); //清空url
 				  
 				  var linksJson = JSON.parse(linksData);
@@ -776,15 +893,18 @@ $("#pageName").on('keyup', function() {
 					 // alert(linksJson[i].url);
 					  $("#link-prompt-div").append('<div id="link_prompt_'+i+'" class="col-sm-12 link-prompt" style="padding: 5px; padding-left:10px; padding-top: 10px;  border: 1px solid #eee;" dataurl="'+linksJson[i].url+'"><span style="color: #2e8cd8;  font-weight: bold;;font-size: 14px;"> '+linksJson[i].name+'</span> - <span style="color:green;font-size: 11px;"> '+linksJson[i].urlShow+'</span></div>');
 				  }
-				  $("#link-prompt-div").show();
+				  if(linksJson.length>0){
+					  $("#link-prompt-div").show();
+				  }
+				
 				  $(".link-prompt").click( linkPromptFunc);
 				}
-			  
 			}) ;
 		
 	}
 	else{//小于1
 		$("#link-prompt-div").empty();
+		$("#link-prompt-div").hide();
 	}
 	
 });
@@ -801,7 +921,6 @@ $("#createPage-name-div").on('keyup', function(event) {
 				$('.link-prompt').css('background-color',' #fff');
 				$('#link_prompt_'+$('#link_prompt_index').val()).css('background-color',' #eee');
 			}
-	
 			return;
 		};
 		case 40:{//down
@@ -812,11 +931,7 @@ $("#createPage-name-div").on('keyup', function(event) {
 					$('.link-prompt').css('background-color',' #fff');
 					$('#link_prompt_'+$('#link_prompt_index').val()).css('background-color',' #eee');
 					//alert($('#link_prompt_index').val());
-			 
 			 	}
-				
-				
-	
 			return;
 		};
 		case 13:{//enter
@@ -857,8 +972,11 @@ $("#bookmarkFileBtn").click( function(event) {
      return false;
 });
 $(".deletePage").click( function(event) {
-	
-	if(confirm("要删除这条网址将？")){
+	if(!(loginFlag=='true')){
+		preLoginFunction();
+		return;
+	}
+	if(confirm("确定要删除这条网址？")){
 		$.ajax({
 			  url: $('#contextPath').val() + "/page/delete",
 			  data:{"id": $(this).attr('data-id')   },
@@ -873,10 +991,243 @@ $(".deletePage").click( function(event) {
 		}
 		);
 	}
-			  
-	 
+});
+$(".editPage").click( function(event) { 
+	if(!(loginFlag=='true')){
+		preLoginFunction();
+		return;
+	}
+	//alert( $(this).siblings('.pageMark').first().attr('data-id') );
+	$("#editPage_dataid").val( $(this).parent().siblings('.pageMark').first().attr('data-id'));
+	$("#editPage_pageName").val( $(this).parent().siblings('.pageMark').first().attr('data-name'));
+	$("#editPage_url").val( $.trim($(this).parent().siblings('.pageMark').first().attr('href')) );
+	$('.modal').modal('hide');
+	$('#editPageModel').modal();
+	
+		/*
+		$.ajax({
+			  url: $('#contextPath').val() + "/page/delete",
+			  data:{"id": $(this).attr('data-id')   },
+			  success:function(data) {
+				  if(data.indexOf("操作成功")>=0 ){
+						location.reload(true);
+					}
+					else{
+						alert(data);
+					}
+			  }
+		}
+		);
+		*/
 });
 
+$("#foot-prompt-close").click( function() {
+	$("#foot-prompt").hide();
+	//$("#footer").show();
+	
+});
+
+
+$("#user-operation-div").hover(
+	function() { 
+		setTimeout(function(){
+			$("#user-operation-content").show();
+		},300);
+	}
+	,
+	function() { 
+		setTimeout(function(){
+			$("#user-operation-content").hide();
+		},300);
+	}
+);
+
+$("#foot-prompt-ok").click(function(){
+	$.ajax({
+		url : contextPath + "/user/quickLogin",
+		method : "POST",
+		data : {
+			"quick-name" : $('#foot-prompt-username-input').val(),
+			"quick-password" : $('#foot-prompt-password-input').val()
+		}
+	}).success(function(data) {
+
+		if (data.indexOf("操作成功")>=0 ) {
+			//alert("操作成功");
+			if($('#contextPath').val() == ''){
+				location.href =  '/' ;
+			}
+			else{
+				location.href =  $('#contextPath').val()  ;
+			}
+		} else {
+			alert(data);
+		}
+	}).error(function(data) {
+		alert('服务器正在飞速运转，请耐心等待' + data);
+	});
+});
+
+
+$(".auth-create-btn").click(function(){
+	$(".auth-create-btn").css("color","#222");
+	$(this).css("color","#fff");
+	$(".auth-create-btn").removeClass("btn-success");
+	$(this).addClass("btn-success");
+	$("#auth-create-value").val( $(this).attr("data-value") );
+});
+
+$(".ajax-reply").click(function(){
+	if($(this).hasClass('ajax-reply-opening')){
+		$(this).removeClass('ajax-reply-opening'); 
+		$(this).text('回复');
+		$(this).parent().children('.ajax-reply-div').eq(0).remove();
+	}
+	else{
+		$('.ajax-reply-div').remove();
+		$(this).addClass('ajax-reply-opening'); 
+		$(this).text('收起回复');
+		$(this).parent().append('<div class="ajax-reply-div" style="padding:20px;"><textarea class="col-sm-12 ajax-reply-textarea"></textarea><button class=" pull-right" style="margin-top:5px; height:25px;font-size:12px;padding-top:2px;padding-bottom:2px;">确定</button> </div>');	
+	}
+	
+});
+
+
+
+function copyFolder(){
+	if(!(loginFlag=='true')){
+		preLoginFunction();
+		return;
+	}
+	$.ajax({
+		url : contextPath + "/folder/copy",
+		method : "POST",
+		data : {
+			"folderID" : $('#fid').val()
+		}
+	}).success(function(data) {
+
+		if (data.indexOf("成功")>=0 ) {
+			if($('#contextPath').val() == ''){
+				alert("操作成功");
+				location.href =  '/' ;
+			}
+			else{
+				location.href =  $('#contextPath').val()  ;
+			}
+		} else {
+			alert(data);
+		}
+	}).error(function(data) {
+		alert('服务器正在飞速运转，请耐心等待' + data);
+	});
+}
+
+
+//设为首页
+function SetHome(obj, vrl) {
+	vrl = "http://webhezi.com/";
+	try {
+		obj.style.behavior = 'url(#default#homepage)';
+		obj.setHomePage(vrl);
+	} catch (e) {
+		if (window.netscape) {
+			try {
+				netscape.security.PrivilegeManager
+						.enablePrivilege("UniversalXPConnect");
+			} catch (e) {
+				alert("需要您手动设置！\n请在浏览器地址栏输入“about:config”并回车\n然后将 [signed.applets.codebase_principal_support]的值设置为'true',双击即可。");
+			}
+			var prefs = Components.classes['@mozilla.org/preferences-service;1']
+					.getService(Components.interfaces.nsIPrefBranch);
+			prefs.setCharPref('browser.startup.homepage', vrl);
+		} else {
+			//alert("请检查您是否安装了以下软件——360安全卫士、金山卫士、QQ电脑管家、金山毒霸。如已安装，请参考软件中的浏览器设置主页的方法进行设置。");
+			alert("您的浏览器不支持，请按照下面步骤操作：1.打开浏览器设置。2.点击设置网页。3.输入：" + vrl + "点击确定。");
+		}
+	}
+}
+
+// 加入收藏
+function AddFavorite() {
+ 
+	var sURL = window.location.href;
+
+	var sTitle = "网址盒子";
+	try {
+		window.external.addFavorite(sURL, sTitle);
+	} catch (e) {
+		try {
+			window.sidebar.addPanel(sTitle, sURL, "");
+		} catch (e) {
+			alert("需要您手动设置，请使用Ctrl+D进行添加");
+		}
+	}
+}
+
+function linkUp(id){
+	$.ajax({
+		url : contextPath + "/link/up",
+		method : "POST",
+		data : {
+			"id" : id
+		}
+	}).success(function(){
+		alert('操作成功');
+	});
+};
+function pageUp(id){
+	$.ajax({
+		url : contextPath + "/page/up",
+		method : "POST",
+		data : {
+			"id" : id
+		}
+	}).success(function(){
+		alert('操作成功');
+	});
+};
+
+$(".page-edit-div").hover( 
+		function() { 
+			$(this).children(".deletePage").show(500);
+		}
+		,
+		function() { 
+			$(this).children(".deletePage").hide(500);
+		}
+);
+/*
+$(".page-comment-div").hover(
+		function() { 
+			$(this).children(".pageComment").show();
+		}
+		,
+		function() {
+			$(this).children(".pageComment").hide(500);
+		}
+);
+*/
+$( document ).ready(function() {
+	
+	//$("#footer").hide();
+	//$("#folder-index").children().slice(6).hide();
+});
+
+/*
+$("#folder-index").hover( 
+function() { 
+	setTimeout(function(){
+		$("#folder-index").children().slice(6).show();
+	},500);
+}
+,
+function() { 
+	$(this).children().slice(6).hide();
+}
+);
+
+*/
 
 /*
 			$(".statistic_folder").click( function(event) {

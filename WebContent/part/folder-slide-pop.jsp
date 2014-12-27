@@ -12,9 +12,9 @@
 		class="  col-sm-12  " style="padding:  3px;"> <span class=" glyphicon glyphicon-star-empty"></span> 网址盒子 </a> 
 		
 		<a class="col-sm-12"
-		ng-click="preAddPageFunction()" style="margin-top: 10px;">
+		onclick="preAddPageFunction()" style="margin-top: 10px;">
 		>>查看更多 </a>
 		
-		 <a class="col-sm-12" ng-click="preCreateFolderFunction()"
+		 <a class="col-sm-12" onclick="preCreateFolderFunction()"
 		style="margin-top: 10px;"> >>添加 </a>
 </div>

@@ -30,9 +30,7 @@ public class DeleteFolderContoller extends HttpServlet {
 		//TODO 改Tag 和 Link的计数
 
 		try {
-			Map<String, String> map = U.requestToMap(req);
-			
-			String id = map.get("id");
+			String id = U.filterCharacter(req.getParameter("id"));
 			User user = U.param(req, C.user, User.class);
 			
 			new CommonValidator().isLogin(req, null)

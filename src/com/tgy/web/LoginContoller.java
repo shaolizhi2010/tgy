@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.tgy.dao.UserDao;
 import com.tgy.entity.User;
+import com.tgy.service.UserService;
 import com.tgy.util.C;
 import com.tgy.util.MD5Util;
 import com.tgy.util.U;
@@ -22,21 +23,25 @@ public class LoginContoller extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse res)
 			throws ServletException, IOException {
-		User user = U.fromReqJson(req, User.class);
+		
+		String name = U.filterCharacter(req.getParameter("name")) ;
+		String password = U.filterCharacter(req.getParameter("password"));
 		
 		try {
-			new CommonValidator().isNotNull(user, null)
-				.isShorter(user.name, 20, "用户名过长")
-				.isLonger(user.name, 0, "请输入用户名")
-				.isShorter(user.password, 40, "密码过长")
-				.isLonger(user.password, 0, "请输入密码");
+			new CommonValidator().isNotNull(name, null)
+				.isNotNull(password, null)
+				.isShorter(name, 20, "用户名过长")
+				.isLonger(name, 0, "请输入用户名")
+				.isShorter(password, 40, "密码过长")
+				.isLonger(password, 0, "请输入密码");
 		} catch (Exception e) {
 			U.resFailed(res, e.getMessage());
 		}
 		
-		user.password = MD5Util.toMD5(user.password);
+		password = MD5Util.toMD5(password);
 		
-		User loginUser = new UserDao().login(user);
+		UserService userService = new UserService();
+		User loginUser = userService.login(name,password);
 		 
 		if (loginUser != null) {
 
@@ -57,7 +62,10 @@ public class LoginContoller extends HttpServlet {
 			
 			//U.forward(req, res, "/"+loginUser.name);
 			 
-			U.message(res, "登录成功");
+			U.resSuccess(res);
+			//loginUser.loginTimes++;
+			//loginUser.lastLoginDate = U.dateTime();
+			//userService.save(loginUser);
 		} else {
 			U.message(res, "用户名或密码错误");
 			return;

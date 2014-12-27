@@ -25,14 +25,15 @@ public class IndexContoller extends HttpServlet {
 			@CookieValue(value = "lastPsCode", defaultValue = "",required  = false) String lastPsCode
 			) {
 		
-		if(StringUtils.isBlank(lastLoginUserID)){
-			//用户从没登录过 也没创建过快速体验书签，显示 ‘创建收藏夹按钮’ 和 ‘体验一下按钮’
-			req.setAttribute("isNewUser", "true");
-		}
+//		if(StringUtils.isBlank(lastLoginUserID)){
+//			//用户从没登录过 也没创建过快速体验书签，显示 ‘创建收藏夹按钮’ 和 ‘体验一下按钮’
+//			req.setAttribute("isNewUser", "true");
+//		}
 		
 		if(StringUtils.isBlank(lastLoginUserID) && StringUtils.isBlank(lastViewUserID)){//第一次访问
 			
-			U.forward(req, res, "/公用导航"); 
+			//U.forward(req, res, "/公用导航");
+			U.forward(req, res, "/index-hot-user.jsp");
 			return;
 		}
 		else{
@@ -48,7 +49,8 @@ public class IndexContoller extends HttpServlet {
 				
 				User user = new UserDao().getByID(userID);
 				if(user==null){
-					U.forward(req, res, "/公用导航"); 
+					U.forward(req, res, "/index-hot-user.jsp");
+					//U.forward(req, res, "/公用导航"); 
 					return;
 				}
 				else{

@@ -34,7 +34,7 @@
 					</button>
 				</div>
 
-				<!--  ng-click="uploadBookmarkFunction()" -->
+				<!--  onclick="uploadBookmarkFunction()" -->
 				<!-- upload bookmark end-->
 			</div>
 		</div>

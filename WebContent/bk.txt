@@ -1,3 +1,151 @@
+	<%@page import="com.tgy.entity.User"%>
+<%@page import="com.tgy.service.UserService"%>
+<%@page import="org.apache.commons.lang3.StringUtils"%>
+<%@page import="java.util.List"%>
+<%@ page language="java" pageEncoding="UTF-8"%>
+
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="row clearfix c-menu-sub">
+            <div class="col-md-12 column "  >
+
+                 <div class="col-md-2 column">
+                 	<a href="#">返利成功</a>
+                 </div>
+                 <div class="col-md-2 column">
+                 	<a href="#">菜单一</a>
+                 </div>
+                 <div class="col-md-2 column">
+                 	<a href="#">菜单一</a>
+                 </div>
+                 <div class="col-md-2 column">
+                 	<a href="#">菜单一</a>
+                 </div>
+                 <div class="col-md-2 column">
+                 	<a href="#">菜单一</a>
+                 </div>
+
+            </div>
+            
+        </div>
+    </div>
+    
+<!-- 本页菜单开始 -->
+    <div class="container">
+        <div class="row clearfix">
+            <div class="col-md-12 column">
+                <!--  content here  -->
+
+					<table class="table">
+						<thead>
+							<tr class="success">
+	
+								<th>会员</th>
+								<th>账户余额</th>
+								<th>收款人</th>
+								<th>返利过 </th>
+								<th>介绍人 </th>
+								<th>时间</th>
+								<th>说明 	</th> 
+								<th>操作</th>
+								<th>可用 </th>
+							</tr>
+						</thead>
+						<tbody>
+	
+							<%
+								UserService userService = new UserService();
+								
+								
+								List<User> users = userService.list("-createDate");
+								
+								 for(User user: users){
+									 
+							%>
+	
+							<tr class="">
+ 
+								
+								<td><%= user.name %>
+								</td>
+								
+ 
+								<td> 
+									<%=user.createDate%>
+								 </td>
+								 
+							</tr>
+							<%
+								}
+							%>
+	
+	
+						</tbody>
+					</table>
+
+            </div>
+ 
+        </div>
+    </div>
+</body>
+</html>
+	
+	
+	<footer  class="pull-right" style="color: #999;font-size: 8px;">
+ 							 <%=d.createDate %>  
+ 						</footer>
+
+#acd9f8
+onclick="preCreateCommentForLink('<%=link.id%>')"
+
+    <script src="/javascripts/html5shiv.js"></script>
+    <script src="/javascripts/respond.js"></script>
+
+本页面完全开放! 大家可以添加网址，不需登录. 欢迎把你收藏的资源网址也添加进来， 分享给大家! 
+另外招募管理员，负责美剧网站和网盘资源的添加和维护，为美剧网友谋福利！ 
+欢迎报名，QQ:2350233623 开心
+
+<div class="col-sm-12 " style="padding-top:10px;border: 1px solid #eee;">
+						
+			<a href="<%=request.getContextPath()%>/美剧"
+				class="  col-sm-8  " style="padding-left:3px; ">  
+				<span style="color:#1155cc" >美剧</span>   </a>
+			<br>
+			<div class="col-sm-12 no-padding" style="margin-top: 10px;">
+				<div class ="  col-sm-6 hoverAble" style="border: 1px solid #eee;"> 
+					<span class="" >11</span><br>
+					<span class="">访问</span>
+				</div>
+				<div class ="  col-sm-6  hoverAble" style="border: 1px solid #eee;"> 
+					<span class="">11</span><br>
+					<span class="">欢迎度</span>
+				</div>
+			</div>
+		</div> 
+
+<div class="container col-sm-12 clearfix " style="padding: 20px;font-size: 16px;">
+		 		本页面完全开放!  大家可以添加网址，不需登录. 
+				欢迎把你收藏的资源网址也添加进来，
+				<a  href="#" title="添加一个网址" onclick="preAddPageFunction()">分享给大家!</a>
+				<br> 
+				<span style="font-size: 12px"> 另外招管理员一名，负责美剧网站和网盘资源的添加和维护，为美剧网友谋福利！</span>
+				<br>
+				<span style="font-size: 12px">欢迎报名，QQ:2350233623 开心</span>
+		 	</div>
+
+<link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+<a href="<%=request.getContextPath() %>/history" class=" col-sm-2 no-padding hoverAble"><span class="tabs-tab">历史记录(114)</span></a>
+
+<a style="padding-top: 8px;float:right;display: block; " href="https://graph.qq.com/oauth2.0/authorize?response_type=code&client_id=101171952&redirect_uri=http://www.webhezi.com/qqcallback.jsp&state=test">
+			<img alt="使用QQ帐号登录" src="<%=request.getContextPath() %>/images/qqlogin.png">
+		</a>
+
 <img style="width: 18px;" src="'+dataJson[i].iconPath+'"> 
 		<%
 			if (StringUtils.isNoneBlank(showFolderName)) {

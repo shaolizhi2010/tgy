@@ -1,7 +1,6 @@
 package com.tgy.statistic;
 
 import java.io.IOException;
-import java.util.HashMap;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,10 +9,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.tgy.dao.FolderDao;
+import com.tgy.dao.LinkDao;
 import com.tgy.dao.PageDao;
+import com.tgy.dao.TagDao;
 import com.tgy.entity.Folder;
 import com.tgy.entity.Page;
 import com.tgy.exception.BaseException;
+import com.tgy.statistic.entity.Link;
+import com.tgy.statistic.entity.Tag;
 import com.tgy.util.U;
 import com.tgy.validator.CommonValidator;
 
@@ -24,13 +27,12 @@ public class ClickStatisticController extends HttpServlet {
 	protected void service(HttpServletRequest req, HttpServletResponse res)
 			throws ServletException, IOException {
 
-		HashMap param = U.fromReqJson(req, HashMap.class);
-		String id = String.valueOf(param.get("id"));
-		String type = String.valueOf(param.get("type"));
+		String id = U.filterCharacter(req.getParameter("id")) ;
+		String type = U.filterCharacter(req.getParameter("type")) ;
 
 		try {
-			new CommonValidator().isLogin(req, null).isNotNull(id, null)
-					.isNotNull(type, null);
+			new CommonValidator().isNotNull(id, null)
+					.isNotNull(type, null);//isLogin(req, null).
 
 			if ("page".equals(type)) {
 				PageDao pDao = new PageDao();
@@ -43,32 +45,38 @@ public class ClickStatisticController extends HttpServlet {
 					FolderDao fDao = new FolderDao();
 					Folder folder = fDao.getByID(page.pid);
 					if (folder != null) {
-						folder.clicks+=1;
+						folder.showTimes+=1;
 						folder.favScore+=1;
 						fDao.save(folder);
 	 
 					} 
 
-//					LinkDao lDao = new LinkDao();
-//					Link link = lDao.getByUrl(page.url);
-//					if (link != null) {
-//						link.clicks++;
-//						page.favScore++;
-//						lDao.save(link);
-//					}
-
+					LinkDao lDao = new LinkDao();
+					Link link = lDao.getByUrl(page.url);
+					if (link != null) {
+						link.clicks++;
+						link.favScore++;
+						lDao.save(link);
+					}
 				}
-
 			}
 			else if ("folder".equals(type)) {
 				FolderDao fDao = new FolderDao();
 				Folder folder = fDao.getByID(id);
 				if (folder != null) {
-					folder.clicks+=2;
+					folder.showTimes+=2;
 					folder.favScore+=2;
 					fDao.save(folder);
+					
+					TagDao tDao = new TagDao();
+					Tag tag = tDao.getByName(folder.name);
+					tag.clicks+=1;
+					tag.favScore+=1;
+					tDao.save(tag);
  
 				} 
+				
+				
 
 			}
 

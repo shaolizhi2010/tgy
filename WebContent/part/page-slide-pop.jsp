@@ -8,7 +8,7 @@
 
 <%@include file="bookmark-data.jsp" %> 
 
-<div class="container col-sm-12 clearfix"
+<div  class="container col-sm-12 clearfix"
 	style="padding: 2px; padding-left: 20px; margin-bottom: 20px; border-left: 1px solid #eee;">
 
  
@@ -35,7 +35,7 @@
 			> <span
 			class="glyphicon glyphicon-star" style="color: #ffd76e;"></span> <span
 			style="color: #1155cc;"> <%= U.shortTitle(link.title) %></span> <!-- #ff076e #1155cc; 0000cc-->
-		</a> <a ng-click="createPageFunction('<%=link.title%>','<%=link.url%>')" href="#" class="col-sm-2"
+		</a> <a onclick="createPageFunction('<%=link.title%>','<%=link.url%>')" href="#" class="col-sm-2"
 			style="padding-left: 1px; padding-right: 1px;"> <span
 			class="glyphicon glyphicon glyphicon-plus" 
 			style="padding-right: 1px;"></span>
@@ -50,7 +50,7 @@
 	<%
 		}
 
-		}
+		}//end if
 	%>
 
 

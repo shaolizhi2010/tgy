@@ -124,7 +124,7 @@
 							<td><%=linkIndex++%></td>
 							<td><a target="_blank" href=" <%=link.url%>"><span
 									style="font-size: 14px; font-weight: 300; margin-left: 3px;"><%=titleName%></span></a></td>
-							<td><a ng-click=" " href="#" class="col-sm-2"
+							<td><a onclick=" " href="#" class="col-sm-2"
 								style="padding-left: 1px; padding-right: 1px; font-weight: bold;">
 									<span style=""> + </span>
 							</a></td>

@@ -27,11 +27,11 @@ public class EditUserContoller extends HttpServlet {
 	protected void service(HttpServletRequest req, HttpServletResponse res)
 			throws ServletException, IOException {
 
-		Map<String, String> map = U.requestToMap(req);
-		
-		String id = map.get("id");
-		String name = map.get("name");
-		String password = map.get("password");
+
+		String id = U.filterCharacter(req.getParameter("id")) ;
+		String name = U.filterCharacter(req.getParameter("name")) ;
+		String password = U.filterCharacter(req.getParameter("password")) ;
+		String authCreateStr = U.filterCharacter(req.getParameter("authCreate")) ;
 		
 		User loginUser = U.param(req, C.user, User.class);
 		
@@ -55,7 +55,11 @@ public class EditUserContoller extends HttpServlet {
 					.isShorter( password, 30, "密码长度需小于30");
 				loginUser.password = MD5Util.toMD5(password);
 			}
+			if(StringUtils.isNotBlank(authCreateStr)){
+				loginUser.authCreate = Integer.parseInt(authCreateStr);
+			}
 			loginUser.isTemp=false;
+			
 			new UserDao().save(loginUser);
 			req.getSession().setAttribute(C.user, loginUser);
 			

@@ -11,6 +11,7 @@ import org.mongodb.morphia.query.Query;
 import com.tgy.App;
 import com.tgy.entity.Folder;
 import com.tgy.entity.Page;
+import com.tgy.statistic.entity.Tag;
 import com.tgy.util.U;
 
 public class FolderDao extends BasicDAO<Folder, ObjectId> {
@@ -19,6 +20,12 @@ public class FolderDao extends BasicDAO<Folder, ObjectId> {
 		super(Folder.class, App.getInstance().getDatastore());
 	}
 
+	public List<Folder> list(int num) {
+		Query<Folder> query = App.getInstance().getDatastore()
+				.createQuery(Folder.class).order("-favScore").limit(num);
+		return find(query).asList();
+	}
+	
 	// TODO
 	// public List<Folder> getPublicFoldersByUserID(String userID) {
 	//
@@ -54,7 +61,7 @@ public class FolderDao extends BasicDAO<Folder, ObjectId> {
 	}
 
 	public void saveWithRef(Folder folder) {
-		folder.updateDate = U.dateTime();
+		folder.lastModifyDate = U.dateTime();
 		save(folder);
 	}
 
