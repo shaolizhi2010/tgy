@@ -11,7 +11,7 @@
 <%@page import="com.tgy.entity.Page"%>
 <%@ page language="java" pageEncoding="UTF-8"%>
 
-<%@include file="user-data.jsp" %>
+<%@include file="show-user-data.jsp" %>
 <%@include file="bookmark-data.jsp" %>
 
 <%
@@ -19,6 +19,7 @@ String folderName = showFolderName;
 if(StringUtils.isBlank(folderName)){
 	folderName = "网址";
 }
+int papgeIndex=0;
 %>
 <!-- 显示网址页面开始 -->
 <div id="pages-part" class="col-sm-12 no-padding sub-page-with-title">
@@ -47,7 +48,7 @@ if(StringUtils.isBlank(folderName)){
 		%>
 		</div>
 	</div>
-	<div class="sub-page-body col-sm-12 no-padding">
+	<div class="sub-page-body col-sm-12 no-padding" style="background: #fff;">
 	<%
 	if(StringUtils.isBlank(showFolderID) && StringUtils.isNotBlank(showUserID)){ //全部
 		pages = new PageService().search(showUserID, null, null, null);
@@ -100,8 +101,12 @@ if(StringUtils.isBlank(folderName)){
 				if (pageName != null && pageName.length() > 24) {
 					pageName = pageName.substring(0, 24) + "...";
 				}
+				String pageBackgroudColor = "";
+				//pageBackgroudColor =  (papgeIndex++%2)==0 ? "background-color:#fefefe" :  "";  //每条page信息的北京交替变化
+					
+				
 		%>
-		<div class="col-sm-12 pages-part-page hoverAble">
+		<div class="col-sm-12 pages-part-page hoverAble" style="  <%=pageBackgroudColor%>">
 		<a target="_blank" class="col-sm-8  pageMark" href="<%=linkStr%>" 
 			onclick="openLink('<%=p.id %>','page')" title = "<%=p.name %>"
 			data-id="<%=p.id%>" data-name="<%=p.name%>">

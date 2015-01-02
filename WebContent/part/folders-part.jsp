@@ -24,7 +24,7 @@
 	%>
 
 	<%
-		for (Folder folder : showFolder.folders) {
+		for (Folder folder : rootFolders) {
 			String name = folder.name;
 			if (name != null && name.length() > 4) {
 	//			name = name.substring(0, 4) + "..";
@@ -34,7 +34,7 @@
 	<a href="<%=request.getContextPath()%>/folder/<%=folder.id%>/<%=name %>"
 		dataid="<%=folder.id%>" dataname="<%=folder.name%>" class=" btn  folderMark editable "
 		 style="text-align: left;margin:0px;">
-		<span class="glyphicon glyphicon-book" style="color:<%=folder.color%>"></span>
+		<span class="glyphicon glyphicon-book"  ></span>
 		<div class="label" style="color: #2e8cd8;  font-size: 16px; padding:5px;  padding-left:10px;padding-right:15px; " ><%=name%></div>
 	</a>
  

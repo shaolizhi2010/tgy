@@ -1,3 +1,4 @@
+<%@page import="java.util.Random"%>
 <%@ page language="java" pageEncoding="UTF-8"%>
 <%@ page trimDirectiveWhitespaces="true" %> 
 <%@page import="com.tgy.entity.User"%>
@@ -12,7 +13,7 @@
  
 <%@include file="part/common.jsp" %>
 <%@include file="part/bookmark-data.jsp" %> 
-<%@include file="part/user-data.jsp" %>
+<%@include file="part/show-user-data.jsp" %>
 <!DOCTYPE html>
 <html  >
 <head lang="en">
@@ -21,7 +22,7 @@
 </head>
 <body>
 	<jsp:include page="part/head.jsp" />
-
+	<jsp:include page="part/private-tabs.jsp" />
 	<div class="  col-sm-12" style="margin-top: 10px;"></div>
  
  	<%
@@ -101,6 +102,59 @@
 				}
 			%>
 			<jsp:include page="part/folder-slide-follow.jsp" />
+			
+			<!-- ad -->
+			<div class="  col-sm-12" style="margin-top: 50px;"></div>
+			
+			<%
+			int rad = new Random().nextInt(5);
+			if(rad==0){//amazon
+				%>
+				<a class="col-sm-12 no-padding" 
+					target="_blank"
+					href="https://www.amazon.cn/b?ie=UTF8&node=1354810071&tag=bijia365-23&camp=356&creative=6240&linkCode=ur1&adid=0K191MEG6A97ZXAVDZ6P">
+					<img class="col-sm-12 no-padding" src="https://images-na.ssl-images-amazon.com/images/G/28/img14/chn/2014halfyear/2014best_300250._V351018681_.jpg">
+				</a>
+				<%
+			}
+			else if(rad == 1){//jd
+				%>
+				<div class="col-sm-12 no-padding">
+					<script type="text/javascript">var jd_union_pid="248667042";var jd_union_euid="";</script><script type="text/javascript" src="http://ads.union.jd.com/static/js/union.js"></script>
+				</div>
+				<%
+			}
+			else if(rad == 2){
+				%>
+				<div class="col-sm-12 no-padding">
+					<a class="col-sm-12 no-padding" 
+						target="_blank"
+						href="http://click.yhd.com/?ut=102241362&s=YzczMDE1YTc5NGE1MWNhMGNkM2IxZWRjN2NhZmIzNDBiNTAzZDNhNTRmNDYzNjM4MzI1Nzc3OGE4YTE2OWFkMzVjZTc2ZWVhMDQyYWU5YTM5N2Q4NDI0MjBhODI2OWE5&cv=1">
+						<img class="col-sm-12 no-padding" src="http://d6.yihaodianimg.com/V00/M0A/79/CC/CgQDslSZm3OARXYOAAEKNu6NOSA81400.jpg">
+					</a>
+				</div>
+				<%
+			}
+			else if(rad == 3){
+				%>
+				<div class="col-sm-12 no-padding">
+					<script charset="gbk" type="text/javascript" src="http://union.dangdang.com/adapi/sc?id=j4XN87qvRb&from=P-315609"></script>
+				</div>
+				<%
+			}
+			else if(rad == 4){
+				%>
+			<div class="col-sm-12 no-padding">
+				<iframe src="http://group.gome.com.cn/y/5780_123_2_5_/Active/ActiveImg?sid=5780&wid=123&category=2&bid=5&feedback=" width="300" height="250" scrolling="no" border="0" marginwidth="0" style="border: none;" frameborder="0"></iframe>
+			</div>
+				<%
+			}
+			%>
+
+			<!-- ad end -->
+			
+			
+ 
 		</div>
 		<!-- 显示推荐页面结束 -->
 

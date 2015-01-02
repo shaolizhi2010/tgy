@@ -1,7 +1,7 @@
 <%@page import="org.apache.commons.lang3.StringUtils"%>
 <%@page import="com.tgy.entity.User"%>
 <%@ page language="java" pageEncoding="UTF-8"%>
-<%@include file="user-data.jsp" %>
+<%@include file="show-user-data.jsp" %>
 <%
 String loginUserNameShow =   "";
 if(StringUtils.isNotBlank(loginUserName)  ){
@@ -31,16 +31,15 @@ if (showUserNameShort != null && showUserNameShort.length() > 8) {
 		<div id= "god-content-div" class="col-sm-12"  style="display: none;position: absolute; z-index: 1000;   background-color: #fff;border: 1px solid #333; ">
 		</div> 
 		<a id="god_link" href="#" target="_blank" style="display: none;"></a>
-	</div> 
-	<div id="head-sub-menu" class="col-sm-3 no-padding"> 
-		 <a class="col-sm-5 col-sm-offset-1  hoverAble2 " href="#" onclick="preOpenMyFolder()"><span>我的收藏</span></a>
-		 <a class="col-sm-6    hoverAble2 " href="<%=request.getContextPath()%>/index-hot-user.jsp"><span  >大家的收藏</span></a>
+	</div>
+	<div id="head-sub-menu" class="col-sm-3 container no-padding"> 
+		 <a class="col-sm-5 col-sm-offset-1  no-padding  " href="<%=request.getContextPath() %>"  ><span style="color: #387bb6;">我的收藏</span></a>
+		 <a class="col-sm-6    no-padding  " href="<%=request.getContextPath()%>/group/group.index.jsp"><span style="color: #e85205;" >大家的收藏</span></a>
 		 <!--  
 		  <a class="col-sm-3    hoverAble2 " href="<%=request.getContextPath()%>/公用导航"><span  >导航</span></a>
 		 -->
 	</div>
-<div class="col-sm-3 no-padding"  style="text-align: center;">
-</div>
+ 
 	<% if (loginFlag) { %>
 		<div id= "user-operation-div" class="col-sm-2 col-sm-offset-2 no-padding">
 	   		<a id= "user-operation-btn" class="col-sm-12  hoverAble2" href="<%=request.getContextPath() %>/u/<%=loginUserID %>" 
@@ -89,15 +88,3 @@ if (showUserNameShort != null && showUserNameShort.length() > 8) {
 	%>
 </div>
 <!-- 菜单 结束 -->
-
-<!-- 分割线  -->
-<hr class="col-sm-12"
-	style="border-top: 2px solid #eee; padding: 0px; margin: 0px;">
-<jsp:include page="public-tabs.jsp" />
-	<%//如果登陆
-if(loginFlag){
-	%>
-	<jsp:include page="private-tabs.jsp" />
-	<%
-}
-%>

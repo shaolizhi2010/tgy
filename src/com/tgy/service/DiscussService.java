@@ -1,6 +1,7 @@
 package com.tgy.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.bson.types.ObjectId;
 import org.mongodb.morphia.Datastore;
@@ -19,6 +20,19 @@ import com.tgy.entity.Discuss;
 
 public class DiscussService {
 	DiscussDao dao = new DiscussDao();
+
+	public Discuss byID(String id) {
+		return dao.byID(id);
+	}
+
+	public Discuss get(  Map<String, String> conditions) {
+		return dao.get(Discuss.class, conditions);
+	}
+
+	public List<Discuss> list(  Map<String, String> conditions,
+			String orderStr, int limit) {
+		return dao.list(Discuss.class, conditions, orderStr, limit);
+	}
 
 	public List<Discuss> list(String sourceID, String targetID, String type,
 			int num, String orderStr) {

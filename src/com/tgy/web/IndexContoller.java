@@ -33,7 +33,7 @@ public class IndexContoller extends HttpServlet {
 		if(StringUtils.isBlank(lastLoginUserID) && StringUtils.isBlank(lastViewUserID)){//第一次访问
 			
 			//U.forward(req, res, "/公用导航");
-			U.forward(req, res, "/index-hot-user.jsp");
+			U.forward(req, res, "/group/group.index.jsp");
 			return;
 		}
 		else{
@@ -49,7 +49,7 @@ public class IndexContoller extends HttpServlet {
 				
 				User user = new UserDao().getByID(userID);
 				if(user==null){
-					U.forward(req, res, "/index-hot-user.jsp");
+					U.forward(req, res, "/group/group.index.jsp");
 					//U.forward(req, res, "/公用导航"); 
 					return;
 				}

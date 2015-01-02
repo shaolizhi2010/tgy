@@ -43,7 +43,6 @@ public class PublicMessageContoller extends HttpServlet {
 			user.publicMessage = message;
 			us.save(user);
 			
-			U.refreshSession(req.getSession());
 			U.resSuccess(res);
 		} catch (BaseException e) {
 			U.resFailed(res, e.getMessage());

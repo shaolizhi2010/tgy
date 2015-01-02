@@ -55,7 +55,6 @@ public class EditFolderContoller extends HttpServlet {
 				fDao.save(folder);
 			}
 			// fService.save(folder);
-			 U.refreshSession(req.getSession());
 			 U.resSuccess(res);
 		} catch (Exception e) {
 			e.printStackTrace();

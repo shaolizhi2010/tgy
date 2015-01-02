@@ -26,6 +26,7 @@ public class User extends BaseEntity implements Serializable{
 	public boolean isPublic;//是否公共用户，即别的用户是否可以添加网址。兴趣组功能出来以后，这个功能逐步取消。
 	public String publicMessage;//显示在页面上方的公告信息。
 	public boolean isTemp;//是否是临时用户，2.0版会弃用
+	public boolean isAdmin;
 	
 	//public String bookmarkLastUpdateTime;//书签最后更新时间，用来跟客户端时间比对，如果比客户端新，则返回最新数据给客户端，否则不返回数据，客户端使用localstorage存的数据，
 	//这样可以降低服务器压力 提示客户端速度,客户端缓存会用到，暂时不启用

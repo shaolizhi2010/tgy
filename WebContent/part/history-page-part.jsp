@@ -13,7 +13,7 @@
 <%@page import="com.tgy.entity.Page"%>
 <%@page language="java" pageEncoding="UTF-8"%>
 
-<%@include file="user-data.jsp"  %>  
+<%@include file="show-user-data.jsp"  %>  
 <%@include file="bookmark-data.jsp"%>
  
 <div id="history-page-part" class="col-sm-12 no-padding sub-page-with-title" >

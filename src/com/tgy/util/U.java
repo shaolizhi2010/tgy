@@ -124,15 +124,16 @@ public class U {
 
 		return url;
 	}
-
+	
+	/*
 	public static void refreshSession(HttpSession session) {
-		/*
-		 * session.removeAttribute("fid");
-		 * session.removeAttribute("userFolders");
-		 * session.removeAttribute("curFolder"); session.removeAttribute("fid");
-		 * session.removeAttribute("folders"); session.removeAttribute("pages");
-		 */
-	}
+		
+		  session.removeAttribute("fid");
+		  session.removeAttribute("userFolders");
+		 session.removeAttribute("curFolder"); session.removeAttribute("fid");
+		 session.removeAttribute("folders"); session.removeAttribute("pages");
+		 
+	}*/
 
 	public static <T> T fromReqJson(HttpServletRequest req, Class<T> clazz) {
 		BufferedReader br;

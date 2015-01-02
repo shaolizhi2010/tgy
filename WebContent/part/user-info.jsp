@@ -4,7 +4,7 @@
 <%@page import="com.tgy.util.U"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" pageEncoding="UTF-8"%>
-<%@include file="user-data.jsp" %>
+<%@include file="show-user-data.jsp" %>
 
 <%
 String showUserNameShort = showUserName;

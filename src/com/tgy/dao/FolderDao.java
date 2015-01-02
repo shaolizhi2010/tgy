@@ -9,6 +9,7 @@ import org.mongodb.morphia.dao.BasicDAO;
 import org.mongodb.morphia.query.Query;
 
 import com.tgy.App;
+import com.tgy.entity.BasePage;
 import com.tgy.entity.Folder;
 import com.tgy.entity.Page;
 import com.tgy.statistic.entity.Tag;

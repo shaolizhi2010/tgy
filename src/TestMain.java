@@ -1,6 +1,7 @@
 import java.io.StringReader;
 import java.net.URLEncoder;
 import java.util.List;
+import java.util.Random;
 
 import org.apache.commons.lang3.StringUtils;
 import org.htmlcleaner.CleanerProperties;
@@ -19,7 +20,9 @@ public class TestMain {
 	public static void main(String[] args) {
 		try {
 			System.out.println("start");
-
+			for(int i=0;i<100;i++){
+				System.out.println(new Random().nextInt(2));
+			}
 			
 			//System.out.println(s);
 			

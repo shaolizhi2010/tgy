@@ -1,6 +1,6 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
 
-<%@include file="../part/user-data.jsp"%>
+<%@include file="../part/show-user-data.jsp"%>
 <%
 
 

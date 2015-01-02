@@ -7,17 +7,14 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.tomcat.util.buf.UDecoder;
 import org.bson.types.ObjectId;
 
 import com.tgy.dao.FolderDao;
 import com.tgy.dao.UserDao;
 import com.tgy.entity.Folder;
 import com.tgy.entity.User;
-import com.tgy.util.BreadCrumbUtil;
 import com.tgy.util.FolderUtil;
 import com.tgy.util.U;
-import com.tgy.vo.BreadCrumb;
 import com.tgy.web.vo.BookmarkData;
 
 public class IndexService {
@@ -119,7 +116,7 @@ public class IndexService {
 					|| !StringUtils.equals(fid, fidInSession)
 					|| req.getSession().getAttribute("curFolder") == null) {
 				curFolder = fDao.get(new ObjectId(fid));
-				rootFolder = new FolderService().rootFolder(fid);
+				rootFolder = new FolderService().getByID(fid);
 				req.getSession().setAttribute("fid", fid);
 
 				// req.getSession().setAttribute("fid", fid);
@@ -128,25 +125,21 @@ public class IndexService {
 
 		FolderUtil.setFolderForSession(curFolder, req);
 		if (rootFolder != null) {
-			req.getSession().setAttribute("folders", rootFolder.folders);
+			//req.getSession().setAttribute("folders", rootFolder.folders);
 			req.getSession().setAttribute("rootFolder", rootFolder);
 			req.getSession().setAttribute("rid", rootFolder.id.toString());
 		}
 
 		// set bread crumb
 		// BreadCrumbUtil.add(bread, BreadCrumbUtil.build( curBookmark));
-		BreadCrumb bread = BreadCrumbUtil.build(
-				req.getSession().getAttribute("curFolder"),
-				req.getContextPath());
-		req.setAttribute("bread", bread);
+//		BreadCrumb bread = BreadCrumbUtil.build(
+//				req.getSession().getAttribute("curFolder"),
+//				req.getContextPath());
+//		req.setAttribute("bread", bread);
 
 		System.out.println("IndexController : "
 				+ (System.currentTimeMillis() - start));
-
-		if (StringUtils.equals(showType, "h")) {
-			U.forward(req, res, "/heng.jsp");
-		} else {
-			U.forward(req, res, "/index-1.jsp");
-		}
+ 
+		U.forward(req, res, "/index-1.jsp");
 	}
 }

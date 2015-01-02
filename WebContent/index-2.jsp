@@ -9,7 +9,7 @@
 <%@page import="org.apache.commons.lang3.StringUtils"%>
 <%@ page language="java" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<%@include file="part/user-data.jsp"  %>  
+<%@include file="part/show-user-data.jsp"  %>  
 <%@include file="part/bookmark-data.jsp" %>
 <html  >
 <head lang="en">
@@ -21,6 +21,7 @@
 %>
 <body> 
 	<jsp:include page="part/head.jsp" />
+	<jsp:include page="part/private-tabs.jsp" />
 	<div class=" col-sm-12 no-padding" style="border: 1px solid #999;  "></div>
 	<div class="col-sm-12" style="height: 10px;"></div> 
 	<!-- 书签主页面开始 -->
@@ -29,7 +30,7 @@
 	 <div>
 		<!-------- 右侧 书签主页面 --------->
 		<div id="pageMain" class="col-sm-9 no-padding"
-			style=" border-top: 1px solid #eee; border-left: 1px solid #eee; border-right: 1px solid #eee;padding:0px;   padding-left: 20px;padding-bottom: 40px;">
+			style=" padding:0px;   padding-left: 20px;padding-bottom: 40px;">
 			<jsp:include page="part/folder-fav.jsp" />
 			<div class="col-sm-12" style="height: 10px;"></div>
 			<jsp:include page="part/pages-all-part.jsp" />

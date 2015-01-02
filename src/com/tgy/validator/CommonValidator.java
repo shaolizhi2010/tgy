@@ -7,6 +7,7 @@ import org.apache.commons.lang3.StringUtils;
 import com.tgy.entity.StateFulBaseEntity;
 import com.tgy.entity.User;
 import com.tgy.exception.BaseException;
+import com.tgy.util.AuthManager;
 import com.tgy.util.C;
 
 public class CommonValidator implements Validator{
@@ -103,8 +104,12 @@ public class CommonValidator implements Validator{
 		return this;
 	}
 	
+	 
 	public CommonValidator isSameUser(User user, StateFulBaseEntity e2,String errMsg) throws BaseException{ 
-		if(user==null || user.id == null){
+		
+		boolean isSameUser = AuthManager.checkOwner(user, e2);
+		
+		if(!isSameUser){ //不是owner
 			if(StringUtils.isNotBlank(errMsg)){
 				throw new BaseException(this, errMsg);
 			}
@@ -112,24 +117,8 @@ public class CommonValidator implements Validator{
 				throw new BaseException(this, "无权限进行此操作");
 			}
 		}
-		else{
-			if(e2==null){ //要检查的对象不存在 // || e2.id==null
-				return this;
-			}
-			else{
- 				if(!StringUtils.equals(user.id.toString(), e2.userID)){
-					if(StringUtils.isNotBlank(errMsg)){
-						throw new BaseException(this, errMsg);
-					}
-					else{
-						throw new BaseException(this, "无权限进行此操作");
-					}
-				}
-				else{
-					//ok
-				}
-			}
-		}
+		 
 		return this;
 	} 
+	
 }

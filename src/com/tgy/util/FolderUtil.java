@@ -40,7 +40,7 @@ public class FolderUtil {
 
 		for (Folder folder : folders) {
 
-			if (folder != null && folder.isDefault) {
+			if (folder != null ) {
 				return folder;
 			}
 		}

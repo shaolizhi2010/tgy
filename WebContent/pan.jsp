@@ -12,7 +12,7 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
 <%@include file="part/common.jsp" %>
 <%@include file="part/bookmark-data.jsp" %> 
-<%@include file="part/user-data.jsp" %>
+<%@include file="part/show-user-data.jsp" %>
 <%
 List<Page>  results = U.paramList(request, "results");
 String keyword = U.paramString(request, "keyword");
@@ -26,31 +26,25 @@ String keyword = U.paramString(request, "keyword");
 </head>
 <body>
 	<jsp:include page="part/head.jsp" />
+	<jsp:include page="part/public-tabs.jsp" />
 	<div class="  col-sm-12" style="margin-top: 20px;"></div>
  	
- 	<!-- 菜单 -->
- 	<div class=" col-sm-3 no-padding" >
-		<div class=" col-sm-10 col-sm-offset-1 no-padding" >
-			<jsp:include page="part/ziyuan.menu.jsp"/>
-		</div>
-	</div>
-	
 	<!-- 主体内容 -->
 	<div class=" col-sm-9 container ">
-		<div class="  col-sm-12" style="margin-top: 10px;"></div>
-		<div id="pan-search-input col-sm-12">
-			<div  class="col-sm-6   no-padding" >
-				<input id="pan_search_value" class=" form-control   hover-focus" 
+		<div class="  col-sm-12 " style="margin-top: 10px;"></div>
+		<div id="pan-search-input" class="col-sm-10 col-sm-offset-1 ">
+			<div  class="col-sm-8   no-padding" >
+				<input id="pan_search_value" class=" form-control hover-focus enterInput"   data-func-name="panSearch"
 					value="<%=keyword %>" style="height: 40px;border-radius:10px;" placeholder="百度云盘搜索" />
 			</div>
-			<div class="col-sm-2">
-				<input class="btn btn-primary col-sm-12" style="height: 40px;border-radius:20px;" onclick="panSearch()" 
+			<div class="col-sm-3">
+				<input class="btn btn-primary col-sm-12 enterBtn " style="height: 40px;border-radius:10px;" onclick="panSearch()" 
 					 type="button" value="搜索资源">
 			</div>
 		</div>
  
 		
-		<div id="pan-search-results" class="col-sm-10 no-padding">
+		<div id="pan-search-results" class="col-sm-10 col-sm-offset-1 no-padding">
 		
 			<%
 			for (Page pageObj : results) {
@@ -115,6 +109,12 @@ String keyword = U.paramString(request, "keyword");
 		 </div>
  	
 	</div>
+	 	<!-- 菜单 -->
+ 	<div class=" col-sm-3 no-padding" >
+		<div class=" col-sm-10 col-sm-offset-1 no-padding" >
+			<jsp:include page="part/search-discuss.jsp"/>
+		</div>
+	</div>
 	
 	<input type="hidden" id="loginFlag" value="<%=loginFlag %>">
 	<input type="hidden" id="userID" value="<%=showUserID %>">
@@ -134,7 +134,6 @@ String keyword = U.paramString(request, "keyword");
 	<jsp:include page="part/importAtFoot.jsp" />
 	<script src="<%=request.getContextPath()%>/myjs/common.js"></script>
 	<script src="<%=request.getContextPath()%>/myjs/pan.js"></script>
-	<script src="<%=request.getContextPath()%>/myjs/pageMainApp.js"></script>
 </body>
 
 </html>

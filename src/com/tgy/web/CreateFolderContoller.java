@@ -45,6 +45,9 @@ public class CreateFolderContoller extends HttpServlet {
 				.isLonger(folder.name, 0, "名称不能为空")
 				.isShorter(folder.name, 60, "名称需小于60");
 			
+			
+			
+			
 			FolderService fService = new FolderService();
 			
 			String userID = U.getUserID(req);
@@ -54,7 +57,6 @@ public class CreateFolderContoller extends HttpServlet {
 			}
 			
 			fService.save(folder);
-			U.refreshSession(req.getSession());
 			U.resSuccess(res);
 		} catch (BaseException e) {
 			U.resFailed(res, e.getMessage());

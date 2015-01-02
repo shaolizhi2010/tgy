@@ -87,7 +87,6 @@ public class PageService {
 			if(defaultRootFolder==null){
 				 defaultRootFolder = new Folder();
 					defaultRootFolder.name = "未命名";
-					defaultRootFolder.isRoot = true;
 					defaultRootFolder.createDate = U.dateTime();
 					defaultRootFolder.userID = page.userID;
 					fDao.save(defaultRootFolder); // save root folder

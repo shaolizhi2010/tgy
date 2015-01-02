@@ -9,11 +9,9 @@
 <%@page import="com.tgy.entity.Page"%>
 <%@ page language="java" pageEncoding="UTF-8"%>
 
-<%@include file="user-data.jsp"  %>  
+<%@include file="show-user-data.jsp"  %>  
 <%@include file="bookmark-data.jsp"%>
-
-<hr class="divider col-sm-12"
-	style="border-top: 2px solid #eee; margin-top: 0px;padding: 0px;">  
+ 
 
 <!-- folder fav 开始 -->
 <div class="col-sm-12" style=" margin:0px; padding-bottom: 3px;padding-top: 1px; ">
@@ -24,7 +22,7 @@
  	<%
  	List<Folder> recentList = new ArrayList<Folder>();
  	if(StringUtils.isNoneBlank(showUserID)){
- 		recentList = new FolderDao().getFoldersByUserID(showUserID, "-updateDate");
+ 		recentList = new FolderDao().getFoldersByUserID(showUserID, "-lastModifyDate");
  	}
  	
  	int index = 0; 

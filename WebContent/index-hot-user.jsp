@@ -13,7 +13,7 @@
 
 <%@include file="part/common.jsp" %>
 <%@include file="part/bookmark-data.jsp" %> 
-<%@include file="part/user-data.jsp" %>
+<%@include file="part/show-user-data.jsp" %>
 <%
 PageService ps = new PageService();
 UserService fs = new UserService();
@@ -28,13 +28,8 @@ List<User> users = fs.list("-showTimes",10);
 </head>
 <body>
 	<jsp:include page="part/head.jsp" />
+	<jsp:include page="part/public-tabs.jsp" />
 	<div class="  col-sm-12" style="margin-top: 20px;"></div>
- 	<!-- 菜单 -->
- 	<div class=" col-sm-3 no-padding" >
-		<div class=" col-sm-10 col-sm-offset-1 no-padding" >
-			<jsp:include page="part/index.public.menu.jsp"/>
-		</div>
-	</div>
 	<!-- 主体内容 -->
 	<div class=" col-sm-9 no-padding container">
 		<!-- one column start -->
@@ -172,6 +167,13 @@ List<User> users = fs.list("-showTimes",10);
 	
 	</div>
 	<!-- 主体内容 end-->
+	<!-- 菜单 -->
+ 	<div class=" col-sm-3 no-padding" >
+		<div class=" col-sm-10 col-sm-offset-1 no-padding" >
+			<jsp:include page="part/hot-user.menu.slide.jsp"/>
+		</div>
+	</div>
+	
 	
 	<input type="hidden" id="loginFlag" value="<%=loginFlag %>">
 	<input type="hidden" id="userID" value="<%=showUserID %>">

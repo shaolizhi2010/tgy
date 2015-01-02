@@ -13,7 +13,7 @@
 <%@page import="java.util.List"%>
 <%@page import="org.apache.commons.lang3.StringUtils"%>
 <%@include file="part/common.jsp" %>
-<%@include file="part/user-data.jsp" %>
+<%@include file="part/show-user-data.jsp" %>
 <%
 	UserService uService = new UserService();
 	List<Discuss> discusses = U.paramList(request, "discusses") ;
@@ -53,17 +53,17 @@
 						String headUrl = "";
 						String userUrl = "";
 						//String userID = "";
-						if(StringUtils.isBlank(d.sourceID)){
+						if(StringUtils.isBlank(d.userID)){
 							if(StringUtils.isNotBlank(d.soucrceIP)){
 								userName = d.soucrceIP;
 							}
 						}
 						else{
-							User sourceUser = uService.getByID(d.sourceID);
+							User sourceUser = uService.getByID(d.userID);
 							if(sourceUser!=null){
 								userName = sourceUser.name;
 								headUrl = sourceUser.headImgUrl;
-								userUrl = request.getContextPath()+"/u/"+d.sourceID;
+								userUrl = request.getContextPath()+"/u/"+d.userID;
 							}
 						}
  				%>

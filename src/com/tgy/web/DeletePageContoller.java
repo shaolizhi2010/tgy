@@ -60,7 +60,6 @@ public class DeletePageContoller extends HttpServlet {
 				pDao.deleteWithRef(page);
 				
 			}
-			 U.refreshSession(req.getSession());
 			 U.resSuccess(res);
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -4,7 +4,7 @@
 <%@page import="com.tgy.entity.Folder"%>
 <%@page import="com.tgy.util.U"%>
 <%@ page language="java" pageEncoding="UTF-8"%>
-<%@include file="user-data.jsp" %>
+<%@include file="show-user-data.jsp" %>
 <%@include file="bookmark-data.jsp" %>
 <%
 	String title = C.title;

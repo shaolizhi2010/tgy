@@ -1,3 +1,37 @@
+			<div class="col-sm-12 no-padding">
+				<a class="col-sm-12 no-padding" 
+					target="_blank"
+					href="https://www.amazon.cn/b?ie=UTF8&node=1354810071&tag=bijia365-23&camp=356&creative=6240&linkCode=ur1&adid=0K191MEG6A97ZXAVDZ6P">
+					<img class="col-sm-12 no-padding" src="https://images-na.ssl-images-amazon.com/images/G/28/img14/chn/2014halfyear/2014best_300250._V351018681_.jpg">
+				</a>
+			</div>
+	box-shadow: #E8E8E8 0px 1px 1px 0px;	
+	/**
+	 * 权限系统设计
+	 * 1 操作者 ： 发起操作的user， 比如某user要更改
+	 * 2 被操作实体
+	 * 操作者 的权限值 大于等于 被操作者的 权限值，即可进行操作。
+	 * 
+	 * 操作者有一个权限值，默认是0,即everyone,new User 得到的user 权限值是0
+	 * 被操作实体有一个权限值，默认是0
+	 * 
+	 * 权限值
+	 * owner > superAdmin > admin > loginUsr > everyOne
+	 * 
+	 */
+	
+	//权限控制
+	//0 自己，默认值
+	//1O 超级管理员
+	//2O 管理员
+	//5O 任意登录用户     
+	//9O 所有人,包括未登录
+	public static int authOwner = 0;//只有所有者才能操作
+	//public static int authSuperAdmin = 10;//超级管理员
+	public static int authAdmin = 20;//普通管理员
+	public static int authLoginUser = 50;//登录用户
+	public static int authEveryOne = 90;//所有人，不登陆的游客也可以
+
 	<%@page import="com.tgy.entity.User"%>
 <%@page import="com.tgy.service.UserService"%>
 <%@page import="org.apache.commons.lang3.StringUtils"%>

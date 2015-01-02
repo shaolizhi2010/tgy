@@ -85,12 +85,7 @@ public class FolderService {
 
 		// check user exsit
 		UserService uService = new UserService();
-
-		folder.isRoot = true;
-
 		folder.createDate = U.dateTime();
-
-		folder.color = U.randomColor();
 
 		fDao.saveWithRef(folder);
 
@@ -111,18 +106,18 @@ public class FolderService {
 		return folder;
 	}
 
-	public Folder rootFolder(String folderID) {
-		Folder folder = fDao.getByID(folderID);
-		if (folder == null) {
-			return null;
-		}
-		if (folder.isRoot) {
-			return folder;
-		} else {
-			return rootFolder(folder.pid);
-		}
-
-	}
+//	public Folder rootFolder(String folderID) {
+//		Folder folder = fDao.getByID(folderID);
+//		if (folder == null) {
+//			return null;
+//		}
+//		if (folder.isRoot) {
+//			return folder;
+//		} else {
+//			return rootFolder(folder.pid);
+//		}
+//
+//	}
 
 	public List<Folder> getFoldersByUserID(String userID) {
 		return fDao.getFoldersByUserID(userID);

@@ -80,7 +80,6 @@ public class CreatePageContoller extends HttpServlet {
 			errMsg = saveOnePage(page, user);
 		}
 
-		U.refreshSession(req.getSession());
 		U.resSuccess(res);
 
 	}

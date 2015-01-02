@@ -125,7 +125,7 @@ public class UploadBookmarkUtil {
 				
 			}
 			
-			parentFolder.add(folder);
+			//parentFolder.add(folder); TODO
 
 			for (Element e : element.getChildren()) {
 				scan(e, folder);

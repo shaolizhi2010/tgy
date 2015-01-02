@@ -9,8 +9,12 @@
 <%@page import="com.tgy.entity.Page"%>
 <%@page language="java" pageEncoding="UTF-8"%>
 
-<%@include file="user-data.jsp"  %>  
+<%@include file="show-user-data.jsp"  %>  
 <%@include file="bookmark-data.jsp"%>
+ <%
+ 
+ %>
+ 
  
 <!-- folder index 开始 -->
 <div id="folder-index" class="col-sm-12 container no-padding sub-page-with-title">

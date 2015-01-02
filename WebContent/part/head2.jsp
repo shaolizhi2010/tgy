@@ -9,7 +9,7 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
 
 <%@include file="common.jsp"%>
-<%@include file="user-data.jsp"%>
+<%@include file="show-user-data.jsp"%>
 <%@include file="bookmark-data.jsp"%>
 
 <%

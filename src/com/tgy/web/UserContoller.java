@@ -58,18 +58,18 @@ public class UserContoller extends HttpServlet {
 			@CookieValue(value = "lastPsCode", defaultValue = "", required = false) String lastPsCode)
 			throws ServletException, IOException {
 		
-		String indexType = req.getParameter("t");
+		String showType = req.getParameter("t");//1 竖版显示 2横板（导航）显示
 		//redirect
 		if(StringUtils.equals(userName, "pan")){
 			U.forward(req, res, "/pan.jsp");
 			return;
 		}
 		User showUser = new UserDao().getByName(userName);
-		service(req, res, lastLoginUserID, lastPsCode, showUser,indexType);
+		service(req, res, lastLoginUserID, lastPsCode, showUser,showType);
 	}
 
 	protected void service(HttpServletRequest req, HttpServletResponse res,
-			String lastLoginUserID, String lastPsCode, User showUser,String indexType)
+			String lastLoginUserID, String lastPsCode, User showUser,String showType)
 			throws ServletException, IOException {
 		
 		UserService userService = new UserService();
@@ -141,7 +141,13 @@ public class UserContoller extends HttpServlet {
 			vh.times++;
 			vService.save(vh);
 		}
-		U.forward(req, res, "/index-1.jsp");
+		if(StringUtils.equals(showType, "2")){
+			U.forward(req, res, "/index-2.jsp");
+		}
+		else{
+			U.forward(req, res, "/index-1.jsp");
+		}
+		
 
 	}
 }

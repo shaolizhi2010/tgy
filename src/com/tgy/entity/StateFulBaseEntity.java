@@ -9,5 +9,7 @@ import org.mongodb.morphia.annotations.Entity;
  */
 @Entity
 public class StateFulBaseEntity extends BaseEntity{
+	
+	//所有人的userid， owner的userid
 	public String userID;
 }

@@ -46,7 +46,6 @@ public class DeleteFolderContoller extends HttpServlet {
 				
 				fDao.deleteWithRef(folder);
 			}
-			 U.refreshSession(req.getSession());
 			 U.resSuccess(res);
 		} catch (Exception e) {
 			e.printStackTrace();

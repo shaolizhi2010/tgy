@@ -12,7 +12,7 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
 <%@include file="part/common.jsp" %>
 <%@include file="part/bookmark-data.jsp" %> 
-<%@include file="part/user-data.jsp" %>
+<%@include file="part/show-user-data.jsp" %>
 <!DOCTYPE html>
 <html>
 <head lang="en">

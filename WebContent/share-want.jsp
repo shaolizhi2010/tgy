@@ -14,7 +14,7 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
 <%@include file="part/common.jsp" %>
 <%@include file="part/bookmark-data.jsp" %> 
-<%@include file="part/user-data.jsp" %>
+<%@include file="part/show-user-data.jsp" %>
 <%
 	UserService uService = new UserService();
 	DiscussService disService = new DiscussService();
@@ -29,6 +29,7 @@
 </head>
 <body>
 	<jsp:include page="part/head.jsp" />
+	<jsp:include page="part/public-tabs.jsp" />
 	<div class="  col-sm-12" style="margin-top: 20px;"></div>
  	
  	<!-- 菜单 -->
@@ -50,17 +51,17 @@
 						String headUrl = "";
 						String userUrl = "";
 						//String userID = "";
-						if(StringUtils.isBlank(d.sourceID)){
+						if(StringUtils.isBlank(d.userID)){
 							if(StringUtils.isNotBlank(d.soucrceIP)){
 								userName = d.soucrceIP;
 							}
 						}
 						else{
-							User sourceUser = uService.getByID(d.sourceID);
+							User sourceUser = uService.getByID(d.userID);
 							if(sourceUser!=null){
 								userName = sourceUser.name;
 								headUrl = sourceUser.headImgUrl;
-								userUrl = request.getContextPath()+"/u/"+d.sourceID;
+								userUrl = request.getContextPath()+"/u/"+d.userID;
 							}
 						}
  				%>
