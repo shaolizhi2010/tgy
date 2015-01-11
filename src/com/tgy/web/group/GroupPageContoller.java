@@ -85,9 +85,6 @@ public class GroupPageContoller extends BaseGroupContoller {
 			validator.isNotNull(group, null); // valide group
 			validator.isNotNull(group.id, null); // valide group
 
-			// loginUser 创建folder 的人
-			User loginUser = U.param(req, C.user, User.class);
-			String loginUserID = U.getUserID(req);
 
 			// 权限检查
 			if (commonAuth(req, group, group.authCreate) == false) {
@@ -192,6 +189,7 @@ public class GroupPageContoller extends BaseGroupContoller {
 			InterestGroupFolder folder) {
 		try {
 			page.url = StringUtils.trim(page.url);
+			InterestGroupService gs = new InterestGroupService();
 
 			new CommonValidator()
 					// .isLonger(page.name, 0, "网站名称不能为空")
@@ -205,9 +203,11 @@ public class GroupPageContoller extends BaseGroupContoller {
 
 			// save group data
 			if (folder == null && group != null) { // 未指定folder 直接村group里
-				InterestGroupService gs = new InterestGroupService();
 				group.add(page);
+				group.pageCount++;
+				group.favScore+=C.scoreCreatePage;
 				group.lastModifyDate = U.dateTime();
+				
 				gs.save(group);
 			}
 
@@ -215,8 +215,15 @@ public class GroupPageContoller extends BaseGroupContoller {
 			if (folder != null) {
 				InterestGroupFolderService fs = new InterestGroupFolderService();
 				folder.add(page);
+				
+				folder.favScore += C.scoreCreatePage;
 				folder.lastModifyDate = U.dateTime();
 				fs.save(folder);
+				
+				group.pageCount++;
+				group.favScore+=C.scoreCreatePage;
+				group.lastModifyDate = U.dateTime();
+				gs.save(group);
 			}
 
 			return "";

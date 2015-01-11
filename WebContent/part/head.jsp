@@ -33,8 +33,8 @@ if (showUserNameShort != null && showUserNameShort.length() > 8) {
 		<a id="god_link" href="#" target="_blank" style="display: none;"></a>
 	</div>
 	<div id="head-sub-menu" class="col-sm-3 container no-padding"> 
-		 <a class="col-sm-5 col-sm-offset-1  no-padding  " href="<%=request.getContextPath() %>"  ><span style="color: #387bb6;">我的收藏</span></a>
-		 <a class="col-sm-6    no-padding  " href="<%=request.getContextPath()%>/group/group.index.jsp"><span style="color: #e85205;" >大家的收藏</span></a>
+		 <a id="head-sub-menu-personal"  class="col-sm-5 col-sm-offset-1  no-padding  " href="<%=request.getContextPath()%>/me"  ><span style="color: #387bb6;">我的收藏</span></a>
+		 <a id="head-sub-menu-public" class="col-sm-6    no-padding  " href="<%=request.getContextPath()%>/index-hot-user.jsp"><span style="color: #e85205;" >大家的收藏</span></a>
 		 <!--  
 		  <a class="col-sm-3    hoverAble2 " href="<%=request.getContextPath()%>/公用导航"><span  >导航</span></a>
 		 -->
@@ -61,9 +61,6 @@ if (showUserNameShort != null && showUserNameShort.length() > 8) {
 				 <span class="caret"></span>
 			</a>
 			<div id= "user-operation-content" class="col-sm-12 no-padding "  style="">
-			 	<a onclick="preEditUserFunction()" class="hoverAble2" href="#" style="">编辑用户信息</a>
-			 	<a onclick="preEditPublicMessageFunction()" class="hoverAble2" href="#" style="">编辑公告信息</a>
-			 	
 		 		<a onclick="preLoginFunction()" class="hoverAble2" href="#" style="">切换账号</a>
 		 		<a onclick="logoutFunction()" class="hoverAble2" href="#" style="">注销</a>
 			</div>
@@ -88,3 +85,8 @@ if (showUserNameShort != null && showUserNameShort.length() > 8) {
 	%>
 </div>
 <!-- 菜单 结束 -->
+
+
+<!-- 弹出框开始 -->
+<jsp:include page="../window/common-window.jsp" />
+<!-- 弹出框结束 -->

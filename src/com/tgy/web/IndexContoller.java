@@ -18,7 +18,7 @@ import com.tgy.util.U;
 @RequestMapping( value = {"/"}  )
 public class IndexContoller extends HttpServlet {
 	
-	@RequestMapping(  )
+	@RequestMapping()
 	public void index(HttpServletRequest req, HttpServletResponse res,
 			@CookieValue(value = "lastViewUserID", defaultValue = "",required  = false) String lastViewUserID,
 			@CookieValue(value = "lastLoginUserID", defaultValue = "",required  = false) String lastLoginUserID,
@@ -30,10 +30,10 @@ public class IndexContoller extends HttpServlet {
 //			req.setAttribute("isNewUser", "true");
 //		}
 		
-		if(StringUtils.isBlank(lastLoginUserID) && StringUtils.isBlank(lastViewUserID)){//第一次访问
+		if(StringUtils.isBlank(lastLoginUserID) ){//第一次访问 && StringUtils.isBlank(lastViewUserID)
 			
 			//U.forward(req, res, "/公用导航");
-			U.forward(req, res, "/group/group.index.jsp");
+			U.forward(req, res, "/index-hot-user.jsp");
 			return;
 		}
 		else{
@@ -43,13 +43,13 @@ public class IndexContoller extends HttpServlet {
 					userID = lastLoginUserID;
 					
 				}
-				else if(StringUtils.isNotBlank(lastViewUserID)){//如没有登录userid，使用 上次看过的userid
-					userID = lastViewUserID;
-				}
+//				else if(StringUtils.isNotBlank(lastViewUserID)){//如没有登录userid，使用 上次看过的userid
+//					userID = lastViewUserID;
+//				}
 				
 				User user = new UserDao().getByID(userID);
 				if(user==null){
-					U.forward(req, res, "/group/group.index.jsp");
+					U.forward(req, res, "/index-hot-user.jsp");
 					//U.forward(req, res, "/公用导航"); 
 					return;
 				}
@@ -65,7 +65,63 @@ public class IndexContoller extends HttpServlet {
 		
 		 
 	}
- 
-	 
+	
+	/*
+	 * 用户点击了 我的收藏 按钮，
+	 * 吧用户分为以下几种
+	 * 1 从未登录过，点击 ‘我的收藏’
+	 * 2 登录过，但现在没有登录，点击我的收藏
+	 * 3 已经登陆了，点击 我的收藏
+	 * 
+	 */
+	@RequestMapping(value = {"/me"} )
+	public void me(HttpServletRequest req, HttpServletResponse res,
+			@CookieValue(value = "lastViewUserID", defaultValue = "",required  = false) String lastViewUserID,
+			@CookieValue(value = "lastLoginUserID", defaultValue = "",required  = false) String lastLoginUserID,
+			@CookieValue(value = "lastPsCode", defaultValue = "",required  = false) String lastPsCode
+			) {
+		
+//		if(StringUtils.isBlank(lastLoginUserID)){
+//			//用户从没登录过 也没创建过快速体验书签，显示 ‘创建收藏夹按钮’ 和 ‘体验一下按钮’
+//			req.setAttribute("isNewUser", "true");
+//		}
+		String showType = req.getParameter("t");//1 竖版显示 2横板（个人导航）显示 3 横板 公共导航页
+		if(StringUtils.isBlank(showType)){
+			showType = "1";
+		}
+		if(StringUtils.isBlank(lastLoginUserID) ){//没登陆过 && StringUtils.isBlank(lastViewUserID)
+			
+			//U.forward(req, res, "/公用导航");
+			U.forward(req, res, "/index-"+showType+".jsp");
+			return;
+		}
+		else{
+			try {
+				String userID = "";
+				if(StringUtils.isNotBlank(lastLoginUserID)  ){ //如有登录id和密码 默认使用登录userid，temp user的密码未空
+					userID = lastLoginUserID;
+					
+				}
+//				else if(StringUtils.isNotBlank(lastViewUserID)){//如没有登录userid，使用 上次看过的userid
+//					userID = lastViewUserID;
+//				}
+				
+				User user = new UserDao().getByID(userID);
+				if(user==null){
+					U.forward(req, res, "/index-"+showType+".jsp");
+					//U.forward(req, res, "/公用导航"); 
+					return;
+				}
+				else{
+					U.forward(req, res, "/"+user.name);
+					return;
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		
+		 
+	}
 	
 }

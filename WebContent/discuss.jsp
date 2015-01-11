@@ -35,6 +35,7 @@
 </head>
 <body>
 	<jsp:include page="part/head.jsp" />
+	<jsp:include page="part/public-tabs.jsp" />
 	<div class="  col-sm-12" style="margin-top: 10px;"></div>
  
 	<!-- 书签主页面开始 -->

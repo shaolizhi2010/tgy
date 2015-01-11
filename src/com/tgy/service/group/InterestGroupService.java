@@ -30,7 +30,10 @@ public class InterestGroupService {
 			Map<String, String> conditions, String orderStr, int limit) {
 		return dao.list(InterestGroup.class, conditions, orderStr, limit);
 	}
-
+	public List<InterestGroup> list( 
+			Map<String, String> conditions, String orderStr,int start, int limit) {
+		return dao.list(InterestGroup.class, conditions, orderStr,start, limit);
+	}
 	public InterestGroup byID(String id) {
 		return dao.byID(id);
 	}

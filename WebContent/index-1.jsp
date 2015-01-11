@@ -22,36 +22,43 @@
 </head>
 <body>
 	<jsp:include page="part/head.jsp" />
-	<jsp:include page="part/private-tabs.jsp" />
-	<div class="  col-sm-12" style="margin-top: 10px;"></div>
+	<%
+	if(isSelf){ //这个flag从server来，server判断用户正在看的是自己的收藏
+	%>
+		<jsp:include page="part/private-tabs.jsp" />	
+	<%
+	}else if(loginFlag==true && (StringUtils.isBlank(showUserID) || StringUtils.equals(loginUserID, showUserID)  ) ){
+		%>
+		<jsp:include page="part/private-tabs.jsp" />
+		<%
+	}else{
+		%>
+		<jsp:include page="part/public-tabs.jsp" />
+		<%
+	}
+	%>
+	<div class="  col-sm-12" style="margin-top: 20px;"></div>
  
- 	<%
- 		if(showUser!=null && showUser.authCreate==9){//public 
- 	%>
-		<div class="container col-sm-12 clearfix " style=" font-size: 16px;">
-		 		这是一个神奇的页面！ 大家都可以添加收藏的网址，人人为我 我为人人！
-				<a  href="#" title="添加一个网址" onclick="preAddPageFunction()">>>添加网址戳这里</a>
-				
-		</div>
-
- 	<%
- 		}
- 	%>
  	<%
  		if(showUser!=null && StringUtils.isNotBlank(showUser.publicMessage)){
  	%>
-		<div class="container col-sm-12 clearfix " style=" font-size: 16px;">
- 		 	<h4></h4> <%=showUser.publicMessage %>
+ 	<!-- 
+		<div class="container col-sm-12 clearfix " style=" font-size: 16px;padding-bottom:10px; border-bottom:1px solid #f5f5f5;">
+ 		 	<span class="publicMessage"><%=showUser.publicMessage %></span>
  		</div>
+ 	-->
  			
  	<%
  		}
  	%>
- 	 
+ 	<div class="  col-sm-12"  ></div>
 	<!-- 书签主页面开始 -->
 	<div class="container col-sm-12 clearfix " style="padding-top: 0px;">  
 		<!-------- 书签主页面 --------->
 		<div id="pageMain" class="col-sm-9 no-padding" >
+			<jsp:include page="part/quick-add-link.jsp" />	
+			<div class="  col-sm-12" style="margin-top: 10px;"></div>
+			
 			<div class="  col-sm-12"  ></div>
 			<%
 			if(showUser!=null && showFolder==null &&StringUtils.equals("导航", showUser.showType) ){
@@ -74,7 +81,7 @@
 			if( !(showUser!=null && showFolder==null &&StringUtils.equals("导航", showUser.showType)) ){
 				%>
 				<div class="  col-sm-12" style="margin-top: 40px;"></div>
-				<jsp:include page="part/page-pop.jsp" />
+				<%--<jsp:include page="part/page-pop.jsp" /> --%> 
 				<%
 			}
 			%>
@@ -107,7 +114,7 @@
 			<div class="  col-sm-12" style="margin-top: 50px;"></div>
 			
 			<%
-			int rad = new Random().nextInt(5);
+			int rad = 100;// new Random().nextInt(5);
 			if(rad==0){//amazon
 				%>
 				<a class="col-sm-12 no-padding" 
@@ -175,16 +182,18 @@
 	<input type="hidden" id="edit_url" value="">
 
 	<!-- hidden var end -->
+	<input type="hidden" id="pageID" value="index-1">
 
 	<!-- 弹出框开始 -->
 	<jsp:include page="window/window.jsp" />
 	<!-- 弹出框结束 -->
 	
-	<jsp:include page="part/foot.jsp" />
+	<jsp:include page="part/foot-private.jsp" />
 	<jsp:include page="part/importAtFoot.jsp" />
 	
 	<script src="<%=request.getContextPath()%>/myjs/pageMainApp.js"></script>
 	<script src="<%=request.getContextPath()%>/myjs/common.js"></script>
+	<script src="<%=request.getContextPath()%>/myjs/user-info.js"></script>
 </body>
 
 </html>

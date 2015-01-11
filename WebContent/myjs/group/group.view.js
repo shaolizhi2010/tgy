@@ -1,9 +1,9 @@
 
  function joinGroupFunction() {
-	//if(!(loginFlag=='true')){
-	//	preLoginFunction();
-	//	return;
-	//}
+	if(!(loginFlag=='true')){
+		preLoginFunction();
+		return;
+	}
 	
 	$.ajax({
 		url : contextPath + "/g/join",

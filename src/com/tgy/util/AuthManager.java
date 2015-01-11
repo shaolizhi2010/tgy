@@ -27,6 +27,26 @@ public class AuthManager {
 	}
 	
 	//是否是owner
+	public static boolean checkJoined(User user, InterestGroup group){
+		if(group==null || group.id == null){//没有目标，不能操作
+			return false;
+		}
+ 
+		//未登录 不可以操作
+		if(user==null || user.id==null ){
+			return false;
+		}
+		GroupUserService gus = new GroupUserService();
+		GroupUser groupUser = gus.get(new ConditionMap().add("userID", user.id.toString())
+				.add("groupID",group.id.toString()));
+		if(groupUser!=null){  
+			return true;
+		}
+ 
+		return false;
+	}
+	
+	//是否是owner
 	public static boolean checkOwner(User user, StateFulBaseEntity entity){
 		if(entity==null){//没有目标，不能操作
 			return false;

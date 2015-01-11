@@ -32,21 +32,26 @@ String keyword = U.paramString(request, "keyword");
 	<!-- 主体内容 -->
 	<div class=" col-sm-9 container ">
 		<div class="  col-sm-12 " style="margin-top: 10px;"></div>
+		<div class="  col-sm-10 col-sm-offset-1  " style="margin-top: 10px;"><span style="font-size:22px;">网盘搜索</span><span style="font-size:11px;" >   (找资源、找电影、找剧集、找资料...)</span></div>
 		<div id="pan-search-input" class="col-sm-10 col-sm-offset-1 ">
 			<div  class="col-sm-8   no-padding" >
 				<input id="pan_search_value" class=" form-control hover-focus enterInput"   data-func-name="panSearch"
-					value="<%=keyword %>" style="height: 40px;border-radius:10px;" placeholder="百度云盘搜索" />
+					value="<%=keyword %>" style="height: 40px;border-radius:10px;" placeholder="网盘搜索" />
 			</div>
 			<div class="col-sm-3">
-				<input class="btn btn-primary col-sm-12 enterBtn " style="height: 40px;border-radius:10px;" onclick="panSearch()" 
+				<input class="btn btn-primary col-sm-12" style="height: 40px;border-radius:10px;" onclick="panSearch()" 
 					 type="button" value="搜索资源">
 			</div>
 		</div>
- 
 		
 		<div id="pan-search-results" class="col-sm-10 col-sm-offset-1 no-padding">
 		
 			<%
+			if(results==null||results.size()==0){
+				%>
+				<span style="font-size: 9px;padding-left: 10px;">暂无数据</span>
+				<%
+			}
 			for (Page pageObj : results) {
  
 					String link =pageObj.url;
@@ -80,7 +85,7 @@ String keyword = U.paramString(request, "keyword");
 		%>
 	
 		<div class="col-sm-12 container pages-part-page hoverAble no-padding">
-			<a target="_blank" href="<%=pageObj.url%>" class="col-sm-10 no-padding"> 
+			<a target="_blank" href="<%=pageObj.url%>" class="col-sm-9 no-padding"> 
 				<%		String iconPath = "";
 						if(StringUtils.isNoneBlank(pageObj.iconPath)  ){
 							iconPath = pageObj.iconPath;
@@ -98,8 +103,8 @@ String keyword = U.paramString(request, "keyword");
 				<span class="pages-part-page-name" > <%=pageName%></span> - <span class="pages-part-page-link"><%=linkshow%></span>
 			</a> 
 			<a onclick="preAddPageFunction('<%=pageName%>','<%=pageObj.url%>')" href="#" 
-				class="col-sm-1 pull-right  addPage" > 
-				<span class="glyphicon glyphicon glyphicon-plus pull-right" title="复制到我的收藏夹"  ></span>
+				class="col-sm-3 pull-right  addPage" > 
+				<span class="  pull-right" title="复制到我的收藏夹"  >[复制到我的收藏夹]</span>
 			</a>
  
 		</div>
@@ -109,27 +114,16 @@ String keyword = U.paramString(request, "keyword");
 		 </div>
  	
 	</div>
+	 	<input type="hidden" id="pageID" value="pan">
+	
 	 	<!-- 菜单 -->
  	<div class=" col-sm-3 no-padding" >
 		<div class=" col-sm-10 col-sm-offset-1 no-padding" >
 			<jsp:include page="part/search-discuss.jsp"/>
 		</div>
 	</div>
-	
-	<input type="hidden" id="loginFlag" value="<%=loginFlag %>">
-	<input type="hidden" id="userID" value="<%=showUserID %>">
-	<input type="hidden" id="contextPath" value="<%=contextPath%>">
-	<input type="hidden" id="fid" value="<%=showFolderID%>">
-	<input type="hidden" id="curFolder" value="<%=showFolderName%>">
-	<input type="hidden" id="edit_pid" value="">
-	<input type="hidden" id="edit_name" value="">
-	<input type="hidden" id="edit_url" value="">
-
-	<!-- hidden var end -->
-
-	<!-- 弹出框开始 -->
-	<jsp:include page="window/window.jsp" />
-	<!-- 弹出框结束 -->
+ 
+ 
 	<jsp:include page="part/foot.jsp" />
 	<jsp:include page="part/importAtFoot.jsp" />
 	<script src="<%=request.getContextPath()%>/myjs/common.js"></script>

@@ -44,14 +44,28 @@ public class GroupContoller extends HttpServlet {
 			return;
 		}
 
-		InterestGroup group = new InterestGroupService().byID(groupID);
+		InterestGroupService s = new InterestGroupService();
+		InterestGroup group = null;
 		
-		if(group==null){
-			U.forward(req, res, "/not-found.jsp");
+		if(groupID!=null && groupID.length()>20){
+			group = s.byID(groupID);
+		}
+		if(group==null){ //根据name取或是根据id没取到
+			group = s.get(new ConditionMap().add("name", groupID));
+		}
+		
+		if(group==null||group.id==null){
+			U.forward(req, res, "/404.jsp");
 			return;
 		}
+		else{
+			groupID = group.id.toString();
+			group.showTimes++;
+			group.favScore++;
+			s.save(group);
+		}
 		InterestGroupPageService ps = new InterestGroupPageService();
-		List<InterestGroupPage> pages =ps.list(new ConditionMap().add("groupID", groupID), null, 30);
+		List<InterestGroupPage> pages =ps.list(new ConditionMap().add("groupID", groupID), "-favScore", 30);
 		
 		
 		if(group!=null){
@@ -85,16 +99,16 @@ public class GroupContoller extends HttpServlet {
 			return;
 		}
 		group.userCount++;
+		group.favScore+=C.scoreNewUser;
 		groupService.save(group);
 		
 		GroupUserService gus = new GroupUserService();
-		GroupUser groupUser = gus.get(new ConditionMap().add("userID", loginUser.id.toString())
-				.add("groupID",groupID));
-		if(groupUser!=null){ //已经是成员了
+	 
+		if(AuthManager.checkJoined(loginUser, group)){ //已经是成员了
 			U.resFailed(res, "您已经是群组成员了");
 			return;
 		}
-		groupUser = new GroupUser();
+		GroupUser groupUser = new GroupUser();
 		groupUser.setUser(loginUser);
 		groupUser.setGroup(group);
 		
@@ -128,6 +142,11 @@ public class GroupContoller extends HttpServlet {
 			GroupUserService guService = new GroupUserService();
 			InterestGroupService gService = new InterestGroupService();
 			
+			if(gService.get(new ConditionMap().add("name", name))!=null){//已存在
+				U.resFailed(res, "这个名字已被抢,请再选一个名字吧");
+				return ;
+			}
+			
 			GroupUser groupuser = new GroupUser();
 			groupuser.setUser(user);
 			groupuser.isSuperAdmin = true;
@@ -140,6 +159,7 @@ public class GroupContoller extends HttpServlet {
 			group.authCreate = Integer.parseInt(authCreateStr);
 			group.authUpdate = Integer.parseInt(authUpdateStr);
 			group.userID = U.getUserID(req);
+			group.userCount=1;
 			//group.createDate = U.dateTime();
 			//group.useAble = true;
 			group.add(groupuser);

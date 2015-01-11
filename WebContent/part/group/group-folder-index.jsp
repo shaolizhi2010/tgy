@@ -37,7 +37,7 @@
 	 	if(CollectionUtils.isEmpty(group.folders)){
 	 		%>
 	 		<div class="col-sm-12 ">
-	 			还未创建任何收藏夹，现在就 <a href="<%=request.getContextPath() %>/group/folder/create/pre?groupID=<%=groupID %>"  >添加一个</a> 吧
+	 			还未创建任何收藏夹，现在就 <a onclick="afterLogin('<%=request.getContextPath() %>/group/folder/create/pre?groupID=<%=groupID %>')"  href="#"  >添加一个</a> 吧
 	 		</div>
 	 		<%
 	 	}
@@ -47,7 +47,7 @@
 	 			style = "background-color:#eee;";
 	 		}
 	 		%>
-	 		<a style="<%=style %>" class="folder-index-element hoverAble" href="<%=request.getContextPath()%>/g/<%=group.id %>" >全部</a>	
+	 		<a style="<%=style %>" class="folder-index-element hoverAble" onclick="" href="<%=request.getContextPath()%>/g/<%=group.id %>" >全部</a>	
 	 		<%
 	 			
 		 		//Collections.reverse(rootFolders);

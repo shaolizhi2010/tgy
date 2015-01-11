@@ -29,8 +29,8 @@
 			   <select class="  form-control"   id="createPage_pid">
 			   <option value="<%=showFolderID%>"  ><%=showFolderName%></option>
 			   <%
-			   if(loginUserBookmarkData!=null && loginUserBookmarkData.rootFolders!=null){
-				   for(Folder f: loginUserBookmarkData.rootFolders){
+			   if(bookmarkData!=null && bookmarkData.rootFolders!=null){
+				   for(Folder f: bookmarkData.rootFolders){
 					   String selected = "";
 					   if(StringUtils.equals(showFolderID, String.valueOf(f.id ))){
 						   selected = "selected='selected'";
@@ -50,7 +50,7 @@
 					<textarea    id="pageUrl"  class="form-control hover-focus" rows="3"></textarea>
 			</div>
 			<div style="margin-top: 20px;" id="createPage-name-div">
-				<label for="pageName">网站名称</label> <input placeholder="不填则自动获取"
+				<label for="pageName">网站名称</label> <input placeholder=""
 					ng-keyup="$event.keyCode == 13 ? createPageFunction() : null"
 					class="form-control  " id="pageName" type="text" />
 			</div>

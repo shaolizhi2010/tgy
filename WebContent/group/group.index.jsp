@@ -24,7 +24,21 @@
 //UserService fs = new UserService();
 //List<User> users = fs.list("-showTimes",10);
 InterestGroupService service = new InterestGroupService();
-List<InterestGroup> groups = service.list(null, null, 0);
+
+long count = ps.count();
+
+long pageTotal = count/10+1;
+if(pageTotal>=0){//最多先显示前10页
+	pageTotal=10;
+}
+int start =0;
+if(request.getParameter("start")!=null){
+	start = Integer.parseInt(request.getParameter("start"));
+}
+int curPageNum = start/10+1;
+
+
+List<InterestGroup> groups = service.list(null, "-favScore",start, 10); 
 %>
 
 <!DOCTYPE html>
@@ -75,14 +89,14 @@ List<InterestGroup> groups = service.list(null, null, 0);
 						<div class="col-sm-8 user-name">
 							<a href="<%=request.getContextPath()%>/g/<%=group.id %>" >
 								<span><%=name %></span></a>
-							<div class="share-info"><span></span> <span><%=group.userCount %> 用户   0网址 </span> </div>
+							<div class="share-info"><span><%=group.userCount %>成员</span> <span><%=group.pageCount %>网址     </span> </div>
 						</div>
 					</div>
 					
 					<!-- links -->
 					<div class="col-sm-12 info-card-pages ">
 						<%
-						List<InterestGroupPage> subPages = ps.list(new ConditionMap().add("groupID", group.id.toString()),null, 4);
+						List<InterestGroupPage> subPages = ps.list(new ConditionMap().add("groupID", group.id.toString()),"-favScore", 4);
 						for(InterestGroupPage p :subPages){
 					 		
 							String pName = p.name; 
@@ -101,7 +115,7 @@ List<InterestGroup> groups = service.list(null, null, 0);
 						%>
 					</div>
 					<div class="col-sm-12 info-card-description ">
-						这是一个专门做美剧资源的群组，欢迎大家加入。。
+						 
 					</div>
 					
 				</div>
@@ -145,14 +159,14 @@ List<InterestGroup> groups = service.list(null, null, 0);
 						<div class="col-sm-8 user-name">
 						<a href="<%=request.getContextPath()%>/g/<%=group.id %>" >
 							<span><%=name %></span></a>
-						<div class="share-info"><span></span> <span><%=group.showTimes %> 访问   0关注 </span> </div>
+						<div class="share-info"><span><%=group.userCount %>成员</span> <span><%=group.pageCount %>网址     </span> </div>
 					</div>
 					</div>
 					
 					<!-- links -->
 					<div class="col-sm-12 info-card-pages ">
 						<%
-						List<InterestGroupPage> subPages = ps.list(new ConditionMap().add("groupID", group.id.toString()),null, 4);
+						List<InterestGroupPage> subPages = ps.list(new ConditionMap().add("groupID", group.id.toString()),"-favScore", 4);
 						for(InterestGroupPage p :subPages){
 							String pName = p.name; 
 							if(StringUtils.isBlank(p.name)){
@@ -178,9 +192,40 @@ List<InterestGroup> groups = service.list(null, null, 0);
 		</div>
 		<!-- one column end -->
 	
+	<div class="col-sm-12">
+	
+		<!-- 翻页 -->
+		<nav>
+		  <ul class="pagination">
+		    <li>
+		      <a href="<%=request.getContextPath()%>/index-hot-user.jsp?start=<%=curPageNum*10-20%>" aria-label="Previous">
+		        <span aria-hidden="true">&laquo;</span>
+		      </a>
+		    </li>
+		    <%
+		    for(int i = 1;i<11;i++){
+		    	String selectedStyle="";
+		    	if(i==curPageNum){
+		    		selectedStyle="background-color:#072;color:#fff;";
+		    	}
+		   		%>
+		   		 <li><a style="<%=selectedStyle %>" href="<%=request.getContextPath()%>/group/group.index.jsp?start=<%=i*10-10%>"><%=i %></a></li>
+		   		<% 	
+		    }
+		    %>
+		   
+		    <li>
+		      <a href="<%=request.getContextPath()%>/group/group.index.jsp?start=<%=curPageNum*10%>" aria-label="Next">
+		        <span aria-hidden="true">&raquo;</span> 
+		      </a>
+		    </li>
+		  </ul>
+		</nav>
+	</div>
+	
 	</div>
 	<!-- 主体内容 end-->
-	
+	<!-- hidden var end -->	<input type="hidden" id="pageID" value="group-index">
 	 	<!-- 菜单 -->
  	<div class=" col-sm-3 no-padding" >
 		<div class=" col-sm-10 col-sm-offset-1 no-padding" >

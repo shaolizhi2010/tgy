@@ -41,7 +41,7 @@ try{
 		
 		Map<String, String> userinfo = qq.getUserQQInfo(token, openId);
 		String nickname = userinfo.get("nickname");
-		String headImgUrl = userinfo.get("figureurl_qq_1");
+		String headImgUrl = userinfo.get("figureurl_qq_2");
 		
 		User loginUser = uService.dealWithOpenID(openId, nickname,headImgUrl); 
 		if(loginUser!=null){

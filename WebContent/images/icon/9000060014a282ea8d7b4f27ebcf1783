@@ -1,0 +1,1286 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+   
+
+
+
+
+
+
+
+
+
+
+ 
+
+ 
+
+<!DOCTYPE html>
+<html ng-app="pageMainApp" ng-controller="pageMainCtrl">
+<head lang="en">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+ 
+
+
+
+
+
+
+
+
+
+
+ 
+
+ 
+
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>网址盒子-网址收藏-网站分享 </title>
+<meta name='description' content='网址盒子，最好的网站收藏、网站分享和网站推荐平台，找网站，到网址盒子。'/>
+<meta name='keywords' content='网址盒子 网络收藏夹  美剧网站 电影网站 好网站 电视剧网站 '/>
+<meta http-equiv="Content-Language" content="zh-CN" />
+
+<meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+
+<meta name="baidu-site-verification" content="2zdFjXE5FL" />
+<meta name="google-site-verification" content="OUnrPw6694Qv4V01iZHP-sENOEoS7jpMHBD5h5B_wRw" />
+<meta property="qc:admins" content="5733125577675205216375" />
+<meta name="sogou_site_verification" content="Qd7VdxsXzG"/>
+<meta name="msvalidate.01" content="272A4B91678EA4354B575FB689707BEE" />
+
+<link rel="sitemap" type="application/xml" title="Sitemap" href="Sitemap.txt" />
+<link rel="shortcut icon"   href="images/favicon.ico" />
+<link rel="icon"  href="favicon.ico" />
+
+
+
+<link href="/stylesheets/bootstrap.min.css" rel="stylesheet">
+<link href="/stylesheets/bootstrap-theme.min.css" rel="stylesheet">
+<link href="/stylesheets/jquery-ui-1.11.min.css" rel="stylesheet">
+<link href="/stylesheets/common.css" rel="stylesheet">
+<link href="/stylesheets/jquery.fileupload.css" rel="stylesheet" >
+<link href="/stylesheets/jquery.fileupload-ui.css" rel="stylesheet">
+
+<!--[if lt IE 9]> 
+    <script src="/javascripts/html5shiv.js"></script>
+    <script src="/javascripts/respond.js"></script>
+    
+<![endif]-->
+
+
+
+</head>
+
+
+
+
+
+
+<body>
+	
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+ 
+
+
+
+<!-- 菜单 开始 -->
+<div id="menu" class="container col-sm-12 "
+	style="padding: 3px; background-color: #f5f5f5;">
+	<div id="logo" class="col-sm-4 ">
+		<a style="text-decoration: none;"
+			 href="/"><span style="color: #444;font-size: 26px;font-weight:bold;">网址盒子</span> </a> 
+		<span
+			style="font-size: 14px; color: #666;">好网址? 快到盒子里来！</span>  
+	</div>
+
+<div class="col-sm-4 "  style="text-align: center;">
+	<!-- 
+	<span style="font-size: 12px;text-align: center;background-color: orange ;
+	color: #fff;padding: 5px;font-weight: 400;">网站内测中 欢迎试用！</span> 
+	 -->
+</div>
+
+	
+	<div class="col-sm-3  col-sm-offset-1"
+		style="font-size: 12px; color: #555;  ">
+
+		<span class="glyphicon glyphicon-envelope"
+			style="padding-top: 12px;font-size: 12px; color: #555;"></span> 
+		<span
+			style="padding-top: 12px;font-size: 12px; color: #555;"> 欢迎 </span>
+		 <a
+			ng-click="preLoginFunction()" href="#" style="padding-top: 12px;font-weight: bold;">登录</a>
+			
+		<span style="padding-top: 12px;font-size: 12px; color: #555;">或</span> <a
+			ng-click="preAddUserFunction()" href="#" style="font-weight: bold;">注册</a>
+		<a style="padding-top: 8px;float:right;display: block; " href="https://graph.qq.com/oauth2.0/authorize?response_type=code&client_id=101171952&redirect_uri=http://www.webhezi.com/qqcallback.jsp&state=test">
+			<img alt="使用QQ帐号登录" src="/images/qqlogin.png">
+		</a>
+	</div>
+	
+
+
+
+
+	<!-- 
+	<div class="col-sm-2">
+		<div class="input-group">
+			<input   id="search-input-baidu" placeholder="百度一下"
+				ng-keyup="$event.keyCode == 13 ? searchBaidu() : null" type="text"
+				class="form-control">  <span  ng-click="searchBaidu( )" class="input-group-addon glyphicon glyphicon-search" >  </span>
+		</div>
+	</div>
+	<div class="col-sm-2">
+		<div class="input-group">
+			<input id="search-input-google" placeholder="Google一下"
+				ng-keyup="$event.keyCode == 13 ? searchGoogle() : null" type="text"
+				class="form-control"> <span ng-click="searchGoogle( )"
+				class="input-group-addon glyphicon glyphicon-search"></span>
+		</div>
+	</div>
+	 -->
+
+	<!-- 
+	<div id="searchSite-div" class="col-sm-offset-4 col-sm-3" style="padding:3px;   ">
+		<div class="input-group">
+			<input id="searchSite-input" placeholder="网站类别"
+				ng-keyup="$event.keyCode == 13 ? searchSite() : null" type="text"
+				class="form-control"> <span ng-click="searchSite()"
+				class="input-group-addon ">找网站</span>
+			 
+		</div>
+	</div>
+ -->
+
+	<!-- 
+	<div class="col-sm-1" style="padding:3px;  ">
+		<a href="#" class="btn btn-default  dropdown-toggle"
+			data-toggle="dropdown">
+			<span>菜单</span><span class="caret"></span>
+		</a>
+		<ul class="dropdown-menu" role="menu">
+			<li><a ng-click="preLoginFunction()" href="#">登录</a></li>
+			<li><a ng-click="preAddUserFunction()" href="#">注册</a></li>
+			<li class="divider"></li>
+		</ul>
+	</div>
+	 -->
+	<!-- 
+	<div class="col-sm-2">
+
+		<button ng-click="preLoginFunction( )"
+			class="btn btn-default col-sm-4">登录</button>
+		<button ng-click="preAddUserFunction( )"
+			class="btn btn-default col-sm-4">注册</button>
+	</div>
+	
+	 -->
+</div>
+
+<!-- 菜单 结束 -->
+
+<!-- 分割线  -->
+<hr class="col-sm-12"
+	style="border-top: 2px solid #eee; padding: 0px; margin: 0px;">
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+ 
+
+
+
+
+
+
+
+
+
+ 
+
+ 
+
+
+
+
+
+
+
+
+
+
+ 
+
+ 
+
+
+
+<!--------面包屑----------->
+<div class=" col-sm-12"
+	style="padding: 3px; padding-top: 15px; padding-bottom: 10px; margin: 0px;">
+
+	<div class=" col-sm-2" style="padding-left: 0px; ">
+		<!-- 当前用户 和 用户下拉列表  begin-->
+		<div class="  col-sm-12" style=" ">
+			<a class="  col-sm-12" style="padding-left:0px;  " href="#"
+				id="showUserHistoryBtn" type="button" data-toggle="dropdown"
+				aria-haspopup="true" role="button" aria-expanded="false">
+				<span class="glyphicon glyphicon-home" style="font-size: 16px; font-weight: bold;"></span>
+				<span>用户:</span>  <span
+					style="  font-weight: bold; font-size: 20px;">未找到</span>
+				<span class="caret"></span>
+			</a>
+			
+			<ul id="showUserHistoryContent" class="dropdown-menu col-sm-6" role="menu" aria-labelledby="showUserHistoryBtn" style="   ">
+ 
+		  </ul>
+			 
+		</div>
+<!-- 当前用户 和 用户下拉列表 end -->
+
+	</div>
+	
+	<div id="god-div" class="col-md-7 ui-widget no-padding" style=""> 
+		<input id="god-input" class="form-control hover-focus" style="height: 45px;" placeholder="网址、关键字、网站名称" />
+		<div id= "god-content-div" class="  col-sm-12"  style="display: none;position: absolute; z-index: 1000;   background-color: #fff;border: 1px solid #333; ">
+			 
+		</div> 
+		<a id="god_link" href="#" target="_blank" style="display: none;"></a>
+	</div>
+	
+	
+	<div class="  col-sm-3  ">
+
+		
+		<div class="col-sm-6" style="padding: 3px;">
+			<a class=" btn btn-success  col-sm-12"
+				style="color: #fff; font-weight: bold; margin-right: 0px;"
+				ng-click="preAddPageFunction()" href="#"> 添加网址 </a>
+			<!-- #449044 -->
+		</div>
+		<div class="col-sm-6" style="padding: 3px; margin-left: 0px;">
+			<a class="btn btn-default col-sm-12" data-toggle="dropdown"
+				style="margin-left: 0px;" href="#" role="button"
+				aria-expanded="false"> 更多操作 <span class="caret"></span>
+			</a>
+			<ul class="dropdown-menu" role="menu">
+				<li><a ng-click="preEditAll()"> 编辑 </a></li>
+				<li><a ng-click="preCreateFolderFunction()">添加分类</a></li>
+				<li><a ng-click="preUploadBookmarkFunction()">导入书签</a></li>
+			</ul>
+		</div>
+		
+
+	</div>
+
+</div>
+
+<!-- 分割线
+<hr class="divider col-sm-12"
+	style="border-top: 2px solid #eee; margin-top: 1px;"> -->
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+   
+
+
+
+
+
+
+
+
+
+
+ 
+
+ 
+
+<hr class="divider col-sm-12"
+	style="border-top: 2px solid #eee; margin-top: 0px;padding: 0px;">  
+
+<!-- folder fav 开始 -->
+<div class="col-sm-12" style=" margin:0px; padding-bottom: 3px;padding-top: 1px; ">
+ 
+ <div class="col-sm-12   " style="padding: 1px;"> 
+ 	<span style="font-size: 12px;">常用分类：</span>
+ 	
+ 	
+	 	<span style="font-size: 10px;color: #999;padding-left: 10px;">最新：</span>  
+ 	
+ 
+ </div>
+ 
+</div>
+<!-- 分割线 -->
+
+<!-- folder fav  结束 -->
+ 
+	<!-- 书签主页面开始 -->
+	<div class="container col-sm-12 clearfix" style="padding-top: 0px;margin-top: 0px; ">  
+		<!-- 左侧书签列表 -->
+		
+		<!-- 左侧书签列表结束-->
+ 
+ 
+		<!-------- 右侧 书签主页面 --------->
+		<div id="pageMain" class="col-sm-9 "
+			style="background-color:#fafafa;border-top: 1px solid #eee; border-left: 1px solid #eee; border-right: 1px solid #eee;padding:0px; padding-top:10px; padding-left: 20px;padding-bottom: 40px;">
+  
+			<div class="  col-sm-12" style="margin-top: 10px;"></div>
+			
+			
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+ 
+
+<!-- 显示all网址页面开始 -->
+<div class="col-sm-12" style="padding: 0px; padding-bottom: 10px;">
+
+	
+
+
+ 
+	<div class="col-sm-12"
+		style="padding: 3px; margin-bottom: 10px; border-bottom: 1px solid #eee;">
+		<a class="btn col-sm-2   " title="每个分类里存放多个网址"
+			ng-click="preCreateFolderFunction()"
+			href="#"
+			style="background-color: #eee; border: 1px solid #ddd; margin-top: 2px; margin-bottom: 2px;">
+			<span style="color: #ccc;font-size: 12px;">  +分类 
+		</span>
+		</a>
+		<div class="col-sm-10"> 
+			<a title="添加网址" class="btn col-sm-3   " href="#"
+				ng-click="preAddPageFunction('','','') "
+				style="border: 1px solid #ddd; margin-top: 5px; margin-bottom: 5px; display: block; color: #222;">
+				<span style="color: #ddd; font-size: 12px;  "> +网址 </span> 
+			</a>
+			<a title="添加网址" class="btn col-sm-3   " href="#"
+				ng-click="preAddPageFunction('','','') "
+				style="border: 1px solid #ddd; margin-top: 5px; margin-bottom: 5px; display: block; color: #222;">
+				<span style="color: #ddd;font-size: 12px;  "> +网址</span>
+			</a>
+			<a title="添加网址" class="btn col-sm-3   " href="#"
+				ng-click="preAddPageFunction('','','') " 
+				style="border: 1px solid #ddd; margin-top: 5px; margin-bottom: 5px; display: block; color: #222;">
+				<span style="color: #ddd; font-size: 12px;  "> +网址</span>
+			</a>
+			<a title="添加网址" class="btn col-sm-3   " href="#"
+				ng-click="preAddPageFunction('','','') "
+				style="border: 1px solid #ddd; margin-top: 5px; margin-bottom: 5px; display: block; color: #222;">
+				<span style="color: #ddd; font-size: 12px;  "> +网址</span> 
+			</a>
+		</div>
+	</div>
+
+
+ 
+	<div class="col-sm-12"
+		style="padding: 3px; margin-bottom: 10px; border-bottom: 1px solid #eee;">
+		<a class="btn col-sm-2   " title="每个分类里存放多个网址"
+			ng-click="preCreateFolderFunction()"
+			href="#"
+			style="background-color: #eee; border: 1px solid #ddd; margin-top: 2px; margin-bottom: 2px;">
+			<span style="color: #ccc;font-size: 12px;">  +分类 
+		</span>
+		</a>
+		<div class="col-sm-10"> 
+			<a title="添加网址" class="btn col-sm-3   " href="#"
+				ng-click="preAddPageFunction('','','') "
+				style="border: 1px solid #ddd; margin-top: 5px; margin-bottom: 5px; display: block; color: #222;">
+				<span style="color: #ddd; font-size: 12px;  "> +网址 </span> 
+			</a>
+			<a title="添加网址" class="btn col-sm-3   " href="#"
+				ng-click="preAddPageFunction('','','') "
+				style="border: 1px solid #ddd; margin-top: 5px; margin-bottom: 5px; display: block; color: #222;">
+				<span style="color: #ddd;font-size: 12px;  "> +网址</span>
+			</a>
+			<a title="添加网址" class="btn col-sm-3   " href="#"
+				ng-click="preAddPageFunction('','','') " 
+				style="border: 1px solid #ddd; margin-top: 5px; margin-bottom: 5px; display: block; color: #222;">
+				<span style="color: #ddd; font-size: 12px;  "> +网址</span>
+			</a>
+			<a title="添加网址" class="btn col-sm-3   " href="#"
+				ng-click="preAddPageFunction('','','') "
+				style="border: 1px solid #ddd; margin-top: 5px; margin-bottom: 5px; display: block; color: #222;">
+				<span style="color: #ddd; font-size: 12px;  "> +网址</span> 
+			</a>
+		</div>
+	</div>
+
+ 
+</div>
+<!-- 显示网址页面结束 -->
+
+		</div>
+		<!-------- 右侧 书签列表页面 end  --->
+
+		<!-- 显示推荐页面开始 -->
+		<div class="col-sm-3" style="background-color:#fdfdfd;  padding-bottom: 20px;">
+
+			
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+ 
+
+<div class="container col-sm-12 clearfix"
+	style="padding: 2px; padding-left: 20px; margin-bottom: 20px; ">
+
+	<div>
+		<span style="font-size: 14px;">我常用的网站：</span>
+	</div>
+	
+
+	<div style="font-size: 12px;">
+		&nbsp;&nbsp;&nbsp;&nbsp;登录后可用，欢迎 <a ng-click="preLoginFunction()" href="#">登录</a> 或 <a
+			ng-click="preAddUserFunction()" href="#">注册</a>
+	</div>
+
+	
+
+
+
+</div>
+			
+			 
+
+
+
+
+<div class="container col-sm-12 clearfix"
+	style="padding: 2px;padding-left: 20px;    margin-bottom: 20px;">
+
+	<div>
+		<span style="font-size: 14px;">公用导航：</span>
+	</div>
+
+<div style="  padding-top:10px;padding-bottom: 10px; "> 
+	<a href="/公用导航"
+		class="  col-sm-8  " style="padding-left:3px; ">  <span
+			class="glyphicon glyphicon-star" style="color: #ffd76e;"></span> <span color="#1155cc">公用导航</span>   </a>
+			
+</div>
+
+<div style=" padding-top:10px;padding-bottom: 10px; ">
+				
+	<a href="/视频"
+		class="  col-sm-8  " style="padding-left:3px; ">  <span
+			class="glyphicon glyphicon-star" style="color: #ffd76e;"></span> <span color="#1155cc">视频</span>   </a>
+	
+</div>
+
+ 
+<div style="  padding-top:10px;  ">
+				
+	<a href="/网购"
+		class="  col-sm-8  " style="padding-left:3px; ">  <span
+			class="glyphicon glyphicon-star" style="color: #ffd76e;"></span> <span color="#1155cc">网购</span>   </a>
+	
+</div> 
+
+<!-- 
+		<a class="col-sm-12" target="_blank" href="/paihang"
+		 style="margin-top: 10px;">
+		>>查看更多 </a>
+		
+		 <a class="col-sm-12" ng-click="preCreateFolderFunction()"
+		style="margin-top: 10px;"> >>添加 </a>
+ -->
+</div>
+ 
+			
+		</div>
+		<!-- 显示推荐页面结束 -->
+
+	</div>
+	<!-- 书签主页面结束-->
+
+	<!-- toolbar -->
+	
+
+<!-- 菜单 开始 -->
+<div id="toolbar" class="col-sm-8  col-sm-offset-2 "
+	style=" margin-top: 550px; position: absolute;"><!--col-sm-offset-2  -->
+
+ 
+<!--
+	<div id="" class="col-sm-2"
+		style="height: 80px; border: 1px solid #ccc"><p>创建分类</p></div>
+
+ 	<div id="" class="col-sm-2"
+		style="height: 80px; border: 1px solid #ccc"><p>添加网址</p></div>
+		
+	<div id="" class="col-sm-2"
+		style="height: 80px; border: 1px solid #ccc"><p>创建分类</p></div>
+		
+	<div id="" class="col-sm-2"
+		style="height: 80px; border: 1px solid #ccc"><p>创建分类</p></div>
+		
+	<div id="" class="col-sm-2"
+		style="height: 80px; border: 1px solid #ccc"><p>创建分类</p></div>
+		
+	<div id="" class="col-sm-2"
+		style="height: 80px; border: 1px solid #ccc"><p>创建分类</p></div>
+ -->
+
+</div>
+
+<!-- 菜单 结束 -->
+
+ 
+
+	<!-- hidden var begin -->
+
+	<input type="hidden" id="userID" value="">
+	<input type="hidden" id="showUserName" value="未找到">
+	<input type="hidden" id="loginUserID" value="">
+	<input type="hidden" id="contextPath" value="">
+	<input type="hidden" id="fid" value="">
+	<input type="hidden" id="curFolder" value="">
+	<input type="hidden" id="edit_pid" value="">
+	<input type="hidden" id="edit_name" value="">
+	<input type="hidden" id="edit_url" value="">
+
+	<!-- hidden var end -->
+
+	<!-- 弹出框开始 -->
+	
+
+<!-- create root folder model -->
+<div class="modal " id="createRootFolderModel" tabindex="-1"
+	role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	
+
+
+<div class="modal-dialog"><!--  modal-lg -->
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span
+                        class="sr-only">Close</span></button>
+            <h4 class="modal-title" id="myModalLabel">添加收藏夹</h4>
+        </div>
+        <div class="modal-body">
+
+            <!-- create folder begin-->
+
+            <input type="hidden" id="createRootFolder_parentFolderId"/>
+
+ 
+            <div  style="margin-top: 20px;" >
+                <label for="createRootFolder_folderName">名称</label><input class="form-control"  ng-keyup="$event.keyCode == 13 ? createRootFolderFunction() : null" id="createRootFolder_folderName"
+                                                          type="text"/>
+            </div>
+
+            <div  style="margin-top: 20px;" >
+                <button ng-click="createRootFolderFunction()" id="createRootFolder-ok" type="button"
+                        class="btn btn-primary">添加
+                </button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+            </div>
+
+
+            <!-- create folder end-->
+
+        </div>
+
+    </div>
+</div>
+</div>
+
+<!-- upload root folder model -->
+<div class="modal " id="uploadBookmarkModel" tabindex="-1"
+	role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	
+
+
+
+<div class="modal-dialog">
+	<div class="modal-content">
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal">
+				<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+			</button>
+			<h4 class="modal-title" id="myModalLabel">上传书签</h4>
+		</div>
+		<div class="modal-body">
+
+			<!-- upload bookmark begin-->
+
+			<div >
+				<span class="btn btn-success fileinput-button"> <i class="glyphicon glyphicon-plus"></i> <span>添加文件</span> <input
+					type="file" id="bookmarkFile" name="bookmarkFile" value="">
+				</span>
+
+				<!-- 
+				<div>
+					<label for="uploadBookmark_bookmarkName">书签名</label><input
+						class="form-control"
+						ng-keyup="$event.keyCode == 13 ? uploadBookmarkFunction() : null"
+						id="uploadBookmark_bookmarkName" type="text" />
+				</div>
+ -->
+
+				<div style="margin-top: 20px;">
+					<button id="bookmarkFileBtn" type="button"  class="btn btn-primary">确定</button>
+					<button type="button" class="btn btn-default" data-dismiss="modal">取消
+					</button>
+				</div>
+
+				<!--  ng-click="uploadBookmarkFunction()" -->
+				<!-- upload bookmark end-->
+			</div>
+		</div>
+
+	</div>
+</div>
+</div>
+
+<!-- create folder model -->
+<div class="modal " id="createFolderModel" tabindex="-1"
+	role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	
+
+
+<div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span
+                        class="sr-only">Close</span></button>
+            <h4 class="modal-title" id="myModalLabel">添加</h4>
+        </div>
+        <div class="modal-body">
+
+            <!-- create folder begin-->
+
+            <div  style="margin-top: 20px;" >
+                <label for="createFolder_folderName">分类名称</label><input class="form-control hover-focus"  ng-keyup="$event.keyCode == 13 ? createFolderFunction() : null" id="createFolder_folderName"
+                                                          type="text"/>
+            </div>
+
+            <div  style="margin-top: 20px;" >
+                <button ng-click="createFolderFunction()" id="createFolder-ok" type="button"
+                        class="btn btn-primary">添加
+                </button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+            </div>
+
+
+            <!-- create folder end-->
+
+        </div>
+
+    </div>
+</div>
+
+</div>
+<!-- edit folder model -->
+<div class="modal " id="editFolderModel" tabindex="-1"
+	role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	
+
+
+<div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span
+                        class="sr-only">Close</span></button>
+            <h4 class="modal-title" id="myModalLabel">编辑分类</h4>
+        </div>
+        <div class="modal-body">
+
+            <!-- edit folder begin-->
+			<input type="hidden" id="editFolder_dataid" value="">
+            <div  style="margin-top: 20px;" >
+                <label for="editFolder_folderName">名称</label><input class="form-control"  ng-keyup="$event.keyCode == 13 ? editFolderFunction() : null" id="editFolder_folderName"
+                                                          type="text"/>
+            </div>
+
+            <div  style="margin-top: 20px;" >
+                <button ng-click="editFolderFunction()" id="editFolder-ok" type="button"
+                        class="btn btn-primary">确定
+                </button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                 <button ng-click="deleteFolderFunction()"  type="button" class="btn btn-danger pull-right"  ><span style="font-size: bold;">删除</span></button>
+            </div>
+
+
+            <!-- edit folder end-->
+
+        </div>
+
+    </div>
+</div>
+
+</div>
+
+<!-- create page model -->
+<div class="modal " id="createPageModel" tabindex="-1" role="dialog"
+	aria-labelledby="myModalLabel" aria-hidden="true">
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+  
+ 
+
+<div class="modal-dialog">
+	<div class="modal-content">
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal">
+				<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+			</button>
+			<h4 class="modal-title" id="myModalLabel">添加网址</h4>
+		</div>
+		<div class="modal-body">
+			
+			<!-- create page begin -->
+			<input type="hidden" id="createPage_folderId" /> <input type="hidden"
+				id="createPage_bookmarkId" />
+			
+			<div style="margin-top: 20px;">
+				<label for="pageUrl">分类</label> 
+				<a href="#"  ng-click="preCreateFolderFunction()" ><span style="font-size: 12px;line-height: 14px;">创建新分类</span> </a>
+			</div>
+			<div class="">
+			   <select class="  form-control"   id="createPage_pid">
+			   <option value=""  ></option>
+			   
+			    </select>
+			</div>
+			
+			<div style="margin-top: 20px;">
+				<label for="pageUrl">网址</label>
+					
+					<textarea  ng-keyup="$event.keyCode == 13 ? createPageFunction() : null" id="pageUrl"  class="form-control hover-focus" rows="1"></textarea>
+			</div>
+			<div style="margin-top: 20px;" id="createPage-name-div">
+				<label for="pageName">网站名称</label> <input placeholder="不填则自动获取"
+					ng-keyup="$event.keyCode == 13 ? createPageFunction() : null"
+					class="form-control hover-focus" id="pageName" type="text" />
+			</div>
+			<input type="hidden" id="link_prompt_index" value='-1'>
+			<div id="link-prompt-div" class="col-sm-12" style="margin-bottom: 10px;padding-right: 5px;" >
+			
+			</div>
+			<div style="margin-top: 20px;">
+				<label for="pageName">备注</label> 
+				<textarea   id="pageDescription"  class="form-control hover-focus" rows="3"></textarea>
+			</div>
+			
+			<div style="margin-top: 20px;">
+				<button ng-click="createPageFunction()" id="createPage-ok"
+					type="button" class="btn btn-primary">添加网址</button>
+				<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+			</div>
+
+
+			<!-- create page end-->
+
+		</div>
+
+	</div>
+</div>
+
+</div>
+<!-- edit page model -->
+<div class="modal " id="editPageModel" tabindex="-1" role="dialog"
+	aria-labelledby="myModalLabel" aria-hidden="true">
+	
+
+
+<div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span
+                        class="sr-only">Close</span></button>
+            <h4 class="modal-title" id="myModalLabel">编辑</h4>
+        </div>
+        <div class="modal-body">
+
+            <!-- edit page begin-->
+			<input type="hidden" id="editPage_dataid" value="">
+ 
+             <div  style="margin-top: 20px;" >
+                <label for="editPage_url">网址</label><input class="form-control"  ng-keyup="$event.keyCode == 13 ? editPageFunction() : null" id="editPage_url"
+                                                          type="text"/>
+            </div>
+ 
+            <div  style="margin-top: 20px;" >
+                <label for="editPage_pageName">名称</label><input class="form-control"  ng-keyup="$event.keyCode == 13 ? editPageFunction() : null" id="editPage_pageName"
+                                                          type="text"/>
+            </div>
+
+            <div  style="margin-top: 20px;" >
+                <button ng-click="editPageFunction()" id="editPage-ok" type="button"
+                        class="btn btn-primary">确定
+                </button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                <button ng-click="deletePageFunction()"  type="button" class="btn btn-danger pull-right"  ><span style="font-size: bold;">删除</span></button>
+            </div>
+
+
+            <!-- edit page end-->
+
+        </div>
+
+    </div>
+</div>
+
+</div>
+
+<!-- create user Modal -->
+<div class="modal " id="createUserModel" tabindex="-1" role="dialog"
+	aria-labelledby="myModalLabel" aria-hidden="true">
+
+	
+ <div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span
+                        class="sr-only">Close</span></button>
+            <h4 class="modal-title" id="myModalLabel">用户注册</h4>
+        </div>
+        <div class="modal-body">
+
+            <!-- create user begin-->
+
+            <div style="margin-top: 20px;" >
+                <label for="createUser-name">用户名</label><input class="form-control"
+                                                                           id="createUser-name"
+                                                                           type="text"/>
+            </div>
+            <div  style="margin-top: 20px;" >
+                <label for="createUser-password">密码</label><input class="form-control" id="createUser-password"
+                                                          type="password"/>
+            </div>
+            <div style="margin-top: 20px;"  >
+                <label for="createUser-password-again">确认密码</label>
+                <input ng-keyup="$event.keyCode == 13 ? addUserFunction() : null"
+                       class="form-control" id="createUser-password-again" type="password"/>
+            </div>
+            <div  style="margin-top: 20px;" >
+                <button ng-click="addUserFunction()" id="createUser-ok" type="button"
+                        class="btn btn-primary">确定
+                </button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+            </div>
+
+
+            <!-- create page end-->
+
+        </div>
+
+    </div>
+</div>
+</div>
+
+<!-- edit user Modal -->
+<div class="modal " id="editUserModel" tabindex="-1" role="dialog"
+	aria-labelledby="myModalLabel" aria-hidden="true">
+
+	
+
+
+
+
+
+
+
+
+
+
+ 
+
+ 
+
+
+ <div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span
+                        class="sr-only">Close</span></button>
+            <h4 class="modal-title" id="myModalLabel">修改资料</h4>
+        </div>
+        <div class="modal-body">
+
+            <!-- create user begin-->
+	
+			<input type="hidden" id="editUser-id" value="">
+	
+            <div style="margin-top: 20px;" >
+                <label for="editUser-name">用户名</label>
+                <input class="form-control"   id="editUser-name" type="text" value="临时用户"/>
+            </div>
+            <div  style="margin-top: 20px;" >
+                <label for="editUser-password">密码</label>
+                <input class="form-control" id="editUser-password"   placeholder="不填 则不更改密码"
+                                                          type="password"/>
+            </div>
+            <div style="margin-top: 20px;"  >
+                <label for="editUser-password-again">确认密码</label>
+                <input ng-keyup="$event.keyCode == 13 ? editUserFunction() : null" placeholder="不填 则不更改密码"
+                       class="form-control" id="editUser-password-again" type="password"/>
+            </div>
+            <div  style="margin-top: 20px;" >
+                <button ng-click="editUserFunction()" id="editUser-ok" type="button"
+                        class="btn btn-primary">确定
+                </button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+            </div>
+
+
+            <!-- create page end-->
+
+        </div>
+
+    </div>
+</div>
+</div>
+
+<!-- temp To Normal UserModel -->
+<div class="modal " id="editTempUserModel" tabindex="-1"
+	role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	
+
+
+
+
+
+
+
+
+
+
+ 
+
+ 
+
+
+ <div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span
+                        class="sr-only">Close</span></button>
+            <h4 class="modal-title" id="myModalLabel">免费注册</h4>
+        </div>
+        <div class="modal-body">
+			
+            <!-- create user begin-->
+			
+			<input type="hidden" id="editTempUser-id" value="">
+			
+            <div style="margin-top: 20px;" >
+                <label for="editTempUser-name">用户名</label>
+                <input class="form-control"   id="editTempUser-name" type="text" value=""/>
+            </div>
+            <div  style="margin-top: 20px;" >
+                <label for="editTempUser-password">密码</label>
+                <input class="form-control" id="editTempUser-password"   placeholder=""
+                                                          type="password"/>
+            </div>
+            <div style="margin-top: 20px;"  >
+                <label for="editTempUser-password-again">确认密码</label>
+                <input ng-keyup="$event.keyCode == 13 ? editTempUserFunction() : null" placeholder=""
+                       class="form-control" id="editTempUser-password-again" type="password"/>
+            </div>
+            <div  style="margin-top: 20px;" >
+                <button ng-click="editTempUserFunction()" id="editTempUser-ok" type="button"
+                        class="btn btn-primary">确定
+                </button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+            </div>
+
+
+            <!-- create page end-->
+
+        </div>
+
+    </div>
+</div>
+
+</div>
+
+<!-- login Modal -->
+<div class="modal " id="loginModel" tabindex="-1" role="dialog"
+	aria-labelledby="myModalLabel" aria-hidden="true">
+
+	
+<div class="modal-dialog">
+	<div class="modal-content">
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal">
+				<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+			</button>
+			<h4 class="modal-title" id="myModalLabel">用户登录</h4>
+		</div>
+		<div class="modal-body">
+
+			<!-- create user begin-->
+
+			<div style="margin-top: 20px;">
+				<label for="login-name">用户名</label><input ng-keyup="$event.keyCode == 13 ? loginFunction() : null"  class="form-control"
+					id="login-name" type="text" />
+			</div>
+			<div style="margin-top: 20px;">
+				<label for="login-password">密码</label><input  ng-keyup="$event.keyCode == 13 ? loginFunction() : null" class="form-control"
+					id="login-password" type="password" />
+			</div>
+
+			<div style="margin-top: 20px;">
+				<button ng-click="loginFunction()" id="login-ok" type="button"
+					class="btn btn-primary">确定</button>
+				<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+			</div>
+
+			<!-- create page end-->
+
+		</div>
+
+	</div>
+</div>
+</div>
+
+<!-- first try -->
+<div class="modal " id="firstTryModel" tabindex="-1" role="dialog"
+	aria-labelledby="myModalLabel" aria-hidden="true">
+
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+  
+ 
+
+<div class="modal-dialog">
+	<div class="modal-content">
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal">
+				<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+			</button>
+			<h4 class="modal-title" id="myModalLabel">添加自己的网址收藏夹</h4>
+		</div>
+		<div class="modal-body">
+
+			<div style="margin-top: 20px;">
+				<h4>您还没有登录，您可以</h4>
+			</div>
+			 
+			<div style="margin-top: 20px;">
+				<button ng-click="preLoginFunction()" 
+					type="button" class="btn btn-success">登录</button>
+				<button ng-click="preAddUserFunction()" 
+					type="button" class="btn btn-primary">注册</button>
+				<a  
+					href="/user/create/temp"
+					type="button" class="btn btn-warning"
+					style="color: #fff;" >快速体验</a>
+				
+			</div>
+
+
+			<!-- create page end-->
+
+		</div>
+
+	</div>
+</div>
+</div>
+	<!-- 弹出框结束 -->
+	
+	
+
+
+
+<!--   -->
+<div id="footer" class="container col-sm-12 "
+	style="padding: 3px;  text-align: center;margin-top: 20px;">
+	<span style="color: #ccc;font-size: 12px;">@2014  网址盒子 辽ICP备13008200号-3</span> 
+	<img width="13" height="13"  src="http://su.bdimg.com/static/superplus/img/copy_rignt_24.png"  >
+</div>
+ 
+ <script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?999632e3a1866b83e17f01047bfe0ded";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+	
+	
+
+<script
+	src="/javascripts/jquery-1.11.1.min.js"></script>
+<script src="/javascripts/angular.min.js"></script>
+<script src="/javascripts/jquery-ui-1.11.min.js"></script>
+<script src="/javascripts/jquery.lazyload.min.js"></script>
+<script	src="/javascripts/bootstrap.min.js"></script>
+<script src="/javascripts/ajaxfileupload.js"></script>
+	<script src="/myjs/pageMainApp.js"></script>
+	<script src="/myjs/common.js"></script>
+	
+	<a id="go-top" href="#"></a>
+		
+	
+</body>
+
+
+</html>

@@ -3,6 +3,7 @@ package com.tgy.service.group;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang3.StringUtils;
 import org.bson.types.ObjectId;
 import org.mongodb.morphia.Datastore;
 import org.mongodb.morphia.DatastoreImpl;
@@ -15,8 +16,12 @@ import org.mongodb.morphia.query.UpdateResults;
 import com.mongodb.DBCollection;
 import com.mongodb.WriteConcern;
 import com.mongodb.WriteResult;
+import com.tgy.asyn.GetGroupPageInfoThread;
+import com.tgy.asyn.GetPageInfoThread;
+import com.tgy.dao.LinkDao;
 import com.tgy.dao.group.InterestGroupPageDao;
 import com.tgy.entity.group.InterestGroupPage;
+import com.tgy.statistic.entity.Link;
 
 public class InterestGroupPageService {
 
@@ -67,8 +72,27 @@ public class InterestGroupPageService {
 		return pDao.getEntityClass();
 	}
 
-	public Key<InterestGroupPage> save(InterestGroupPage entity) {
-		return pDao.save(entity);
+	public Key<InterestGroupPage> save(InterestGroupPage page) {
+		Key<InterestGroupPage> key= pDao.save(page);
+		if(StringUtils.isBlank(page.name)){
+			
+			LinkDao linkDao = new LinkDao();
+			
+			Link link = linkDao.getByUrl(page.url);
+			if(link == null || StringUtils.isBlank(link.title) ){
+				new Thread(new GetGroupPageInfoThread(page.url, page.id.toString())).start();
+				try { //wait second
+					new Thread().sleep(1000);
+				} catch (InterruptedException e) {
+				}
+			}
+			else{
+				page.name = link.title;
+				pDao.save(page);
+			}
+		
+		}
+		return key;
 	}
 
 	public Key<InterestGroupPage> save(InterestGroupPage entity, WriteConcern wc) {

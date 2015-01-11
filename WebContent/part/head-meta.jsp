@@ -13,7 +13,7 @@
 		userName = loginUserName;
 	}
 	if( StringUtils.isNotBlank(showUserName )  ){
-		title = showUserName+" - " +title;
+		title = showUserName+"的收藏夹  - " +title;
 	}
 	if( StringUtils.isNotBlank(showFolderName )  ){
 		title = showFolderName+" - " + title;
@@ -25,7 +25,7 @@
 <meta name='keywords' content='网址盒子 网址收藏 美剧 电影 电视剧 人人 美剧下载 美剧资源 美剧网盘 '/>
 <meta http-equiv="Content-Language" content="zh-CN" />
 <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-<meta name="baidu-site-verification" content="ZHXLJ1hVsp" />
+<meta name="baidu_union_verify" content="22b8f1d552d7aa7971e01d375296bf63">
 <meta name="google-site-verification" content="OUnrPw6694Qv4V01iZHP-sENOEoS7jpMHBD5h5B_wRw" />
 <meta property="qc:admins" content="5733125577675205216375" />
 <meta name="sogou_site_verification" content="Qd7VdxsXzG"/>

@@ -20,7 +20,7 @@ import com.tgy.util.MD5Util;
 import com.tgy.util.U;
 import com.tgy.validator.CommonValidator;
 
-@WebServlet("/user/edit")
+@WebServlet("/private/setting")
 public class EditUserContoller extends HttpServlet {
 
 	@Override
@@ -28,37 +28,34 @@ public class EditUserContoller extends HttpServlet {
 			throws ServletException, IOException {
 
 
-		String id = U.filterCharacter(req.getParameter("id")) ;
-		String name = U.filterCharacter(req.getParameter("name")) ;
+		String publicMessage = U.filterCharacter(req.getParameter("publicMessage")) ;
+		String email = U.filterCharacter(req.getParameter("email")) ;
 		String password = U.filterCharacter(req.getParameter("password")) ;
-		String authCreateStr = U.filterCharacter(req.getParameter("authCreate")) ;
-		
+		String authQueryStr = U.filterCharacter(req.getParameter("authQuery")) ;
+		String headImgUrl = U.filterCharacter(req.getParameter("headImgUrl")) ;
 		User loginUser = U.param(req, C.user, User.class);
 		
 		try {
 			CommonValidator validator =  new CommonValidator();
-			validator.isNotNull(loginUser, null)
-					.isNotNull(id, "无法找到要编辑的用户");
-					
+			validator.isNotNull(loginUser, "需要登陆").isNotNull(loginUser.id, "需要登陆");
 			
-			if(!StringUtils.equals(loginUser.id.toString(), id)){
-				throw new BaseException(this, "无权限进行此操作");
+			validator.isShorter( publicMessage, 200, "签名太长了，需小于100哦");
+			loginUser.publicMessage = publicMessage;
+			if(StringUtils.isNotBlank(headImgUrl)){
+				loginUser.headImgUrl = headImgUrl;
 			}
-			
-			if(StringUtils.isNotBlank(name)){ //更改了user name
-				validator.isLonger( name, 1, "用户名长度需大于1")
-						.isShorter( name, 20, "用户名长度应小于20");
-				loginUser.name = name;
+			if(StringUtils.isNotBlank(email)){ //更改了 user password
+				validator.isShorter( email, 200, "密码长度需小于200");
+				loginUser.email = email;
 			}
 			if(StringUtils.isNotBlank(password)){ //更改了 user password
 				validator.isLonger( password, 5, "密码长度需大于等于6")
 					.isShorter( password, 30, "密码长度需小于30");
 				loginUser.password = MD5Util.toMD5(password);
 			}
-			if(StringUtils.isNotBlank(authCreateStr)){
-				loginUser.authCreate = Integer.parseInt(authCreateStr);
+			if(StringUtils.isNotBlank(authQueryStr)){
+				loginUser.authQuery = Integer.parseInt(authQueryStr);
 			}
-			loginUser.isTemp=false;
 			
 			new UserDao().save(loginUser);
 			req.getSession().setAttribute(C.user, loginUser);

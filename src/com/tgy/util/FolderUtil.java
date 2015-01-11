@@ -1,17 +1,39 @@
 package com.tgy.util;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.collections.CollectionUtils;
 
+import com.tgy.entity.BaseFolder;
 import com.tgy.entity.Folder;
 import com.tgy.entity.Page;
 
 public class FolderUtil {
 
+	public static void sortByOrderIndex(List<Folder> list){
+		Collections.sort(list, new Comparator<Folder>( ) {
+
+			@Override
+			public int compare(Folder o1, Folder o2) {
+				if(o1.sortOrder > o2.sortOrder){
+					return 1;
+				}
+				else if(o1.sortOrder < o2.sortOrder){
+					return -1;
+				}
+				else {
+					return 0;
+				}				
+			}
+			
+		});
+	}
+	
 	public static void setFolderForSession(Folder curFolder,
 			HttpServletRequest req) {
 
@@ -20,7 +42,7 @@ public class FolderUtil {
 			req.getSession().setAttribute("pages", curFolder.pages);
 		}
 	}
-
+	
 	/**
 	 * 取出来默认Folder
 	 * 
@@ -114,7 +136,7 @@ public class FolderUtil {
 		return folder;
 
 	}
-
+	
 	public static Page buildPage(String name, String link) {
 		Page page = new Page();
 		page.name = name;

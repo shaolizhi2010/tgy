@@ -75,6 +75,62 @@ public class BingSearchSevice {
 		}
 	}
 
+	public List<Page> search2(String keyword ) {
+		try {
+			
+			//搜索历史 记录到后台
+			SearchHistoryDao dao = new SearchHistoryDao();
+			
+			List<Page>  results = new ArrayList<>();
+			keyword = URLEncoder.encode(keyword+"网站");
+			
+			int index = 0;
+			while(index<=10 && results.size()<5){//没凑够5条结果，并且搜索记录少于20条，继续搜素
+				String url = "http://cn.bing.com/search?q="+keyword +"&first="+index;
+				
+				String s  = SimpleConnecter.connect(url, "utf-8");
+				
+				HtmlCleaner hc = new HtmlCleaner();
+
+				TagNode node = hc.clean(s);
+				String pageSource = getPageSourceFromNode(node);
+				
+				Document doc = new org.jdom2.input.SAXBuilder().build(new StringReader(pageSource));
+				List<Element> elementList = X.getSubElementList(doc, "//a");
+				
+				for(Element e : elementList){
+					Attribute attr = e.getAttribute("href");
+					if(attr!=null){
+						String href = attr.getValue();
+						//String hrefTemp = StringUtils.replace(href, "://", "");
+						//hrefTemp = StringUtils.replaceOnce(hrefTemp, "/", "");
+						//StringUtils.countMatches("", sub)
+						
+						//System.out.println(href +"---");
+						if( StringUtils.startsWith(href, "http")&& StringUtils.countMatches(href, "/")<=3&&StringUtils.endsWith(href, "/")&& !StringUtils.contains(href, "bing.com")){//url中不包含/， 是根域名
+							//System.out.println(e.getValue());
+							//System.out.println(href);
+							Page p = new Page();
+							p.name = e.getValue();
+							p.url = href;
+							results.add(p);
+						}
+					}
+				}
+				index+=12;
+			}
+			
+		
+			
+			
+			
+			return results;
+		} catch (Exception e) {
+			System.out.println("WebInfoUtil Exception : "+e.getMessage());
+			return new ArrayList<>();
+		}
+	}
+	
 	public  String getPageSourceFromNode(TagNode node) {
 		// long start = System.currentTimeMillis();
 		HtmlCleaner hc = new HtmlCleaner();

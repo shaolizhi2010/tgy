@@ -17,6 +17,8 @@ public class BasePage extends StateFulBaseEntity  implements Serializable,Compar
 	public String pid;//folderID
 	public String url;
 	
+	public int sortOrder;//排序编号，1排在第一位。。。
+	
 	public Link refLink;
 	
 	public String iconPath;

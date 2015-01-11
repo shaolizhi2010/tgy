@@ -2,6 +2,7 @@ package com.tgy.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -21,6 +22,7 @@ import com.tgy.App;
 import com.tgy.dao.VisitHistoryDao;
 import com.tgy.entity.User;
 import com.tgy.entity.VisitHistory;
+import com.tgy.util.ConditionMap;
 import com.tgy.util.U;
 
 public class VisitHistoryService {
@@ -33,21 +35,7 @@ public class VisitHistoryService {
 			return new ArrayList<VisitHistory>();
 		}
 		
-		Query<VisitHistory> query = App.getInstance().getDatastore()
-				.createQuery(VisitHistory.class);
-		
-		if(StringUtils.isNotBlank(requestUserID)){
-			query.filter("requestUserID", requestUserID);
-		}
-		if(StringUtils.isNotBlank(responseUserID)){
-			query.filter("responseUserID", responseUserID);
-		}	
-		if(StringUtils.isNotBlank(orderStr)){
-			query.order(orderStr);
-		}
-
-		return find(query).asList();
-
+		return list(new ConditionMap().add("requestUserID", requestUserID).add("responseUserID", responseUserID), orderStr, 0);
 	}
 	public Key<VisitHistory> save(VisitHistory entity) {
 		
@@ -201,6 +189,17 @@ public class VisitHistoryService {
 
 	public String toString() {
 		return dao.toString();
+	}
+	public VisitHistory byID(String id) {
+		return dao.byID(id);
+	}
+	public VisitHistory get( 
+			Map<String, String> conditions) {
+		return dao.get(VisitHistory.class, conditions);
+	}
+	public List<VisitHistory> list( 
+			Map<String, String> conditions, String orderStr, int limit) {
+		return dao.list(VisitHistory.class, conditions, orderStr, limit);
 	}
 
 }

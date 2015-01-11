@@ -4,7 +4,7 @@
 				</div>
 				<div class="sub-page-body no-padding col-sm-12">
 					<div class="col-sm-12  ">
-						<a class="col-sm-12 public-folder-element hoverAble" href="<%=request.getContextPath()%>/group/group.create.jsp" >
+						<a onclick="afterLogin('<%=request.getContextPath()%>/group/group.create.jsp')" class="col-sm-12 public-folder-element hoverAble" href="#" >
 			 	 			<span style="padding-left: 10px;">创建兴趣组</span> 
 			 	 		</a>
 					</div>

@@ -103,8 +103,6 @@ int papgeIndex=0;
 				}
 				String pageBackgroudColor = "";
 				//pageBackgroudColor =  (papgeIndex++%2)==0 ? "background-color:#fefefe" :  "";  //每条page信息的北京交替变化
-					
-				
 		%>
 		<div class="col-sm-12 pages-part-page hoverAble" style="  <%=pageBackgroudColor%>">
 		<a target="_blank" class="col-sm-8  pageMark" href="<%=linkStr%>" 
@@ -117,11 +115,9 @@ int papgeIndex=0;
 								iconPath = request.getContextPath()+"/"+iconPath;
 							}
 						}
-						else{
-							iconPath = request.getContextPath()+"/images/defaultFav.png";
-						}
+						 
 					%>
-					<img class="img18" data-original="<%=iconPath%> " alt='*' >
+					<img class="img18" src="<%=request.getContextPath()%>/images/defaultFav.png" data-original="<%=iconPath%>" alt='*' >
 			 		<span class="pages-part-page-name" > <%=pageName%></span> - <span class="pages-part-page-link"><%=linkshow%></span>
 		</a>  
 		
@@ -145,15 +141,19 @@ int papgeIndex=0;
 				class="  pull-right  addPage hoverAble3" > 
 				<span class="glyphicon glyphicon glyphicon-plus pull-right" title="复制到我的收藏夹"  ></span>
 			</a>
-			  -->
-			<a href="#" onclick="pageUp('<%=p.id%>')" class="pull-right pageUp hoverAble3" title=" >顶< (已有<%=link.ups %>人顶过)">
+			
+			<a href="#" onclick="downPage('<%=p.id%>')" class="pull-right pageUp hoverAble3" title=" >不推荐< (有<%=link.downs %>人不推荐)">
+				 <span style="color:green;" class="glyphicon glyphicon-thumbs-down"></span> 
+			</a>
+			<a href="#" onclick="upPage('<%=p.id%>')" class="pull-right pageUp hoverAble3" title=" >推荐< (有<%=link.ups %>人推荐)">
 				 <span style="color:green;" class="glyphicon glyphicon-thumbs-up"></span> 
 			</a>
+			  -->
 			<%
 			if(link!=null&&link.id!=null&&StringUtils.isNotBlank(link.id.toString())){
 			%>
-				<a  href="<%=request.getContextPath()%>/discuss/link/<%=link.id %>" class="pull-right pageComment hoverAble3" title="评论一下 (已有<%=link.commentsCount %>次评论)">
-					评论(<%=link.commentsCount %>)
+				<a style="font-size: 13px;" href="<%=request.getContextPath()%>/discuss/link/<%=link.id %>" class="pull-right pageComment hoverAble3" title="评论一下 (已有<%=link.commentsCount %>次评论)">
+					<%=link.lastDiscuss!=null?StringUtils.substring(link.lastDiscuss, 0,5):""  %>..评论(<%=link.commentsCount %>)
 				</a>
 			<%
 			}

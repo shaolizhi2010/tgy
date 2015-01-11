@@ -75,6 +75,7 @@ public class DiscussContoller extends HttpServlet {
 				Link lk = ls.getByID(linkID);
 				if(lk!=null){
 					lk.commentsCount++;
+					lk.lastDiscuss = message;
 					lk.add(dc);
 					ls.save(lk);
 				}

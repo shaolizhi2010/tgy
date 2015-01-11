@@ -25,9 +25,14 @@ if(request.getAttribute("showUser")!=null){
 	showUserHeadImgUrl = showUser.headImgUrl;
 }
 boolean isSelf = false;//用户已登陆并且用户是在查看自己的收藏夹
-if(StringUtils.isNoneBlank(loginUserID) &&
+if(request.getAttribute("isSelf")!=null && (Boolean)request.getAttribute("isSelf")==true ){
+	isSelf = true;
+}
+else if(StringUtils.isNoneBlank(loginUserID) &&
 		StringUtils.isNotBlank(showUserID) && 
 		StringUtils.equals(loginUserID, showUserID)){
 	isSelf = true;
 }
 %>
+<input type="hidden" id="showUserID" value="<%=showUserID%>">
+<input type="hidden" id="isSelf" value="<%=isSelf%>">

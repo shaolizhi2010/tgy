@@ -50,6 +50,8 @@ public class Link extends BaseEntity  implements Serializable,Comparable  {
 	@Reference(ignoreMissing = true,lazy=true)
 	public List<Discuss> discusses; //link的所有评论
 	
+	public String lastDiscuss;//最后一条评论内容，便于页面显示.
+	
 	@Reference(ignoreMissing = true,lazy=true)
 	public User firstCreateBy;//第一个创建人
 	

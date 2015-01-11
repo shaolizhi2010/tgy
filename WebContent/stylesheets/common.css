@@ -9,6 +9,19 @@ a,a:link,a:visited,a:hover,a:active {
 a {
 	text-decoration: none;
 }
+.modal-header{
+	background-color: #f7f7f7;
+	color: #666;
+}
+.publicMessage{
+	font-size: 20px;
+	word-wrap: break-word; word-break: break-all;
+}
+.user-info-publicMessage{
+	font-size: 14px;
+	font-weight: bold;
+	word-wrap: break-word; word-break: break-all;
+}
 .no-padding {
 	padding: 0px;
 }
@@ -39,6 +52,14 @@ a {
 	font-size:20px;
 	text-align: center;
 	font-weight: bold;
+	line-height: 40px;
+}
+#head-sub-menu-personal:hover{
+	border-bottom: 3px solid #387bb6;	 
+	
+}
+#head-sub-menu-public:hover{
+	border-bottom: 3px solid #e85205;	 
 }
 #user-operation-btn{
 	font-size: 18px;color: #222;font-weight: bold;padding : 10px;text-align: center; 
@@ -60,6 +81,19 @@ a {
 	border-radius:5px;	
 	text-decoration: none;color: #222;
 	border: 1px solid #eee;
+}
+.menu-slide-tab  {
+	padding:5px;
+	padding-left: 10px;
+	padding-right: 10px;
+	min-width:60px;
+	font-size: 15px;
+	font-weight: 555;
+	color: #072;
+	display: block;
+}
+.menu-slide-tab span {
+	
 }
 .sub-page{
 	background-color: #fff;
@@ -163,16 +197,19 @@ a {
 	font-weight: bold ;
 	color: red;
 }
+.add-link-div{
+	display: none;
+	}
 .add-link{
-	border: 1px dashed #ccc;  
+	border: 1px dashed #eee;  
 	margin-top: 5px; 
 	margin-bottom: 5px; 
-	display: block; 
+	display: block;
+	display: none; 
 }
 .add-link span{
 	color: #ccc; 
-	font-size:20px;
-	font-weight: bold;
+	font-size:14px;
 }
 .folder-index-element{
 	padding:5px; text-decoration:none;text-align:center;
@@ -293,6 +330,10 @@ a {
 	color: #072;
 	padding: 5px;
 }
+.tabs-tab-selected{
+	background-color: #007722;
+	color: #fff;
+}
 .tabs-quick-link{
  
 }
@@ -333,7 +374,7 @@ a {
 	border:1px solid #eee;
 	border-radius:5px;
 	padding-top: 10px;
-
+background-color:#fcfcfc;
 	margin: 15px;
 }
 .info-card:hover{

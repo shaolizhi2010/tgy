@@ -29,6 +29,6 @@ if (userObj!= null && ((User)userObj).id!=null) {
 	}
 	loginUserHeadImgUrl = loginUser.headImgUrl;
 }
-
- 
 %>
+<input type="hidden" id="loginFlag" value="<%=loginFlag%>">
+<input type="hidden" id="loginUserID" value="<%=loginUserID%>">

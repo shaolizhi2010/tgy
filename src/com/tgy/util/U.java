@@ -22,7 +22,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.apache.commons.lang3.StringEscapeUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import com.google.gson.Gson;
@@ -42,10 +41,15 @@ public class U {
 		String[] subs = msg.split("[ ]");
 		StringBuffer sb = new StringBuffer();
 		for(String sub : subs){
-			if(sub.startsWith("http")){
-				sub = "<a href='"+sub+"' target='_blank'>"+sub+"</a>";
+			if(sub.contains("http")){
+				String sub1 = StringUtils.substringBefore(sub, "http");
+				String sub2 = StringUtils.substringAfter(sub, "http");
+				sub2 = "<a href='http"+sub2+"' target='_blank'>http"+sub2+"</a>";
+				sb.append(sub1+sub2);
+			}else{
+				sb.append(sub);
 			}
-			sb.append(sub);
+			
 		}
 		return sb.toString();
 	}
@@ -153,7 +157,7 @@ public class U {
 		}
 	}
 
-	public static Map<String, String> requestToMap(HttpServletRequest req) {
+	public static Map  requestToMap(HttpServletRequest req) {
 		BufferedReader br;
 		try {
 			br = new BufferedReader(new InputStreamReader(req.getInputStream()));

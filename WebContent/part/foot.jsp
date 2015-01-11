@@ -1,6 +1,6 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
 
-<div id="foot-setFav" class="container col-sm-12 no-padding" style="margin-top: 40px; ">
+<div id="foot-setFav" class="container col-sm-12 no-padding" style="margin-top: 240px; ">
 	<span class="col-sm-12 no-padding" style="text-align: center;font-size: 14px; ">欢迎按住 Ctrl+D <a href="#" onclick="AddFavorite(this)"> 收藏本页</a>    </span> 
 </div>
 
@@ -10,12 +10,22 @@
 	style="margin-top: 40px;  ">
 	<img class="col-sm-12 no-padding" src="http://g-ecx.images-amazon.com/images/G/28/img13/book/associates/lqx_130110_book72890_sale.gif"/>
 </a>
- -->
- 
- 
+
+ <div   class="container col-sm-12 "
+	style="padding: 3px;  text-align: center; margin-top: 40px;">
+	
+		<div class="col-sm-10 col-sm-offset-1 ">
+			<a class="col-sm-12  " 
+				target="_blank"
+				href="http://www.amazon.cn/b/ref=as_sl_pc_tf_lc?ie=UTF8&node=120610071&tag=bijia365-23&camp=356&creative=5180&linkCode=ur1&adid=0ANYNBWG4TGXZJ62RGNT&&ref-refURL=http%3A%2F%2Flocalhost%2Ftgy%2Fpan">
+				<img class="col-sm-12 no-padding img-responsive" src="" data-original="http://g-ecx.images-amazon.com/images/G/28/img13/book/associates/lll_20131216_bk_kks_728_90.gif">
+			</a>
+		</div>
+ </div>
+  -->
 <div id="footer" class="container col-sm-12 "
-	style="padding: 3px;  text-align: center;margin-top: 40px;">
-	<span style="color: #ccc;font-size: 12px;">@2014  网址盒子 辽ICP备13008200号-3</span> 
+	style="padding: 3px;  text-align: center;margin-top:  40px;">
+	<span style="color: #ccc;font-size: 12px;">@2015  网址盒子 辽ICP备13008200号-3</span> 
 </div>
  
  

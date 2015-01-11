@@ -47,8 +47,8 @@
 		<div id="pageMain" class="col-sm-9 no-padding" >
 			<div class="col-sm-12 group-info no-padding">
 				<span class="group-info-title" ><%=groupName %></span>
-				<%if(createAble){%>
-				 
+				<%if(isJoined){%>
+				
 				<%}else{
 					%>
 					<a onclick="joinGroupFunction()" href="#" class="group-info-in"><span>加入群组</span></a>

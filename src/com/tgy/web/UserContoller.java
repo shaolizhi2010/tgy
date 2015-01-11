@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.tgy.dao.PageDao;
 import com.tgy.dao.UserDao;
 import com.tgy.entity.User;
 import com.tgy.entity.VisitHistory;
@@ -44,9 +45,9 @@ public class UserContoller extends HttpServlet {
 		// if(StringUtils.isBlank(userID) || userID.length()!=24){
 		// U.resFailed(res, "用户id不正确");
 		// }
-
+		String showType = req.getParameter("t");//1 竖版显示 2横板（个人导航）显示 3 横板 公共导航页
 		User showUser = new UserDao().getByID(userID);
-		service(req, res, lastLoginUserID, lastPsCode, showUser,"1");
+		service(req, res, lastLoginUserID, lastPsCode, showUser,showType);//default 2, 导航形式显示
 	}
 
 	@RequestMapping(value = { "/{userName}" })
@@ -58,7 +59,7 @@ public class UserContoller extends HttpServlet {
 			@CookieValue(value = "lastPsCode", defaultValue = "", required = false) String lastPsCode)
 			throws ServletException, IOException {
 		
-		String showType = req.getParameter("t");//1 竖版显示 2横板（导航）显示
+		String showType = req.getParameter("t");//1 竖版显示 2横板（个人导航）显示 3 横板 公共导航页
 		//redirect
 		if(StringUtils.equals(userName, "pan")){
 			U.forward(req, res, "/pan.jsp");
@@ -75,13 +76,17 @@ public class UserContoller extends HttpServlet {
 		UserService userService = new UserService();
 		
 		if (showUser != null) {
-			showUser.showTimes++;
+			showUser.showTimes+=C.scoreClick;
+			showUser.favScore+=C.scoreClick;
 			userService.save(showUser);
 			
 			BookmarkData data = indexService
 					.getBookmarkDataByUserID(showUser.id.toString());
-			req.setAttribute("bookmarkData", data);
 			
+			long pageCount = new PageDao().count("userID", showUser.id.toString());
+			
+			req.setAttribute("bookmarkData", data);
+			req.setAttribute("pageCount", pageCount);
 			
 
 			// BreadCrumb bread = BreadCrumbUtil.build(
@@ -98,12 +103,12 @@ public class UserContoller extends HttpServlet {
 		if (loginUser == null && StringUtils.isNotBlank(lastLoginUserID)) { // 还未登录
 																				// 尝试自动登陆
 			if (StringUtils.isBlank(lastPsCode)) { // temp user的情况， 密码为空
-				loginUser = new UserDao().getByID(lastLoginUserID);
-				if (loginUser != null && loginUser.isTemp) {
-
-				} else {
-					loginUser = null;// 如果不是temp用户 又没有密码，则不自动登陆
-				}
+				//loginUser = new UserDao().getByID(lastLoginUserID);
+//				if (loginUser != null && loginUser.isTemp) {
+//
+//				} else {
+//					loginUser = null;// 如果不是temp用户 又没有密码，则不自动登陆
+//				}
 
 			} else { // 有密码 正常登录过的用户
 				loginUser = new UserDao().checkUserByPsCode(lastLoginUserID,
@@ -141,11 +146,34 @@ public class UserContoller extends HttpServlet {
 			vh.times++;
 			vService.save(vh);
 		}
-		if(StringUtils.equals(showType, "2")){
+		boolean isSelf = false;
+		if(loginUser!=null && showUser!=null && loginUser.id!=null && showUser.id!=null
+				&&StringUtils.equals(loginUser.id.toString(), showUser.id.toString())){//查看自己的收藏夹
+			isSelf = true;
+		}
+		//之前登陆过这个收藏夹，说明是自己的收藏夹，只是没有登录
+		else if(StringUtils.isNotBlank(lastLoginUserID)&& showUser!=null&& showUser.id!=null&&StringUtils.equals(lastLoginUserID, showUser.id.toString()) ){
+			isSelf = true;
+		}
+		req.setAttribute("isSelf", isSelf);
+		
+		if(StringUtils.equals(showType, "3")){
+			U.forward(req, res, "/index-3.jsp");
+		}
+		else if(StringUtils.equals(showType, "2")){
 			U.forward(req, res, "/index-2.jsp");
 		}
-		else{
+		else if(StringUtils.equals(showType, "1")){
 			U.forward(req, res, "/index-1.jsp");
+		}
+		else{
+			//已登录 正在查看自己的收藏夹
+			if(isSelf){
+				U.forward(req, res, "/index-2.jsp");
+			}
+			else{
+				U.forward(req, res, "/index-1.jsp");
+			}
 		}
 		
 

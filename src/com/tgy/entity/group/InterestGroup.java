@@ -25,6 +25,7 @@ public class InterestGroup extends StateFulBaseEntity implements Serializable{
 	//public String type; //类型
 	
 	public int userCount;//用户数
+	public int pageCount;//网址数
 	
 	@Reference(ignoreMissing = true, lazy = true)
 	public List<GroupUser> users;//所有用户
@@ -39,6 +40,9 @@ public class InterestGroup extends StateFulBaseEntity implements Serializable{
 	public String publicMessage;//显示在页面上方的公告信息。
 	
 	public int authCreateDiscuss = C.authEveryOne;
+	
+	//convert data flag
+	public String convertDataFlag  ;
 	
 	public void add(InterestGroupFolder folder) {
 		if (folders == null) {

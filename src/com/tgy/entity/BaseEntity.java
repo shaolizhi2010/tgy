@@ -40,6 +40,9 @@ public class BaseEntity {
 	public boolean deleteFlag;//删除标志，有些不执行真的删除
 	public boolean useAble=true;//是否可用 
 	
+	//是否有系统自动生成
+	public boolean isRobot;
+	
 	//权限控制
 	//-10
 	//0 只有自己 
@@ -56,5 +59,15 @@ public class BaseEntity {
 	//system 
 	public String vesion_="0.3";//数据对应的系统版本，每个版本所产生的数据格式可能不同，加此标记，便于处理数据。
 	
+	public void copyBasic(BaseEntity from){
+		if(from==null){
+			return ;
+		}
+		this.showTimes = from.showTimes;
+		this.favScore = from.favScore;
+		this.ups = from.ups;
+		this.downs = from.downs;
+		this.keeps = from.keeps;
+	}
 
 }

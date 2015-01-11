@@ -1,3 +1,6 @@
+$('#contextPath').val()
+<script src="<%=request.getContextPath()%>/javascripts/jquery.lazyload.min.js"></script>
+
 			<div class="col-sm-12 no-padding">
 				<a class="col-sm-12 no-padding" 
 					target="_blank"

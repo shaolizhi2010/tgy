@@ -1,3 +1,6 @@
+<%@page import="com.tgy.util.PageUtil"%>
+<%@page import="com.tgy.entity.BaseFolder"%>
+<%@page import="com.tgy.util.FolderUtil"%>
 <%@page import="com.tgy.App"%>
 <%@page import="com.tgy.util.URLUtils"%>
 <%@page import="org.apache.commons.collections.CollectionUtils"%>
@@ -12,9 +15,10 @@
 <%@include file="bookmark-data.jsp"%>
 
 <!-- 显示all网址页面开始 -->
-<div class="col-sm-12 no-padding" style="  padding-bottom: 10px;">
-
+<div id="pages-all-container" class="col-sm-12 no-padding sortable" style="  padding-bottom: 10px;">
+	<div class="col-sm-12    " > <a class="pull-right" href="#" onclick="preEditAll()"><span class='glyphicon glyphicon-cog  ' style='font-size:12px;margin-right: 5px;'></span>快速编辑</a></div>
 	<%
+		FolderUtil.sortByOrderIndex( rootFolders);
 		for (Folder folder : rootFolders) {
 			String folderName = folder.name;
 			
@@ -23,9 +27,8 @@
 			}
 			
 	%>
-	<div class="col-sm-12 no-padding sub-page folder-pages" >
-		<a 
-		class="btn  col-sm-2 folderMark editable " title="<%=folder.name%>"
+	<div class="col-sm-12 no-padding sub-page folder-pages pages-all-subFolder" >
+		<a  class="btn  col-sm-2 folderMark editable " title="<%=folder.name%>"
 			 
 			dataid="<%=folder.id%>" 
 			dataname="<%=folder.name%>"
@@ -38,8 +41,9 @@
 			<span style="color: #666;font-weight: bold;font-size: 15px;"> <%=folderName%>
 		</span>
 		</a>
-		<div class="col-sm-10 container" style="  "> 
+		<div class="col-sm-10 container sortable pages-all-subFolder-pages" style="  "> 
 			<%
+				PageUtil.sortByOrderIndex( folder.pages);
 				for (Page p : folder.pages) {
 						String pageName = p.name;
 						pageName = StringUtils.trim(pageName); 
@@ -70,7 +74,7 @@
 			%>
 
 			<a dataid="<%=p.id%>" dataname="<%=pageTitle%>" title="<%=pageTitle+ pageDescription%>"
-				class="  col-xs-12 col-sm-4 col-sm-3  folder-pages-link editable pageMark click-trace hoverAble  " href="<%=link%>"
+				class="  col-xs-12 col-sm-4 col-sm-3  folder-pages-link editable pageMark click-trace hoverAble pages-all-subFolder-pages-page"  href="<%=link%>"
 				style="padding-right: 0px;"
 				onclick="openLink('<%=p.id%>','page')" target="_blank">
 				<%
@@ -90,19 +94,18 @@
 						<%
 					}
 				%>
-				  <span class="col-sm-9 no-padding" style=""><%=pageName%></span>  
+				  <span class=" no-padding" style=""><%=pageName%></span>  
 			</a>
 
 			<%
 				}//end for pages
 			%>
-			<!-- 
-			<a title="添加网址" class="btn col-sm-3  add-link " href="#"
-				onclick="preAddPageFunction('','','<%=folder.id%>') "
-				style="">
-				<span style=""> +</span>
+		 
+			<a title="添加网址" class="btn col-sm-3   add-link" href="javascript:void(0)"
+				onclick="preAddPageFunction('','','') "
+				>
+				<span  > + 收藏网址 </span> 
 			</a>
- -->
 		</div>
 
 	</div>

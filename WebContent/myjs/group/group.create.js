@@ -1,5 +1,8 @@
 function createGroupFunction(){
- 
+	if(!($('#loginFlag').val()=='true')){
+		preLoginFunction();
+		return;
+	}
 	$.ajax(
 			{
 				url :  $('#contextPath').val()

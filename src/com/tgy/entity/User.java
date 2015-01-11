@@ -31,6 +31,10 @@ public class User extends BaseEntity implements Serializable{
 	//public String bookmarkLastUpdateTime;//书签最后更新时间，用来跟客户端时间比对，如果比客户端新，则返回最新数据给客户端，否则不返回数据，客户端使用localstorage存的数据，
 	//这样可以降低服务器压力 提示客户端速度,客户端缓存会用到，暂时不启用
 	
+	public long pageCount;//收藏网页的个数
+	public long fansCount;//粉丝个数
+	public long followsCount;//关注数
+	
 	public int loginTimes; //登录次数
 	public String lastLoginDate;//最后一次登录的时间 
 	

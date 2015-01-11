@@ -39,6 +39,11 @@ public class BaseBasicDAO<T,K> extends BasicDAO<T, K> {
 	
 	//取list
 	public List<T> list(Class<T> C, Map<String,String> conditions,String orderStr,  int limit) {
+		return list(C, conditions, orderStr, 0,limit);
+	}
+	
+	//取list
+	public List<T> list(Class<T> C, Map<String,String> conditions,String orderStr,int start,  int limit) {
 		
 		Query<T> query = App.getInstance().getDatastore().createQuery(C);
 		
@@ -52,8 +57,12 @@ public class BaseBasicDAO<T,K> extends BasicDAO<T, K> {
 		if(StringUtils.isNotBlank(orderStr)){
 			query.order(orderStr);
 		}
+		//start
+		if(start>0){
+			query.offset(start);
+		}
 		//limit
-		if(limit!=0){
+		if(limit>0){
 			query.limit(limit);
 		}
 		

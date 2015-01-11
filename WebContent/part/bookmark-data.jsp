@@ -13,26 +13,39 @@
 Folder showFolder=null;
 String showFolderName = "";
 String showFolderID = "";
+Long pageCount = 0L;
+if(request.getAttribute("pageCount")!=null){
+	pageCount = (Long)request.getAttribute("pageCount");
+}
+
 List<Folder> rootFolders = new ArrayList<Folder>();
 //List<Folder> folders =  new ArrayList();
 List<Page> pages =  new ArrayList<Page>();
-	BookmarkData bookmarkData = U.param(request, "bookmarkData", BookmarkData.class);
-	if(bookmarkData!=null){ 
-		rootFolders = bookmarkData.getRootFolders();
-		if(!CollectionUtils.isEmpty(rootFolders)){ 
-			Collections.sort(rootFolders); 
-			Collections.reverse(rootFolders); 
-		}
-		showFolder = bookmarkData.folder;
-		if(showFolder!=null){
-			showFolderName = showFolder.name;
-			showFolderID =  showFolder.id.toString();
-			pages=  showFolder.pages; //cur folder
-			if(!CollectionUtils.isEmpty(pages)){
-				Collections.sort(pages); 
-				Collections.reverse(pages); 
-			}
+BookmarkData bookmarkData = U.param(request, "bookmarkData", BookmarkData.class);
+if(bookmarkData!=null){
+	rootFolders = bookmarkData.getRootFolders();
+	if(!CollectionUtils.isEmpty(rootFolders)){ 
+		Collections.sort(rootFolders); 
+		Collections.reverse(rootFolders); 
+	}
+	showFolder = bookmarkData.folder;
+	if(showFolder!=null){
+		showFolderName = showFolder.name;
+		showFolderID =  showFolder.id.toString();
+		pages=  showFolder.pages; //cur folder
+		if(!CollectionUtils.isEmpty(pages)){
+			Collections.sort(pages); 
+			Collections.reverse(pages); 
 		}
 	}
-	BookmarkData loginUserBookmarkData = U.param(request, "loginUserBookmarkData", BookmarkData.class);
+}
+	//BookmarkData loginUserBookmarkData = U.param(request, "loginUserBookmarkData", BookmarkData.class);
+%>
+
+<%
+if(CollectionUtils.isEmpty(rootFolders)){
+	%>
+	<input type="hidden" id="bookmarkEmptyFlag" value="true">
+	<%
+}
 %>

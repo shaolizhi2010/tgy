@@ -16,8 +16,21 @@
 <%@include file="part/show-user-data.jsp" %>
 <%
 PageService ps = new PageService();
-UserService fs = new UserService();
-List<User> users = fs.list("-showTimes",10);
+UserService us = new UserService();
+long userCount = us.count();
+
+long pageTotal = userCount/10+1;
+if(pageTotal>=0){//最多先显示前10页
+	pageTotal=10;
+}
+int start =0;
+if(request.getParameter("start")!=null){
+	start = Integer.parseInt(request.getParameter("start"));
+}
+int curPageNum = start/10+1;
+
+
+List<User> users = us.list("-favScore",start,10);
 %>
 
 <!DOCTYPE html>
@@ -29,43 +42,77 @@ List<User> users = fs.list("-showTimes",10);
 <body>
 	<jsp:include page="part/head.jsp" />
 	<jsp:include page="part/public-tabs.jsp" />
-	<div class="  col-sm-12" style="margin-top: 20px;"></div>
+	<div class="  col-sm-12" style="margin-top: 4px;"></div>
+	
+	<!-- 网站介绍 -->
+	<div class="col-sm-9  container" style="background-color:#e8edf1;padding: 30px;padding-top: 10px;padding-bottom: 10px;"> 
+		<div class="col-sm-12" style="font-size: 26px;font-weight: bold;color: #de9590;">网址盒子 - 网址收藏 网站分享</div>
+		
+		<div class=" col-sm-12" style="margin-top: 10px;"></div>
+		
+		<div class="col-sm-12" style="font-size: 13px;padding: 10px;color: #222;font-family: Helvetica;">
+			<span style="color: #99d233;" class="glyphicon glyphicon-ok-sign"> </span> 
+			<span style="font-size: 14px;">在线网址收藏</span> 
+			<span style="font-size: 13px;color: #333;"> -- 在线收藏喜欢的网站，不再弄丢网址，不再错过好网站</span>
+		</div>
+		<div class="col-sm-12" style="font-size: 13px;padding: 10px;color: #222;font-family: Helvetica;">
+			<span style="color: #99d233;" class="glyphicon glyphicon-ok-sign"> </span> 
+			<span style="font-size: 14px;">上网导航</span> 
+			<span style="font-size: 13px;color: #333;"> -- 把自己喜欢的网址，制作成自己的上网导航，设置为首页</span>
+		</div>
+		<div class="col-sm-12" style="font-size: 13px;padding: 10px;color: #222;font-family: Helvetica;">
+			<span style="color: #99d233;" class="glyphicon glyphicon-ok-sign"> </span> 
+			<span style="font-size: 14px;">兴趣组</span> 
+			<span style="font-size: 13px;color: #333;"> -- 加入兴趣组，和共同爱好的朋友交流，分享网址，淘网站</span>
+		</div>
+		<div class="col-sm-12" style="font-size: 13px;padding: 10px;color: #222;font-family: Helvetica;">
+			<span style="color: #99d233;" class="glyphicon glyphicon-ok-sign"> </span> 
+			<span style="font-size: 14px;">分享网址</span> 
+			<span style="font-size: 13px;color: #333;"> -- 发送收藏夹的链接给好友，关注好友，查看Ta 收藏了哪些网站</span>
+		</div>  
+	</div>
+	
+	
 	<!-- 主体内容 -->
 	<div class=" col-sm-9 no-padding container">
+		<div class="  col-sm-12" style="margin-top: 10px;">
+			<h3>活跃用户</h3>
+		</div>
+		
 		<!-- one column start -->
-		<div class="col-sm-6" style=" ">
+		<div class="col-sm-6  " style=" ">
 			<%
 		 	for (int i=0;i<users.size();i+=2) {
 		 		User user = users.get(i);
 		 		String name = user.name;
-				if (name != null && name.length() > 12) {
-					name = name.substring(0, 12) + "..";
+				if (name != null && name.length() > 8) {
+					name = name.substring(0, 8) + "..";
 				}
 		 	%> 
 		 	
 		 	<!--one info card -->
-				<div class="col-sm-10   info-card">
+				<div class="col-sm-12   info-card">
 					<div class="col-sm-12">
-						<div class="col-sm-4">
+						<div class="col-sm-3">
 							<a href="<%=request.getContextPath()%>/u/<%=user.id %>" >
 							<%
 								if(StringUtils.isBlank(user.headImgUrl)){
 									%>
-									<span class="glyphicon glyphicon-user" style="font-size: 40px;color: #eee;"></span>
+									<span class="glyphicon glyphicon-user" style="font-size: 50px;color: #eee;"></span>
 									<%
 								}
 								else{
 									%>
-									<img style="height: 40px;width: 40px;" alt="已登录" src="<%=user.headImgUrl%>">
+									<img style="height: 50px;width: 50px;" alt="已登录" src="<%=user.headImgUrl%>">
 									<%
 								}
 							%> 
 							</a>
 						</div>
 						<div class="col-sm-8 user-name">
-						<a href="<%=request.getContextPath()%>/u/<%=user.id %>" >
-							<span><%=name %></span></a>
-						<div class="share-info"><span></span> <span><%=user.showTimes %> 访问   0关注 </span> </div>
+						<a href="<%=request.getContextPath()%>/u/<%=user.id %>" title="<%=user.name%>">
+							<span><%=name %></span><span style="color:#999; font-size: 9px;font-weight: normal;"> 的收藏夹</span></a>
+						<div class="share-info"><span></span> <span><%=user.favScore %>欢迎度     <%=user.pageCount%>网址</span> </div>
 					</div>
 					</div>
 					
@@ -97,7 +144,7 @@ List<User> users = fs.list("-showTimes",10);
 		<!-- one column end -->
 		
 		<!-- one column start -->
-		<div class="col-sm-6" style=" ">
+		<div class="col-sm-6  " style=" ">
 			<%
 		 	 
 		  
@@ -107,34 +154,34 @@ List<User> users = fs.list("-showTimes",10);
 		 		if(StringUtils.isBlank(name)){
 		 			continue;
 		 		}
-				if (name != null && name.length() > 12) {
-					name = name.substring(0, 12) + "..";
+				if (name != null && name.length() > 8) {
+					name = name.substring(0, 8) + "..";
 				}
 		 	%> 
 		 	
 		 	<!--one info card -->
-				<div class="col-sm-10   info-card">
+				<div class="col-sm-12   info-card">
 					<div class="col-sm-12">
-						<div class="col-sm-4">
+						<div class="col-sm-3">
 							<a href="<%=request.getContextPath()%>/u/<%=user.id %>"  >
 							<%
 								if(StringUtils.isBlank(user.headImgUrl)){
 									%>
-									<span class="glyphicon glyphicon-user" style="font-size: 40px;color: #eee;"></span>
+									<span class="glyphicon glyphicon-user" style="font-size: 50px;color: #eee;"></span>
 									<%
 								}
 								else{
 									%>
-									<img style="height: 40px;width: 40px;" alt="已登录" src="<%=user.headImgUrl%>">
+									<img style="height: 50px;width: 50px;" alt="已登录" src="<%=user.headImgUrl%>">
 									<%
 								}
 							%> 
 							</a>
 						</div>
 						<div class="col-sm-8 user-name">
-						<a href="<%=request.getContextPath()%>/u/<%=user.id %>" >
-							<span><%=name %></span></a>
-						<div class="share-info"><span></span> <span><%=user.showTimes %> 访问   0关注 </span> </div>
+						<a href="<%=request.getContextPath()%>/u/<%=user.id %>" title="<%=user.name%>">
+							<span><%=name %></span><span style="color:#999; font-size: 9px;font-weight: normal;"> 的收藏夹</span></a>
+						<div class="share-info"><span></span> <span><%=user.favScore %>欢迎度     <%=user.pageCount%>网址 </div>
 					</div>
 					</div>
 					
@@ -164,7 +211,36 @@ List<User> users = fs.list("-showTimes",10);
 				%>
 		</div>
 		<!-- one column end -->
-	
+		
+		<div class="col-sm-12">
+		<!-- 翻页 -->
+		<nav>
+		  <ul class="pagination">
+		    <li>
+		      <a href="<%=request.getContextPath()%>/index-hot-user.jsp?start=<%=curPageNum*10-20%>" aria-label="Previous">
+		        <span aria-hidden="true">&laquo;</span>
+		      </a>
+		    </li>
+		    <%
+		    for(int i = 1;i<11;i++){
+		    	String selectedStyle="";
+		    	if(i==curPageNum){
+		    		selectedStyle="background-color:#072;color:#fff;";
+		    	}
+		   		%>
+		   		 <li><a style="<%=selectedStyle %>" href="<%=request.getContextPath()%>/index-hot-user.jsp?start=<%=i*10-10%>"><%=i %></a></li>
+		   		<% 	
+		    }
+		    %>
+		   
+		    <li>
+		      <a href="<%=request.getContextPath()%>/index-hot-user.jsp?start=<%=curPageNum*10%>" aria-label="Next">
+		        <span aria-hidden="true">&raquo;</span> 
+		      </a>
+		    </li>
+		  </ul>
+		</nav>
+		</div>
 	</div>
 	<!-- 主体内容 end-->
 	<!-- 菜单 -->
@@ -183,8 +259,7 @@ List<User> users = fs.list("-showTimes",10);
 	<input type="hidden" id="edit_pid" value="">
 	<input type="hidden" id="edit_name" value="">
 	<input type="hidden" id="edit_url" value="">
-
-	<!-- hidden var end -->
+	<!-- hidden var end -->	<input type="hidden" id="pageID" value="index-hot-user">
 
 	<!-- 弹出框开始 -->
 	<jsp:include page="window/window.jsp" />

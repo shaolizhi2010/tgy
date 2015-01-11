@@ -23,6 +23,8 @@ public class AppConfig extends WebMvcConfigurerAdapter {
 				"/part/**");
 		registry.addResourceHandler("/adadm/**").addResourceLocations(
 				"/adadm/**");
+		registry.addResourceHandler("/op/**").addResourceLocations(
+				"/op/**");
 		registry.addResourceHandler("/window/**").addResourceLocations(
 				"/window/**");
 		registry.addResourceHandler("/fonts/**").addResourceLocations(

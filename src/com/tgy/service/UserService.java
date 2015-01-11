@@ -217,7 +217,7 @@ public class UserService {
 			user.name = userName;
 		}
 		//old user
-		else if(StringUtils.isNotBlank(headImgUrl) && StringUtils.isBlank( user.headImgUrl) ){
+		else if(StringUtils.isNotBlank(headImgUrl) ){// && StringUtils.isBlank( user.headImgUrl)
 			user.headImgUrl = headImgUrl;
 		}
 		if(user!=null){
@@ -248,6 +248,11 @@ public class UserService {
 	
 	public List<User> list( String sortStr,int limit){
 		
+		return list(sortStr,0,limit);
+	}
+	
+	public List<User> list( String sortStr,int start, int limit){
+		
 		Query<User> query = App.getInstance().getDatastore().createQuery(User.class);
 		
  
@@ -256,7 +261,10 @@ public class UserService {
 		}else{
 			query.order("favScore");
 		}
-		if(limit!=0){
+		if(start>0){
+			query.offset(start);
+		}
+		if(limit>0){
 			query.limit(limit);
 		}
 		

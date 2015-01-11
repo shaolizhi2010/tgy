@@ -41,7 +41,7 @@
 					<div class="col-sm-12 container sub-page-body no-padding" style=" ">
 			            <div  style="margin-top: 20px;" >
 			                <span for="createFolder_folderName">名称</span>
-			                <input class="form-control hover-focus" 
+			                <input class="form-control hover-focus enterInput" data-func-name="createFolderForGroupFunction"
 			                	id="group_view_folderName" type="text"/>
 			            </div>
 			            <div  style="margin-top: 20px;" >

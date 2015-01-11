@@ -473,24 +473,7 @@ var editTempUserFunction = function() {
 	});
 
 };
-var logoutFunction = function() {
-	$.ajax({
-		url : contextPath + "/user/logout",
-		method : "POST",
-		data : {}
-	}).success(function(data) {
-		if(data.indexOf("操作成功")>=0 ){
-			location.href =  $('#contextPath').val();
-		}
-		else{
-			alert(data);
-		}
-	}).error(function(data) {
-		alert('服务器正在飞速运转，请耐心等待' + data);
-		// $scope.status = status;
-	});
 
-};
 var preEditAll = function() {
 	if(!(loginFlag=='true')){
 		preLoginFunction();
@@ -498,8 +481,11 @@ var preEditAll = function() {
 	}
 	editingFlag = !editingFlag;
 	if(editingFlag){
+		
 		$(".editable").append("<span class='glyphicon glyphicon-pencil' style='font-size:8px;'></span>");
 		$(".editable").addClass('editing');
+		$(".add-link-div").show();
+		$(".add-link").show();
 		$(".editing").click( function(event) {
 			event.preventDefault();
 			// alert($(this).attr('dataid'));
@@ -523,6 +509,8 @@ var preEditAll = function() {
 	else{
 		$(".glyphicon-pencil").remove();
 		$(".editable").removeClass('editing');
+		$(".add-link-div").hide();
+		$(".add-link").hide();
 		$(".editable").unbind('click');//取消弹出编辑框，回复初始状态。
 	}
 

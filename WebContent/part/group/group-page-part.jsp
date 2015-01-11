@@ -41,13 +41,13 @@
 		%>
 		</div>
 	</div>
-	<div class="sub-page-body col-sm-12 no-padding">
+	<div class="sub-page-body col-sm-12 no-padding" style="background: #fff;">
 	<%
  
 	if(CollectionUtils.isEmpty(pages)){
  		%>
  		<div class="col-sm-12 ">
- 			还未收藏任何网址，现在就 <a href="<%=request.getContextPath() %>/group/page/create/pre?groupID=<%=groupID %>&&folderID=<%=showFolderID %>"  >添加一个 </a> 吧
+ 			还未收藏任何网址，现在就 <a onclick="afterLogin('<%=request.getContextPath() %>/group/page/create/pre?groupID=<%=groupID %>&&folderID=<%=showFolderID %>')" href="#"  >添加一个 </a> 吧
  		</div>
  		<%
  	}
@@ -130,14 +130,17 @@
 				<span class="glyphicon glyphicon glyphicon-plus pull-right" title="复制到我的收藏夹"  ></span>
 			</a>
 			  -->
-			<a href="#" onclick="pageUp('<%=p.id%>')" class="pull-right pageUp hoverAble3" title=" >顶< (已有<%=link.ups %>人顶过)">
+			<a href="#" onclick="downGroupPage('<%=p.id%>')" class="pull-right pageUp hoverAble3" title=" >不推荐< (有<%=link.downs %>人不推荐)">
+				 <span style="color:green;" class="glyphicon glyphicon-thumbs-down"></span> 
+			</a>
+			<a href="#" onclick="upGroupPage('<%=p.id%>')" class="pull-right pageUp hoverAble3" title=" >推荐< (有<%=link.ups %>人推荐)">
 				 <span style="color:green;" class="glyphicon glyphicon-thumbs-up"></span> 
 			</a>
 			<%
 			if(link!=null&&link.id!=null&&StringUtils.isNotBlank(link.id.toString())){
 			%>
-				<a  href="<%=request.getContextPath()%>/discuss/link/<%=link.id %>" class="pull-right pageComment hoverAble3" title="评论一下 (已有<%=link.commentsCount %>次评论)">
-					评论(<%=link.commentsCount %>)
+				<a style="font-size: 13px;" href="<%=request.getContextPath()%>/discuss/link/<%=link.id %>" class="pull-right pageComment hoverAble3" title="评论一下 (已有<%=link.commentsCount %>次评论)">
+					<%=link.lastDiscuss!=null?StringUtils.substring(link.lastDiscuss, 0,5):""  %>..评论(<%=link.commentsCount %>)
 				</a>
 			<%
 			}

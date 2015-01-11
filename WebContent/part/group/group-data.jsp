@@ -54,10 +54,13 @@ else{
 }
 
  
-AuthManager authManager = new AuthManager(); 
+AuthManager authManager = new AuthManager();
 boolean createAble = authManager.groupCreateAuth(loginUser, group);
 boolean editAble =  authManager.groupUpdateAuth(loginUser, group);
 boolean deleteAble = false;
+
+boolean isJoined = AuthManager.checkJoined(loginUser, group);
+
 %>
 <input id="groupName" type="hidden" value="<%=groupName %>" />
 <input id="groupID" type="hidden" value="<%=groupID %>" />

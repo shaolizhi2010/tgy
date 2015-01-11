@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8"/>
+<meta name="location" content="province=北京;city=北京;coord=">
+<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+<meta name="format-detection" content="telephone=no" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black" >
+<meta name="apple-mobile-web-app-capable" content="yes" >
+<meta name="description" content="
+百度糯米团购-消费者满意度最好的团购网站，美食、KTV、电影、酒店团购低至3折！更有全网最低价商品折扣，一流的团购服务，100%品质保证。" />
+<link rel="apple-touch-startup-image" href="http://newebapp0.nuomi.bdimg.com/static/common/img/start_83a773c.png">
+<link rel="apple-touch-icon-precomposed" sizes="57x57" href="http://newebapp2.nuomi.bdimg.com/static/common/img/logo-57_899958a.png" />
+<link rel="apple-touch-icon-precomposed" sizes="72x72" href="http://newebapp0.nuomi.bdimg.com/static/common/img/logo-72_6642ce0.png" />
+<link rel="apple-touch-icon-precomposed" sizes="114x114" href="http://newebapp0.nuomi.bdimg.com/static/common/img/logo-114_1ebba25.png" />
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://newebapp2.nuomi.bdimg.com/static/common/img/logo-144_98290d9.png" />
+<link rel="shortcut icon" href="http://newebapp1.nuomi.bdimg.com/static/common/img/favicon.ico" />
+<style type="text/css">
+		/* @require common:widget/ui/css_base/css_base.css */
+	</style>
+<script>
+		var F = {};
+		(function () {
+			var b = {};
+			F.context = function(p, r) {
+				var q = arguments.length;
+				if (q > 1) {
+					b[p] = r
+				} else {
+					if (q == 1) {
+						if (typeof p == "object") {
+							for (var o in p) {
+								if (p.hasOwnProperty(o)) {
+									b[o] = p[o]
+								}
+							}
+						} else {
+							return b[p];
+						}
+					}
+				}
+			};
+		})();
+
+        if (!location.hash) {
+            document.addEventListener("DOMContentLoaded", function () {
+                // 先让 DOMContentLoaded 的其他事件处理完成，再执行 UI
+                setTimeout(function(){
+                    window.scrollTo(0, 1);
+                }, 0);
+            });
+        }
+	</script>
+<title>
+【百度糯米】高品质团购网站</title>
+
+<script>
+        void function(g,f,j,c,h,d,b){g.alogObjectName=h,g[h]=g[h]||function(){(g[h].q=g[h].q||[]).push(arguments)},g[h].l=g[h].l||+new Date,d=f.createElement(j),d.async=!0,d.src=c,b=f.getElementsByTagName(j)[0],b.parentNode.insertBefore(d,b)}(window,document,"script","http://img.baidu.com/hunter/alog/alog.mobile.min.js","alog");void function(){function c(){return;}window.PDC={mark:function(a,b){alog("speed.set",a,b||+new Date);alog.fire&&alog.fire("mark")},init:function(a){alog("speed.set","options",a)},view_start:c,tti:c,page_ready:c}}();void function(n){var o=!1;n.onerror=function(n,e,t,c){var i=!0;return!e&&/^script error/i.test(n)&&(o?i=!1:o=!0),i&&alog("exception.send","exception",{msg:n,js:e,ln:t,col:c}),!1},alog("exception.on","catch",function(n){alog("exception.send","exception",{msg:n.msg,js:n.path,ln:n.ln,method:n.method,flag:"catch"})})}(window);
+    </script>
+
+<script>
+    window.onerror = function(message, url, line) {
+        var href   = window.location.href;
+        var params = [
+            "pid=343",
+            "client_type=WAP_SMART",
+            "action=other",
+            "type=jsError",
+            "content=" + encodeURIComponent(message || "no-valid-message"),
+            "href=" + encodeURIComponent(href),
+            "fromurl=" + encodeURIComponent(url || "no-valid-url"),
+            "timestamp=" + encodeURIComponent(+new Date())
+        ].join("&");
+        
+        (new Image()).src = "/s.gif?" + params;     
+    };
+
+    // 可惜 img 的 onerror 不是promise对象。
+    document.addEventListener("DOMContentLoaded", function() {
+        var imgs = document.getElementsByTagName("img");
+        
+        // @this the img itself
+        function _imgErrorCallback () {
+            var src = this.src;
+            // this.src = __uri("img/error.png");
+            this.src = "http://newebapp0.nuomi.bdimg.com/static/common/img/img_placeholder_small_d11b7fc.png";
+            
+            var params = [
+                "pid=343",
+                "client_type=WAP_SMART",
+                "action=other",
+                "type=imgError",
+                "content=" + encodeURIComponent(src),
+                "page=" + encodeURIComponent(window.location.href),
+                "timestamp=" + encodeURIComponent(+new Date())
+            ].join("&");
+            
+            (new Image()).src = "/s.gif?" + params;
+        }
+        
+        for (var i = 0, len = imgs.length; i < len; i++) {
+            if (imgs[i].onerror !== null) {
+                imgs[i].onerror = (function (index) {
+                    var func = imgs[index].onerror;
+
+                    return function () {
+                        var args = [].slice.apply(arguments);
+                    
+                        (typeof func === "function") && func.apply(this, args);
+                        _imgErrorCallback.apply(this, args); 
+                    };
+                })(i);
+            } else {
+                imgs[i].onerror = _imgErrorCallback;
+            }
+        }
+    });
+</script>
+
+
+
+
+
+<script> alog('speed.set', 'ht', +new Date); </script>
+
+<link rel="stylesheet" type="text/css" href="http://newebapp1.nuomi.bdimg.com/static/common/pkg/common_css_8_ddabb2c.css"/><link rel="stylesheet" type="text/css" href="http://newebapp2.nuomi.bdimg.com/static/common/pkg/common_css_0_014cafb.css"/><link rel="stylesheet" type="text/css" href="http://newebapp0.nuomi.bdimg.com/static/list/pkg/list_css_1_5bb5a9d.css"/><link rel="stylesheet" type="text/css" href="http://newebapp0.nuomi.bdimg.com/static/list/pkg/list_css_2_0564cf3.css"/><link rel="stylesheet" type="text/css" href="http://newebapp2.nuomi.bdimg.com/static/login/pkg/login_css_0_55b2371.css"/><link rel="stylesheet" type="text/css" href="http://newebapp1.nuomi.bdimg.com/static/common/widget/ui/voucher_popup/voucher_popup_090b7e2.css"/></head>
+
+
+
+
+
+
+<body mon="position=index">
+
+<header class="w-index-header" mon="element_type=nav">
+<a class="city" href="/city?returnUrl=%2F" mon="area=changeCity&element=changeCity">
+北京
+</a>
+<div class="arrow-down"></div>
+<a id='header-user' class="user" href="javascript:void(0);" mon="area=my&element=my">
+我的</a>
+<div class="brand">
+</div>
+</header>
+
+
+<article class="p-index" mon="action=click" id="j-index">
+<section class="w-index-search">
+<form method="get" action="/webapp/tuan/list" class="j-search-form">
+<div class="search-input-wrap">
+<input type="search" name="kw" maxlength="20" class="j-search-input" autocomplete="off" placeholder="请输入您想找的团购"/>
+<i id="j-clear-input"></i>
+<button type="submit" class="j-search-submit">搜索</button>
+</div>
+<div class="j-search-suggestion search-suggestion"></div></form>
+</section>
+<div class="w-banner-swipe" mon="action=click&area=topBanner&element_type=nav">
+<div class="wrap" style="padding-top:31.25%">
+<ul id="j-sliders" class="sliders">
+<li class="holder" style="background-image: url(http://hiphotos.baidu.com/bainuo/pic/item/37d3d539b6003af36e18ec24362ac65c1138b6d7.jpg);">
+<a href="http://huodong.static.nuomi.com/zt/ganenbaokan_wap.html?channel=ugc_tk_wap" mon="element=http://huodong.static.nuomi.com/zt/ganenbaokan_wap.html?channel=ugc_tk_wap"></a>
+</li>
+<li class="holder" style="background-image: url(http://hiphotos.baidu.com/bainuo/pic/item/1f178a82b9014a90c413bcf5aa773912b31bee4d.jpg);">
+<a href="http://huodong.static.nuomi.com/zt/zm1203_zs_wap.html?zhoumo.act06.wap" mon="element=http://huodong.static.nuomi.com/zt/zm1203_zs_wap.html?zhoumo.act06.wap"></a>
+</li>
+</ul>
+<div id="j-pointers" class="pointers"></div>
+</div>
+</div>
+<section class="widget-index-catg clearfix" mon="area=topNav&element_type=filter">
+<div class="wrap wrap8 clearfix">
+<a class="item item1"
+                        href="/bj/326/0-0/0-0-0-0-0"
+            			mon="element=326">
+<div class="img meishi"></div>
+<div class="text">美食</div>
+</a>
+<a class="item item2"
+                        href="/movie"
+            			mon="element=345">
+<div class="img dianying"></div>
+<div class="text">电影</div>
+<div class="img-icon" style="background-image: url(http://hiphotos.baidu.com/tuangou/pic/item/d019d2bf6c81800a2c9de931b23533fa828b4751.jpg);"></div>
+</a>
+<a class="item item3"
+                        href="/bj/642/0-0/0-0-0-0-0"
+            			mon="element=642">
+<div class="img jiudian"></div>
+<div class="text">酒店</div>
+</a>
+<a class="item item4"
+                        href="/bj/341/0-0/0-0-0-0-0"
+            			mon="element=341">
+<div class="img ktv"></div>
+<div class="text">KTV</div>
+</a>
+<a class="item item5"
+                        href="/bj/364/0-0/0-0-0-0-0"
+            			mon="element=364">
+<div class="img huoguo"></div>
+<div class="text">火锅</div>
+</a>
+<a class="item item6"
+                        href="/bj/392/0-0/0-0-0-0-0"
+            			mon="element=392">
+<div class="img zizhucan"></div>
+<div class="text">自助餐</div>
+</a>
+<a class="item item7"
+                        href="/bj/330/0-0/0-0-0-0-0"
+            			mon="element=330">
+<div class="img gouwu"></div>
+<div class="text">购物</div>
+</a>
+<a class="item item8"
+                        href="/bj/0/0-0/0-0-0-0-0"
+            			mon="element=0">
+<div class="img quanbufenlei"></div>
+<div class="text">全部分类</div>
+</a>
+</div>
+</section>
+<section class="goods-list-title">
+精品团购</section>
+<script>
+    void function(e,t){for(var n=t.getElementsByTagName("img"),a=+new Date,i=[],o=function(){this.removeEventListener&&this.removeEventListener("load",o,!1),i.push({img:this,time:+new Date})},s=0;s< n.length;s++)!function(){var e=n[s];e.addEventListener?!e.complete&&e.addEventListener("load",o,!1):e.attachEvent&&e.attachEvent("onreadystatechange",function(){"complete"==e.readyState&&o.call(e,o)})}();alog("speed.set",{fsItems:i,fs:a})}(window,document);
+</script>
+<div id="j-goods-container" mon="action=click&area=itemList&element_type=item">
+<section class="w-goods"  ><a href="/bj/deal/0zq7lkax"mon="element=1153335&position=1&page_index=1&area=normal_list&search_result_no="class="clearfix" name="0" id="0"><div class="img-wrapper"><span class="tag-free-reservation"></span><img src="http://newebapp0.nuomi.bdimg.com/static/common/img/img_placeholder_small_d11b7fc.png" data-src="http://S2.nuomi.bdimg.com/upload/deal/2014/6/V_T/1153335-73tztbfqni-3222282789637631.jpg" width="118" height="79" /></div><ul><li class="title"><span class="store ">3分店</span><span class="item-name">一品小笼</span></li><li class="info"><img src="http://img4.hao123.com/data/cedbf669900124f814b3a3194364241a" class='activity-icon'/>双人餐！特色小笼包，美味诱人，让你爱不释嘴，享受美食！</li><li class="others"><ins class="del"><del>48.8</del></ins><span class="slash">/</span><del class="old-price">135.5</del><span class="bought">1539</span></li></ul><div class="privilege-price privilege-price-active"><ins>46.3</ins></div></a></section><section class="w-goods"  ><a href="/bj/deal/lhwahboq"mon="element=2150118&position=2&page_index=1&area=normal_list&search_result_no="class="clearfix" name="1" id="1"><div class="img-wrapper"><img src="http://newebapp0.nuomi.bdimg.com/static/common/img/img_placeholder_small_d11b7fc.png" data-src="http://e.hiphotos.baidu.com/nuomi/wh%3D230%2C140/sign=2ef2a1e7a70f4bfb8c859656307f54c1/9d82d158ccbf6c812cfae290bf3eb13532fa40fd.jpg" width="118" height="79" /></div><ul><li class="title"><span class="store ">4分店</span><span class="item-name">集天味道</span></li><li class="info"><img src="http://img4.hao123.com/data/cedbf669900124f814b3a3194364241a" class='activity-icon'/>超值烤鱼套餐！贴心的服务，优雅的环境，地处繁华，交通便利！</li><li class="others"><ins class="del"><del>76</del></ins><span class="slash">/</span><del class="old-price">210</del><span class="bought">428</span></li></ul><div class="privilege-price privilege-price-active"><ins>72.2</ins></div></a></section><script>
+    void function(e,t){for(var n=t.getElementsByTagName("img"),a=+new Date,i=[],o=function(){this.removeEventListener&&this.removeEventListener("load",o,!1),i.push({img:this,time:+new Date})},s=0;s< n.length;s++)!function(){var e=n[s];e.addEventListener?!e.complete&&e.addEventListener("load",o,!1):e.attachEvent&&e.attachEvent("onreadystatechange",function(){"complete"==e.readyState&&o.call(e,o)})}();alog("speed.set",{fsItems:i,fs:a})}(window,document);
+</script>
+<section class="w-goods"  ><a href="/bj/deal/sxszbifm"mon="element=716928&position=3&page_index=1&area=normal_list&search_result_no="class="clearfix" name="2" id="2"><div class="img-wrapper"><img src="http://newebapp0.nuomi.bdimg.com/static/common/img/img_placeholder_small_d11b7fc.png" data-src="http://S1.nuomi.bdimg.com/upload/deal/2014/3/V_T/716928-1395390328765.jpg" width="118" height="79" /></div><ul><li class="title"><span class="store ">4分店</span><span class="item-name">蜀湘缘万州烤鱼</span></li><li class="info"><img src="http://img4.hao123.com/data/cedbf669900124f814b3a3194364241a" class='activity-icon'/>双人餐！菜品丰富，装修雅致，环境优雅，给您带来全方位的美食诱惑！</li><li class="others"><ins class="del"><del>68.8</del></ins><span class="slash">/</span><del class="old-price">178</del><span class="bought">2342</span></li></ul><div class="privilege-price privilege-price-active"><ins>65.3</ins></div></a></section><section class="w-goods"  ><a href="/bj/deal/erauyhtm"mon="element=2533366&position=4&page_index=1&area=normal_list&search_result_no="class="clearfix" name="3" id="3"><div class="img-wrapper"><img src="http://newebapp0.nuomi.bdimg.com/static/common/img/img_placeholder_small_d11b7fc.png" data-src="http://S0.nuomi.bdimg.com/upload/deal/2014/11/V_T/2533366-urkicgqtpm-9074285637705924.jpg" width="118" height="79" /></div><ul><li class="title"><span class="store ">11分店</span><span class="item-name">味妙烤鱼吧</span></li><li class="info"><img src="http://img.hao123.com/data/68e63b9d29244e1ae7b12109e042d1ae" class='activity-icon'/>3-4人餐！肥美清江鱼，鲜嫩草鱼，缤纷口味，特色配菜，丰富口感，诱惑难挡！</li><li class="others"><ins>98</ins><span class="slash">/</span><del class="old-price">223</del><span class="bought">343</span></li></ul></a></section><section class="w-goods"  ><a href="/bj/deal/juxxb3du"mon="element=1455645&position=5&page_index=1&area=normal_list&search_result_no="class="clearfix" name="4" id="4"><div class="img-wrapper"><span class="tag-free-reservation"></span><img src="http://newebapp0.nuomi.bdimg.com/static/common/img/img_placeholder_small_d11b7fc.png" data-src="http://S2.nuomi.bdimg.com/upload/deal/2014/7/V_T/1455645-kjbrgadyyd-2526084055587199.jpg" width="118" height="79" /></div><ul><li class="title"><span class="store ">12分店</span><span class="item-name">香草香草云南原生态火锅</span></li><li class="info"><img src="http://img4.hao123.com/data/cedbf669900124f814b3a3194364241a" class='activity-icon'/>价值100元代金券！丰富菜品，地道口味，云南美食，诱人滋味！</li><li class="others"><ins class="del"><del>75</del></ins><span class="slash">/</span><del class="old-price">100</del><span class="bought">12562</span></li></ul><div class="privilege-price privilege-price-active"><ins>71.2</ins></div></a></section><section class="w-goods"  ><a href="/w/deal/ye5zq0uw"mon="element=2513016&position=6&page_index=1&area=normal_list&search_result_no="class="clearfix" name="5" id="5"class="clearfix" name="5" id="5"><div class="img-wrapper"><img src="http://newebapp0.nuomi.bdimg.com/static/common/img/img_placeholder_small_d11b7fc.png" data-src="http://S0.nuomi.bdimg.com/upload/deal/2014/11/V_T/2513016-icsqntedrq-26593535802962185.jpg" width="118" height="79" /></div><ul><li class="title"><span class="item-name">泰纳果园</span></li><li class="info"><img src="http://img.hao123.com/data/68e63b9d29244e1ae7b12109e042d1ae" class='activity-icon'/>四川双流特产新鲜草莓360g/份！2份起顺丰包邮！</li><li class="others"><ins>19.9</ins><span class="slash">/</span><del class="old-price">49</del><span class="bought">1145</span></li></ul></a></section><section class="w-goods"  ><a href="/bj/deal/biv93l2n"mon="element=2095194&position=7&page_index=1&area=normal_list&search_result_no="class="clearfix" name="6" id="6"><div class="img-wrapper"><span class="tag-free-reservation"></span><img src="http://newebapp0.nuomi.bdimg.com/static/common/img/img_placeholder_small_d11b7fc.png" data-src="http://e.hiphotos.baidu.com/nuomi/wh%3D230%2C140/sign=8be0b4b9523d26972e86005f66cb9eca/0e2442a7d933c895fa4f1108d21373f08202008b.jpg" width="118" height="79" /></div><ul><li class="title"><span class="store ">47分店</span><span class="item-name">大鸭梨烤鸭店</span></li><li class="info"><img src="http://img4.hao123.com/data/cedbf669900124f814b3a3194364241a" class='activity-icon'/><img src="http://img.hao123.com/data/301.png" class='activity-icon'/>8-10人豪华餐！用料考究，做工精良，秉承健康，美食齐聚！</li><li class="others"><ins class="del"><del>398</del></ins><span class="slash">/</span><del class="old-price">714</del><span class="bought">2848</span></li></ul><div class="privilege-price privilege-price-active"><ins>378</ins></div></a></section><section class="w-goods"  ><a href="/bj/deal/5jyvai1k"mon="element=553628&position=8&page_index=1&area=normal_list&search_result_no="class="clearfix" name="7" id="7"><div class="img-wrapper"><span class="tag-free-reservation"></span><img src="http://newebapp0.nuomi.bdimg.com/static/common/img/img_placeholder_small_d11b7fc.png" data-src="http://S1.nuomi.bdimg.com/upload/deal/2013/12/V_T/553628-1387979987785.jpg" width="118" height="79" /></div><ul><li class="title"><span class="store ">3分店</span><span class="item-name">东来顺</span></li><li class="info"><img src="http://img.hao123.com/data/301.png" class='activity-icon'/>4人套餐！中华老字号，涮肉火锅蜚声中外！聚会宴请首选，餐后可免费打包</li><li class="others"><ins>178</ins><span class="slash">/</span><del class="old-price">655</del><span class="bought">7324</span></li></ul></a></section><section class="w-goods"  ><a href="/bj/deal/fsltc1u9"mon="element=1282966&position=9&page_index=1&area=normal_list&search_result_no="class="clearfix" name="8" id="8"><div class="img-wrapper"><span class="tag-free-reservation"></span><img src="http://newebapp0.nuomi.bdimg.com/static/common/img/img_placeholder_small_d11b7fc.png" data-src="http://S2.nuomi.bdimg.com/upload/deal/2014/7/V_T/1282966-8bmbmjyfuk-752377978930109.jpg" width="118" height="79" /></div><ul><li class="title"><span class="store ">国贸</span><span class="item-name">麦多和馅饼</span></li><li class="info"><img src="http://img4.hao123.com/data/cedbf669900124f814b3a3194364241a" class='activity-icon'/>价值10元代金券！多种美味，任您搭配，精心独创，可叠加使用</li><li class="others"><ins class="del"><del>7.5</del></ins><span class="slash">/</span><del class="old-price">10</del><span class="bought">633</span></li></ul><div class="privilege-price privilege-price-active"><ins>7.12</ins></div></a></section><section class="w-goods"  ><a href="/bj/deal/scdtulbl"mon="element=2277833&position=10&page_index=1&area=normal_list&search_result_no="class="clearfix" name="9" id="9"><div class="img-wrapper"><span class="tag-free-reservation"></span><img src="http://newebapp0.nuomi.bdimg.com/static/common/img/img_placeholder_small_d11b7fc.png" data-src="http://e.hiphotos.baidu.com/nuomi/wh%3D230%2C140/sign=a97a4d003a12b31bc739c52bb5281a4b/c83d70cf3bc79f3d222b3577b9a1cd11738b29ab.jpg" width="118" height="79" /></div><ul><li class="title"><span class="store ">2分店</span><span class="item-name">草本工坊</span></li><li class="info"><img src="http://img4.hao123.com/data/cedbf669900124f814b3a3194364241a" class='activity-icon'/>价值100元全场通用代金券！精选菜式热腾鲜美，美味随心萦绕，撼动你的味蕾！</li><li class="others"><ins class="del"><del>69</del></ins><span class="slash">/</span><del class="old-price">100</del><span class="bought">675</span></li></ul><div class="privilege-price privilege-price-active"><ins>65.5</ins></div></a></section><section class="w-goods"  ><a href="/bj/deal/jyierssq"mon="element=2335328&position=11&page_index=1&area=normal_list&search_result_no="class="clearfix" name="10" id="10"><div class="img-wrapper"><span class="tag-free-reservation"></span><img src="http://newebapp0.nuomi.bdimg.com/static/common/img/img_placeholder_small_d11b7fc.png" data-src="http://S2.nuomi.bdimg.com/upload/deal/2014/11/V_T/2335328-xsrsj2am85-25900757159181362.jpg" width="118" height="79" /></div><ul><li class="title"><span class="store ">11分店</span><span class="item-name">豪尚豪牛排馆</span></li><li class="info"><img src="http://img.hao123.com/data/68e63b9d29244e1ae7b12109e042d1ae" class='activity-icon'/>单人餐！环境优雅舒适，服务热情周到，期待您的光临！</li><li class="others"><ins>43.8</ins><span class="slash">/</span><del class="old-price">90</del><span class="bought">983</span></li></ul></a></section><section class="w-goods"  ><a href="/bj/deal/9razafu5"mon="element=575080&position=12&page_index=1&area=normal_list&search_result_no="class="clearfix" name="11" id="11"><div class="img-wrapper"><span class="tag-free-reservation"></span><img src="http://newebapp0.nuomi.bdimg.com/static/common/img/img_placeholder_small_d11b7fc.png" data-src="http://S1.nuomi.bdimg.com/upload/deal/2014/1/V_T/575080-1389854787379.jpg" width="118" height="79" /></div><ul><li class="title"><span class="store ">77分店</span><span class="item-name">和合谷</span></li><li class="info"><img src="http://img.hao123.com/data/68e63b9d29244e1ae7b12109e042d1ae" class='activity-icon'/>价值20元代金券！全场正价菜品通用，马年鸿运，马上开饭！京津冀79店通用！</li><li class="others"><ins>15.8</ins><span class="slash">/</span><del class="old-price">20</del><span class="bought">89602</span></li></ul></a></section><section class="w-goods"  ><a href="/bj/deal/mytt0ueh"mon="element=1118783&position=13&page_index=1&area=normal_list&search_result_no="class="clearfix" name="12" id="12"><div class="img-wrapper"><span class="tag-free-reservation"></span><img src="http://newebapp0.nuomi.bdimg.com/static/common/img/img_placeholder_small_d11b7fc.png" data-src="http://S0.nuomi.bdimg.com/upload/deal/2014/6/V_T/1118783-rfx8trjxpk-11924322451956588.jpg" width="118" height="79" /></div><ul><li class="title"><span class="store ">48分店</span><span class="item-name">真功夫</span></li><li class="info">冬（香）菇鸡腿肉饭+香滑蒸蛋！连锁中式快餐，美味套餐，超值实惠！</li><li class="others"><ins>13</ins><span class="slash">/</span><del class="old-price">19</del><span class="bought">26671</span></li></ul></a></section><section class="w-goods"  ><a href="/bj/deal/djosjdbr"mon="element=1049400&position=14&page_index=1&area=normal_list&search_result_no="class="clearfix" name="13" id="13"><div class="img-wrapper"><span class="tag-free-reservation"></span><img src="http://newebapp0.nuomi.bdimg.com/static/common/img/img_placeholder_small_d11b7fc.png" data-src="http://S2.nuomi.bdimg.com/upload/deal/2014/5/V_T/1049400-nj8cu9f22p-10861769248021992.jpg" width="118" height="79" /></div><ul><li class="title"><span class="store ">4分店</span><span class="item-name">蟹老宋</span></li><li class="info"><img src="http://img4.hao123.com/data/cedbf669900124f814b3a3194364241a" class='activity-icon'/><img src="http://img.hao123.com/data/301.png" class='activity-icon'/>2-3人餐！特色菜品，醇、鲜、香、辣，食，回味悠长！</li><li class="others"><ins class="del"><del>86</del></ins><span class="slash">/</span><del class="old-price">331</del><span class="bought">5547</span></li></ul><div class="privilege-price privilege-price-active"><ins>81.7</ins></div></a></section><section class="w-goods"  ><a href="/bj/deal/zv9aujxc"mon="element=1675355&position=15&page_index=1&area=normal_list&search_result_no="class="clearfix" name="14" id="14"><div class="img-wrapper"><span class="tag-free-reservation"></span><img src="http://newebapp0.nuomi.bdimg.com/static/common/img/img_placeholder_small_d11b7fc.png" data-src="http://S0.nuomi.bdimg.com/upload/deal/2014/8/V_T/1675355-cbbinv95yi-18702365571929583.jpg" width="118" height="79" /></div><ul><li class="title"><span class="store ">43分店</span><span class="item-name">宏状元</span></li><li class="info"><img src="http://img.hao123.com/data/68e63b9d29244e1ae7b12109e042d1ae" class='activity-icon'/>价值50元通用代金券！你最爱的邻家餐厅，京城粥界佼佼者，精心烹制，一举天下知！</li><li class="others"><ins>40</ins><span class="slash">/</span><del class="old-price">50</del><span class="bought">12315</span></li></ul></a></section><section class="w-goods"  ><a href="/w/deal/qwo7wsz5"mon="element=1540061&position=16&page_index=1&area=normal_list&search_result_no="class="clearfix" name="15" id="15"class="clearfix" name="15" id="15"><div class="img-wrapper"><img src="http://newebapp0.nuomi.bdimg.com/static/common/img/img_placeholder_small_d11b7fc.png" data-src="http://S1.nuomi.bdimg.com/upload/deal/2014/8/V_T/1540061-745zjistqe-17351248533929373.jpg" width="118" height="79" /></div><ul><li class="title"><span class="item-name">三只松鼠</span></li><li class="info"><img src="http://img.hao123.com/data/68e63b9d29244e1ae7b12109e042d1ae" class='activity-icon'/>坚果组合580g/套！碧根果+夏威夷果+炭烧腰果！包邮！</li><li class="others"><ins>48.5</ins><span class="slash">/</span><del class="old-price">99</del><span class="bought">20118</span></li></ul></a></section><section class="w-goods"  ><a href="/bj/deal/t86uyfxm"mon="element=2412674&position=17&page_index=1&area=normal_list&search_result_no="class="clearfix" name="16" id="16"><div class="img-wrapper"><span class="tag-free-reservation"></span><img src="http://newebapp0.nuomi.bdimg.com/static/common/img/img_placeholder_small_d11b7fc.png" data-src="http://e.hiphotos.baidu.com/nuomi/wh%3D230%2C140/sign=7cdd29a07e1ed21b799c26e79e5ef1f5/e4dde71190ef76c65ca643799e16fdfaaf516768.jpg" width="118" height="79" /></div><ul><li class="title"><span class="store ">多商圈</span><span class="item-name">情歌汗蒸</span></li><li class="info"><img src="http://img4.hao123.com/data/cedbf669900124f814b3a3194364241a" class='activity-icon'/>燕莎店汗蒸淋浴套餐！舒缓身心，缓解疲劳，带给你内外合一的美丽！</li><li class="others"><ins class="del"><del>9</del></ins><span class="slash">/</span><del class="old-price">99</del><span class="bought">1881</span></li></ul><div class="privilege-price privilege-price-active"><ins>8.55</ins></div></a></section><section class="w-goods"  ><a href="/bj/deal/bboyysfh"mon="element=2291492&position=18&page_index=1&area=normal_list&search_result_no="class="clearfix" name="17" id="17"><div class="img-wrapper"><span class="tag-free-reservation"></span><img src="http://newebapp0.nuomi.bdimg.com/static/common/img/img_placeholder_small_d11b7fc.png" data-src="http://e.hiphotos.baidu.com/nuomi/wh%3D230%2C140/sign=9ae7e0b7b78f8c54e386cd2d091901c4/6a600c338744ebf82ffa4266daf9d72a6159a7db.jpg" width="118" height="79" /></div><ul><li class="title"><span class="store ">多商圈</span><span class="item-name">蜀小牛冒菜</span></li><li class="info"><img src="http://img.hao123.com/data/68e63b9d29244e1ae7b12109e042d1ae" class='activity-icon'/>价值30元代金券！精心烹制，菜品丰富，色香味俱全，营养美味！</li><li class="others"><ins>15</ins><span class="slash">/</span><del class="old-price">30</del><span class="bought">165</span></li></ul></a></section><section class="w-goods"  ><a href="/bj/deal/nhphssyb"mon="element=1802902&position=19&page_index=1&area=normal_list&search_result_no="class="clearfix" name="18" id="18"><div class="img-wrapper"><span class="tag-free-reservation"></span><img src="http://newebapp0.nuomi.bdimg.com/static/common/img/img_placeholder_small_d11b7fc.png" data-src="http://S1.nuomi.bdimg.com/upload/deal/2014/9/V_T/1802902-ktwx6ze7e9-19253533438657388.jpg" width="118" height="79" /></div><ul><li class="title"><span class="store ">多商圈</span><span class="item-name">京牌烤猪蹄</span></li><li class="info"><img src="http://img4.hao123.com/data/cedbf669900124f814b3a3194364241a" class='activity-icon'/>价值10元代金券！新鲜猪蹄，秘制调料，猛火烤制，口感细腻，营养健康！节假日通用！</li><li class="others"><ins class="del"><del>9</del></ins><span class="slash">/</span><del class="old-price">10</del><span class="bought">1197</span></li></ul><div class="privilege-price privilege-price-active"><ins>8.07</ins></div></a></section><section class="w-goods"  ><a href="/bj/deal/zcrzpeap"mon="element=2483462&position=20&page_index=1&area=normal_list&search_result_no="class="clearfix" name="19" id="19"><div class="img-wrapper"><span class="tag-free-reservation"></span><img src="http://newebapp0.nuomi.bdimg.com/static/common/img/img_placeholder_small_d11b7fc.png" data-src="http://S1.nuomi.bdimg.com/upload/deal/2014/11/V_T/2483462-w46mxvcu36-9338840055845572.jpg" width="118" height="79" /></div><ul><li class="title"><span class="store ">4分店</span><span class="item-name">万达影城</span></li><li class="info"><img src="http://img.hao123.com/data/68e63b9d29244e1ae7b12109e042d1ae" class='activity-icon'/>优享卡1张！豪华影音设备，国内外大片随心看，开启震撼的电影之旅！</li><li class="others"><ins>56</ins><span class="slash">/</span><del class="old-price">130</del><span class="bought">270</span></li></ul></a></section></div>
+<div class="w-viewmore clearfix" mon="action=click&element_type=nav">
+<a id="j-viewmore" href="/webapp/tuan/list" class="op-btn more" mon="area=findAll&element=findAll">查看全部团购</a>
+<a href="javascript:;" id="j-gotop" class="op-btn gotop" mon="area=toTop&element=toTop">回到顶部</a>
+</div>
+</article>
+
+<footer class="footer" ><section class="login"><div class="login-wrap" ><link id="passport_css" rel="passport_css" href="http://newebapp0.nuomi.bdimg.com/static/login/widget/update_passport/passport.css" /><a href="javascript:void(0);" class="btn login-btn" mon="area=login" id="login-button">登录</a><a href="javascript:void(0);" class="btn" mon="area=register" id="register-button">注册</a></div><div class="city-wrap"><a class="btn text" href="/city?returnUrl=%2F" mon="area=botCity"><span>城市：</span></a><a href="/city?returnUrl=%2F" class="btn"  mon="area=botCity"><span>北京</span><span></span></a></div></section><section class="links" mon="area=botNav"><a href="/" class="link" mon="element=home">首页</a><a href="http://www.nuomi.com?jfd" class="link" mon="element=pc">电脑版</a><a href="http://download.nuomi.com/d?ddyh" class="link" mon="element=app">客户端</a><a href="http://uxsurvey.baidu.com/wireless/index.php?sid=51273&lang=zh-Hans&style=x" class="link" mon="element=survey">满意度调研</a><a href="/webapp/common/staticfeedback" class="link" mon="element=feedback">信息反馈</a><a href="/webapp/common/statichelp" class="link" mon="element=help">帮助</a></section><section class="copyright">&copy;nuomi.com 京ICP证060807号</section></footer>
+
+
+<link rel="passport_header_css" href="http://newebapp0.nuomi.bdimg.com/static/login/widget/update_passport/passport.css" />
+<span id="update_passport_dialog_callback_wrap" style="display:none;">
+<img class="u-title-img" data-src="http://newebapp2.nuomi.bdimg.com/static/login/widget/update_passport/image/success_400be3e.png" >
+<div class="u-container">
+<p class="u-title">恭喜您，账号升级成功！</p>
+<p class="u-title"></p>
+<p class="u-title small">以后可以用以下百度账号登录糯米</p>
+</div>
+</span>
+
+
+
+
+<script type="text/javascript">
+	//F.context('cityInfo', null);
+	F.context('cityInfo', {"map_id":"131","pid":"100000000","is_show":"7","areaId":"100010000","areaName":"\u5317\u4eac\u5e02","shortName":"\u5317\u4eac","areaSpell":"beijing","order":"100","domainUrl":"bj"});
+	F.context('user', null);
+	F.context('page', "index");
+    
+    /* 来源渠道值 */
+    F.context("channel", "webapp");
+    F.context("channel_content", "");
+
+    // s 值
+    F.context('key_s', "");
+
+    //new add
+    F.context('areaCode', "100010000");
+</script>
+
+<script>
+        /* 配置需要统计的模块 */
+        window.alogObjectConfig = {
+            product: '273',
+            page: '273_229',
+            speed: {
+                sample: '0.8'
+            },
+            monkey: {
+                sample: '0.8'
+            },
+            exception: {
+                sample: '0.8'
+            },
+            feature: {
+                sample: '0.8'
+            },
+            csp: {
+                sample: '0.8',
+                'default-src': [
+                    {match: '*bae.baidu.com', target: 'Accept,Warn'},
+                    {match: '*.baidu.com,*.bdstatic.com,*.bdimg.com,localhost,*.hao123.com,*.hao123img.com', target: 'Accept'},
+                    {match: /^(127|172|192|10)(\.\d+){3}$/, target: 'Accept'},
+                    {match: '*', target: 'Accept,Warn'}
+                ]
+            }
+        };
+        void function(e,t,n,a,r,o){function c(t){e.attachEvent?e.attachEvent("onload",t,!1):e.addEventListener&&e.addEventListener("load",t)}function i(e,n,a){a=a||15;var r=new Date;r.setTime((new Date).getTime()+1e3*a),t.cookie=e+"="+escape(n)+";path=/;expires="+r.toGMTString()}function s(e){var n=t.cookie.match(new RegExp("(^| )"+e+"=([^;]*)(;|$)"));return null!=n?unescape(n[2]):null}function d(){var e=s("PMS_JT");if(e){i("PMS_JT","",-1);try{e=eval(e)}catch(n){e={}}e.r&&t.referrer.replace(/#.*/,"")!=e.r||alog("speed.set","wt",e.s)}}c(function(){alog("speed.set","lt",+new Date),r=t.createElement(n),r.async=!0,r.src=a+"?v="+~(new Date/864e5),o=t.getElementsByTagName(n)[0],o.parentNode.insertBefore(r,o)}),d()}(window,document,"script","http://img.baidu.com/hunter/alog/dp.mobile.min.js");
+    </script>
+</body><script type="text/javascript" src="http://newebapp2.nuomi.bdimg.com/static/common/pkg/common_js_0_2d40e7a.js"></script>
+<script type="text/javascript">require.resourceMap({"res":{"common:static/lib/mod.js":{"url":"http://newebapp0.nuomi.bdimg.com/static/common/lib/mod_bb4183f.js","pkg":"common:p10"},"common:widget/lib/gmu/zepto/zepto.js":{"url":"http://newebapp0.nuomi.bdimg.com/static/common/widget/lib/gmu/zepto/zepto_02d6b51.js","pkg":"common:p10"},"common:widget/ui/cookie/cookie.js":{"url":"http://newebapp1.nuomi.bdimg.com/static/common/widget/ui/cookie/cookie_2709005.js","pkg":"common:p10"},"common:widget/ui/dialog/dialog.js":{"url":"http://newebapp0.nuomi.bdimg.com/static/common/widget/ui/dialog/dialog_9a64868.js","pkg":"common:p10"},"common:widget/ui/http/http.js":{"url":"http://newebapp2.nuomi.bdimg.com/static/common/widget/ui/http/http_dfddabb.js","pkg":"common:p10"},"common:widget/ui/lazyload/lazyload.js":{"url":"http://newebapp2.nuomi.bdimg.com/static/common/widget/ui/lazyload/lazyload_52af8ed.js","pkg":"common:p10","deps":["common:widget/lib/gmu/zepto/zepto.js"]},"common:widget/ui/phone_popup/phone_popup.js":{"url":"http://newebapp1.nuomi.bdimg.com/static/common/widget/ui/phone_popup/phone_popup_0415423.js","pkg":"common:p10","deps":["common:widget/lib/gmu/zepto/zepto.js"]},"common:widget/ui/toast/toast.js":{"url":"http://newebapp2.nuomi.bdimg.com/static/common/widget/ui/toast/toast_ebbd0ec.js","pkg":"common:p10"},"common:widget/ui/usertrack/usertrack.js":{"url":"http://newebapp2.nuomi.bdimg.com/static/common/widget/ui/usertrack/usertrack_96de45b.js","pkg":"common:p10","deps":["common:widget/lib/gmu/zepto/zepto.js","common:widget/ui/cookie/cookie.js"]},"common:widget/banner_swipe/banner_swipe.js":{"url":"http://newebapp0.nuomi.bdimg.com/static/common/widget/banner_swipe/banner_swipe_2541b38.js","pkg":"common:p11"},"common:widget/ui/map_convert/map_convert.js":{"url":"http://newebapp2.nuomi.bdimg.com/static/common/widget/ui/map_convert/map_convert_2fb078c.js","pkg":"common:p11"},"common:widget/ui/map_geolocation/map_geolocation.js":{"url":"http://newebapp2.nuomi.bdimg.com/static/common/widget/ui/map_geolocation/map_geolocation_44a64f2.js","pkg":"common:p11","deps":["common:widget/ui/map_convert/map_convert.js","common:widget/ui/usertrack/usertrack.js","common:widget/ui/cookie/cookie.js"]},"common:widget/ui/storage/storage.js":{"url":"http://newebapp1.nuomi.bdimg.com/static/common/widget/ui/storage/storage_c8e8d52.js","pkg":"common:p11"},"common:widget/ui/suggestion/suggestion.js":{"url":"http://newebapp2.nuomi.bdimg.com/static/common/widget/ui/suggestion/suggestion_3b67483.js","pkg":"common:p11","deps":["common:widget/lib/gmu/zepto/zepto.js","common:widget/ui/usertrack/usertrack.js","common:widget/ui/http/http.js","common:widget/ui/storage/storage.js"]},"common:widget/ui/geolocation/geolocation.js":{"url":"http://newebapp0.nuomi.bdimg.com/static/common/widget/ui/geolocation/geolocation_fe4cd11.js","pkg":"common:p11","deps":["common:widget/ui/map_geolocation/map_geolocation.js","common:widget/lib/gmu/zepto/zepto.js"]},"list:widget/recommend_goods/recommend_goods.js":{"url":"http://newebapp2.nuomi.bdimg.com/static/list/widget/recommend_goods/recommend_goods_92da1d9.js","pkg":"list:p6","deps":["common:widget/lib/gmu/zepto/zepto.js"]},"list:widget/ui/geolocation/geolocation.js":{"url":"http://newebapp0.nuomi.bdimg.com/static/list/widget/ui/geolocation/geolocation_b2106a8.js","pkg":"list:p6","deps":["common:widget/lib/gmu/zepto/zepto.js","common:widget/ui/storage/storage.js","common:widget/ui/geolocation/geolocation.js","common:widget/ui/dialog/dialog.js","common:widget/ui/cookie/cookie.js","common:widget/ui/usertrack/usertrack.js"]},"common:widget/sync_bduss/sync_bduss.js":{"url":"http://newebapp1.nuomi.bdimg.com/static/common/widget/sync_bduss/sync_bduss_99856a0.js","pkg":"common:p21","deps":["common:widget/lib/gmu/zepto/zepto.js"]},"common:widget/ui/scrollstop/scrollstop.js":{"url":"http://newebapp2.nuomi.bdimg.com/static/common/widget/ui/scrollstop/scrollstop_9db814d.js","pkg":"common:p21","deps":["common:widget/lib/gmu/zepto/zepto.js"]},"common:widget/ui/voucher_popup/voucher_popup.js":{"url":"http://newebapp0.nuomi.bdimg.com/static/common/widget/ui/voucher_popup/voucher_popup_a4ff0fe.js","pkg":"common:p21","deps":["common:widget/lib/gmu/zepto/zepto.js"]}},"pkg":{"common:p10":{"url":"http://newebapp2.nuomi.bdimg.com/static/common/pkg/common_js_0_2d40e7a.js"},"common:p11":{"url":"http://newebapp1.nuomi.bdimg.com/static/common/pkg/common_js_1_f1d2de2.js"},"list:p6":{"url":"http://newebapp1.nuomi.bdimg.com/static/list/pkg/list_js_1_218ab00.js"},"common:p21":{"url":"http://newebapp1.nuomi.bdimg.com/static/common/pkg/common_other_js_6cf18da.js"}}});</script><script type="text/javascript" src="http://newebapp1.nuomi.bdimg.com/static/common/pkg/common_js_1_f1d2de2.js"></script>
+<script type="text/javascript">!function(){		require.async('common:widget/lib/gmu/zepto/zepto.js', function($){
+			$(function(){
+				alog && alog('speed.set', 'drt', +new Date);
+            });
+		});
+	}();
+!function(){   require.async(["common:widget/lib/gmu/zepto/zepto.js", "common:widget/ui/cookie/cookie.js"], function($, Cookie){
+    var $el = $("#header-user");
+    var url = "http:\/\/wappass.baidu.com\/passport\/login?tpl=nuomi&u=http%3A%2F%2Fm.nuomi.com%2Fwebapp%2Fuser%2Fbindaccount&smsLoginLink=1&authsite=1&time=1417892623&skin=http%3A%2F%2Fm.nuomi.com%2Fstatic%2Flogin%2Fwidget%2Fupdate_passport%2Fpassport.css";
+    var backurl = "\/webapp\/user\/mine";
+    var type    ="";
+
+    if ($el.length == 0 || url.length == 0){
+       return;
+    }
+
+    options={};
+    options.expires=1;
+    options.domain=".nuomi.com";
+    $el.on("click",function(e){
+      if(backurl){
+        Cookie.set("back_url", backurl,options);
+      }
+      else
+        Cookie.set("back_url", window.location.href,options);            
+    });
+    
+    //种下返回页Cookie
+    
+    $el.on("click", function(){
+      window.location.href = url;
+    });
+  });
+}();
+!function(){require.async(["common:widget/ui/suggestion/suggestion.js", "common:widget/lib/gmu/zepto/zepto.js", "common:widget/ui/usertrack/usertrack.js"], function (Sug, $, usertrack){
+    // For Smarty
+	
+    var hotbrand = ["\u706b\u9505","\u81ea\u52a9\u9910","\u4fbf\u5b9c\u574a","\u8001\u8bda\u4e00\u9505","\u4e01\u4e01\u6d0b\u56de\u8f6c\u81ea\u52a9\u706b\u9505"];
+	if (hotbrand == null) {
+        hotbrand = new Array();
+    }
+
+    // 最多显示12个
+    if(hotbrand.length > 12){
+        hotbrand.length = 12;
+    }
+	
+	//hotword统计的rid
+	var hotword_rid = "130e7b7d81f8bd6a5495207ed9d85206";
+	
+    // For Html
+    var $searchInput    = $(".j-search-input"),
+        $suggestWrapper = $(".j-search-suggestion"),
+        $searchClearBtn = $("#j-clear-input"),
+        $searchForm     = $(".j-search-form");
+        
+    // For Css      
+    var clearBtnClassName = "clean";
+    
+    // For nsClick 与统计解耦
+    var sendStr = 'action=search&element_type=filter';
+    var nsSearchClearBtn  = sendStr+"&area=searchFuc&element=clearInput",    
+        nsSearchSubmitBtn = sendStr+"&area=search&element=###";
+        
+    // For Url  与后端Url解耦
+    
+    // 绑定 sug 功能
+    Sug.suggest({
+        $input      : $searchInput,
+        $wrapper    : $suggestWrapper,  
+        hotbrand    : hotbrand, 
+		hotword_rid	: hotword_rid
+    });
+    
+    // 是否展示 清除输入按钮
+    $searchInput.on("input", function (){
+        var toggleOn;
+        
+        if (this.value !== "") {
+            toggleOn = true;
+        } else {
+            toggleOn = false;
+        }
+        
+        $searchClearBtn.toggleClass(clearBtnClassName, toggleOn);
+
+    });
+    
+
+    // 清除输入 功能
+    $searchClearBtn.on("tap", function (){
+        usertrack.send(nsSearchClearBtn);
+        $searchInput.val("").trigger("input");
+    });
+    
+    // 代理用户提交行为
+    $searchForm.on("submit", function(evt){
+        evt.preventDefault();
+        
+        var value = $searchInput.val();
+    
+        var nsContent = nsSearchSubmitBtn.replace("###", value || "noKeyWord");
+        usertrack.send(nsContent);
+
+        Sug.search(value);
+    });
+});
+}();
+!function(){	document.addEventListener("DOMContentLoaded", function(){
+		require.async(['common:widget/lib/gmu/zepto/zepto.js', 'common:widget/banner_swipe/banner_swipe.js', "common:widget/ui/usertrack/usertrack.js"], function ($, Swipe, usertrack) {
+			
+			$("#j-sliders").on("click", "a", function () {
+				var $self = $(this);
+				//usertrack.send($self.attr("mon"), this);
+				usertrack.location($self.attr("href"));
+				return false;
+			});
+
+			new Swipe(document.getElementById("j-sliders"), {
+				startSlide: 	1 - 1, 
+				continuous: 	"1" ? true : false, 
+				auto: 			"5000" ? parseInt("5000", 10) : 0,
+				addPointers: 	"1" ? true : false
+			});
+		});
+	});
+	}();
+!function(){	/*判断statParam是否为空*/
+	require.async(["common:widget/lib/gmu/zepto/zepto.js"],function($){
+		var statParam = "s=e4f4ba8d3290184788bc773d1643b8f0";
+		if(statParam){
+			$(".w-goods a").live("click",function(e){
+				var ajaxStatParam = $(this).parent().data("s");
+				/*判断是否为ajax分页的数据*/
+				if(ajaxStatParam){
+					statParam = ajaxStatParam;
+				}
+				var self = $(this);
+				e.preventDefault(), window.location = $(this).attr("href")+"?"+statParam;
+			});
+		}
+	});
+}();
+!function(){require.async(['common:widget/lib/gmu/zepto/zepto.js', "common:widget/ui/usertrack/usertrack.js"], function($, usertrack){
+    //返回顶部按钮逻辑
+    $('#j-gotop').on("click", function () {
+        <!-- usertrack.send($(this).attr("mon"), this); -->
+        window.scrollTo(0, 0); 
+    });
+
+	//显示更多按钮逻辑
+	});
+}();
+!function(){        require.async(["common:widget/lib/gmu/zepto/zepto.js", "common:widget/ui/lazyload/lazyload.js", "list:widget/ui/geolocation/geolocation.js"], function ($, lazyload, geo) {
+            $("#j-goods-container img").lazyload({threshold: 0, supportAsync: true});
+
+            geo.getPosition();
+        });
+    }();
+!function(){   require.async(["common:widget/lib/gmu/zepto/zepto.js", "common:widget/ui/cookie/cookie.js"], function($, Cookie){
+    var $el = $("#login-button");
+    var url = "http:\/\/wappass.baidu.com\/passport\/login?tpl=nuomi&u=http%3A%2F%2Fm.nuomi.com%2Fwebapp%2Fuser%2Fbindaccount&smsLoginLink=1&authsite=1&time=1417892623&skin=http%3A%2F%2Fm.nuomi.com%2Fstatic%2Flogin%2Fwidget%2Fupdate_passport%2Fpassport.css";
+    var backurl = "";
+    var type    ="";
+
+    if ($el.length == 0 || url.length == 0){
+       return;
+    }
+
+    options={};
+    options.expires=1;
+    options.domain=".nuomi.com";
+    $el.on("click",function(e){
+      if(backurl){
+        Cookie.set("back_url", backurl,options);
+      }
+      else
+        Cookie.set("back_url", window.location.href,options);            
+    });
+    
+    //种下返回页Cookie
+    
+    $el.on("click", function(){
+      window.location.href = url;
+    });
+  });
+}();
+!function(){   require.async(["common:widget/lib/gmu/zepto/zepto.js", "common:widget/ui/cookie/cookie.js"], function($, Cookie){
+    var $el = $("#register-button");
+    var url = "http:\/\/wappass.baidu.com\/passport\/reg?tpl=nuomi&u=http%3A%2F%2Fm.nuomi.com%2Fwebapp%2Fuser%2Faddaccount&time=1417892623&skin=http%3A%2F%2Fm.nuomi.com%2Fstatic%2Flogin%2Fwidget%2Fupdate_passport%2Fpassport.css";
+    var backurl = "";
+    var type    ="";
+
+    if ($el.length == 0 || url.length == 0){
+       return;
+    }
+
+    options={};
+    options.expires=1;
+    options.domain=".nuomi.com";
+    $el.on("click",function(e){
+      if(backurl){
+        Cookie.set("back_url", backurl,options);
+      }
+      else
+        Cookie.set("back_url", window.location.href,options);            
+    });
+    
+    //种下返回页Cookie
+    
+    $el.on("click", function(){
+      window.location.href = url;
+    });
+  });
+}();
+!function(){    require.async(["common:widget/lib/gmu/zepto/zepto.js", "common:widget/ui/cookie/cookie.js", "common:widget/ui/dialog/dialog.js"], function ($, Cookie, Dialog) {
+        var hasSuccess = Cookie.get("bind_success");
+        if (!hasSuccess) {
+            return;
+        }
+
+        //清除一下
+        Cookie.remove("bind_success");
+
+        var DIALOG_WIDTH = 280;
+        //获取模板
+        var $upDialog = $("#update_passport_dialog_callback_wrap");
+        var TMPL = $upDialog.html();
+            TMPL = TMPL.replace('data-src','src');
+        $upDialog.remove();
+        var dialogObject = Dialog({
+                hideHeader : true,
+                content : TMPL,
+                width : DIALOG_WIDTH,
+                showCloseBtn : false,
+                onClose : function () {
+                    $(".u-close").remove();
+                    return false;
+                }
+            });
+
+        var $dialog = $(dialogObject.target);
+        $dialog.attr("id", "update_passport_dialog_callback");
+        var $closeBtn = $('<div class="u-close"></div>').appendTo($("body"));
+        
+        function _fix_dialog(){
+            var mt =  0 - $dialog.height()/2;
+            
+            $dialog.css({"margin-top" : mt});
+            var cm_top = parseInt(mt) - 10 + "px";
+            var cm_left = parseInt($dialog.css("margin-left")) + DIALOG_WIDTH - 15 + "px";
+            
+            $closeBtn
+            .css({
+                "margin-top" : cm_top,
+                "margin-left" : cm_left,
+            });
+        };
+        //无法准确预计图片何时加载完成，因此监听image load的同时，200毫秒后再次计算一次
+        $dialog.find(".u-title-img").on("load", function(){
+            _fix_dialog();
+        });
+        setTimeout(function () {
+            _fix_dialog();
+        }, 200);
+        
+        //set close button
+        var cm_top = parseInt($dialog.css("margin-top")) - 10 + "px";
+        var cm_left = parseInt($dialog.css("margin-left")) + DIALOG_WIDTH - 15 + "px";
+        $closeBtn
+        .on("click", function () {
+            dialogObject.destory();
+            $closeBtn.remove();
+        });
+
+        $dialog.on("touchmove", function (event) {
+            event.preventDefault();
+            event.stopPropagation();
+        });
+
+        var userPhone = "";
+        var userEmail = "";
+        var userName = "";
+
+        var $container = $dialog.find(".u-container");
+        if (userPhone && userPhone != 0) {
+            userPhone = userPhone.substring(0, 3) + "****" + userPhone.slice(-4);
+            $container.append('<p class="u-title small low">' + userPhone + '</p>');
+        }
+        if (userEmail) {
+            var sp_email = userEmail.split("@");
+            if (sp_email.length === 2) {
+                if (sp_email[0].length > 4) {
+                    var enStr = "";
+                    for (var i = sp_email[0].length - 4; i--; i > 0) {
+                        enStr += "*";
+                    }
+                    userEmail = sp_email[0].slice(0, 2) + enStr + sp_email[0].slice(-2) + "@" + sp_email[1];
+                } else {
+                    var enStr = "";
+                    for (var i = sp_email[0].length - 2; i--; i > 0) {
+                        enStr += "*";
+                    }
+                    userEmail = sp_email[0].slice(0, 2) + enStr + "@" + sp_email[1];
+                }
+                $container.append('<p class="u-title small low">' + userEmail + '</p>');
+            }
+        }
+        if (userName) {
+            $container.append('<p class="u-title small low">' + userName + '</p>');
+        }
+    });
+}();
+!function(){			if (navigator && navigator.standalone) {
+				require.async("common:widget/lib/gmu/zepto/zepto.js", function($) {
+					$(document).on("click", "a", function(e){
+						e.preventDefault(); 
+						location.href = $(e.currentTarget).attr("href");
+					});
+				});
+			}
+		}();
+!function(){	require.async(['common:widget/lib/gmu/zepto/zepto.js', 'common:widget/ui/usertrack/usertrack.js'], function($, usertrack){
+		// 初始化点击监听
+		usertrack.init();
+		// 发送pv
+		usertrack.send({
+			//position : "index",
+			action : "show"
+		});
+		usertrack.register(".ns-track[mon]"); //click日志监听，非a[mod]情况
+	});
+    
+}();
+!function(){		var $ = require('common:widget/lib/gmu/zepto/zepto.js'),
+			Http = require('common:widget/ui/http/http.js'),
+			Cookie = require("common:widget/ui/cookie/cookie.js"),
+			Dialog = require("common:widget/ui/dialog/dialog.js");
+
+			$(function(){
+				
+				if(Cookie.get('giftcardNotify') != null && Cookie.get('giftcardNotify') == 1){
+					Cookie.remove('giftcardNotify');
+					Dialog({
+			            hideHeader: true,
+			            content: '<div class="dialog_img"></div><p class="active_words">恭喜您获得<strong>神秘</strong>代金券大礼包<br/>快去团购吧！</p><div class="dialog_btn_wrap"><a href="javascript:void(0);" id="ui-dialog-ok" class="btn_goOn dialog_btn">关闭</a><a class="btn_goActive dialog_btn" href="http://m.nuomi.com/webapp/user/gcard?status=1">查看代金券</a></div>',
+			            showCloseBtn: false,
+			            clickOnMaskClose: true
+			        });
+				}
+				
+
+			});
+	
+	}();
+!function(){			require.async(["common:widget/sync_bduss/sync_bduss.js"],function(sync_bduss){
+				var logout_url = "http:\/\/wappass.baidu.com\/passport\/?logout&u=http%3A%2F%2Fm.nuomi.com%2Fwebapp%2Fuser%2Flogoutaccount&tpl=nuomi";
+				sync_bduss.init(logout_url);
+			});
+		}();</script><script type="text/javascript">(new Image()).src="http://static.tieba.baidu.com/tb/pms/img/st.gif?pid=242&v=2&fs=108dc8d,52ae723,b44d86f,2eff67f,2fb3565,6c10a75,864e5f1,e38b5a9,3f5ca5f&otherStr=7e47017,4d98353,522b50c,f707ad8,c3028bf,1363af3,d33a564,37eece5,aef93e9,eece438,bd2a35e,dc6147b,f3a0a56,6da1d66&page=list/page/index.tpl&sid=1417892623&hash=436a95bc8f&fid=baidunuomi";</script></html>
+<!--02229357050758827530120703-->
+<script> var _trace_page_logid = 0222935705; </script><!--02229357050528928522120703-->
+<script> var _trace_page_logid = 0222935705; </script>

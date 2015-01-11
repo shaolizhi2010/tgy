@@ -85,7 +85,7 @@ public class FolderService {
 
 		// check user exsit
 		UserService uService = new UserService();
-		folder.createDate = U.dateTime();
+		//folder.createDate = U.dateTime();
 
 		fDao.saveWithRef(folder);
 

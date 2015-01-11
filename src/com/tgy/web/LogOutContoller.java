@@ -22,9 +22,9 @@ public class LogOutContoller extends HttpServlet {
 		try { 
 			
 
-			Cookie cookie = new Cookie("lastLoginUserID", "");
-			cookie.setPath("/");
-			res.addCookie(cookie);
+//			Cookie cookie = new Cookie("lastLoginUserID", "");
+//			cookie.setPath("/");
+//			res.addCookie(cookie);
 			
 			//cancel auto login
 			Cookie cookie2 = new Cookie("lastPsCode", "");

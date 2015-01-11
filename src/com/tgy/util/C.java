@@ -3,6 +3,14 @@ package com.tgy.util;
 import java.math.BigDecimal;
 
 public interface C {
+	 int scoreCreatePage = 5;//添加
+	 int scoreCreatefolder = 5;//添加
+	 int scoreClick = 1; //点击
+	 int scoreShoucang = 20;//收藏得分
+	 int scoreUp = 10; //顶一下 得分
+	 int scoreDown = -10;//踩一下 得分
+	 int scoreNewUser = 20; //for group
+	 
 	
 	//权限控制
 	//0 自己，默认值

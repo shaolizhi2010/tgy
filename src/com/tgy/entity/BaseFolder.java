@@ -15,6 +15,8 @@ import org.mongodb.morphia.annotations.Transient;
 public class BaseFolder extends StateFulBaseEntity  implements Serializable,Comparable {
  
 	public String name;
+	public int sortOrder;//排序编号，1排在第一位。。。
+	
 	@Override
 	public boolean equals(Object obj) {
 

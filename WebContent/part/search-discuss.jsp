@@ -29,7 +29,7 @@
 
 	<div class=" container col-sm-12 sub-page-with-title"  >
 		<div class="sub-page-title">
-			<span>聊天 </span>
+			<span>... </span>
 		</div>
 		<div class="col-sm-12 sub-page-body no-padding" style="padding:0px;padding-top:10px; background-color: #fff;">
 		<%
@@ -67,7 +67,7 @@
 				%>
 				 <span style="color: #666;font-size: 10px;"><%= U.shortString(userName, 6) %></span>   
 			</a>
-			<p class=" col-sm-12 no-padding" style=" background-color:#f2f2f2;  padding:   10px;padding-left:  15px;  font-size: 12px;font-weight: normal;">
+			<p class=" col-sm-12 no-padding" style=" background-color:#f2f2f2;  padding:   10px;padding-left:  15px;  font-size: 12px;font-weight: normal;word-wrap: break-word; word-break: break-all;">
 					<%=U.addLinkForMessage( d.message)  %>  
 			</p>
 		</div>

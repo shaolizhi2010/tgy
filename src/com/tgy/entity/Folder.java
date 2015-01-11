@@ -11,6 +11,8 @@ import org.mongodb.morphia.annotations.Reference;
 @Entity
 public class Folder extends BaseFolder  implements Serializable,Comparable {
 	
+	
+	
 	@Reference(ignoreMissing = true, lazy = true)
 	public List<Page> pages; // 文件夹包含的页面
 

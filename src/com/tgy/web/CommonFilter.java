@@ -17,6 +17,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang3.StringUtils;
 
+import com.tgy.util.U;
+
 @WebFilter("/*")
 public class CommonFilter implements Filter {
 
@@ -42,6 +44,29 @@ public class CommonFilter implements Filter {
 			res.setHeader( "Location", "http://www.webhezi.com"+requestPage+queryString);   
 			res.setHeader( "Connection", "close" );   
 		}
+		
+		//redirect begin
+		/*
+		if(req.getRequestURL().indexOf("webhezi.com/美剧")>=0
+				||req.getRequestURL().indexOf("webhezi.com/u/5486a54cc79d6117fdb02e17")>=0
+				||req.getRequestURL().indexOf("webhezi.com/%E7%BE%8E%E5%89%A7")>=0){
+			U.forward(req, res, "/g/美剧");
+			//res.setStatus(301);   
+			//res.setHeader( "Location", "http://www.webhezi.com/g/美剧");   
+			//res.setHeader( "Connection", "close" ); 
+			return;
+		}
+		if(req.getRequestURL().indexOf("webhezi.com/电影")>=0
+				||req.getRequestURL().indexOf("webhezi.com/u/548da190c79d007151dd722f")>=0
+				||req.getRequestURL().indexOf("www.webhezi.com/%E7%94%B5%E5%BD%B1")>=0){
+			U.forward(req, res, "/g/电影");
+			//res.setStatus(301);   
+			//res.setHeader( "Location", "http://www.webhezi.com/g/电影");   
+			//res.setHeader( "Connection", "close" ); 
+			return;
+		}
+		*/
+		//redirect end
 		
 		//System.out.println("EncodingFilter : default charset is "+Charset.defaultCharset());
 		

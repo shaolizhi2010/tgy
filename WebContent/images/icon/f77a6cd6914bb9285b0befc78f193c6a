@@ -1,0 +1,641 @@
+
+
+
+
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ko" lang="ko">
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta http-equiv="Content-Type" content="text/html; CHARSET=utf-8" />
+<meta http-equiv="imagetoolbar" content="no" />
+<meta name="Author" content="LOTTE.COM hercules14/211" />
+<meta name="content" content="생활 속의 인터넷 쇼핑 Lotte.com, 즐거운 만남, 유익한 세일 정보, 다양한 브랜드 쇼핑을 할 수 있는 새로운 생활문화공간. One of the Best ON LINE shopping malls in Korea managed by Lotte.com. Absolute address on the real life, Everything on E-life." />
+<meta name="keywords" content="온라인 쇼핑, 백화점, 전자상거래, 헬로서울, 세일, 명품브랜드, 커뮤니티, 라이프 스타일, 문화정보, 인터넷, Lotte, Shopping, Seoul, Fashion, Culture, Home, Office, Book, Music, Leisure, Gift" />
+<meta name="description" content="생활 속의 인터넷 쇼핑 Lotte.com" />
+<meta name="viewport" content="user-scalable=yes, maximum-scale=1.0, width=1077" />
+
+<title>백화점을 인터넷으로 | 롯데닷컴 LOTTE.com</title>
+
+<link rel="shortcut icon" type="image/x-icon" href="http://image.lotte.com/lotte/images/common/favorite.ico"  />
+<link rel="stylesheet" type="text/css" href="/css/lotte.css" />
+<link rel="stylesheet" type="text/css" href="/css/product.css" />
+<link rel="stylesheet" type="text/css" href="/css/layout_2013.css" />
+<!-- 기업고객 맞춤서비스 -->
+<link rel="stylesheet" type="text/css" href="/css/customer_service.css" />
+<!-- //기업고객 맞춤서비스 -->
+
+<script type="text/javascript" src="/common/js/jquery-1.7.1.min.js"></script>
+<script type="text/JavaScript" src="/common/js/common.js"></script>
+<script type="text/JavaScript" src="/common/js/link.js"></script>
+<!--<script type="text/javascript" src="../common/js/signKoreaPKI.js"></script>-->
+<!--(D)삭제<script type="text/javascript" src="/common/js/flashLoader.js"></script>-->
+<script type="text/javascript" src="/common/js/lotte.util.js"></script>
+<script type="text/javascript" src="/common/js/search/search_comm.js"></script>
+<script type="text/javascript" src="/common/js/search/search.js"></script>
+<script type="text/javascript" src="/common/js/design.js"></script>
+
+</head>
+
+
+<body>
+<div class="error_wrap_re">
+  
+    <div class="error_header">
+    	
+        <h1><a href="http://www.lotte.com">
+        
+        <img src="http://image.lotte.com/lotte/images/service/logo_201303.gif" alt="LOTTE.COM" /></a></h1><hr />
+
+        <div class="h_left">
+            <h2>쇼핑에 불편을 드려 죄송합니다.</h2>
+            <ul>
+                <li class="h_txt01">
+                    <img src="http://image.lotte.com/lotte/images/service/txtNotFound_01.gif" alt="고객님께서 찾으시는 페이지를 찾을 수가 없습니다. 찾으시는 페이지 주소가 올바른지 다시 한번 확인 부탁드립니다." />
+                </li>
+                <li>
+                    <a href="#void" onclick="history.go(-1); return false;"><img src="http://image.lotte.com/lotte/images/service/btn_prev_NotFound_01.gif" alt="이전 페이지 돌아가기" /></a>
+                    
+                    <a href="http://www.lotte.com"><img src="http://image.lotte.com/lotte/images/service/btn_home_NotFound_01.gif" alt="홈페이지 바로가기" /></a>
+                	
+                </li>
+            </ul>           
+        </div><hr /><!-- // h_left -->
+        <div class="h_right">
+            <h2>롯데닷컴이 제공하는 특별한 쇼핑 찬스!</h2>
+            <ul>
+            	
+                <li>
+                    <a href="http://www.lotte.com/lotte/event/surprise/surprise.jsp?tracking=MOCA_13_01">
+                        <img src="http://image.lotte.com/lotte/images/service/shopC_01.gif" alt="[서프라이즈] 롯데닷컴의 자존심" />
+                    </a>
+                </li>
+				<li>
+                    <a href="http://www.lotte.com/planshop/viewPlanShopDetail.lotte?spdp_no=5367243&tracking=MOCA_13_02">
+                        <img src="http://image.lotte.com/lotte/images/service/shopC_geniedeal.gif" alt="[지니딜] 지니의 브랜드 매직쇼" />
+                    </a>
+                </li>
+                <li>
+                    <a href="http://www.lotte.com/lotte/event/superchance_1.jsp?tracking=MOCA_13_03">
+                        <img src="http://image.lotte.com/lotte/images/service/shopC_superchance.gif" alt="[슈퍼찬스] 똑똑한 쇼핑방법" />
+                    </a>
+                </li>
+                
+            </ul>
+        </div><!-- // h_right -->
+
+    </div><hr /><!-- // error_header -->
+
+    <div class="error_cont">
+
+        <div class="category_list">
+        	
+            <h2>롯데닷컴 전체보기</h2>
+            <ul class="list01">
+                <!-- 화장품 -->
+                <li>
+                    <div>
+                        <h3>화장품</h3>
+                        <dl>
+                            <dt class="tit_01"><a href="http://www.lotte.com/main/viewMain.lotte?dpml_no=1&tracking=MOCA_05_DOT">롯데닷컴</a></dt>
+                            <dd><a href="http://www.lotte.com/display/viewDispShop.lotte?disp_no=1677642&tracking=MOCA_01_DOT_01">화장품/이미용</a></dd>
+                        </dl>
+                        <dl>
+                            <dt class="tit_02"><a href="http://www.lotte.com/main/viewMain.lotte?dpml_no=2&tracking=MOCA_01_DEP">롯데백화점</a></dt>
+                            <dd><a href="http://www.lotte.com/display/viewDispShop.lotte?disp_no=1692074&tracking=MOCA_01_DEP_01">명품화장품 NO.1</a></dd>
+                        </dl>
+                        <dl>
+                            <dt class="tit_03"><a href="http://www.lotte.com/main/viewMain.lotte?dpml_no=11&tracking=MOCA_01_HOME">롯데홈쇼핑</a></dt>
+                            <dd><a href="http://www.lotte.com/display/viewDispShop.lotte?disp_no=5413127&tracking=MOCA_01_HOME_01">TV쇼핑 화장품</a></dd>
+                            <dd><a href="http://www.lotte.com/display/viewDispShop.lotte?disp_no=5413041&tracking=MOCA_01_HOME_02">카탈로그 화장품 </a></dd>
+                        </dl>
+                    </div>
+                </li>
+
+                <!-- 잡화/슈즈/명품 -->
+                <li>
+                    <div>
+                        <h3>잡화/슈즈/명품</h3>
+                        <dl>
+                            <dt class="tit_01"><a href="http://www.lotte.com/main/viewMain.lotte?dpml_no=1&tracking=MOCA_06_DOT">롯데닷컴</a></dt>
+                            <dd><a href="http://www.lotte.com/display/viewDispShop.lotte?disp_no=1675137&tracking=MOCA_06_DOT_01">패션잡화</a></dd>
+                            <dd><a href="http://www.lotte.com/display/viewDispShop.lotte?disp_no=1674767&tracking=MOCA_06_DOT_02">패션슈즈</a></dd>
+                            <dd><a href="http://www.lotte.com/display/viewDispShop.lotte?disp_no=1676186&tracking=MOCA_06_DOT_03">시계/보석/쥬얼리</a></dd>
+                            <dd><a href="http://www.lotte.com/display/viewDispShop.lotte?disp_no=1675880&tracking=MOCA_06_DOT_04">수입명품</a></dd>
+                        </dl>
+                        <dl>
+                            <dt class="tit_02"><a href="http://www.lotte.com/main/viewMain.lotte?dpml_no=2&tracking=MOCA_06_DEP">롯데백화점</a></dt>
+                            <dd><a href="http://www.lotte.com/display/viewDispShop.lotte?disp_no=1698054&tracking=MOCA_06_DEP_01">패션잡화</a></dd>
+                            <dd><a href="http://www.lotte.com/display/viewDispShop.lotte?disp_no=1514071&tracking=MOCA_06_DEP_02">슈즈/시계/쥬얼리</a></dd>
+                        </dl>
+                        <dl>
+                            <dt class="tit_04"><a href="http://www.lotte.com/main/viewMain.lotte?dpml_no=3&tracking=MOCA_06_YOUNG">영플라자</a></dt>
+                            <dd><a href="http://www.lotte.com/display/viewDispShop.lotte?disp_no=1696875&tracking=MOCA_06_YOUNG_01">패션잡화</a></dd>
+                        </dl>
+                        <dl>
+                            <dt class="tit_03"><a href="http://www.lotte.com/main/viewMain.lotte?dpml_no=11&tracking=MOCA_01_HOME">롯데홈쇼핑</a></dt>
+                            <dd><a href="http://www.lotte.com/display/viewDispShop.lotte?disp_no=5413084&tracking=MOCA_06_HOME_01">TV쇼핑 패션잡화/보석/시계</a></dd>
+                            <dd><a href="http://www.lotte.com/display/viewDispShop.lotte?disp_no=5412993&tracking=MOCA_06_HOME_02">카탈로그 패션잡화/보석/시계</a></dd>
+                        </dl>
+                    </div>
+                </li>
+
+                <!-- 영패션/유니섹스 -->
+                <li>
+                    <div>
+                        <h3>영패션/유니섹스</h3>
+                        <dl>
+                            <dt class="tit_01"><a href="http://www.lotte.com/main/viewMain.lotte?dpml_no=1&tracking=MOCA_02_DOT">롯데닷컴</a></dt>
+                            <dd><a href="http://www.lotte.com/display/viewDispShop.lotte?disp_no=1670756&tracking=MOCA_02_DOT_01">여성 트렌디의류</a></dd>
+                            <dd><a href="http://www.lotte.com/display/viewDispShop.lotte?disp_no=1672762&tracking=MOCA_02_DOT_02">진/유니섹스</a></dd>
+                        </dl>
+                        <dl>
+                            <dt class="tit_02"><a href="http://www.lotte.com/main/viewMain.lotte?dpml_no=2&tracking=MOCA_02_DEP">롯데백화점</a></dt>
+                            <dd><a href="http://www.lotte.com/display/viewDispShop.lotte?disp_no=1692766&tracking=MOCA_02_DEP_01">영캐쥬얼</a></dd>
+                            <dd><a href="#">진/유니섹스</a></dd>
+                        </dl>
+                        <dl>
+                            <dt class="tit_04"><a href="http://www.lotte.com/main/viewMain.lotte?dpml_no=3&tracking=MOCA_02_YOUNG">영플라자</a></dt>
+                            <dd><a href="http://www.lotte.com/display/viewDispShop.lotte?disp_no=1695234&tracking=MOCA_02_YOUNG_01">영캐주얼</a></dd>
+                            <dd><a href="http://www.lotte.com/display/viewDispShop.lotte?disp_no=1695987&tracking=MOCA_02_YOUNG_02">진/유니섹스</a></dd>
+                        </dl>
+                    </div>
+                </li>
+
+                <!-- 여성의류 -->
+                <li>
+                    <div>
+                        <h3>여성의류</h3>
+                        <dl>
+                            <dt class="tit_01"><a href="http://www.lotte.com/main/viewMain.lotte?dpml_no=1&tracking=MOCA_03_DOT">롯데닷컴</a></dt>
+                            <dd><a href="http://www.lotte.com/display/viewDispShop.lotte?disp_no=1670930&tracking=MOCA_03_DOT_01">여성 캐주얼/정장</a></dd>
+                            <dd><a href="http://www.lotte.com/display/viewDispShop.lotte?disp_no=1673641&tracking=MOCA_03_DOT_02">언더웨어</a></dd>
+                        </dl>
+                        <dl>
+                            <dt class="tit_02"><a href="http://www.lotte.com/main/viewMain.lotte?dpml_no=2&tracking=MOCA_03_DEP">롯데백화점</a></dt>
+                            <dd><a href="http://www.lotte.com/display/viewDispShop.lotte?disp_no=1694687&tracking=MOCA_03_DEP_01">여성 캐주얼/정장</a></dd>
+                            <dd><a href="http://www.lotte.com/display/viewDispShop.lotte?disp_no=1693211&tracking=MOCA_03_DEP_02">언더웨어</a></dd>
+                        </dl>
+                        <dl>
+                            <dt class="tit_03"><a href="http://www.lotte.com/main/viewMain.lotte?dpml_no=11&tracking=MOCA_01_HOME">롯데홈쇼핑</a></dt>
+                            <dd><a href="http://www.lotte.com/display/viewDispShop.lotte?disp_no=5413077&tracking=MOCA_03_HOME_01">TV쇼핑 패션의류</a></dd>
+                            <dd><a href="http://www.lotte.com/display/viewDispShop.lotte?disp_no=5412978&tracking=MOCA_03_HOME_02">카탈로그 패션의류</a></dd>
+                        </dl>
+                    </div>
+                </li>
+
+                <!-- 남성의류 -->
+                <li>
+                    <div>
+                        <h3>남성의류</h3>
+                        <dl>
+                            <dt class="tit_05"><a href="http://www.lotte.com/main/viewMain.lotte?dpml_no=4&tracking=MOCA_04_MENS">롯데맨즈</a></dt>
+                            <dd><a href="http://www.lotte.com/display/viewDispShop.lotte?disp_no=5211738&tracking=MOCA_04_MENS_01">남성 정장/셔츠</a></dd>
+                            <dd><a href="http://www.lotte.com/display/viewDispShop.lotte?disp_no=5211749&tracking=MOCA_04_MENS_02">남성 캐릭터정장/캐주얼</a></dd>
+                            <dd><a href="http://www.lotte.com/display/viewDispShop.lotte?disp_no=5414470&tracking=MOCA_04_MENS_03">남성 속옷</a></dd>
+                        </dl>
+                        <dl>
+                            <dt class="tit_02"><a href="http://www.lotte.com/main/viewMain.lotte?dpml_no=2&tracking=MOCA_04_DEP">롯데백화점</a></dt>
+                            <dd><a href="http://www.lotte.com/display/viewDispShop.lotte?disp_no=5230101&tracking=MOCA_04_DEP_01">남성 정장/셔츠</a></dd>
+                            <dd><a href="http://www.lotte.com/display/viewDispShop.lotte?disp_no=5230102&tracking=MOCA_04_DEP_02">남성 캐릭터정장</a></dd>
+                            <dd><a href="http://www.lotte.com/display/viewDispShop.lotte?disp_no=5230103&tracking=MOCA_04_DEP_03">남성 캐주얼</a></dd>
+                            <dd><a href="http://www.lotte.com/display/viewDispShop.lotte?disp_no=5414489&tracking=MOCA_04_DEP_04">남성 속옷</a></dd>
+                        </dl>
+                    </div>
+                </li>
+
+                <!-- 스포츠/레저 -->
+                <li class="last">
+                    <div>
+                        <h3>스포츠/레저</h3>
+                        <dl>
+                            <dt class="tit_01"><a href="http://www.lotte.com/main/viewMain.lotte?dpml_no=1&tracking=MOCA_05_DOT">롯데닷컴</a></dt>
+                            <dd><a href="http://www.lotte.com/display/viewDispShop.lotte?disp_no=1687397&tracking=MOCA_05_DOT_01">스포츠패션/슈즈/구기</a></dd>
+                            <dd><a href="http://www.lotte.com/display/viewDispShop.lotte?disp_no=1689272&tracking=MOCA_05_DOT_02">등산/캠핑/낚시</a></dd>
+                            <dd><a href="http://www.lotte.com/display/viewDispShop.lotte?disp_no=1689074&tracking=MOCA_05_DOT_03">헬스/스키/수영</a></dd>
+                            <dd><a href="http://www.lotte.com/display/viewDispShop.lotte?disp_no=1689931&tracking=MOCA_05_DOT_04">골프의류/용품</a></dd>
+                            <dd><a href="http://www.lotte.com/display/viewDispShop.lotte?disp_no=1732809&tracking=MOCA_05_DOT_05">자전거/인라인/자동차</a></dd>
+                        </dl>
+                        <dl>
+                            <dt class="tit_02"><a href="http://www.lotte.com/main/viewMain.lotte?dpml_no=2&tracking=MOCA_05_DEP">롯데백화점</a></dt>
+                            <dd><a href="http://www.lotte.com/display/viewDispShop.lotte?disp_no=1696687&tracking=MOCA_05_DEP_01">스포츠/패션/슈즈</a></dd>
+                            <dd><a href="http://www.lotte.com/display/viewDispShop.lotte?disp_no=1488049&tracking=MOCA_05_DEP_02">등산/골프/수영</a></dd>
+                        </dl>
+                        <dl>
+                            <dt class="tit_03"><a href="http://www.lotte.com/main/viewMain.lotte?dpml_no=11&tracking=MOCA_01_HOME">롯데홈쇼핑</a></dt>
+                            <dd><a href="http://www.lotte.com/display/viewDispShop.lotte?disp_no=5413110&tracking=MOCA_05_HOME_01">TV쇼핑 스포츠/레저</a></dd>
+                            <dd><a href="http://www.lotte.com/display/viewDispShop.lotte?disp_no=5413024&tracking==MOCA_05_HOME_02">카탈로그 스포츠/레저</a></dd>
+                        </dl>
+                    </div>
+                </li>
+            </ul>
+
+            <ul class="list02">
+                <!-- 유아동 -->
+                <li>
+                    <div>
+                        <h3>유아동관</h3>
+                        <dl>
+                            <dt class="tit_06"><a href="http://www.lotte.com/main/viewMain.lotte?dpml_no=12&tracking=MOCA_07_BABY">유아동관</a></dt>
+                            <dd><a href="http://www.lotte.com/display/viewDispShop.lotte?disp_no=5152204&tracking=MOCA_07_BABY_01">유아동용품/임신/출산</a></dd>
+                            <dd><a href="http://www.lotte.com/display/viewDispShop.lotte?disp_no=5152205&tracking=MOCA_07_BABY_02">유아동의류/잡화</a></dd>
+                            <dd><a href="http://www.lotte.com/display/viewDispShop.lotte?disp_no=5152207&tracking=MOCA_07_BABY_03">유아동도서/완구/교구</a></dd>
+                        </dl>
+                        <dl>
+                            <dt class="tit_02"><a href="http://www.lotte.com/main/viewMain.lotte?dpml_no=2&tracking=MOCA_07_DEP">롯데백화점</a></dt>
+                            <dd><a href="http://www.lotte.com/display/viewDispShop.lotte?disp_no=5152208&tracking=MOCA_07_DEP_01">유아동/용품</a></dd>
+                        </dl>
+                        <dl>
+                            <dt class="tit_03"><a href="http://www.lotte.com/main/viewMain.lotte?dpml_no=11&tracking=MOCA_01_HOME">롯데홈쇼핑</a></dt>
+                            <dd><a href="http://www.lotte.com/display/viewDispShop.lotte?disp_no=5413132&tracking=MOCA_07_HOME_01">TV쇼핑 유아동</a></dd>
+                            <dd><a href="http://www.lotte.com/display/viewDispShop.lotte?disp_no=5413046&tracking=MOCA_07_HOME_02">카탈로그 유아동</a></dd>
+                        </dl>
+                    </div>
+                </li>
+
+                <!-- 가전/컴퓨터 -->
+                <li>
+                    <div>
+                        <h3>가전/컴퓨터</h3>
+                        <dl>
+                            <dt class="tit_01"><a href="http://www.lotte.com/main/viewMain.lotte?dpml_no=1&tracking=MOCA_11_DOT">롯데닷컴</a></dt>
+                            <dd><a href="http://www.lotte.com/display/viewDispShop.lotte?disp_no=1685097&tracking=MOCA_11_DOT_01">TV/냉장고/세탁기/계절가전</a></dd>
+                            <dd><a href="http://www.lotte.com/display/viewDispShop.lotte?disp_no=1685253&tracking=MOCA_11_DOT_02">주방/생활/이미용 가전</a></dd>
+                            <dd><a href="http://www.lotte.com/display/viewDispShop.lotte?disp_no=1685549&tracking=MOCA_11_DOT_03">디카/DSLR/캠코더</a></dd>
+                            <dd><a href="http://www.lotte.com/display/viewDispShop.lotte?disp_no=1684389&tracking=MOCA_11_DOT_04">스마트폰/내비/MP3/학습기</a></dd>
+                            <dd><a href="http://www.lotte.com/display/viewDispShop.lotte?disp_no=5280985&tracking=MOCA_11_DOT_05">노트북/태블릿/데스크탑</a></dd>
+                            <dd><a href="http://www.lotte.com/display/viewDispShop.lotte?disp_no=5280993&tracking=MOCA_11_DOT_06">컴퓨터 주변기기/게임</a></dd>
+                        </dl>
+                        <dl>
+                            <dt class="tit_02"><a href="http://www.lotte.com/main/viewMain.lotte?dpml_no=2&tracking=MOCA_11_DEP">롯데백화점</a></dt>
+                            <dd><a href="http://www.lotte.com/display/viewDispShop.lotte?disp_no=1694054&tracking=MOCA_11_DEP_01">가전/디카/노트북</a></dd>
+                        </dl>
+                        <dl>
+                            <dt class="tit_03"><a href="http://www.lotte.com/main/viewMain.lotte?dpml_no=11&tracking=MOCA_01_HOME">롯데홈쇼핑</a></dt>
+                            <dd><a href="http://www.lotte.com/display/viewDispShop.lotte?disp_no=5413106&tracking=MOCA_11_HOME_01">TV쇼핑 가전/디지털</a></dd>
+                            <dd><a href="http://www.lotte.com/display/viewDispShop.lotte?disp_no=5413011&tracking=MOCA_11_HOME_02">카탈로그 가전/디지털</a></dd>
+                        </dl>
+                    </div>
+                </li>
+
+                <!-- 가구/침구/인테리어 -->
+                <li>
+                    <div>
+                        <h3>가구/침구/인테리어</h3>
+                        <dl>
+                            <dt class="tit_01"><a href="http://www.lotte.com/main/viewMain.lotte?dpml_no=1&tracking=MOCA_08_DOT">롯데닷컴</a></dt>
+                            <dd><a href="http://www.lotte.com//display/viewDispShop.lotte?disp_no=5374430&tracking=MOCA_08_DOT_01">쇼파/침대/옷장</a></dd>
+                            <dd><a href="http://www.lotte.com//display/viewDispShop.lotte?disp_no=5348043&tracking=MOCA_08_DOT_02">책상/의자/식탁/싱크대</a></dd>
+                            <dd><a href="http://www.lotte.com//display/viewDispShop.lotte?disp_no=5374431&tracking=MOCA_08_DOT_03">아동/수납/사무기구</a></dd>
+                            <dd><a href="http://www.lotte.com//display/viewDispShop.lotte?disp_no=5348544&tracking=MOCA_08_DOT_04">침구</a></dd>
+                            <dd><a href="http://www.lotte.com//display/viewDispShop.lotte?disp_no=5374432&tracking=MOCA_08_DOT_05">커튼/카페트/인테리어</a></dd>
+                        </dl>
+                        <dl>
+                            <dt class="tit_02"><a href="http://www.lotte.com/main/viewMain.lotte?dpml_no=1&tracking=MOCA_09_DEP">롯데백화점</a></dt>
+                            <dd><a href="http://www.lotte.com/display/viewDispShop.lotte?disp_no=1693792&tracking=MOCA_09_DEP_01">가정/생활</a></dd>
+                        </dl>
+                        <dl>
+                            <dt class="tit_03"><a href="http://www.lotte.com/main/viewMain.lotte?dpml_no=11&tracking=MOCA_01_HOME">롯데홈쇼핑</a></dt>
+                            <dd><a href="http://www.lotte.com/display/viewDispShop.lotte?disp_no=5413103&tracking=MOCA_08_HOME_01">TV쇼핑 가구/침구</a></dd>
+                            <dd><a href="http://www.lotte.com/display/viewDispShop.lotte?disp_no=5413004&tracking=MOCA_08_HOME_02">카탈로그 가구/침구</a></dd>
+                        </dl>
+                    </div>
+                </li>
+
+                <!-- 주방/생활/건강 -->
+                <li>
+                    <div>
+                        <h3>주방/생활/건강</h3>
+                        <dl>
+                            <dt class="tit_01"><a href="http://www.lotte.com/main/viewMain.lotte?dpml_no=1&tracking=MOCA_09_DOT">롯데닷컴</a></dt>
+                            <dd><a href="http://www.lotte.com/display/viewDispShop.lotte?disp_no=5374433&tracking=MOCA_09_DOT_01">세제/욕실/위생</a></dd>
+                            <dd><a href="http://www.lotte.com/display/viewDispShop.lotte?disp_no=5348843&tracking=MOCA_09_DOT_02">수납/청소/생활잡화</a></dd>
+                            <dd><a href="http://www.lotte.com/display/viewDispShop.lotte?disp_no=1682489&tracking=MOCA_09_DOT_03">주방/식기</a></dd>
+                            <dd><a href="http://www.lotte.com/display/viewDispShop.lotte?disp_no=1683525&tracking=MOCA_09_DOT_04">건강/다이어트/실버</a></dd>
+                        </dl>
+                        <dl>
+                            <dt class="tit_02"><a href="http://www.lotte.com/main/viewMain.lotte?dpml_no=1&tracking=MOCA_09_DEP">롯데백화점</a></dt>
+                            <dd><a href="http://www.lotte.com/display/viewDispShop.lotte?disp_no=1693792&tracking=MOCA_09_DEP_01">가정/생활</a></dd>
+                        </dl>
+                        <dl>
+                            <dt class="tit_03"><a href="http://www.lotte.com/main/viewMain.lotte?dpml_no=11&tracking=MOCA_01_HOME">롯데홈쇼핑</a></dt>
+                            <dd><a href="http://www.lotte.com/display/viewDispShop.lotte?disp_no=5413124&tracking=MOCA_09_HOME_01">TV쇼핑 주방/생활/건강</a></dd>
+                            <dd><a href="http://www.lotte.com/display/viewDispShop.lotte?disp_no=5413037&tracking=MOCA_09_HOME_02">카탈로그 주방/생활/건강</a></dd>
+                        </dl>
+                    </div>
+                </li>
+
+                <!-- 식품 -->
+                <li>
+                    <div>
+                        <h3>식품</h3>
+                        <dl>
+                            <dt class="tit_07"><a href="http://www.lotte.com/main/viewMain.lotte?dpml_no=6&tracking=MOCA_10_FOOD">식품관</a></dt>
+                            <dd><a href="http://www.lotte.com/display/viewDispShop.lotte?disp_no=1481412&tracking=MOCA_10_FOOD_01">신선식품</a></dd>
+                            <dd><a href="http://www.lotte.com/display/viewDispShop.lotte?disp_no=1481413&tracking=MOCA_10_FOOD_02">즉석/가공식품</a></dd>
+                            <dd><a href="http://www.lotte.com/display/viewDispShop.lotte?disp_no=1481414&tracking=MOCA_10_FOOD_03">건강/다이어트 식품</a></dd>
+                        </dl>
+                        <dl>
+                            <dt class="tit_02"><a href="http://www.lotte.com/main/viewMain.lotte?dpml_no=2&tracking=MOCA_10_DEP">롯데백화점</a></dt>
+                            <dd><a href="http://www.lotte.com/display/viewDispShop.lotte?disp_no=5100300&tracking=MOCA_10_DEP_01">프리미엄식품</a></dd>
+                        </dl>
+                        <dl>
+                            <dt class="tit_03"><a href="http://www.lotte.com/main/viewMain.lotte?dpml_no=11&tracking=MOCA_01_HOME">롯데홈쇼핑</a></dt>
+                            <dd><a href="http://www.lotte.com/display/viewDispShop.lotte?disp_no=5413112&tracking=MOCA_10_HOME_01">TV쇼핑 식품</a></dd>
+                            <dd><a href="http://www.lotte.com/display/viewDispShop.lotte?disp_no=5413027&tracking=MOCA_10_HOME_02">카탈로그 식품</a></dd>
+                        </dl>
+                    </div>
+                </li>
+
+                <!-- e쿠폰/문구/서비스 -->
+                <li class="last">
+                    <div>
+                        <h3>e쿠폰/문구/서비스</h3>
+                        <dl>
+                            <dt class="tit_01"><a href="http://www.lotte.com/main/viewMain.lotte?dpml_no=1&tracking=MOCA_05_DOT">롯데닷컴</a></dt>
+                            <dd><a href="http://www.lotte.com/display/viewDispShop.lotte?disp_no=5095800&tracking=MOCA_12_ECOUPON_01">e쿠폰몰</a></dd>
+                            <dd><a href="http://www.lotte.com/display/viewDispShop.lotte?disp_no=1691501&tracking=MOCA_12_01_01">상품권/이용권/꽃/렌탈</a></dd>
+                            <dd><a href="http://www.lotte.com/display/viewDispShop.lotte?disp_no=1682792&tracking=MOCA_12_04_01">문구/사무기기/보안</a></dd>
+                            <dd><a href="http://www.lotte.com/display/viewDispShop.lotte?disp_no=1683721&tracking=MOCA_12_04_02">악기/애완/취미/원예</a></dd>
+                        </dl>
+                        <dl>
+                            <dt class="tit_03"><a href="http://www.lotte.com/main/viewMain.lotte?dpml_no=11&tracking=MOCA_01_HOME">롯데홈쇼핑</a></dt>
+                            <dd><a href="http://insu.lotteimall.com/fr/product/tv_insur_main.do?menu_cd=FR03&insumallchid=JCDLC0001" target="_blank" title="새창">암/의료실비/저축/차보험</a></dd>
+                        </dl>
+                        <!-- 
+                        20140110 삭제
+                        <dl>
+                            <dt class="tit_08"><a href="http://www.lotte.com/display/viewDispShop.lotte?disp_no=5095800&tracking=MOCA_12_ECOUPON_01">e쿠폰몰</a></dt>
+                            <dd><a href="http://www.lotte.com/display/viewDispShop.lotte?disp_no=1691501&tracking=MOCA_12_01_01">상품권/이용권/꽃/렌탈</a></dd>
+                            <dd><a href="http://www.lotte.com/display/viewDispShop.lotte?disp_no=1682792&tracking=MOCA_12_04_01">문구/사무기기/보안</a></dd>
+                            <dd><a href="http://www.lotte.com/display/viewDispShop.lotte?disp_no=1683721&tracking=MOCA_12_04_02">악기/애완/취미/원예</a></dd>
+                        </dl>
+                        // 20140110 삭제 -->
+                    </div>
+                </li>
+            </ul>
+            
+        </div><hr /><!-- // category_list -->
+        <div class="lecs_list">
+            <h2>브랜드 스토어 by LECS</h2>
+            <div class="lecs_wa_slide">
+                <a href="#js" class="btn_left">상품 리스트 이전 3개 보기</a>
+                <a href="#js" class="btn_right">상품 리스트 다음 3개 보기</a>
+                <div class="mask_wrap">
+                    <ul class="cont_wrap">
+                        <li>
+                            <div class="produnit prd_100v">
+                                <div class="photo_zone">
+                                    <a href="http://www.truereligionbrandjeans.kr/main/mainView.lecs?influx_channel_no=145624&influx_channel_detail_no=2913604&tracking=MOCA_13_TRUE">
+                                        <img src="http://image.lotte.com/lotte/images/service/lecs_list_01.gif" alt="트루릴리전" />
+                                    </a>
+                                </div>
+                                <div class="info_zone">
+                                    <div class="contents benefittit">
+                                        <p class="option oneLine">
+                                            <a href="http://www.truereligionbrandjeans.kr/main/mainView.lecs?influx_channel_no=145624&influx_channel_detail_no=2913604&tracking=MOCA_13_TRUE" target="_blank">트루릴리전</a>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="produnit prd_100v">
+                                <div class="photo_zone">
+                                    <a href="http://www.thenorthfacekorea.co.kr/display/displayShop.lecs?storeNo=62&siteNo=34206&displayNo=NF1A09A01&displayMallNo=NF1&retRef=Y&source=http://www.lotte.com/display/viewDispShop.lotte%3Fdisp_no=5413027%26tracking=MOCA_13_NORTH">
+                                        <img src="http://image.lotte.com/lotte/images/service/lecs_list_02.gif" alt="노스페이스" />
+                                    </a>
+                                </div>
+                                <div class="info_zone">
+                                    <div class="contents benefittit">
+                                        <p class="option oneLine">
+                                            <a href="http://www.thenorthfacekorea.co.kr/display/displayShop.lecs?storeNo=62&siteNo=34206&displayNo=NF1A09A01&displayMallNo=NF1&retRef=Y&source=http://www.lotte.com/display/viewDispShop.lotte%3Fdisp_no=5413027%26tracking=MOCA_13_NORTH">노스페이스</a>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="produnit prd_100v">
+                                <div class="photo_zone">
+                                    <a href="http://topten10.co.kr/main/mainView.lecs?influx_channel_no=141825&influx_channel_detail_no=2881611&tracking=MOCA_13_TOPTEN">
+                                        <img src="http://image.lotte.com/lotte/images/service/lecs_list_03.gif" alt="탑텐" /></a>
+                                </div>
+                                <div class="info_zone">
+                                    <div class="contents benefittit">
+                                        <p class="option oneLine">
+                                            <a href="http://topten10.co.kr/main/mainView.lecs?influx_channel_no=141825&influx_channel_detail_no=2881611&tracking=MOCA_13_TOPTEN">탑텐</a>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="produnit prd_100v">
+                                <div class="photo_zone">
+                                    <a href="http://www.kiehls.co.kr/main/mainView.lecs?influx_channel_no=127224&influx_channel_detail_no=2476767">
+                                        <img src="http://image.lotte.com/lotte/images/service/lecs_list_04.gif" alt="키엘" />
+                                    </a>
+                                </div>
+                                <div class="info_zone">
+                                    <div class="contents benefittit">
+                                        <p class="option oneLine">
+                                            <a href="http://www.kiehls.co.kr/main/mainView.lecs?influx_channel_no=127224&influx_channel_detail_no=2476767">키엘</a>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="produnit prd_100v">
+                                <div class="photo_zone">
+                                    <a href="http://shop.saera.co.kr/main/mainView.lecs?influx_channel_no=140829&influx_channel_detail_no=2878688&tracking=MOCA_13_SAERA">
+                                        <img src="http://image.lotte.com/lotte/images/service/lecs_list_05.gif" alt="세라" />
+                                    </a>
+                                </div>
+                                <div class="info_zone">
+                                    <div class="contents benefittit">
+                                        <p class="option oneLine">
+                                            <a href="http://shop.saera.co.kr/main/mainView.lecs?influx_channel_no=140829&influx_channel_detail_no=2878688&tracking=MOCA_13_SAERA">세라</a>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="produnit prd_100v">
+                                <div class="photo_zone">
+                                    <a href="http://samsonitemall.co.kr/shop/main/index.php"><img src="http://image.lotte.com/lotte/images/service/lecs_list_06.gif" alt="샘소나이트" /></a>
+                                </div>
+                                <div class="info_zone">
+                                    <div class="contents benefittit">
+                                        <p class="option oneLine">
+                                            <a href="http://www.samsonitemall.co.kr/shop/main/index.php">샘소나이트</a>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="produnit prd_100v">
+                                <div class="photo_zone">
+                                    <a href="http://www.nikestore.co.kr/display/displayShop.lecs?influx_channel_no=106825&influx_channel_detail_no=493623">
+                                        <img src="http://image.lotte.com/lotte/images/service/lecs_list_07.gif" alt="나이키" />
+                                    </a>
+                                </div>
+                                <div class="info_zone">
+                                    <div class="contents benefittit">
+                                        <p class="option oneLine">
+                                            <a href="http://www.nikestore.co.kr/display/displayShop.lecs?influx_channel_no=106825&influx_channel_detail_no=493623">나이키</a>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="produnit prd_100v">
+                                <div class="photo_zone">
+                                    <a href="http://shop.puma.co.kr/main/mainView.lecs?influx_channel_no=117825&influx_channel_detail_no=728491">
+                                        <img src="http://image.lotte.com/lotte/images/service/lecs_list_08.gif" alt="푸마" />
+                                    </a>
+                                </div>
+                                <div class="info_zone">
+                                    <div class="contents benefittit">
+                                        <p class="option oneLine">
+                                            <a href="http://shop.puma.co.kr/main/mainView.lecs?influx_channel_no=117825&influx_channel_detail_no=728491">푸마</a>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="produnit prd_100v">
+                                <div class="photo_zone">
+                                    <a href="http://www.mujikorea.net/display/displayShop.lecs?displayNo=MJ1A03&displayMallNo=MJ1">
+                                        <img src="http://image.lotte.com/lotte/images/service/lecs_list_09.gif" alt="무지" />
+                                    </a>
+                                </div>
+                                <div class="info_zone">
+                                    <div class="contents benefittit">
+                                        <p class="option oneLine">
+                                            <a href="http://www.mujikorea.net/display/displayShop.lecs?displayNo=MJ1A03&displayMallNo=MJ1">무지</a>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="produnit prd_100v">
+                                <div class="photo_zone">
+                                    <a href="http://www.uniqlo.kr/display/displayShop.lecs?storeNo=22&siteNo=9&displayNo=UQ1A01A01&displayMallNo=UQ1&influx_channel_no=101617&influx_channel_detail_no=538212">
+                                        <img src="http://image.lotte.com/lotte/images/service/lecs_list_10.gif" alt="유니클로" />
+                                    </a>
+                                </div>
+                                <div class="info_zone">
+                                    <div class="contents benefittit">
+                                        <p class="option oneLine">
+                                            <a href="http://www.uniqlo.kr/display/displayShop.lecs?storeNo=22&siteNo=9&displayNo=UQ1A01A01&displayMallNo=UQ1&influx_channel_no=101617&influx_channel_detail_no=538212">
+                                                유니클로
+                                            </a>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        
+                    </ul>
+                </div>
+            </div>
+            <script type="text/javascript">
+            //<![CDATA[
+                    $('.lecs_wa_slide').lotteWAslide({divection:"x", slideType:"slide", lastSlideType:"item", animationType:"slide", animationTime:100, startIdx:0, randomFlag:false, loofFlag:true, rollingFlag:true, intervalTime:3000, startDelayTime:0, viewNum:9});
+
+            //]]>
+            </script>
+
+        </div><hr /><!-- // lec_list -->
+        <div class="cultureList">
+            <h2>티켓/도서/전문몰</h2>
+            <ul>
+                <li class="fir">
+                    <a href="http://www.lotte.com/display/viewDispShop.lotte?disp_no=5413056&tracking=MOCA_14_TICKET">
+                        <img src="http://image.lotte.com/lotte/images/service/cultureList_01.gif" alt="롯데닷컴 티켓" />
+                    </a>
+                </li>
+                <li>
+                    <a href="http://www.lotte.com/display/viewDispShop.lotte?disp_no=5443047&tracking=MOCA_14_BOOK">
+                        <img src="http://image.lotte.com/lotte/images/service/cultureList_02.gif" alt="롯데닷컴 도서" />
+                    </a>
+                </li>
+                <li>
+                    <a href="http://www.lotte.com/display/viewDispShop.lotte?disp_no=5272565&tracking=MOCA_14_MAGMILE">
+                        <img src="http://image.lotte.com/lotte/images/service/cultureList_03.gif" alt="매그마일" />
+                    </a>
+                </li>
+                <li>
+                    <a href="http://www.lotte.com/display/viewDispShop.lotte?disp_no=5285443&tracking=MOCA_14_INK">
+                        <img src="http://image.lotte.com/lotte/images/service/cultureList_04.gif" alt="잉크서치" />
+                    </a>
+                </li>
+                <li>
+                    <a href="http://www.lotte.com/display/viewDispShop.lotte?disp_no=5293948&tracking=MOCA_14_10BY10">
+                        <img src="http://image.lotte.com/lotte/images/service/cultureList_05.gif" alt="텐바이텐" />
+                    </a>
+                </li>
+            </ul>
+            <ul>
+                <li class="fir">
+                    <a href="http://www.lotte.com/display/viewDispShop.lotte?disp_no=5453087&tracking=MOCA_14_1200m">
+                        <img src="http://image.lotte.com/lotte/images/service/cultureList_06.gif" alt="1200M" />
+                    </a>
+                </li>
+                <li>
+                    <a href="http://www.lotte.com/display/viewDispShop.lotte?disp_no=5453900&tracking=MOCA_14_HIMART">
+                        <img src="http://image.lotte.com/lotte/images/service/cultureList_07.gif" alt="하이마트" />
+                    </a>
+                </li> 
+                <li>
+                    <a href="http://www.lotte.com/display/viewDispShop.lotte?disp_no=5480906&tracking=MOCA_14_OGAGE">
+                        <img src="http://image.lotte.com/lotte/images/service/cultureList_09.gif" alt="오가게" />
+                    </a>
+                </li> 
+            </ul>
+        </div><!-- // cultureList -->
+        
+
+
+    </div><!-- // error_cont -->
+
+
+
+</body>
+</html>
+
+	
+<!--
+	<h1><a href="http://www.lotte.com" target="_top"><img src="http://image.lotte.com/lotte/images/service/tit_error.gif" alt="lotte.com" /></a></h1>
+	<div class="use_shopping">
+		<p><img src="http://image.lotte.com/lotte/images/service/txt_shopping.gif" alt="쇼핑에 불편을 드려 죄송합니다! 고객님께서 찾으시는 페이지를 찾을 수가 없습니다. 찾으시는 페이지 주소에 오타가 있거나, 클릭한 링크가 만료된 것일 수 있습니다." /></p>
+		<div class="btn">
+			<a href="#void" onclick="history.go(-1);"><img src="http://image.lotte.com/lotte/images/service/btn_prev.gif" alt="이전 페이지로 돌아가기" /></a>
+			<a href="http://www.lotte.com" target="_top"><img src="http://image.lotte.com/lotte/images/service/btn_homepage.gif" alt="홈페이지 바로가기" /></a>
+		</div>
+	</div>
+	<p><img src="http://image.lotte.com/lotte/images/service/txt_error.gif" alt="롯데의 다양한 인터넷 쇼핑과 함께 즐거운 쇼핑되시기 바랍니다!" /></p>
+//-->	
+	
+<!--	
+	<div id="NotFoundAllCategory"></div>
+	
+
+	<p class="copy_right"><img src="http://image.lotte.com/lotte/images/service/txt_capy.gif" alt="COPYRIGHT 2000-2009 LOTTE.COM INC. ALL RIGHT RESERVED" /></p>
+	<div style="padding-bottom:30px;">&nbsp;</div>
+</div>
+<div id="message-area">
+<font color="white">죄송합니다. 해당 요청을 처리할 수 없습니다. 잠시후 다시 시도해 주세요</font>
+</div>
+<script type="text/javascript" src="/common/js/pub_ui.js"></script>--> 
+<!-- Publish 2012 Footer Script - common --> 
+
