@@ -13,7 +13,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.tgy.dao.UserDao;
+import com.tgy.entity.Folder;
+import com.tgy.entity.Page;
 import com.tgy.entity.User;
+import com.tgy.exception.BaseException;
+import com.tgy.service.FolderService;
+import com.tgy.service.InitUserService;
+import com.tgy.service.PageService;
 import com.tgy.util.C;
 import com.tgy.util.MD5Util;
 import com.tgy.util.U;
@@ -59,6 +65,9 @@ public class CreateUserContoller extends HttpServlet {
 
 		new UserDao().save(user);
 		req.getSession().setAttribute(C.user, user);
+		
+		new InitUserService().initUser(user.id.toString());
+		
 
 		Cookie cookie = new Cookie("lastLoginUserID", user.id.toString());
 		cookie.setPath("/");

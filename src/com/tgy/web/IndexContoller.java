@@ -81,10 +81,10 @@ public class IndexContoller extends HttpServlet {
 			@CookieValue(value = "lastPsCode", defaultValue = "",required  = false) String lastPsCode
 			) {
 		
-//		if(StringUtils.isBlank(lastLoginUserID)){
-//			//用户从没登录过 也没创建过快速体验书签，显示 ‘创建收藏夹按钮’ 和 ‘体验一下按钮’
-//			req.setAttribute("isNewUser", "true");
-//		}
+		if(StringUtils.isBlank(lastLoginUserID)){
+			//用户从没登录过 
+			req.setAttribute("isNewUser", "true");
+		}
 		String showType = req.getParameter("t");//1 竖版显示 2横板（个人导航）显示 3 横板 公共导航页
 		if(StringUtils.isBlank(showType)){
 			showType = "1";

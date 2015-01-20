@@ -79,7 +79,7 @@ List<InterestGroup> groups = service.list(null, "-favScore",start, 10);
 								}
 								else{
 									%>
-									<img style="height: 40px;width: 40px;" alt="已登录" src="<%=group.headImgUrl%>">
+									<img style="height: 40px;width: 40px;" alt="已登录" data-original="<%=group.headImgUrl%>">
 									<%
 								}
 							%> 
@@ -105,7 +105,7 @@ List<InterestGroup> groups = service.list(null, "-favScore",start, 10);
 					 			//continue;
 					 		}
 						%>
-								<a class="col-sm-6 no-padding" href="<%=p.url%>" target="_blank">
+								<a class="col-sm-6 col-xs-12 no-padding" href="<%=p.url%>" target="_blank">
 									<span >
 									<%=U.shortString(pName, 10)%>
 									</span>
@@ -150,7 +150,7 @@ List<InterestGroup> groups = service.list(null, "-favScore",start, 10);
 								}
 								else{
 									%>
-									<img style="height: 40px;width: 40px;" alt="已登录" src="<%=group.headImgUrl%>">
+									<img style="height: 40px;width: 40px;" alt="已登录" data-original="<%=group.headImgUrl%>">
 									<%
 								}
 							%> 
@@ -174,7 +174,7 @@ List<InterestGroup> groups = service.list(null, "-favScore",start, 10);
 					 			//continue;
 					 		}
 						%>
-								<a class="col-sm-6 no-padding" href="<%=p.url%>" target="_blank">
+								<a class="col-sm-6 col-xs-12 no-padding" href="<%=p.url%>" target="_blank">
 									<span >
 									<%=U.shortString(pName, 10)%>
 									</span>

@@ -30,7 +30,7 @@ public interface C {
 	String user = "loginUser";
 	String utf8 = "UTF-8";
 
-	String title = "网址盒子-网址收藏-网站分享 ";
+	String title = "网址盒子-网址收藏-网址导航-网站分享";
 	String errorMsg = "errorMsg";
 	String htmlRefSearchA = "<a target='_blank' href='http://www.baidu.com/s?wd=zwanggou%20%E8%BF%94%E5%88%A9%E9%82%80%E8%AF%B7%E7%A0%81' title='百度一下'>搜索邀请码?</a>";
 

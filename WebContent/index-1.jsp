@@ -34,10 +34,10 @@
 	}else{
 		%>
 		<jsp:include page="part/public-tabs.jsp" />
+		
 		<%
 	}
 	%>
-	<div class="  col-sm-12" style="margin-top: 20px;"></div>
  
  	<%
  		if(showUser!=null && StringUtils.isNotBlank(showUser.publicMessage)){
@@ -51,12 +51,16 @@
  	<%
  		}
  	%>
- 	<div class="  col-sm-12"  ></div>
+ 	
+ 	
+ 	
 	<!-- 书签主页面开始 -->
 	<div class="container col-sm-12 clearfix " style="padding-top: 0px;">  
 		<!-------- 书签主页面 --------->
 		<div id="pageMain" class="col-sm-9 no-padding" >
-			<jsp:include page="part/quick-add-link.jsp" />	
+		
+		  	<div class="  col-sm-12" style="margin-top: 20px;"></div>
+ 
 			<div class="  col-sm-12" style="margin-top: 10px;"></div>
 			
 			<div class="  col-sm-12"  ></div>
@@ -111,56 +115,28 @@
 			<jsp:include page="part/folder-slide-follow.jsp" />
 			
 			<!-- ad -->
-			<div class="  col-sm-12" style="margin-top: 50px;"></div>
-			
+			<div class="  col-sm-12" style="margin-top: 50px;">
 			<%
-			int rad = 100;// new Random().nextInt(5);
-			if(rad==0){//amazon
+			if(request.getRequestURL().indexOf("localhost") <0){
 				%>
-				<a class="col-sm-12 no-padding" 
-					target="_blank"
-					href="https://www.amazon.cn/b?ie=UTF8&node=1354810071&tag=bijia365-23&camp=356&creative=6240&linkCode=ur1&adid=0K191MEG6A97ZXAVDZ6P">
-					<img class="col-sm-12 no-padding" src="https://images-na.ssl-images-amazon.com/images/G/28/img14/chn/2014halfyear/2014best_300250._V351018681_.jpg">
-				</a>
-				<%
-			}
-			else if(rad == 1){//jd
-				%>
-				<div class="col-sm-12 no-padding">
-					<script type="text/javascript">var jd_union_pid="248667042";var jd_union_euid="";</script><script type="text/javascript" src="http://ads.union.jd.com/static/js/union.js"></script>
-				</div>
-				<%
-			}
-			else if(rad == 2){
-				%>
-				<div class="col-sm-12 no-padding">
-					<a class="col-sm-12 no-padding" 
-						target="_blank"
-						href="http://click.yhd.com/?ut=102241362&s=YzczMDE1YTc5NGE1MWNhMGNkM2IxZWRjN2NhZmIzNDBiNTAzZDNhNTRmNDYzNjM4MzI1Nzc3OGE4YTE2OWFkMzVjZTc2ZWVhMDQyYWU5YTM5N2Q4NDI0MjBhODI2OWE5&cv=1">
-						<img class="col-sm-12 no-padding" src="http://d6.yihaodianimg.com/V00/M0A/79/CC/CgQDslSZm3OARXYOAAEKNu6NOSA81400.jpg">
-					</a>
-				</div>
-				<%
-			}
-			else if(rad == 3){
-				%>
-				<div class="col-sm-12 no-padding">
-					<script charset="gbk" type="text/javascript" src="http://union.dangdang.com/adapi/sc?id=j4XN87qvRb&from=P-315609"></script>
-				</div>
-				<%
-			}
-			else if(rad == 4){
-				%>
-			<div class="col-sm-12 no-padding">
-				<iframe src="http://group.gome.com.cn/y/5780_123_2_5_/Active/ActiveImg?sid=5780&wid=123&category=2&bid=5&feedback=" width="300" height="250" scrolling="no" border="0" marginwidth="0" style="border: none;" frameborder="0"></iframe>
-			</div>
-				<%
-			}
-			%>
-
+				<script type="text/javascript">
+				     document.write('<a style="display:none!important" id="tanx-a-mm_41911274_8730892_29556007"></a>');
+				     tanx_s = document.createElement("script");
+				     tanx_s.type = "text/javascript";
+				     tanx_s.charset = "gbk";
+				     tanx_s.id = "tanx-s-mm_41911274_8730892_29556007";
+				     tanx_s.async = true;
+				     tanx_s.src = "http://p.tanx.com/ex?i=mm_41911274_8730892_29556007";
+				     tanx_h = document.getElementsByTagName("head")[0];
+				     if(tanx_h)tanx_h.insertBefore(tanx_s,tanx_h.firstChild);
+				</script>
+			 <%
+				}
+			 %>
+			 </div>
 			<!-- ad end -->
 			
-			
+
  
 		</div>
 		<!-- 显示推荐页面结束 -->
@@ -194,6 +170,7 @@
 	<script src="<%=request.getContextPath()%>/myjs/pageMainApp.js"></script>
 	<script src="<%=request.getContextPath()%>/myjs/common.js"></script>
 	<script src="<%=request.getContextPath()%>/myjs/user-info.js"></script>
+	<script src="<%=request.getContextPath()%>/myjs/index-1.js"></script>
 </body>
 
 </html>

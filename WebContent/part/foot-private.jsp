@@ -1,6 +1,12 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
 
-<div id="foot-setFav" class="container col-sm-12 no-padding" style="margin-top: 240px; ">
+  <div   class="container col-sm-12 "
+	style="padding: 10px; padding-bottom:30px;  margin-top: 140px; border: 2px solid #eee;background-color: #fdfdfd;">
+	 
+
+ </div>
+
+<div id="foot-setFav" class="container col-sm-12 no-padding" style="margin-top: 40px; ">
 	<span class="col-sm-12 no-padding" style="text-align: center;font-size: 14px; ">欢迎按住 Ctrl+D <a href="#" onclick="AddFavorite(this)"> 收藏本页</a>    </span> 
 </div>
 

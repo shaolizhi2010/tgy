@@ -145,7 +145,6 @@
 	</div>
  	<div class=" col-sm-3 no-padding" >
 		<div class=" col-sm-10 col-sm-offset-1 no-padding" >
-			<jsp:include page="../part/index.public.menu.jsp"/>
 		</div>
 	</div>
 	<!-- 书签主页面结束-->

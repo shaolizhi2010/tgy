@@ -46,6 +46,7 @@ public class CreatePageContoller extends HttpServlet {
 		page.pid = pid;
 		page.name = name;
 		page.url = pageUrl;
+		page.folderID = pid;
 		try {
 			CommonValidator validator = new CommonValidator();
 			validator.isLonger(page.url, 1, "需要填写网址");//isLogin(req, null).isSameUser(user, page,null).
@@ -71,12 +72,10 @@ public class CreatePageContoller extends HttpServlet {
 				p.comment = page.comment;
 				p.userID = page.userID;
 				p.pid = page.pid;
-				p.createDate = U.dateTime();
 				errMsg += saveOnePage(page, user);
 			}
 		} else {
 			page.url = urlList.get(0);
-			page.createDate = U.dateTime();
 			errMsg = saveOnePage(page, user);
 		}
 

@@ -1,5 +1,5 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
- <div class="modal-dialog  draggable">
+ <div class="modal-dialog  ">
     <div class="modal-content  ">
         <div class="modal-header "  >
             <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span
@@ -39,8 +39,9 @@
 	                                                          type="password"/>
 	            </div>
 	            <div class=" " style="margin-top: 20px;"  >
-	                <input ng-keyup="$event.keyCode == 13 ? addUserFunction() : null" style="height: 40px;" placeholder="确认密码"
-	                        class="form-control" id="createUser-password-again" type="password"/>
+	                <input  style="height: 40px;" placeholder="确认密码"
+	                		data-func-name="addUserFunction"
+	                        class="form-control enterInput" id="createUser-password-again" type="password"/>
 	            </div>
 	            <div class="  " style="margin-top: 20px;" >
 	            	<a href="#" onclick="addUserFunction()" >

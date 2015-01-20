@@ -28,14 +28,15 @@
 	<div class="container col-sm-12 clearfix no-padding" style="padding-top: 0px;margin-top: 0px; ">  
 	 
 	 <div>
-		<!-------- 右侧 书签主页面 --------->
+		<!--------  书签主页面 --------->
 		<div id="pageMain" class="col-sm-9 no-padding"
 			style=" padding:0px;   padding-left: 20px;padding-bottom: 40px;">
+			
 			<jsp:include page="part/folder-fav.jsp" />
 			<div class="col-sm-12" style="height: 10px;"></div>
 			<jsp:include page="part/pages-all-part.jsp" />
 		</div>
-		<!-------- 右侧 书签列表页面 end  --->
+		<!--------   书签列表页面 end  --->
 		<!-- 显示推荐页面开始 -->
 		<div class="col-sm-3" style="  padding-bottom: 20px;">
 			<jsp:include page="part/user-info.jsp" />

@@ -3,6 +3,7 @@ package com.tgy.service.group;
 import java.util.List;
 import java.util.Map;
 
+import org.bson.NewBSONDecoder;
 import org.bson.types.ObjectId;
 import org.mongodb.morphia.Datastore;
 import org.mongodb.morphia.DatastoreImpl;
@@ -17,11 +18,54 @@ import com.mongodb.WriteConcern;
 import com.mongodb.WriteResult;
 import com.tgy.App;
 import com.tgy.dao.group.InterestGroupFolderDao;
+import com.tgy.entity.Folder;
+import com.tgy.entity.Page;
 import com.tgy.entity.group.InterestGroupFolder;
+import com.tgy.entity.group.InterestGroupPage;
+import com.tgy.exception.BaseException;
+import com.tgy.service.FolderService;
+import com.tgy.service.PageService;
+import com.tgy.util.U;
 
 public class InterestGroupFolderService {
 
 	InterestGroupFolderDao fDao = new InterestGroupFolderDao();
+	
+	public void copy(String folderID, String userID) throws BaseException{
+		FolderService fService = new FolderService();
+		PageService pageService =   new PageService();
+		InterestGroupFolder folder = fDao.byID(folderID);
+		
+		Folder targetFolder = new Folder();
+		targetFolder.name = folder.name;
+		targetFolder.userID = userID;
+		
+		try {
+			fService.save(targetFolder);
+		} catch (BaseException e) {
+			System.out.println("copy folder : "+targetFolder.name + e.getMessage());
+			throw new BaseException(this, e.getMessage(), e);
+		}
+		
+		for(InterestGroupPage p : folder.pages){
+			
+			Page newPage = new Page();
+			newPage.name = p.name;
+			newPage.description = p.description;
+			newPage.url = p.url;
+			newPage.iconPath = p.iconPath;
+			newPage.pid = targetFolder.id.toString();
+			newPage.folderID = targetFolder.id.toString();
+			newPage.userID = userID;
+			try {
+				pageService.save(newPage);
+			} catch (Exception e) {
+				System.out.println("copy page : "+newPage.name + e.getMessage());
+				//throw new BaseException(this, e.getMessage(), e);
+				continue;
+			}
+		}
+	}
 	
 	public List<InterestGroupFolder> ByName(String folderName) {
 

@@ -33,12 +33,11 @@
 	}else{
 		%>
 		<jsp:include page="part/public-tabs.jsp" />
+		
 		<%
 	}
 	%>
 	
-	<div class=" col-sm-12 no-padding" style="  "></div>
-	<div class="col-sm-12" style="height: 10px;"></div> 
 	<!-- 书签主页面开始 -->
 	<div class="container col-sm-12 clearfix no-padding" style="padding-top: 0px;margin-top: 0px; ">  
 	 
@@ -46,7 +45,7 @@
 		<!-------- 右侧 书签主页面 --------->
 		<div id="pageMain" class="col-sm-9 no-padding"
 			style=" padding:0px;   padding-left: 20px;padding-bottom: 40px;">
-			
+			<div class="col-sm-12" style="height: 20px;"></div>
 			<jsp:include page="part/folder-fav.jsp" />
 			<div class="col-sm-12" style="height: 10px;"></div>
 			<jsp:include page="part/pages-all-part.jsp" />
@@ -56,7 +55,8 @@
 		</div>
 		<!-------- 右侧 书签列表页面 end  --->
 		<!-- 显示推荐页面开始 -->
-		<div class="col-sm-3" style="  padding-bottom: 20px;">
+		<div class="col-sm-3" style="  padding-bottom: 10px;">
+			
 			<jsp:include page="part/user-info.jsp" />
 			<div class="col-sm-12" style="height: 20px;"></div>
 			<jsp:include page="part/page-slide-myHotClicks.jsp" />
@@ -92,54 +92,8 @@
 	<script src="<%=request.getContextPath()%>/myjs/common.js"></script>
 	<script src="<%=request.getContextPath()%>/myjs/pageMainApp.js"></script>
 	<script src="<%=request.getContextPath()%>/myjs/user-info.js"></script>
-	
-	<script>
-	if($('#bookmarkEmptyFlag').val()=='true'){
-		$(".add-link-div").show();
-		$(".add-link").show();
-	}
-	
-	
-    $( ".sortable" ).sortable({
-    	opacity: 0.6, //设置拖动时候的透明度   
-        revert: true, //缓冲效果   
-        cursor: 'move', //拖动的时候鼠标样式  
-        update: function(){  
-        	 
-            $.ajax(
-        			{
-        				url : $('#contextPath').val()+ "/sort/FoldersAndPages",
-        				method : "POST",
-        				data :  freshData(), //folders,//
-        				dataType:'json'
-        			}) ;
-        }
-    });
-    function freshData(){
-        var folders = [];
-        //alert( $('#pages-all-container').children(".pages-all-subFolder").size() );;
-        $('#pages-all-container').children(".pages-all-subFolder").each(function() {   
-        	//alert( ) ;
-        	var folder = {};
-        	folder.folderID = $(this).children(".folderMark").eq(0).attr('dataid');
-        	folder.pages=[];
-        	
-        	$(this).children(".pages-all-subFolder-pages").eq(0).children(".pages-all-subFolder-pages-page").each(function() { 
-        		folder.pages.push( $(this).attr('dataid'));
-        	});
-        	
-        	folders.push(folder);
-        	//folders.push(this.title);   
-         });   
-        return JSON.stringify(folders);
-    }
-
-   // alert( JSON.stringify(folders));
-    
-    
-    //pages-all-subFolder-pages
-    //alert('hoho');
-	</script>
+	<script src="<%=request.getContextPath()%>/myjs/index-2.js"></script>
+ 
 </body>
 
 

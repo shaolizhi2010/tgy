@@ -35,6 +35,13 @@ public class RedirectContoller extends HttpServlet {
  
 		U.message(res, "20E588D3FE408A9B1B94EBC034731350");
 	}
+	@RequestMapping( value = {"/root.txt"}  )
+	public void alimama(HttpServletRequest req, HttpServletResponse res
+			) {
+ 
+		U.message(res, "7153a9607a767e7fe3c231da8ab64f91");
+	}
+	
 	 
 	
 }

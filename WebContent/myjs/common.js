@@ -121,9 +121,10 @@ $(document).ready(function() {
 			$(".head-sub-menu a").css("border-bottom"," none;");
 			$("#head-sub-menu-public").css("border-bottom"," 3px solid #e85205");
 	}
+	//页面上边的菜单
 	$("#tabs-tab").removeClass("tabs-tab-selected");
 	$("#menu-"+$("#pageID").val()+" span").addClass("tabs-tab-selected");
-	
+	//右侧边栏菜单
 	$("#menu-slide-tabs").removeClass("tabs-tab-selected");
 	$("#menu-"+$("#pageID-level2").val()+" span").addClass("tabs-tab-selected");
 });
@@ -148,10 +149,10 @@ var addUserFunction = function() {
 		$('#createUserModel').modal();
 		if(data.indexOf("成功")>=0 ){
 			if($('#contextPath').val() == ''){
-				location.href =  '/' ;
+				location.reload(true) ;
 			}
 			else{
-				location.href =  $('#contextPath').val()  ;
+				location.reload(true);  ;
 			}
 		}
 		else{
@@ -186,13 +187,12 @@ var loginFunction = function() {
 			"password" : $('#login-password').val()
 		}
 	}).success(function(data) {
-
 		if (data.indexOf("操作成功")>=0 ) {
 			if($('#contextPath').val() == ''){
-				location.href =  '/' ;
+				location.reload(true);
 			}
 			else{
-				location.href =  $('#contextPath').val()  ;
+				location.reload(true);
 			}
 		} else {
 			alert(data);
@@ -210,7 +210,7 @@ var logoutFunction = function() {
 		data : {}
 	}).success(function(data) {
 		if(data.indexOf("操作成功")>=0 ){
-			location.href =  $('#contextPath').val();
+			location.reload(true);;
 		}
 		else{
 			alert(data);

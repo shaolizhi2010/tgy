@@ -103,9 +103,39 @@ public class DiscussContoller extends HttpServlet {
 			Discuss dc = new Discuss();
 			dc.message = message;
 			
+			
 			dc.userID = U.getUserID(req);
 			dc.soucrceIP = U.getIpAddr(req);
 			dc.targetIsSearchPage = "true"; //
+			dcs.save(dc);
+			
+			U.resSuccess(res);
+		} catch (BaseException e) {
+			U.resFailed(res, e.getMessage());
+		}
+	}
+	
+	@RequestMapping("/all/create")
+	protected void createForAll(HttpServletRequest req, HttpServletResponse res)
+			throws ServletException, IOException {
+
+		DiscussService dcs = new DiscussService();
+		String message = U.filterCharacter(req.getParameter("message")) ;
+		String sourceName = U.filterCharacter(req.getParameter("sourceName")) ;
+		//String sourceID = U.filterCharacter(req.getParameter("sourceID")) ;
+		
+		try {
+			new CommonValidator()
+				.isLonger(message, 1, "信息长度需大于1")
+				.isShorter(message, 300, "信息需小于150个字符");
+			
+			Discuss dc = new Discuss();
+			dc.message = message;
+			dc.sourceName = sourceName;
+			
+			dc.userID = U.getUserID(req);
+			dc.soucrceIP = U.getIpAddr(req);
+			dc.targetIsAllSite = "true"; //
 			dcs.save(dc);
 			
 			U.resSuccess(res);

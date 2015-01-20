@@ -49,3 +49,4 @@ if(CollectionUtils.isEmpty(rootFolders)){
 	<%
 }
 %>
+<input id="showFolderID" type="hidden" value="<%=showFolderID %>" />

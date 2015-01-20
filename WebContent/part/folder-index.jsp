@@ -14,8 +14,6 @@
  <%
  
  %>
- 
- 
 <!-- folder index 开始 -->
 <div id="folder-index" class="col-sm-12 container no-padding sub-page-with-title">
 	<div class="col-sm-12 sub-page-title  no-padding">
@@ -38,17 +36,17 @@
 	 	if(CollectionUtils.isEmpty(rootFolders)){
 	 		%>
 	 		<div class="col-sm-12 ">
-	 			还未创建任何收藏夹，现在就 <a href="#" onclick="preCreateFolderFunction()">添加一个</a> 吧
+	 			还未创建任何收藏夹，现在就 <a href="#" onclick="preCreateFolderFunction()">添加一些</a> 吧
 	 		</div>
 	 		<%
 	 	}
 	 	else{
 	 		String style= "";
 	 		if(StringUtils.isBlank(showFolderID)){
-	 			style = "background-color:#eee;";
+	 			style = "text-decoration: underline;font-weight:bold;color:red;";
 	 		}
 	 		%>
-	 		<a style="<%=style %>" class="col-xs-4 col-sm-2 folder-index-element hoverAble" href="<%=request.getContextPath()%>/u/<%=showUserID %>" >全部</a>	
+	 		<a style="<%=style %>;" class="col-xs-4 col-sm-2 folder-index-element" href="<%=request.getContextPath()%>/u/<%=showUserID %>" >全部</a>	
 	 		<%
 	 			
 		 		//Collections.reverse(rootFolders);
@@ -59,18 +57,19 @@
 		 				folderName = folderName.substring(0, 12) + "..";
 		 			}
 		 			if(StringUtils.equals(showFolderID, folder.id.toString())){
-		 				style = "background-color:#eee;";
+		 				style = "text-decoration: underline;font-weight:bold;color:red;";
 		 			}
 		 			else{
 		 				style = "";
 		 			}
 		 	 		%> 
-		 	 		<a style="<%=style %>" 
-		 	 		class="col-xs-4 col-sm-2 folder-index-element hoverAble editable folderMark" href="<%=request.getContextPath()%>/folder/<%=folder.id%>/<%=folder.name %>"
-		 	 		dataid="<%=folder.id%>" 
-					dataname="<%=folder.name%>"
-					name="<%=folder.id%>"
-					id="<%=folder.id%>"
+		 	 		<a style="<%=style %>;" 
+			 	 		class="col-xs-4 col-sm-2 folder-index-element editable folderMark" 
+			 	 		href="<%=request.getContextPath()%>/folder/<%=folder.id%>/<%=folder.name %>"
+			 	 		dataid="<%=folder.id%>" 
+						dataname="<%=folder.name%>"
+						name="<%=folder.id%>"
+						id="<%=folder.id%>"
 		 	 		 ><%=folderName %></a>
 		 	 		<%
 		 	 	}

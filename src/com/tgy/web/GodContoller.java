@@ -79,15 +79,15 @@ public class GodContoller extends HttpServlet {
 				}
 			}
 			
-			if(returnList.size()<5){
-				//搜索网盘
-				BingSearchSevice bs = new BingSearchSevice();
-				List<Page>  pages = bs.search(inputValue);
-				
-				for(Page p : pages){
-					addToResult(returnList, pageToMap(p) );
-				}
-			}
+//			if(returnList.size()<5){
+//				//搜索网盘
+//				BingSearchSevice bs = new BingSearchSevice();
+//				List<Page>  pages = bs.search(inputValue);
+//				
+//				for(Page p : pages){
+//					addToResult(returnList, pageToMap(p) );
+//				}
+//			}
 			
 			if(returnList.size()>10){
 				returnList = returnList.subList(0, 10);

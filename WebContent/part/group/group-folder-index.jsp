@@ -47,7 +47,7 @@
 	 			style = "background-color:#eee;";
 	 		}
 	 		%>
-	 		<a style="<%=style %>" class="folder-index-element hoverAble" onclick="" href="<%=request.getContextPath()%>/g/<%=group.id %>" >全部</a>	
+	 		<a style="<%=style %>" class="folder-index-element" href="<%=request.getContextPath()%>/g/<%=group.id %>" >全部</a>	
 	 		<%
 	 			
 		 		//Collections.reverse(rootFolders);
@@ -65,7 +65,7 @@
 		 			}
 		 	 		%> 
 		 	 		<a style="<%=style %>" 
-		 	 		class=" folder-index-element hoverAble editable folderMark" 
+		 	 		class=" folder-index-element editable folderMark" 
 		 	 		href="<%=request.getContextPath()%>/group/folder/<%=folder.id%>/<%=folder.name %>"
 					data-href-view="<%=request.getContextPath()%>/group/folder/<%=folder.id%>/<%=folder.name %>"
 					data-href-edit="<%=request.getContextPath()%>/group/group.folder.edit.jsp?folderID=<%=folder.id%>&groupID=<%=groupID%>"

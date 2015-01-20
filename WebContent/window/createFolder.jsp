@@ -13,7 +13,10 @@
             <!-- create folder begin-->
 
             <div  style="margin-top: 20px;" >
-                <label for="createFolder_folderName">收藏夹名称</label><input class="form-control hover-focus"  ng-keyup="$event.keyCode == 13 ? createFolderFunction() : null" id="createFolder_folderName"
+                <label for="createFolder_folderName">收藏夹名称</label>
+                <input class="form-control hover-focus enterInput" 
+                	data-func-name="createFolderFunction"
+                	   id="createFolder_folderName"
                                                           type="text"/>
             </div>
 

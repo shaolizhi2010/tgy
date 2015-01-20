@@ -1,11 +1,16 @@
 package com.tgy.util;
 
+import java.io.InputStream;
 import java.io.StringReader;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
 import org.htmlcleaner.CleanerProperties;
 import org.htmlcleaner.HtmlCleaner;
 import org.htmlcleaner.SimpleXmlSerializer;
@@ -14,6 +19,7 @@ import org.jdom2.Attribute;
 import org.jdom2.Document;
 import org.jdom2.Element;
 
+import com.tgy.App;
 import com.tgy.dao.SearchHistoryDao;
 import com.tgy.entity.Page;
 import com.tgy.entity.SearchHistory;
@@ -41,14 +47,26 @@ public class BingSearchSevice {
 			dao.save(sh);
 			
 			List<Page>  results = new ArrayList<>();
-			keyword = URLEncoder.encode(keyword);
-			String url = "http://cn.bing.com/search?q="+keyword+"++site%3Apan.baidu.com ";
+			keyword = URLEncoder.encode(keyword,"utf-8");
+			String url = "http://cn.bing.com/search?q="+keyword+"++site%3Apan.baidu.com";
 			
-			String s  = SimpleConnecter.connect(url, "utf-8");
+//			String s  = SimpleConnecter.connect(url, "utf-8");
+			
+			HttpClient httpclient = App.getInstance().getHttpClient();
+			HttpGet httpget = new HttpGet(url);
+			httpget.setHeader("Accept",
+					"text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8");
+			httpget.setHeader("Accept-Language", "zh-CN");
+			httpget.setHeader("Accept-Charset", "UTF-8,GBK;q=0.7");
+			httpget.setHeader("Referer", "cn.bing.com");  
+			HttpResponse response = httpclient.execute(httpget);
+
+			HttpEntity entity = response.getEntity();
+			InputStream entityContent = entity.getContent();
 			
 			HtmlCleaner hc = new HtmlCleaner();
-
-			TagNode node = hc.clean(s);
+			TagNode node = hc.clean(entityContent, "UTF-8");
+			
 			String pageSource = getPageSourceFromNode(node);
 			
 			Document doc = new org.jdom2.input.SAXBuilder().build(new StringReader(pageSource));
@@ -75,6 +93,8 @@ public class BingSearchSevice {
 		}
 	}
 
+ 
+	
 	public List<Page> search2(String keyword ) {
 		try {
 			

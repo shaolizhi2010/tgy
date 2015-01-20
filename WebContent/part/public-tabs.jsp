@@ -3,7 +3,7 @@
 	<a id="menu-index-hot-user" href="<%=request.getContextPath()%>/index-hot-user.jsp" class="   no-padding " style=" "><span class="tabs-tab hoverAble-head">最受欢迎收藏</span> </a>
 	<a id="menu-group-index" href="<%=request.getContextPath()%>/group/group.index.jsp" class="no-padding " style=" "><span class="tabs-tab hoverAble-head">兴趣组</span> </a>
 	<a id="menu-pan"  href="<%=request.getContextPath()%>/pan" class="   no-padding  " style=" "><span class="tabs-tab hoverAble-head">寻找资源</span> </a>
-	<a id="menu-index-3" href="<%=request.getContextPath()%>/公用导航?t=3" class="   no-padding " style=" "><span class="tabs-tab hoverAble-head">导航</span> </a>
+	<a id="menu-index-3" href="<%=request.getContextPath()%>/公用导航?t=3" class="   no-padding " style=" "><span class="tabs-tab hoverAble-head">公用导航</span> </a>
 </div>
 <div class=" col-sm-5 container no-padding tabs ">
 	<span style="float: left;">热门链接:</span> 

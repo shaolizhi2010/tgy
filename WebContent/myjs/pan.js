@@ -1,3 +1,27 @@
+$( document ).ready(function() {
+	
+	$.ajax(
+		{
+			url : $('#contextPath').val()
+					+ "/search/history/top",
+			method : "POST",
+			data : {
+			}
+		}
+	).success(
+		function(data) {
+			var dataJson = JSON.parse(data);
+			  var contextPath = $('#contextPath').val();
+			  for(var i=0;i<dataJson.length;i++){
+				 // alert(dataJson[i].keyword);
+				  $("#searchHistroy").append('<a  href="'+contextPath+'/pan/'+dataJson[i].keyword+'" style=" "> <span class="hoverAble-red" style="padding:5px;">'+dataJson[i].keyword+'</span></a>');
+			  }
+		}
+	)
+		
+	 
+});
+
 function panSearch(){
 	location.href =  $('#contextPath').val()+'/pan/'+$('#pan_search_value').val();
 }

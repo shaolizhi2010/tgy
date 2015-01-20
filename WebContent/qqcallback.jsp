@@ -1,3 +1,4 @@
+<%@page import="com.tgy.service.InitUserService"%>
 <%@page import="com.tgy.util.C"%>
 <%@page import="com.tgy.entity.User"%>
 <%@page import="com.tgy.service.UserService"%>
@@ -45,6 +46,9 @@ try{
 		
 		User loginUser = uService.dealWithOpenID(openId, nickname,headImgUrl); 
 		if(loginUser!=null){
+			
+			new InitUserService().initUser(loginUser.id.toString());
+			
 			Cookie cookie = new Cookie("lastLoginUserID", loginUser.id.toString());
 			cookie.setPath("/");
 			response.addCookie(cookie);

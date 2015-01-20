@@ -16,15 +16,15 @@
 
 <%
 String folderName = showFolderName;
-if(StringUtils.isBlank(folderName)){
-	folderName = "网址";
-}
+//if(StringUtils.isBlank(folderName)){
+//	folderName = "网址";
+//}
 int papgeIndex=0;
 %>
 <!-- 显示网址页面开始 -->
 <div id="pages-part" class="col-sm-12 no-padding sub-page-with-title">
-	<div class="col-sm-12 container sub-page-title  no-padding">
-		<span class="col-sm-5"><%=folderName %></span>
+	<div class="col-sm-12 container no-padding">
+		<span class="col-sm-5"><%=folderName %>网址</span>
 		<div class="col-sm-3 pull-right" style="  padding-top: 3px; ">
 		<%
 		if(StringUtils.isNotBlank(showFolderID)){
@@ -59,7 +59,7 @@ int papgeIndex=0;
 	if(CollectionUtils.isEmpty(pages)){
  		%>
  		<div class="col-sm-12 ">
- 			还未收藏任何网址，现在就 <a href="#" onclick="preAddPageFunction()">添加一个 </a> 吧
+ 			还未收藏任何网址，现在就 <a href="#" onclick="preAddPageFunction()">添加一些 </a> 吧
  		</div>
  		<%
  	}
@@ -104,11 +104,11 @@ int papgeIndex=0;
 				String pageBackgroudColor = "";
 				//pageBackgroudColor =  (papgeIndex++%2)==0 ? "background-color:#fefefe" :  "";  //每条page信息的北京交替变化
 		%>
-		<div class="col-sm-12 pages-part-page hoverAble" style="  <%=pageBackgroudColor%>">
+		<div class="col-sm-12 pages-part-page " style="  <%=pageBackgroudColor%>">
 		<a target="_blank" class="col-sm-8  pageMark" href="<%=linkStr%>" 
 			onclick="openLink('<%=p.id %>','page')" title = "<%=p.name %>"
 			data-id="<%=p.id%>" data-name="<%=p.name%>">
-		<%					String iconPath = "";
+		<%				String iconPath = "";
 						if(StringUtils.isNoneBlank(p.iconPath)  ){
 							iconPath = p.iconPath;
 							if(iconPath.startsWith(App.imgPath)){
@@ -160,12 +160,14 @@ int papgeIndex=0;
 			%>
 
 		</div>
+		<!-- 
 		<div title="访问:<%=p.favScore %>, 受欢迎度:<%=link.favScore %> ">
 			<span style="font-size: 12px;color: #999;" ><%=p.favScore %></span>
 			<span>/</span> 
 			<span style="font-size: 12px;color: #999;" ><%=link.favScore %></span>
 		</div>
-		
+		 -->
+		 
 		</div><!-- 1155cc --> 
 		<%
 			}//end for

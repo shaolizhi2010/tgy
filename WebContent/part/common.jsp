@@ -10,5 +10,7 @@
 <%@page import="java.util.List"%>
 <%  
 String contextPath = request.getContextPath();
+ 
 %>
 <input type="hidden" id="contextPath" value="<%=contextPath %>"  />
+ 

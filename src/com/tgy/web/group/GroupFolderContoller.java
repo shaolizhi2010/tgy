@@ -138,5 +138,25 @@ public class GroupFolderContoller extends BaseGroupContoller {
 			U.resFailed(res, e.getMessage());
 		}
 	}
+	
+	@RequestMapping("/copy")
+	protected void copy(HttpServletRequest req, HttpServletResponse res)
+			throws ServletException, IOException {
+		InterestGroupFolderService fs = new InterestGroupFolderService();
+		
+		try {
+			new CommonValidator().isLogin(req, null) ;
+			
+			String folderID = U.filterCharacter(req.getParameter("folderID")) ;
+			String userID = U.getUserID(req);
+			fs.copy(folderID, userID);
+			
+			U.resSuccess(res);
+		} catch (BaseException e) {
+			U.resFailed(res, e.getMessage());
+		}
+		
+	
+	}
 
 }

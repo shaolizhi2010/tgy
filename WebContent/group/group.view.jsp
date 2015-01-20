@@ -44,7 +44,7 @@
 	<!-- 书签主页面开始 -->
 	<div class="container col-sm-12 clearfix " style="padding-top: 0px;">  
 		<!-------- 书签主页面 --------->
-		<div id="pageMain" class="col-sm-9 no-padding" >
+		<div class=" col-sm-6 container " style="margin-right: 50px;">
 			<div class="col-sm-12 group-info no-padding">
 				<span class="group-info-title" ><%=groupName %></span>
 				<%if(isJoined){%>
@@ -66,9 +66,11 @@
 		</div>
 		<!--------  书签列表页面 end  --->
 		<!-- 显示推荐页面开始 -->
-		<div class="col-sm-3" style="  ">
+		<div class=" col-sm-5 no-padding" style="border-left:1px solid #eee;padding-left: 10px; ">
 			<div class="  col-sm-12">
-				<jsp:include page="../part/group/group-discuss.jsp" />
+				<jsp:include page="../part/all-discuss.jsp">
+			    	<jsp:param name="sourceName" value="<%=groupName %>"/>
+			    </jsp:include>
 			</div>		
 			<div class="  col-sm-12">
 				<jsp:include page="../part/group/group-users.jsp" />
@@ -89,6 +91,7 @@
 	<script src="<%=request.getContextPath()%>/myjs/group/group-page-part.js"></script>
 	<script src="<%=request.getContextPath()%>/myjs/group/group.discuss.js"></script>
 	<script src="<%=request.getContextPath()%>/myjs/group/group.edit-all.js"></script>
+	<script src="<%=request.getContextPath()%>/myjs/discuss.js"></script>
 	
 </body>
 

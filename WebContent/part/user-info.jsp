@@ -1,3 +1,4 @@
+<%@page import="java.util.Random"%>
 <%@page import="org.apache.commons.lang3.StringUtils"%>
 <%@page import="com.tgy.util.GravatarUtil"%>
 <%@page import="com.tgy.entity.Folder"%>
@@ -27,13 +28,13 @@ if(showUser!=null){
 				<%
 					if(StringUtils.isBlank(showUserHeadImgUrl)){
 						%>
-						<span  class="glyphicon glyphicon-user" style="font-size: 80px;color: #f5f5f5;"></span>
+						<img class="img-responsive"  style="min-width: 80px;min-height: 80px; border-radius:80px;" alt="已登录" src="<%=request.getContextPath()%>/images/ava/ava<%=new Random().nextInt(120)+1%>.png">
 						<br><a href="<%=request.getContextPath()%>/private/personal-setting.jsp">[设置头像]</a>
 						<%
 					}
 					else{
 						%>
-						<img class="img-responsive"  style="min-width: 80px;min-height: 80px; " alt="已登录" src="<%=showUserHeadImgUrl%>">
+						<img class="img-responsive"  style="min-width: 80px;min-height: 80px;border-radius:80px; " alt="已登录" src="<%=showUserHeadImgUrl%>">
 						<%
 					}
 				%> 

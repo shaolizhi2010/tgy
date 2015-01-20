@@ -7,7 +7,7 @@ import org.mongodb.morphia.query.Query;
 import com.tgy.App;
 import com.tgy.entity.SearchHistory;
 
-public class SearchHistoryDao extends BasicDAO<SearchHistory, ObjectId> {
+public class SearchHistoryDao extends BaseBasicDAO<SearchHistory, ObjectId> {
 
 	public SearchHistoryDao() {
 		super(SearchHistory.class, App.getInstance().getDatastore());

@@ -172,7 +172,7 @@ public class UserContoller extends HttpServlet {
 				U.forward(req, res, "/index-2.jsp");
 			}
 			else{
-				U.forward(req, res, "/index-1.jsp");
+				U.forward(req, res, "/index-2.jsp");
 			}
 		}
 		

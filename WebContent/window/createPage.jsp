@@ -21,12 +21,12 @@
 			<input type="hidden" id="createPage_folderId" /> <input type="hidden"
 				id="createPage_bookmarkId" />
 			
-			<div style="margin-top: 20px;">
+			<div style="margin-top: 0px;">
 				<label for="pageUrl">分类</label> 
 				<a href="#"  onclick="preCreateFolderFunction()" ><span style="font-size: 12px;line-height: 14px;">创建新分类</span> </a>
 			</div>
 			<div class="">
-			   <select class="  form-control"   id="createPage_pid">
+			   <select class="form-control"   id="createPage_pid">
 			   <option value="<%=showFolderID%>"  ><%=showFolderName%></option>
 			   <%
 			   if(bookmarkData!=null && bookmarkData.rootFolders!=null){
@@ -46,13 +46,15 @@
 			
 			<div style="margin-top: 20px;">
 				<label for="pageUrl">网址</label>
-					
-					<textarea    id="pageUrl"  class="form-control hover-focus" rows="3"></textarea>
+					<textarea    id="pageUrl"  class="form-control hover-focus enterInput"
+						data-func-name="createPageFunction"	 	 rows="3">
+					</textarea>
 			</div>
 			<div style="margin-top: 20px;" id="createPage-name-div">
-				<label for="pageName">网站名称</label> <input placeholder=""
-					ng-keyup="$event.keyCode == 13 ? createPageFunction() : null"
-					class="form-control  " id="pageName" type="text" />
+				<label for="pageName">网站名称</label> 
+				<input placeholder=""
+					data-func-name="createPageFunction"	 
+					class="form-control enterInput " id="pageName" type="text" />
 			</div>
 			<input type="hidden" id="link_prompt_index" value='-1'>
 			<div id="link-prompt-div" class="col-sm-12" style="margin-bottom: 10px;padding-right: 5px;" >

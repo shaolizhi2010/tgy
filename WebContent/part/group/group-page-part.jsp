@@ -27,7 +27,7 @@
 			<%
 			if(true){//TODO
 				%>
-				<span id="copy-folder-btn" class="col-sm-6 btn pull-right sub-page-title-btn  hoverAble2" style="padding:8px; font-size: 13px;border: 1px solid #ccc;border-radius:10px;height: 32px;" title="一键复制 ' ' 中的所有网址(<%=pages.size() %>个),到自己的收藏夹" onclick="copyFolder()">一键复制</span>
+				<span id="copy-folder-btn" class="col-sm-6 btn pull-right sub-page-title-btn  hoverAble2" style="padding:8px; font-size: 13px;border: 1px solid #ccc;border-radius:10px;height: 32px;" title="一键复制 ' ' 中的所有网址(<%=pages.size() %>个),到自己的收藏夹" onclick="copyGroupFolder()">一键复制</span>
 				<%
 			}
 			%>
@@ -147,12 +147,13 @@
 			%>
 
 		</div>
+		<!-- 
 		<div title="访问:<%=p.favScore %>, 受欢迎度:<%=link.favScore %> ">
 			<span style="font-size: 12px;color: #999;" ><%=p.favScore %></span>
 			<span>/</span> 
 			<span style="font-size: 12px;color: #999;" ><%=link.favScore %></span>
 		</div>
-		
+		 -->
 		</div><!-- 1155cc --> 
 		<%
 			}//end for

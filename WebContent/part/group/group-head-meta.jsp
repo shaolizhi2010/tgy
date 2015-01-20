@@ -7,13 +7,13 @@
 
 <%@include file="group-data.jsp" %>
 <%
-	String title = C.title;
+	String title = "网址盒子";
 	String userName = "";
 	if(loginUserName!=null){
 		userName = loginUserName;
 	}
 	if( StringUtils.isNotBlank(groupName )  ){
-		title = groupName+" - " + title;
+		title = groupName+"网址收藏  - " + title;
 	}
 	if( StringUtils.isNotBlank(showFolderName )  ){
 		title = showFolderName+" - " + title;

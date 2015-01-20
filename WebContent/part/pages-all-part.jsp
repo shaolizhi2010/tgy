@@ -15,8 +15,22 @@
 <%@include file="bookmark-data.jsp"%>
 
 <!-- 显示all网址页面开始 -->
-<div id="pages-all-container" class="col-sm-12 no-padding sortable" style="  padding-bottom: 10px;">
-	<div class="col-sm-12    " > <a class="pull-right" href="#" onclick="preEditAll()"><span class='glyphicon glyphicon-cog  ' style='font-size:12px;margin-right: 5px;'></span>快速编辑</a></div>
+<div id="pages-all-container" class="col-sm-12 no-padding" style="  padding-bottom: 10px;">
+	<div id="editPanel" class="col-sm-12" > 
+		<a class="pull-right editPanelElement " href="#" onclick="preEditAll()">
+			<span class="hoverAble-red" id="editAllBtn" > &nbsp;[ 快速编辑 ]&nbsp; </span> </a>
+		<a  class="pull-right editPanelElement" href="#" onclick="preSortAll()">
+			<span class="hoverAble-red" id="sortAllBtn" > &nbsp;[ 改变顺序 ]&nbsp; </span>
+		</a>
+		<a  class="pull-right" href="#" onclick="preAddPageFunction()">
+			<span class="hoverAble-red"> &nbsp;[ 添加网址 ]&nbsp; </span></a>
+	</div>
+	<div id="returnCommonPanel" class="col-sm-12 " style="display: none;" > 
+		<a class="pull-right" href="#">
+			<span id="editAllBtn" > &nbsp;[ 返回浏览模式 ]&nbsp; </span> </a>
+ 
+	</div>
+	<div class="col-sm-12 info"></div>
 	<%
 		FolderUtil.sortByOrderIndex( rootFolders);
 		for (Folder folder : rootFolders) {
@@ -28,27 +42,26 @@
 			
 	%>
 	<div class="col-sm-12 no-padding sub-page folder-pages pages-all-subFolder" >
-		<a  class="btn  col-sm-2 folderMark editable " title="<%=folder.name%>"
+		<a  class="btn  col-sm-1 folderMark editable " title="<%=folder.name%>"
 			 
 			dataid="<%=folder.id%>" 
 			dataname="<%=folder.name%>"
 			name="<%=folder.id%>"
 			id="<%=folder.id%>"
 			href="<%=request.getContextPath()%>/folder/<%=folder.id%>/<%=folderName%>"
-			onclick="$event.preventDefault();openFolder('<%=folder.id %>','<%=folder.name %>',$event  );"
-			
 			style="  margin-top: 2px; margin-bottom: 2px;">
-			<span style="color: #666;font-weight: bold;font-size: 15px;"> <%=folderName%>
-		</span>
+			<span style="font-size: 13px;" class="hoverAble-red">
+				<%=folderName%>
+			</span>
 		</a>
-		<div class="col-sm-10 container sortable pages-all-subFolder-pages" style="  "> 
+		<div class="col-sm-11 container  pages-all-subFolder-pages" style="  "> 
 			<%
 				PageUtil.sortByOrderIndex( folder.pages);
 				for (Page p : folder.pages) {
 						String pageName = p.name;
 						pageName = StringUtils.trim(pageName); 
 						//name
-						pageName = U.shortTitle(pageName, 6);
+						pageName = U.shortTitle(pageName, 4);
 						
 						String pageTitle = p.name;
 						String pageDescription = "";
@@ -61,7 +74,7 @@
 
 						if (StringUtils.isBlank(pageName)) {
 							pageName = p.url;
-							pageName = U.shortURL(pageName,6);
+							pageName = U.shortURL(pageName,4);
 						}
 						String link = p.url;
 
@@ -74,7 +87,7 @@
 			%>
 
 			<a dataid="<%=p.id%>" dataname="<%=pageTitle%>" title="<%=pageTitle+ pageDescription%>"
-				class="  col-xs-12 col-sm-4 col-sm-3  folder-pages-link editable pageMark click-trace hoverAble pages-all-subFolder-pages-page"  href="<%=link%>"
+				class="  col-xs-12 col-xs-3 col-sm-2  folder-pages-link editable pageMark click-trace  pages-all-subFolder-pages-page hoverAble-red"  href="<%=link%>"
 				style="padding-right: 0px;"
 				onclick="openLink('<%=p.id%>','page')" target="_blank">
 				<%
@@ -101,10 +114,10 @@
 				}//end for pages
 			%>
 		 
-			<a title="添加网址" class="btn col-sm-3   add-link" href="javascript:void(0)"
+			<a title="添加网址" class="hoverAble-red col-sm-3 add-link" href="javascript:void(0)"
 				onclick="preAddPageFunction('','','') "
 				>
-				<span  > + 收藏网址 </span> 
+				<span> + 收藏网址 </span> 
 			</a>
 		</div>
 

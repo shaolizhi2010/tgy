@@ -1,3 +1,5 @@
+<%@page import="com.tgy.util.IpUtils"%>
+<%@page import="java.util.Random"%>
 <%@page import="com.tgy.entity.Discuss"%>
 <%@page import="com.tgy.service.DiscussService"%>
 <%@page import="java.util.Collections"%>
@@ -29,61 +31,111 @@
 
 	<div class=" container col-sm-12 sub-page-with-title"  >
 		<div class="sub-page-title">
-			<span>... </span>
+			<span>吐槽 - 大家爱吐槽</span>
 		</div>
 		<div class="col-sm-12 sub-page-body no-padding" style="padding:0px;padding-top:10px; background-color: #fff;">
 		<%
+			//Random rad = new Random();
 			for(Discuss d : discusses){
-				String userName = "游客";
-			String headUrl = "";
-			String userUrl = "";
-			//String userID = "";
-			if(StringUtils.isBlank(d.userID)){
-				if(StringUtils.isNotBlank(d.soucrceIP)){
-					userName = d.soucrceIP;
+				String userName = "百度盘找资源" ;
+				String headUrl = "";
+				String userUrl = "#";
+				String userID = "";
+				int shortIp = 1;//123.123.123.11 ip最后一段
+				String splitToken = ":";
+				if(StringUtils.isBlank(d.userID)){
+					shortIp = IpUtils.lastPartIp(d.soucrceIP);
+					userName +=shortIp;
 				}
-			}
-			else{
-				User sourceUser = uService.getByID(d.userID);
-				if(sourceUser!=null){
-					userName = sourceUser.name;
-					headUrl = sourceUser.headImgUrl;
-					userUrl = request.getContextPath()+"/u/"+d.userID;
+				else{
+					User sourceUser = uService.getByID(d.userID);
+					if(sourceUser!=null){
+						userName = sourceUser.name;
+						headUrl = sourceUser.headImgUrl;
+						userUrl = request.getContextPath()+"/u/"+d.userID;
+						userID = sourceUser.id.toString();
+					}
 				}
-			}
-		%>
-		<div class="col-sm-12 no-padding" style=" ">
-			<a href="<%=userUrl%>" class="  no-padding" style="display: block;  " >
+		%> 
+		<div class="col-sm-12 no-padding hoverAble-discuss" style="padding:10px;padding-bottom:0px; border-top: 1px solid #fafafa;border-bottom: 1px solid #fafafa;">
+			
+				<a href="<%=userUrl%>" class="col-sm-1  no-padding " style="min-width:50px ;padding-right:10px; display: block; float: left; " >
 				<%	
+				
 				if(StringUtils.isBlank(headUrl)){
-			%>
-				<span class="glyphicon glyphicon-user" style="font-size: 15px;color: #ddd;float: left;"></span>
-			<%
-				} else{
+					
 				%>
-				<img height="15" width="15" alt="" src="<%=headUrl %>">
+					<img height="40" width="40" alt="" data-original="<%=request.getContextPath() %>/images/ava/ava<%=shortIp/2+1%>.png" style="-moz-border-radius: 20px;-webkit-border-radius: 20px;border-radius: 20px;" >
+				<%
+				} else{ 
+				%>
+					<img height="40" width="40" alt="" data-original="<%=headUrl %>" style="-moz-border-radius: 20px;-webkit-border-radius: 20px;border-radius: 20px;" >
 				<%
 				}
 				%>
-				 <span style="color: #666;font-size: 10px;"><%= U.shortString(userName, 6) %></span>   
-			</a>
-			<p class=" col-sm-12 no-padding" style=" background-color:#f2f2f2;  padding:   10px;padding-left:  15px;  font-size: 12px;font-weight: normal;word-wrap: break-word; word-break: break-all;">
-					<%=U.addLinkForMessage( d.message)  %>  
-			</p>
+				</a>
+				
+				<div class="col-sm-9 no-padding" style="float: left;"> 
+					<a href="<%=userUrl%>" 
+						class="discuss-username"
+						style="display: block;padding-left: 10px; "
+						target="_blank">
+					<%= U.shortString(userName, 20) %></a>
+					
+					<p class="" style="color:#333;  padding-left:10px; padding-top:5px;  font-size: 13px;font-weight: normal;word-wrap: break-word; word-break: break-all;">
+						<%=U.addLinkForMessage( d.message)  %>  
+					</p>
+				</div>
 		</div>
 		<%
 			}
 		%>
-		 <div class="col-sm-12  no-padding " style="  ">
-				<div  style="margin-top: 5px;" >
-		         		<textarea   id="createDiscussMessage" data-func-name="createDiscussForSearchFunction" class="form-control enterInput hover-focus" rows="2" placeholder=""></textarea> 
+		
+		<!-- 翻页 
+		<div class="col-sm-12">
+		<nav>
+		  <ul class="pagination">
+		    <li>
+		      <a href="#" aria-label="Previous">
+		        <span aria-hidden="true">&laquo;</span>
+		      </a>
+		    </li>
+		    <%
+		    for(int i = 1;i<11;i++){
+		    	String selectedStyle="";
+ 
+		   		%>
+		   		 <li><a style="<%=selectedStyle %>" href="#"><%=i %></a></li>
+		   		<% 	
+		    }
+		    %>
+		   
+		    <li>
+		      <a href="#" aria-label="Next">
+		        <span aria-hidden="true">&raquo;</span> 
+		      </a>
+		    </li>
+		  </ul>
+		</nav>
+	</div>
+	-->
+		<div class="col-sm-12" >
+			 <div class="col-sm-12" style=" padding: 10px;background-color: #f8f8f8; ">
+				<div  style=" ">
+		         		<textarea  style="border:1px solid #ccc;" id="createDiscussMessage" 
+		         			data-func-name="createDiscussForSearchFunction" 
+		         			class="form-control enterInput hover-focus" rows="4" 
+		         			placeholder="快到碗里来说两句"></textarea> 
+
 	         	</div>
-	         	<div  style="margin-top: 4px;" >
-	              <button onclick="createDiscussForSearchFunction()" id="createFolder-ok" type="button"
-	                      class="btn btn-default pull-right" style="font-size:10px; height: 30px; " >发送
-	              </button>
-	         	</div>
-		</div> 	
+				<div  style="margin-top: 5px; " >
+	         	    <span onclick="createDiscussForSearchFunction()" id="createFolder-ok" type="button"
+                      class="pull-right" style="width:45px;height:35px;line-height:35px;text-align:center;border-radius:5px; background-color: #4cbb1f;color: #fff;font-size: 13px;font-weight: bold;">
+                      		发送
+                      </span>
+              	</div>
+			</div> 	
+ 		</div>
  	</div>
 </div>
  

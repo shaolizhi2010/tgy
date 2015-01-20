@@ -16,8 +16,12 @@ import com.tgy.dao.SearchHistoryDao;
 import com.tgy.entity.Page;
 import com.tgy.entity.SearchHistory;
 import com.tgy.statistic.entity.Link;
+import com.tgy.util.BaidupanSearchSevice;
 import com.tgy.util.BingSearchSevice;
+import com.tgy.util.GoogleSearchSevice;
+import com.tgy.util.SougouSearchSevice;
 import com.tgy.util.U;
+import com.tgy.util.YahooSearchSevice;
 
 @RestController
 @RequestMapping(value = { "/"})
@@ -34,7 +38,11 @@ public class PanSearchContoller extends HttpServlet {
 		}
 		
 		if(StringUtils.isNotBlank(keyword)){
-			BingSearchSevice bs = new BingSearchSevice();
+			//BingSearchSevice bs = new BingSearchSevice();
+			//SougouSearchSevice bs = new SougouSearchSevice();
+//			YahooSearchSevice bs = new YahooSearchSevice();
+//			GoogleSearchSevice bs = new GoogleSearchSevice();
+			BaidupanSearchSevice bs = new BaidupanSearchSevice();
 			List<Page>  results = bs.search(keyword);
 			
 			req.setAttribute("results", results);

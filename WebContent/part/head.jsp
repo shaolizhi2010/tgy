@@ -26,7 +26,7 @@ if (showUserNameShort != null && showUserNameShort.length() > 8) {
 	<div id="logo" class="col-sm-2 no-padding">
 		<a href="/" title="网址收藏 网站分享"><span>网址盒子</span> </a>
 	</div> 
-	<div id="god-div" class="col-sm-3 no-padding"> 
+	<div id="god-div" class="col-sm-3 col-xs-0 no-padding"> 
 		<input id="god-input" class="form-control hover-focus" style="height: 40px;border-radius:10px;"   placeholder="搜 资源、网址、网站名称" />
 		<div id= "god-content-div" class="col-sm-12"  style="display: none;position: absolute; z-index: 1000;   background-color: #fff;border: 1px solid #333; ">
 		</div> 

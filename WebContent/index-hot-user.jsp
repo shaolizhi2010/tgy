@@ -1,3 +1,4 @@
+<%@page import="java.util.Random"%>
 <%@ page language="java" pageEncoding="UTF-8"%>
 <%@page import="com.tgy.service.PageService"%>
 <%@page import="com.tgy.service.UserService"%>
@@ -98,12 +99,12 @@ List<User> users = us.list("-favScore",start,10);
 							<%
 								if(StringUtils.isBlank(user.headImgUrl)){
 									%>
-									<span class="glyphicon glyphicon-user" style="font-size: 50px;color: #eee;"></span>
+									<img class="img-responsive"  style="width: 50px;height: 50px; border-radius:50px;" alt="已登录" src="<%=request.getContextPath()%>/images/ava/ava<%=new Random().nextInt(120)+1%>.png">
 									<%
 								}
 								else{
 									%>
-									<img style="height: 50px;width: 50px;" alt="已登录" src="<%=user.headImgUrl%>">
+									<img class="img-responsive" style="width: 50px;height: 50px; border-radius:50px;" alt="已登录" data-original="<%=user.headImgUrl%>">
 									<%
 								}
 							%> 
@@ -125,7 +126,7 @@ List<User> users = us.list("-favScore",start,10);
 					 			continue;
 					 		}
 						%>
-								<a class="col-sm-6 no-padding" href="<%=p.url%>" target="_blank">
+								<a class="col-sm-6 col-xs-12 no-padding" href="<%=p.url%>" target="_blank">
 									<span >
 									<%=U.shortString(p.name, 10)%>
 									</span>
@@ -167,12 +168,12 @@ List<User> users = us.list("-favScore",start,10);
 							<%
 								if(StringUtils.isBlank(user.headImgUrl)){
 									%>
-									<span class="glyphicon glyphicon-user" style="font-size: 50px;color: #eee;"></span>
+									<img class="img-responsive" style="width: 50px;height: 50px; border-radius:50px;" alt="已登录" src="<%=request.getContextPath()%>/images/ava/ava<%=new Random().nextInt(120)+1%>.png">
 									<%
 								}
 								else{
 									%>
-									<img style="height: 50px;width: 50px;" alt="已登录" src="<%=user.headImgUrl%>">
+									<img class="img-responsive" style="width: 50px;height: 50px; border-radius:50px;" alt="已登录" data-original="<%=user.headImgUrl%>">
 									<%
 								}
 							%> 
@@ -180,7 +181,8 @@ List<User> users = us.list("-favScore",start,10);
 						</div>
 						<div class="col-sm-8 user-name">
 						<a href="<%=request.getContextPath()%>/u/<%=user.id %>" title="<%=user.name%>">
-							<span><%=name %></span><span style="color:#999; font-size: 9px;font-weight: normal;"> 的收藏夹</span></a>
+							<span><%=name %></span>
+							<span style="color:#999; font-size: 9px;font-weight: normal;"> 的收藏夹</span></a>
 						<div class="share-info"><span></span> <span><%=user.favScore %>欢迎度     <%=user.pageCount%>网址 </div>
 					</div>
 					</div>
@@ -194,7 +196,7 @@ List<User> users = us.list("-favScore",start,10);
 						 			continue;
 						 		}
 							%>
-								<a class="col-sm-6 no-padding" href="<%=p.url%>" target="_blank">
+								<a class="col-sm-6 col-xs-12 no-padding" href="<%=p.url%>" target="_blank">
 									<span >
 									<%=U.shortString(p.name, 10)%>
 									</span>

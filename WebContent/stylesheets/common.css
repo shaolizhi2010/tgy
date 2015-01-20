@@ -3,15 +3,44 @@ body {
 	font-family: Arial, Helvetica, sans-serif;
 }
  
-a,a:link,a:visited,a:hover,a:active {
+a,a:link,a:visited,a:active {
 	color: #4183c4;
+	text-decoration: none;
 }
 a {
 	text-decoration: none;
 }
+ a:hover{
+ 	font-weight: bold;
+ 	color: red;
+ }
+
+span,p,div,a{
+	color: #333;
+	font-size: 12px;
+	font-family: Arial, Helvetica, sans-serif;
+	font-weight: normal;
+} 
+.close span{
+	font-size: 24px;
+	color: red;
+	font-weight: bold;
+}
+.close span:hover{
+	 
+}
 .modal-header{
-	background-color: #f7f7f7;
+	background-color: #eaf7fb;
 	color: #666;
+}
+.info{
+	font-weight:bold;
+	background-color: #f8fffa;
+	padding: 10px;
+	padding-left:20px;
+	color: #aaa;
+	letter-spacing:1px;
+	display: none;
 }
 .publicMessage{
 	font-size: 20px;
@@ -132,7 +161,7 @@ a {
 .sub-page-body{
 	display:block;
 	padding: 10px; 
-	background-color: #f9f9f9;
+	background-color: #f8fffa;
 }
 .no-outline{
 	outline: 0;
@@ -163,6 +192,13 @@ a {
 }
 .hoverAble3:hover{
 	background-color: orange;
+}
+.hoverAble-red:hover{
+	color: red;
+	font-weight: bold;
+}
+.hoverAble-discuss:hover{
+	background-color: #fbfbfb;
 }
 .hoverAble-head:hover{
 	background-color: #007722;
@@ -212,20 +248,37 @@ a {
 	font-size:14px;
 }
 .folder-index-element{
-	padding:5px; text-decoration:none;text-align:center;
-	  font-size: 13px;  font-weight: 600;display: block;
-	  
-	  float:left;
-	  border-radius:2px; 
-	  width:100px;
-	  min-width: 50px;
+	padding:5px; 
+	text-decoration:none;
+	text-align:center;
+	font-size: 13px;   
+	display: block;
+	color:#1024ee;
+	float:left;
+	border-radius:2px; 
+	width:100px;
+	min-width: 50px;
+	color:#333;
+}
+.folder-index-element:link,
+.folder-index-element:visited,
+.folder-index-element:active{
+	color:#333;
+}
+.folder-index-element:hover{
+	color: red;
+	font-weight: bold;
 }
 .public-folder-element{
-	padding:5px; text-decoration:none; 
-	  font-size: 13px;  font-weight: 600;display: block;
+	padding:5px; 
+	text-decoration:none; 
+	font-size: 13px;  
+	font-weight: 600;
+	display: block;
 }
 .history-folder-element{
-	padding:5px; text-decoration:none; 
+	padding:5px; 
+	text-decoration:none; 
 	  font-size: 13px;  font-weight: 600;display: block;
 }  
 #pages-part{
@@ -244,13 +297,22 @@ a {
 	 padding-top: 6px;padding-bottom: 6px;
 }
 .pages-part-page a:hover{
-	 
+	
 }
 .pages-part-page-name{
-	color: #2e8cd8; padding-left: 15px;font-weight: bold;;font-size: 14px;
+	color: #333; 
+	padding-left: 15px;
+	font-size: 13px;
+}
+.pages-part-page-name:hover{
+	color: red;
+	font-weight: bold;
 }
 .pages-part-page-link{
 	color:green;font-size: 11px;
+}
+.pages-part-page-link:hover{
+	font-weight: bold;
 }
 .img18{
 	width: 18px;height:18px;float: left; 
@@ -417,7 +479,7 @@ background-color:#fcfcfc;
 
 #pan-search-input{
 	padding: 10px;
-	border: 1px solid #eee;
+	--border: 1px solid #eee;
 }
 
 #pan-search-results{
@@ -452,4 +514,18 @@ background-color:#fcfcfc;
 	padding: 5px 15px 5px 15px;
 	color:#fff;
 	font-size: 12px;
+}
+.discuss-username , 
+.discuss-username:link,
+.discuss-username:visited,
+.discuss-username:active{
+	color: #a4a4a4;
+	font-size: 13px;
+}
+.discuss-username:hover{
+	color: green;
+}
+#searchHistroy{
+	margin-top: 40px;
+}
 }

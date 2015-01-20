@@ -10,7 +10,7 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
 
  	 
-	<div   class="col-md-12   "> 
+	<div   class="col-md-12  no-padding "> 
 		<!-- 
 		<div class="  col-md-2 no-padding" style="padding-right: 5px; ">
 			
@@ -18,11 +18,11 @@
 			
 		</div>
 		-->
-		<div class="  col-md-10 no-padding" style="padding-right: 5px; ">
-			<textarea class="  col-md-12 "    style=" border-radius:5px;border:2px solid #ddd;" placeholder="要收藏的网址网址" rows="3" /></textarea>
+		<div class="  col-md-10 no-padding" style=" ">
+			<textarea id="quick_pageUrl" class="  col-md-12 "    style=" border-radius:5px;border:2px solid #ddd;" placeholder="添加喜欢的网址" rows="2" /></textarea>
 		</div>
-		<div class="col-md-2 no-padding" style="padding-right: 5px; ">
-			<a class="btn col-md-12 " style="border: 1px solid #ccc;display: block;border-radius:5px;height: 40px;"><span style="font-size: 10px;font-weight:550 ;color: #666;" >添加网址</span> </a>
+		<div class="col-md-2 no-padding" style="padding-right: 15px; ">
+			<a onclick="quickAddPageFunction()" class="btn col-md-12 " style="border: 1px solid #ccc;display: block;border-radius:5px;height: 48px;line-height: 30px;background-color: #0084e8;"><span style="font-size: 14px; color: #fff;" ><span class="glyphicon glyphicon-plus"></span>添加网址</span> </a>
 		</div>
 		
 	</div>
