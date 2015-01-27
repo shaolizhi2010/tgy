@@ -59,7 +59,7 @@ public class GetPageInfoThread  implements Runnable{
 		}
 		
 		PageDao pDao = new PageDao();
-		Page page = pDao.getByID(pageID);
+		Page page = pDao.byID(pageID);
 		if(StringUtils.isBlank(page.name)){
 			page.name = link.title;
 		}

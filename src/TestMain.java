@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Random;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.math.NumberUtils;
 import org.htmlcleaner.CleanerProperties;
 import org.htmlcleaner.HtmlCleaner;
 import org.htmlcleaner.SimpleXmlSerializer;
@@ -20,9 +21,17 @@ public class TestMain {
 	public static void main(String[] args) {
 		try {
 			System.out.println("start");
-			for(int i=0;i<100;i++){
-				System.out.println(new Random().nextInt(2));
-			}
+			
+			System.out.println( NumberUtils.toInt(""));
+			
+//			List<String> list = (List<String>)null; 
+//			System.out.println(list);
+//			for(String s : list){
+//				System.out.println(s);
+//			}
+//			for(int i=0;i<100;i++){
+//				System.out.println(new Random().nextInt(2));
+//			}
 			
 			//System.out.println(s);
 			

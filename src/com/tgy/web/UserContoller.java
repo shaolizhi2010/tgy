@@ -65,6 +65,9 @@ public class UserContoller extends HttpServlet {
 			U.forward(req, res, "/pan.jsp");
 			return;
 		}
+		if(StringUtils.equals(userName, "null") || StringUtils.isBlank(userName)){
+			return;
+		}
 		User showUser = new UserDao().getByName(userName);
 		service(req, res, lastLoginUserID, lastPsCode, showUser,showType);
 	}

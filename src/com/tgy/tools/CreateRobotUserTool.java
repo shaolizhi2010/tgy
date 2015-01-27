@@ -39,6 +39,7 @@ public class CreateRobotUserTool{
 	
 	public List<String> createRobotUser(int userCount){
 		List<String> createdUsers = new ArrayList<String>();
+		Random rad= new Random();
 		for(int i = 0 ;i<userCount;i++){
 			try {
 				//创建user
@@ -76,10 +77,10 @@ public class CreateRobotUserTool{
 					
 					//设置头像
 					if(new Random().nextInt(2)==1){
-						List<String> heads = FileUtils.readLines(new File( "c:/data/headimg.txt"),"GBK" );
-						int headIndex = new Random().nextInt( heads.size());
-						String head = heads.get(headIndex);
-						user.headImgUrl = head; 
+//						List<String> heads = FileUtils.readLines(new File( "c:/data/headimg.txt"),"GBK" );
+//						int headIndex = new Random().nextInt( heads.size());
+//						String head = heads.get(headIndex);
+						user.headImgUrl = "/images/ava/ava"+ (new Random().nextInt(120)+1) +".png"; 
 					}
 					us.save(user);
 					

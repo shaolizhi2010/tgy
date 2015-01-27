@@ -33,6 +33,7 @@ public class U {
 
 	public static final String pattern_dateTime = "yyyy-MM-dd HH:mm:ss";
 	public static final String pattern_dateTime_withoutYear = "MM-dd HH:mm:ss";
+	public static final String pattern_date = "yyyy-MM-dd";
 
 	public static String addLinkForMessage(String msg){
 		if(StringUtils.isBlank(msg) || !msg.contains("http")){
@@ -86,48 +87,20 @@ public class U {
 		}
 	}
 
-	public static String shortTitle(String title) {
-		if (title == null) {
-			return "";
-		}
-		String shortTitle = title.trim();
-		shortTitle = shortTitle.replace(":", "");
-		shortTitle = shortTitle.replace("【", "");
-		shortTitle = shortTitle.replace("】", "");
 
-		String[] arr = title.split("[- ，,.():：（）]");
-		if (arr.length > 1) {
-			shortTitle = arr[0];
-		}
 
-		return shortTitle;
-	}
-
-	public static String shortTitle(String title, int len) {
-		if (title == null)
-			return "";
-		title = StringUtils.trim(title);
-		if (title.length() > len) {
-			title = shortTitle(title) + "..";
-		}
-		if (title.length() > len) {
-			return title.substring(0, len) + "..";
-		}
-		return title;
-	}
-
-	public static String shortURL(String url, int len) {
-		if (url == null)
-			return "";
-		url = StringUtils.trim(url);
-		url = url.replace("http://", "");
-		url = url.replace("https://", "");
-		url = url.replace("www.", "");
-
-		url = StringUtils.substring(url, 0, len);
-
-		return url;
-	}
+//	public static String shortURL(String url, int len) {
+//		if (url == null)
+//			return "";
+//		url = StringUtils.trim(url);
+//		url = url.replace("http://", "");
+//		url = url.replace("https://", "");
+//		url = url.replace("www.", "");
+//
+//		url = StringUtils.substring(url, 0, len);
+//
+//		return url;
+//	}
 	
 	/*
 	public static void refreshSession(HttpSession session) {
@@ -445,6 +418,32 @@ public class U {
 		if (StringUtils.isNotBlank(datetime)) {
 			try {
 				return StringUtils.substringAfter(datetime, "-");
+			} catch (Exception e) {
+				// not date, do nothing
+			}
+		}
+		return datetime;
+	}
+	
+	public static String date(){
+		Calendar cal = Calendar.getInstance();
+		SimpleDateFormat sdf = new SimpleDateFormat(pattern_date);
+		return sdf.format(cal.getTime());
+	}
+	
+	//without year and second
+	public static String dateTimeShort(String datetime) {
+		if (StringUtils.isNotBlank(datetime)) {
+			try {
+				String today = U.date();
+				if(datetime.contains(today)){//当天的，省略掉日期
+					datetime = datetime.replace(today, "");
+					return StringUtils.substringBeforeLast(datetime,":");
+				}
+				else{
+					return  StringUtils.substringBeforeLast(StringUtils.substringAfter(datetime, "-"), ":");  
+				}
+				
 			} catch (Exception e) {
 				// not date, do nothing
 			}

@@ -115,25 +115,63 @@
 			<jsp:include page="part/folder-slide-follow.jsp" />
 			
 			<!-- ad -->
-			<div class="  col-sm-12" style="margin-top: 50px;">
-			<%
-			if(request.getRequestURL().indexOf("localhost") <0){
-				%>
-				<script type="text/javascript">
-				     document.write('<a style="display:none!important" id="tanx-a-mm_41911274_8730892_29556007"></a>');
-				     tanx_s = document.createElement("script");
-				     tanx_s.type = "text/javascript";
-				     tanx_s.charset = "gbk";
-				     tanx_s.id = "tanx-s-mm_41911274_8730892_29556007";
-				     tanx_s.async = true;
-				     tanx_s.src = "http://p.tanx.com/ex?i=mm_41911274_8730892_29556007";
-				     tanx_h = document.getElementsByTagName("head")[0];
-				     if(tanx_h)tanx_h.insertBefore(tanx_s,tanx_h.firstChild);
-				</script>
-			 <%
+			<div class="col-sm-12"  style="margin-top: 20px;"  >
+				<span>阿里旅游</span>
+				<%
+				int randomCount = 5;
+				Random rad =  new Random();
+				int i = 0;
+				while(i<1){//找5圈，没有就退出
+					if(rad.nextInt(randomCount)==1){
+						%>
+						<a class="col-sm-12 no-padding " 
+							href="http://s.click.taobao.com/t?e=m%3D2%26s%3DVYPmic1qpAgcQipKwQzePCperVdZeJviEViQ0P1Vf2kguMN8XjClAruVGqbGPB3AqqacliaqsdAXPsBJarhjrlQlUTpNxHAmFMDQ4pd8PyuQnSfqJhGOSX7uq6sLYIqu0Q7QOybCaQy9AmARIwX9K9E0MBlxnM%2FDnaYpFBIfC%2F385cnhcjSS%2B6aAacK%2BFPJn" target="_blank"
+							style="padding: 5px; ">
+							<img  class="ad-img img-responsive" alt="阿里旅游" title="阿里旅游"
+								data-original="http://gtms04.alicdn.com/tps/i4/TB13.MaGVXXXXX6XFXXBFn_2pXX-190-195.jpg"/>
+						</a>
+						<%
+						i++;break;
+					}				
+					if(rad.nextInt(randomCount)==1){
+						%>
+						<a class="col-sm-12  no-padding " 
+							href="http://s.click.taobao.com/t?e=m%3D2%26s%3DVYPmic1qpAgcQipKwQzePCperVdZeJviEViQ0P1Vf2kguMN8XjClAruVGqbGPB3AqqacliaqsdAXPsBJarhjrlQlUTpNxHAmFMDQ4pd8PyuQnSfqJhGOSX7uq6sLYIqu0Q7QOybCaQy9AmARIwX9K9E0MBlxnM%2FDnaYpFBIfC%2F385cnhcjSS%2B6aAacK%2BFPJn" target="_blank"
+							style=" padding: 5px; ">
+							<img  class="ad-img img-responsive" alt="阿里旅游" title="阿里旅游"
+								data-original="http://gtms02.alicdn.com/tps/i2/TB1C9fHGVXXXXXnXFXXBFn_2pXX-190-195.jpg"/>
+						</a>
+						<%
+						i++;break;
+					}
+					if(rad.nextInt(randomCount)==1){
+						%>
+						<a class="col-sm-12 no-padding  " 
+							href="http://s.click.taobao.com/t?e=m%3D2%26s%3DVYPmic1qpAgcQipKwQzePCperVdZeJviEViQ0P1Vf2kguMN8XjClAruVGqbGPB3AqqacliaqsdAXPsBJarhjrlQlUTpNxHAmFMDQ4pd8PyuQnSfqJhGOSX7uq6sLYIqu0Q7QOybCaQy9AmARIwX9K9E0MBlxnM%2FDnaYpFBIfC%2F385cnhcjSS%2B6aAacK%2BFPJn" target="_blank"
+							style=" padding: 5px;"> 
+							<img  class="ad-img img-responsive" alt="阿里旅游" title="阿里旅游"
+								data-original="http://img.taobao.com/bao/uploaded/i2/1096920918/TB27L.AbXXXXXaUXpXXXXXXXXXX_!!1096920918.jpg_190x190.jpg"/>
+						</a>
+						<%
+						i++;break;
+					}
+					if(rad.nextInt(randomCount)==1){
+						%>
+						<a class="col-sm-12  no-padding " 
+							href="http://s.click.taobao.com/t?e=m%3D2%26s%3DVYPmic1qpAgcQipKwQzePCperVdZeJviEViQ0P1Vf2kguMN8XjClAruVGqbGPB3AqqacliaqsdAXPsBJarhjrlQlUTpNxHAmFMDQ4pd8PyuQnSfqJhGOSX7uq6sLYIqu0Q7QOybCaQy9AmARIwX9K9E0MBlxnM%2FDnaYpFBIfC%2F385cnhcjSS%2B6aAacK%2BFPJn" target="_blank"
+							style=" padding: 5px;">
+							<img  class="ad-img img-responsive" alt="阿里旅游" title="阿里旅游"
+								data-original="http://img.taobao.com/bao/uploaded/i2/852175380/TB2PZWBXVXXXXXoXXXXXXXXXXXX_!!852175380.jpg_190x190.jpg"/>
+						</a>
+						<%
+						i++;break;
+					}
 				}
-			 %>
-			 </div>
+				
+				%>
+				 
+				
+		 	</div>
 			<!-- ad end -->
 			
 
@@ -167,10 +205,10 @@
 	<jsp:include page="part/foot-private.jsp" />
 	<jsp:include page="part/importAtFoot.jsp" />
 	
-	<script src="<%=request.getContextPath()%>/myjs/pageMainApp.js"></script>
-	<script src="<%=request.getContextPath()%>/myjs/common.js"></script>
-	<script src="<%=request.getContextPath()%>/myjs/user-info.js"></script>
-	<script src="<%=request.getContextPath()%>/myjs/index-1.js"></script>
+	<script src="<%=request.getContextPath()%>/myjs/pageMainApp.js" defer="defer"></script>
+	<script src="<%=request.getContextPath()%>/myjs/common.js"  ></script>
+	<script src="<%=request.getContextPath()%>/myjs/user-info.js" defer="defer"></script>
+	<script src="<%=request.getContextPath()%>/myjs/index-1.js" defer="defer"></script>
 </body>
 
 </html>

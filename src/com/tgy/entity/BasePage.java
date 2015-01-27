@@ -8,8 +8,6 @@ import com.tgy.statistic.entity.Link;
 
 @Entity
 public class BasePage extends StateFulBaseEntity  implements Serializable,Comparable {
- 
-	
 	public String name;
 	public String description;
 	public String comment;
@@ -22,6 +20,8 @@ public class BasePage extends StateFulBaseEntity  implements Serializable,Compar
 	public Link refLink;
 	
 	public String iconPath;
+	
+	public boolean isShare;//是否是用户推荐共享的
 	//public String iconAvailable;//icon 图片是否可用  'true' 'false' or null
 	
 	 

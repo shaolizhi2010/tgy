@@ -58,35 +58,11 @@
 			<%
 				PageUtil.sortByOrderIndex( folder.pages);
 				for (Page p : folder.pages) {
-						String pageName = p.name;
-						pageName = StringUtils.trim(pageName); 
-						//name
-						pageName = U.shortTitle(pageName, 4);
-						
-						String pageTitle = p.name;
-						String pageDescription = "";
-						if(StringUtils.isNotBlank(p.description)){
-							pageDescription = " - "+p.description;
-						}
-						if(StringUtils.isBlank(p.name)){
-							pageTitle = p.url;
-						}
-
-						if (StringUtils.isBlank(pageName)) {
-							pageName = p.url;
-							pageName = U.shortURL(pageName,4);
-						}
-						String link = p.url;
-
-						if (link != null && !link.startsWith("http:") && !link.startsWith("https:")) {
-							link = "http://" + link;
-						}
-						
-						
-						//System.out.println(faviconUrl);
+						String pageName = PageUtil.shortName(p, 4);
+						String link =PageUtil.urlWithHttp(p);
 			%>
 
-			<a dataid="<%=p.id%>" dataname="<%=pageTitle%>" title="<%=pageTitle+ pageDescription%>"
+			<a dataid="<%=p.id%>" dataname="<%=pageName%>" title="<%=pageName%>"
 				class="  col-xs-12 col-xs-3 col-sm-2  folder-pages-link editable pageMark click-trace  pages-all-subFolder-pages-page hoverAble-red"  href="<%=link%>"
 				style="padding-right: 0px;"
 				onclick="openLink('<%=p.id%>','page')" target="_blank">
@@ -98,12 +74,12 @@
 						}
 						 
 						%>
-						<img   style="width: 18px;height:18px;  float: left;margin-right: 10px; " data-original="<%=iconPath %> " alt='<%=pageTitle%>' >
+						<img   style="width: 18px;height:18px;  float: left;margin-right: 10px; " data-original="<%=iconPath %> " alt='<%=pageName%>' >
 						<%
 					}
 					else{
 						%>
-						<img   style="width: 18px;height:18px;float: left; margin-right: 10px; " data-original="<%=request.getContextPath()%>/images/defaultFav.png " alt='<%=pageTitle%>' >
+						<img   style="width: 18px;height:18px;float: left; margin-right: 10px; " data-original="<%=request.getContextPath()%>/images/defaultFav.png " alt='<%=pageName%>' >
 						<%
 					}
 				%>

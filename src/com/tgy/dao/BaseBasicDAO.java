@@ -24,32 +24,68 @@ public class BaseBasicDAO<T,K> extends BasicDAO<T, K> {
 	}
 	
 	//根据条件，取一个实体
-	public T get(Class<T> C, Map<String,String> conditions) {
+	public T get(Class<T> C, Map<String,Object> conditions) {
 		
 		Query<T> query = App.getInstance().getDatastore().createQuery(C);
 		
 		//filter by conditions
 		if(conditions!=null && conditions.size()!=0){
-			for(Map.Entry<String, String> e : conditions.entrySet()){
+			for(Map.Entry<String, Object> e : conditions.entrySet()){
 				query.filter(e.getKey(), e.getValue());
 			}
 		}
 		return findOne(query);
 	}
 	
+	public long count(Class<T> C, Map<String,Object> conditions){
+		Query<T> query = App.getInstance().getDatastore().createQuery(C);
+		
+		//filter by conditions
+		if(conditions!=null && conditions.size()!=0){
+			for(Map.Entry<String, Object> e : conditions.entrySet()){
+				query.filter(e.getKey(), e.getValue());
+			}
+		}
+		return count(query);
+	}
+		
+	public Query<T> createQuery(Class<T> C, Map<String,Object> conditions,String orderStr, int start, int limit){
+		Query<T> query = App.getInstance().getDatastore().createQuery(C);
+		
+		//filter by conditions
+		if(conditions!=null && conditions.size()!=0){
+			for(Map.Entry<String, Object> e : conditions.entrySet()){
+				query.filter(e.getKey(), e.getValue());
+			}
+		}
+		//order
+		if(StringUtils.isNotBlank(orderStr)){
+			query.order(orderStr);
+		}
+		//start
+		if(start>0){
+			query.offset(start);
+		}
+		//limit
+		if(limit>0){
+			query.limit(limit);
+		}
+		return query;
+	}
+	
 	//取list
-	public List<T> list(Class<T> C, Map<String,String> conditions,String orderStr,  int limit) {
+	public List<T> list(Class<T> C, Map<String,Object> conditions,String orderStr,  int limit) {
 		return list(C, conditions, orderStr, 0,limit);
 	}
 	
 	//取list
-	public List<T> list(Class<T> C, Map<String,String> conditions,String orderStr,int start,  int limit) {
+	public List<T> list(Class<T> C, Map<String,Object> conditions,String orderStr,int start,  int limit) {
 		
 		Query<T> query = App.getInstance().getDatastore().createQuery(C);
 		
 		//filter by conditions
 		if(conditions!=null && conditions.size()!=0){
-			for(Map.Entry<String, String> e : conditions.entrySet()){
+			for(Map.Entry<String, Object> e : conditions.entrySet()){
 				query.filter(e.getKey(), e.getValue());
 			}
 		}
@@ -85,8 +121,8 @@ public class BaseBasicDAO<T,K> extends BasicDAO<T, K> {
 	public BaseBasicDAO(MongoClient mongoClient, Morphia morphia, String dbName) {
 		super(mongoClient, morphia, dbName);
 	}
-
- 
+	
+	
 	
 	
 	

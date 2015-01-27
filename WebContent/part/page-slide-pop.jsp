@@ -1,3 +1,4 @@
+<%@page import="com.tgy.util.PageUtil"%>
 <%@page import="org.apache.commons.collections.CollectionUtils"%>
 <%@page import="com.tgy.statistic.entity.Link"%>
 <%@page import="com.tgy.statistic.service.LinkService"%>
@@ -34,7 +35,7 @@
 		<a target="_blank" href="<%=link.url%>" class="col-sm-8"
 			> <span
 			class="glyphicon glyphicon-star" style="color: #ffd76e;"></span> <span
-			style="color: #1155cc;"> <%= U.shortTitle(link.title) %></span> <!-- #ff076e #1155cc; 0000cc-->
+			style="color: #1155cc;"> <%= U.shortString(link.title,6) %></span> <!-- #ff076e #1155cc; 0000cc-->
 		</a> <a onclick="createPageFunction('<%=link.title%>','<%=link.url%>')" href="#" class="col-sm-2"
 			style="padding-left: 1px; padding-right: 1px;"> <span
 			class="glyphicon glyphicon glyphicon-plus" 

@@ -10,7 +10,7 @@ http://www.webhezi.com/resource.jsp
 
 如果忘记本站地址，百度《网址盒子》， 即可找到本站。
 
-百度盘
+百度网盘
 http://pan.baidu.com/share/home?uk=2170308336#category/type=0
  
 360盘

@@ -20,13 +20,12 @@
 		<span class="col-sm-5">收藏夹</span>
 		<div class="col-sm-6 pull-right" style=" padding-top: 3px; ">
 			<% if(isSelf){ %>
-				<span class="col-sm-4   btn  pull-right sub-page-title-btn hoverAble2" 
-					style="padding:8px;margin-right:5px; font-size: 13px;border: 1px solid #ccc;border-radius:10px;  height: 32px;  " 
-					title="编辑" onclick="preEditAll()">编辑</span>
+				<a class="pull-right hoverAble-red"  href="#"
+					style="  " 
+					title="编辑" onclick="preEditAll()"> &nbsp;[ 编辑 ]&nbsp;</a>
 					
-				<span class="col-sm-4   btn  pull-right sub-page-title-btn hoverAble2" 
-					style="padding:8px;margin-right:5px; font-size: 13px;border: 1px solid #ccc;border-radius:10px;  height: 32px;  " 
-					title="添加一个收藏夹" onclick="preCreateFolderFunction()">新建收藏夹</span>
+				<a class="pull-right hoverAble-red"  href="#"
+					title="添加一个收藏夹" onclick="preCreateFolderFunction()"> &nbsp;[ 新建收藏夹 ]&nbsp;</a>
 			<% } %>
 			
 		</div>

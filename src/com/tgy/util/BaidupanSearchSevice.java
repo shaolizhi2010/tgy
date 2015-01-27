@@ -6,6 +6,7 @@ import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -27,8 +28,12 @@ import com.tgy.statistic.entity.Link;
 
 //baidupan.net
 public class BaidupanSearchSevice {
+	
+	public List<Page> search(String keyword) {
+		return search(keyword,0);
+	}
 
-	public List<Page> search(String keyword ) {
+	public List<Page> search(String keyword,int start ) {
 		try {
 			
 			//搜索历史 记录到后台
@@ -49,7 +54,7 @@ public class BaidupanSearchSevice {
 			
 			List<Page>  results = new ArrayList<>();
 			keyword = URLEncoder.encode(keyword,"utf-8");
-			String url = "http://baidupan.net/sopan/soso.php?wd="+keyword+"&pantype=baiduyun";
+			String url = "http://baidupan.net/sopan/soso.php?wd="+keyword+"&start="+start+"&pantype=baiduyun&submit=1";
 			
 //			String s  = SimpleConnecter.connect(url, "utf-8");
 			
@@ -83,6 +88,11 @@ public class BaidupanSearchSevice {
 						Page p = new Page();
 						p.name = e.getValue();
 						p.url = href;
+						if(e.getParentElement()!=null && e.getParentElement().getParentElement()!=null){
+							if(e.getParentElement().getParentElement().getChild("div")!=null){
+								p.comment =  e.getParentElement().getParentElement().getChild("div").getTextNormalize();
+							}
+						}
 						results.add(p);
 					}
 				}

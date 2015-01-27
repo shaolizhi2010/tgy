@@ -1,3 +1,4 @@
+<%@page import="java.util.Random"%>
 <%@ page trimDirectiveWhitespaces="true" %> 
 <%@page import="java.util.ArrayList"%>
 <%@page import="com.tgy.web.vo.BookmarkData"%>
@@ -61,7 +62,68 @@
 			<div class="col-sm-12" style="height: 20px;"></div>
 			<jsp:include page="part/page-slide-myHotClicks.jsp" />
 			<div class="col-sm-12" style="height: 20px;"></div>
-			 <jsp:include page="part/folder-slide-follow.jsp" /> 
+			 <jsp:include page="part/folder-slide-follow.jsp" />
+			 
+				<!-- ad -->
+			<div class="col-sm-12"  style="margin-top: 20px;"  >
+				<span>阿里旅游</span>
+				<%
+				int randomCount = 5;
+				Random rad =  new Random();
+				int i = 0;
+				while(i<1){//找5圈，没有就退出
+					if(rad.nextInt(randomCount)==1){
+						%>
+						<a class="col-sm-12 no-padding " 
+							href="http://s.click.taobao.com/t?e=m%3D2%26s%3DVYPmic1qpAgcQipKwQzePCperVdZeJviEViQ0P1Vf2kguMN8XjClAruVGqbGPB3AqqacliaqsdAXPsBJarhjrlQlUTpNxHAmFMDQ4pd8PyuQnSfqJhGOSX7uq6sLYIqu0Q7QOybCaQy9AmARIwX9K9E0MBlxnM%2FDnaYpFBIfC%2F385cnhcjSS%2B6aAacK%2BFPJn" target="_blank"
+							style="padding: 5px; ">
+							<img  class="ad-img img-responsive" alt="阿里旅游" title="阿里旅游"
+								data-original="http://gtms04.alicdn.com/tps/i4/TB13.MaGVXXXXX6XFXXBFn_2pXX-190-195.jpg"/>
+						</a>
+						<%
+						i++;break;
+					}				
+					if(rad.nextInt(randomCount)==1){
+						%>
+						<a class="col-sm-12  no-padding " 
+							href="http://s.click.taobao.com/t?e=m%3D2%26s%3DVYPmic1qpAgcQipKwQzePCperVdZeJviEViQ0P1Vf2kguMN8XjClAruVGqbGPB3AqqacliaqsdAXPsBJarhjrlQlUTpNxHAmFMDQ4pd8PyuQnSfqJhGOSX7uq6sLYIqu0Q7QOybCaQy9AmARIwX9K9E0MBlxnM%2FDnaYpFBIfC%2F385cnhcjSS%2B6aAacK%2BFPJn" target="_blank"
+							style=" padding: 5px; ">
+							<img  class="ad-img img-responsive" alt="阿里旅游" title="阿里旅游"
+								data-original="http://gtms02.alicdn.com/tps/i2/TB1C9fHGVXXXXXnXFXXBFn_2pXX-190-195.jpg"/>
+						</a>
+						<%
+						i++;break;
+					}
+					if(rad.nextInt(randomCount)==1){
+						%>
+						<a class="col-sm-12 no-padding  " 
+							href="http://s.click.taobao.com/t?e=m%3D2%26s%3DVYPmic1qpAgcQipKwQzePCperVdZeJviEViQ0P1Vf2kguMN8XjClAruVGqbGPB3AqqacliaqsdAXPsBJarhjrlQlUTpNxHAmFMDQ4pd8PyuQnSfqJhGOSX7uq6sLYIqu0Q7QOybCaQy9AmARIwX9K9E0MBlxnM%2FDnaYpFBIfC%2F385cnhcjSS%2B6aAacK%2BFPJn" target="_blank"
+							style=" padding: 5px;"> 
+							<img  class="ad-img img-responsive" alt="阿里旅游" title="阿里旅游"
+								data-original="http://img.taobao.com/bao/uploaded/i2/1096920918/TB27L.AbXXXXXaUXpXXXXXXXXXX_!!1096920918.jpg_190x190.jpg"/>
+						</a>
+						<%
+						i++;break;
+					}
+					if(rad.nextInt(randomCount)==1){
+						%>
+						<a class="col-sm-12  no-padding " 
+							href="http://s.click.taobao.com/t?e=m%3D2%26s%3DVYPmic1qpAgcQipKwQzePCperVdZeJviEViQ0P1Vf2kguMN8XjClAruVGqbGPB3AqqacliaqsdAXPsBJarhjrlQlUTpNxHAmFMDQ4pd8PyuQnSfqJhGOSX7uq6sLYIqu0Q7QOybCaQy9AmARIwX9K9E0MBlxnM%2FDnaYpFBIfC%2F385cnhcjSS%2B6aAacK%2BFPJn" target="_blank"
+							style=" padding: 5px;">
+							<img  class="ad-img img-responsive" alt="阿里旅游" title="阿里旅游"
+								data-original="http://img.taobao.com/bao/uploaded/i2/852175380/TB2PZWBXVXXXXXoXXXXXXXXXXXX_!!852175380.jpg_190x190.jpg"/>
+						</a>
+						<%
+						i++;break;
+					}
+				}
+				
+				%>
+				 
+				
+		 	</div>
+			<!-- ad end -->
+			  
 		</div>
 		<!-- 显示推荐页面结束 -->
 		</div>
@@ -89,10 +151,10 @@
 	<jsp:include page="part/importAtFoot.jsp" />
 	<jsp:include page="part/foot-private.jsp" />
 	
-	<script src="<%=request.getContextPath()%>/myjs/common.js"></script>
-	<script src="<%=request.getContextPath()%>/myjs/pageMainApp.js"></script>
-	<script src="<%=request.getContextPath()%>/myjs/user-info.js"></script>
-	<script src="<%=request.getContextPath()%>/myjs/index-2.js"></script>
+	<script src="<%=request.getContextPath()%>/myjs/common.js" defer="defer"></script>
+	<script src="<%=request.getContextPath()%>/myjs/pageMainApp.js" defer="defer"></script>
+	<script src="<%=request.getContextPath()%>/myjs/user-info.js" defer="defer"></script>
+	<script src="<%=request.getContextPath()%>/myjs/index-2.js" defer="defer"></script>
  
 </body>
 

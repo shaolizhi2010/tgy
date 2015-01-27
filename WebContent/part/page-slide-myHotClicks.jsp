@@ -1,3 +1,4 @@
+<%@page import="com.tgy.util.PageUtil"%>
 <%@page import="org.apache.commons.lang3.StringUtils"%>
 <%@page import="com.tgy.entity.Page"%>
 <%@page import="com.tgy.dao.PageDao"%>
@@ -34,7 +35,7 @@
 		<a target="_blank" href="<%=link%>" class="col-sm-10 no-padding"  
 		 onclick="openLink('<%=p.id %>','page')" > 
 		 	<span class="glyphicon glyphicon-star" style="color: #ffd76e;"></span> <span 
-			style="color: #1155cc;"> <%=U.shortTitle(p.name,6 ) %></span> <!-- #ff076e #1155cc; 0000cc-->
+			style="color: #1155cc;"> <%=PageUtil.shortName(p,6)%></span> <!-- #ff076e #1155cc; 0000cc-->
 		</a> 
 		<span class="col-sm-2" style="color: #1155cc;">  <%=p.clicks%></span>
 	</div>

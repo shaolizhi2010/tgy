@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -23,6 +24,32 @@ import com.tgy.validator.CommonValidator;
 @RequestMapping("/group/folder")
 public class GroupFolderContoller extends BaseGroupContoller {
 
+	@RequestMapping(value = { "/{fid}/{name}","/{fid}" })
+	public void list(HttpServletRequest req, HttpServletResponse res,
+			@PathVariable("fid") String fid) {
+		
+		if("favicon".equals(fid)){
+			return;
+		}
+		
+		InterestGroupFolderService gfs = new InterestGroupFolderService();
+		InterestGroupService gs = new InterestGroupService();
+		InterestGroupFolder folder = gfs.byID(fid);
+		if(folder!=null && StringUtils.isNotBlank(folder.groupID)){
+			req.setAttribute("showFolder", folder);
+			InterestGroup group = gs.byID(folder.groupID);
+			if(group!=null){
+				group.showTimes++;
+				group.favScore++;
+				gs.save(group);
+				req.setAttribute("group", group);
+			}
+		}
+ 
+		U.forward(req, res, "/group/group.view.jsp");
+		
+	}
+	
 	@RequestMapping("/create/pre")
 	protected void preCreate(HttpServletRequest req, HttpServletResponse res)
 			throws ServletException, IOException {

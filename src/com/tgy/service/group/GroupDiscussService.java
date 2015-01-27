@@ -26,12 +26,12 @@ public class GroupDiscussService {
 	}
 
 	public GroupDiscuss get( 
-			Map<String, String> conditions) {
+			Map<String, Object> conditions) {
 		return dao.get(GroupDiscuss.class, conditions);
 	}
 
 	public List<GroupDiscuss> list(
-			Map<String, String> conditions, String orderStr, int limit) {
+			Map<String, Object> conditions, String orderStr, int limit) {
 		return dao.list(GroupDiscuss.class, conditions, orderStr, limit);
 	}
 

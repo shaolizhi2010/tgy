@@ -44,7 +44,7 @@
 	<!-- 书签主页面开始 -->
 	<div class="container col-sm-12 clearfix " style="padding-top: 0px;">  
 		<!-------- 书签主页面 --------->
-		<div class=" col-sm-6 container " style="margin-right: 50px;">
+		<div class=" col-sm-8 container " style=" ">
 			<div class="col-sm-12 group-info no-padding">
 				<span class="group-info-title" ><%=groupName %></span>
 				<%if(isJoined){%>
@@ -52,7 +52,6 @@
 				<%}else{
 					%>
 					<a onclick="joinGroupFunction()" href="#" class="group-info-in"><span>加入群组</span></a>
-				
 				<%}%>
 				
 			</div>
@@ -66,10 +65,10 @@
 		</div>
 		<!--------  书签列表页面 end  --->
 		<!-- 显示推荐页面开始 -->
-		<div class=" col-sm-5 no-padding" style="border-left:1px solid #eee;padding-left: 10px; ">
+		<div class=" col-sm-4 no-padding" style="border-left:1px solid #eee;padding-left: 10px; ">
 			<div class="  col-sm-12">
-				<jsp:include page="../part/all-discuss.jsp">
-			    	<jsp:param name="sourceName" value="<%=groupName %>"/>
+				<jsp:include page="../part/discuss/all-discuss.jsp">
+			    	<jsp:param name="sourceBoardName" value="<%=groupName %>"/>
 			    </jsp:include>
 			</div>		
 			<div class="  col-sm-12">
@@ -85,14 +84,11 @@
 	<jsp:include page="../part/foot.jsp" />
 	<jsp:include page="../part/importAtFoot.jsp" />
 	
-	<script src="<%=request.getContextPath()%>/myjs/pageMainApp.js"></script>
 	<script src="<%=request.getContextPath()%>/myjs/common.js"></script>
-	<script src="<%=request.getContextPath()%>/myjs/group/group.view.js"></script>
-	<script src="<%=request.getContextPath()%>/myjs/group/group-page-part.js"></script>
-	<script src="<%=request.getContextPath()%>/myjs/group/group.discuss.js"></script>
-	<script src="<%=request.getContextPath()%>/myjs/group/group.edit-all.js"></script>
-	<script src="<%=request.getContextPath()%>/myjs/discuss.js"></script>
-	
+	<script src="<%=request.getContextPath()%>/myjs/group/group.view.js" defer="defer"></script>
+	<script src="<%=request.getContextPath()%>/myjs/group/group-page-part.js" defer="defer"></script>
+	<script src="<%=request.getContextPath()%>/myjs/group/group.edit-all.js" defer="defer"></script>
+
 </body>
 
 </html>

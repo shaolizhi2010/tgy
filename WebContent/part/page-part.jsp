@@ -33,7 +33,8 @@ int papgeIndex=0;
 				<%
 				if(!isSelf){
 					%>
-					<span id="copy-folder-btn" class="col-sm-6 btn pull-right sub-page-title-btn  hoverAble2" style="padding:8px; font-size: 13px;border: 1px solid #ccc;border-radius:10px;height: 32px;" title="一键复制 '<%=folderName %>' 中的所有网址(<%=pages.size() %>个),到自己的收藏夹" onclick="copyFolder()">一键复制</span>
+					<a id="copy-folder-btn" class="pull-right hoverAble-red" href="#" title="一键复制 '<%=folderName %>' 中的所有网址(<%=pages.size() %>个),到自己的收藏夹" 
+						onclick="copyFolder()">&nbsp;[ 一键复制 ]&nbsp;</a>
 					<%
 				}
 				%>
@@ -42,7 +43,7 @@ int papgeIndex=0;
 		}
 		if( (showUser!=null && showUser.authCreate==9) ||  isSelf){
 			%>
-			<span class="col-sm-6 btn  pull-right sub-page-title-btn hoverAble2 warning" style="padding:8px; font-size: 13px;border: 1px solid #ccc;border-radius:10px;  height: 32px; " title="添加一个网址" onclick="preAddPageFunction()">添加网址</span>
+			<a class="pull-right hoverAble-red"  href="#" title="添加一个网址" onclick="preAddPageFunction()">&nbsp;[ 添加网址 ]&nbsp;</a>
 			<%
 		}
 		%>
@@ -108,7 +109,7 @@ int papgeIndex=0;
 		<a target="_blank" class="col-sm-8  pageMark" href="<%=linkStr%>" 
 			onclick="openLink('<%=p.id %>','page')" title = "<%=p.name %>"
 			data-id="<%=p.id%>" data-name="<%=p.name%>">
-		<%				String iconPath = "";
+		<%				String iconPath = request.getContextPath()+"/images/defaultFav.png";
 						if(StringUtils.isNoneBlank(p.iconPath)  ){
 							iconPath = p.iconPath;
 							if(iconPath.startsWith(App.imgPath)){
@@ -117,7 +118,7 @@ int papgeIndex=0;
 						}
 						 
 					%>
-					<img class="img18" src="<%=request.getContextPath()%>/images/defaultFav.png" data-original="<%=iconPath%>" alt='*' >
+					<img   height="18" width="18"  src="<%=request.getContextPath()%>/images/defaultFav.png" data-original="<%=iconPath%>" alt='*' >
 			 		<span class="pages-part-page-name" > <%=pageName%></span> - <span class="pages-part-page-link"><%=linkshow%></span>
 		</a>  
 		

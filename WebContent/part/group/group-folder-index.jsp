@@ -21,14 +21,13 @@
 		<span class="col-sm-5">收藏夹 &nbsp;·&nbsp;·&nbsp;·&nbsp;·&nbsp;·&nbsp;·</span>
 		<div class="col-sm-6 pull-right" style=" padding-top: 3px; ">
 			<% if(editAble){ //编辑 %>
-				<span class="col-sm-4   btn  pull-right sub-page-title-btn hoverAble2" 
-					style="padding:8px;margin-right:5px; font-size: 13px;border: 1px solid #ccc;border-radius:10px;  height: 32px;  " 
-					title="编辑" onclick="preEditAll()">编辑</span>
+				<a class="pull-right hoverAble-red"  href="#"
+					style="  " 
+					title="编辑" onclick="preEditAll()"> &nbsp;[ 编辑 ]&nbsp;</a>
 			<% } %>
 			<% if(createAble){ //新增文件夹 %>
-			<a href="<%=request.getContextPath() %>/group/folder/create/pre?groupID=<%=groupID %>" class="col-sm-4   btn  pull-right sub-page-title-btn hoverAble2" 
-				style="padding:8px;margin-right:5px; font-size: 13px;border: 1px solid #ccc;border-radius:10px;  height: 32px;  " 
-				title="添加一个收藏夹"  >新建收藏夹</a>
+			<a href="<%=request.getContextPath() %>/group/folder/create/pre?groupID=<%=groupID %>" class="pull-right hoverAble-red" 
+				title="添加一个收藏夹"  > &nbsp;[ 新建收藏夹 ]&nbsp;</a>
 			<% } %>
 		</div>
 	</div>

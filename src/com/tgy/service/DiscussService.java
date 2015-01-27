@@ -17,6 +17,7 @@ import com.mongodb.WriteConcern;
 import com.mongodb.WriteResult;
 import com.tgy.dao.DiscussDao;
 import com.tgy.entity.Discuss;
+import com.tgy.util.U;
 
 public class DiscussService {
 	DiscussDao dao = new DiscussDao();
@@ -25,30 +26,27 @@ public class DiscussService {
 		return dao.byID(id);
 	}
 
-	public Discuss get(  Map<String, String> conditions) {
+	public Discuss get(Map<String, Object> conditions) {
 		return dao.get(Discuss.class, conditions);
 	}
 
-	public List<Discuss> list(  Map<String, String> conditions,
+	public List<Discuss> list(  Map<String, Object> conditions,
 			String orderStr, int limit) {
 		return dao.list(Discuss.class, conditions, orderStr, limit);
 	}
 
-	public List<Discuss> list(String sourceID, String targetID, String type,
-			int num, String orderStr) {
-		return dao.list(sourceID, targetID, type, num, orderStr);
+	public List<Discuss> list(  Map<String, Object> conditions,
+			String orderStr, int start, int limit) {
+		return dao.list(Discuss.class, conditions, orderStr, start, limit);
+	}
+	
+	public long count(  Map<String, Object> conditions) {
+		return dao.count(Discuss.class, conditions);
 	}
 
-	public List<Discuss> getDiscussesByUserID(String userID) {
-		return dao.getDiscussesByUserID(userID);
-	}
-
-	public List<Discuss> getFoldersByUserID(String userID, String sort) {
-		return dao.getFoldersByUserID(userID, sort);
-	}
-
-	public Discuss getByID(String discussID) {
-		return dao.getByID(discussID);
+	public Query<Discuss> createQuery( 
+			Map<String, Object> conditions,String orderStr, int start, int limit) {
+		return dao.createQuery(Discuss.class, conditions,orderStr,start,limit);
 	}
 
 	public int hashCode() {
@@ -84,6 +82,7 @@ public class DiscussService {
 	}
 
 	public Key<Discuss> save(Discuss entity) {
+		entity.lastModifyDate = U.dateTime();
 		return dao.save(entity);
 	}
 

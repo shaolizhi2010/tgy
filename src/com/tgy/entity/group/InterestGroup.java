@@ -35,7 +35,6 @@ public class InterestGroup extends StateFulBaseEntity implements Serializable{
 
 	@Reference(ignoreMissing = true, lazy = true)
 	public List<InterestGroupPage> pages; //包含的页面
- 
 	
 	public String publicMessage;//显示在页面上方的公告信息。
 	

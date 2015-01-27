@@ -62,7 +62,7 @@ public class SortFoldersAndPagesContoller extends HttpServlet {
 				List<String> pages = (List<String>)folderMap.get("pages");
 				int pageSortIndex = 1;
 				for(String pageID : pages){
-					Page p = pd.getByID(pageID);
+					Page p = pd.byID(pageID);
 					if(p!=null && p.sortOrder != pageSortIndex){
 						try {
 							validator.isSameUser(user, p, "");

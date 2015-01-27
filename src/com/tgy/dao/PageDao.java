@@ -16,11 +16,14 @@ import com.tgy.entity.Page;
 import com.tgy.entity.User;
 import com.tgy.statistic.entity.Link;
 
-public class PageDao extends BasicDAO<Page, ObjectId> {
+public class PageDao extends BaseBasicDAO<Page, ObjectId> {
 
 	public PageDao() {
 		super(Page.class, App.getInstance().getDatastore());
 	}
+	
+	
+	
 	
 	public List<Page> list(String userID, String sortStr,int limit){
 		
@@ -93,12 +96,12 @@ public class PageDao extends BasicDAO<Page, ObjectId> {
 		fDao.save(folder);
 	}
 
-	public Page getByID(String id) {
-		if (StringUtils.isBlank(id))
-			return null;
-		Page page = findOne("_id", new ObjectId(id));
-		return page;
-	}
+//	public Page getByID(String id) {
+//		if (StringUtils.isBlank(id))
+//			return null;
+//		Page page = findOne("_id", new ObjectId(id));
+//		return page;
+//	}
 
 	public List<Page> getByUserID(String userID,String orderBy) {
 		if (StringUtils.isBlank(userID))

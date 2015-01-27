@@ -11,6 +11,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 
 import com.tgy.App;
 import com.tgy.timer.CreateRobotUserTask;
+import com.tgy.timer.DigArticleTask;
 import com.tgy.timer.GetPageInfoTask;
 import com.tgy.timer.StatisticTask;
 
@@ -34,7 +35,7 @@ public class SimpleListener implements ServletContextListener {
 		String basePath = arg0.getServletContext().getRealPath("/");
 		App.basePath = basePath;
 		
-		//去page info
+		// 取page info
 		GetPageInfoTask getPageInfoTask = new GetPageInfoTask();
  	
 		Calendar calendar = Calendar.getInstance();
@@ -57,14 +58,29 @@ public class SimpleListener implements ServletContextListener {
 				24 * 60 * 60 * 1000); // 24小时执行一次
 		//timer2.schedule(statisticTask, 0);// 立刻开始
 	
-		//创建robot user 丰富网站数据
-		CreateRobotUserTask createRobotUserTask  = new CreateRobotUserTask(); 
-		Calendar calendar3 = Calendar.getInstance();
-		calendar3.set(Calendar.HOUR, 23);// 
-		calendar3.set(Calendar.MINUTE,59);//  
+		//自动抓取文章
+		DigArticleTask articleTask = new DigArticleTask();
 		
-		timer3.schedule(createRobotUserTask, calendar3.getTime(),
-				24 * 60 * 60 * 1000); // 24小时执行一次
+		Calendar articleTaskCalendar = Calendar.getInstance();
+		articleTaskCalendar.set(Calendar.HOUR, 10);// 
+		articleTaskCalendar.set(Calendar.MINUTE,0);//
+		
+		new Timer().schedule(articleTask, articleTaskCalendar.getTime(),
+				2 * 67 * 60 * 1000); // 2小时左右执行一次
+		
+		
+		
+//		//创建robot user 丰富网站数据
+//		CreateRobotUserTask createRobotUserTask  = new CreateRobotUserTask(); 
+//		Calendar calendar3 = Calendar.getInstance();
+//		calendar3.set(Calendar.HOUR, 23);// 
+//		calendar3.set(Calendar.MINUTE,59);//  
+//		
+//		timer3.schedule(createRobotUserTask, calendar3.getTime(),
+//				24 * 60 * 60 * 1000); // 24小时执行一次
+		
+		
+		
 		//timer2.schedule(statisticTask, 0);// 立刻开始
 	}
 

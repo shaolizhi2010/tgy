@@ -69,9 +69,9 @@
 	<!-- 弹出框结束 -->
 	
 	<jsp:include page="part/importAtFoot.jsp" />
-	<script src="<%=request.getContextPath()%>/myjs/common.js"></script>
-	<script src="<%=request.getContextPath()%>/myjs/pageMainApp.js"></script>
-	<script src="<%=request.getContextPath()%>/myjs/user-info.js"></script>
+	<script src="<%=request.getContextPath()%>/myjs/common.js" defer="defer"></script>
+	<script src="<%=request.getContextPath()%>/myjs/pageMainApp.js" defer="defer"></script>
+	<script src="<%=request.getContextPath()%>/myjs/user-info.js" defer="defer"></script>
 	
 	<a id="go-top" href="#"></a>
 		<jsp:include page="part/foot.jsp" />

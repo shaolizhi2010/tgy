@@ -49,7 +49,7 @@ public class EditPageContoller extends HttpServlet {
 			
 			PageDao pDao = new PageDao();
 			if(StringUtils.isNotBlank(id)){
-				Page page = pDao.getByID(id);	
+				Page page = pDao.byID(id);	
 				
 				//check if page belong to user
 				new CommonValidator().isSameUser(user, page, null);

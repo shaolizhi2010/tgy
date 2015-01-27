@@ -11,6 +11,10 @@ public interface C {
 	 int scoreDown = -10;//踩一下 得分
 	 int scoreNewUser = 20; //for group
 	 
+	 
+	 String sourceBoardType_link = "link";
+	 String sourceBoardType_group= "group";
+	 String sourceBoardType_pan = "pan";
 	
 	//权限控制
 	//0 自己，默认值

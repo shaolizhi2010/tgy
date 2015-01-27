@@ -1,6 +1,7 @@
 package com.tgy.service;
 
 import java.util.List;
+import java.util.Map;
 import java.util.regex.Pattern;
 
 import org.apache.commons.lang3.StringUtils;
@@ -23,7 +24,6 @@ import com.tgy.dao.LinkDao;
 import com.tgy.dao.PageDao;
 import com.tgy.entity.Folder;
 import com.tgy.entity.Page;
-import com.tgy.entity.VisitHistory;
 import com.tgy.exception.BaseException;
 import com.tgy.statistic.entity.Link;
 import com.tgy.util.U;
@@ -31,6 +31,15 @@ import com.tgy.util.U;
 public class PageService {
 	
 	PageDao pDao = new PageDao();
+	
+	public Page byID(String id) {
+		return pDao.byID(id);
+	}
+
+	public List<Page> list(  Map<String, Object> conditions,
+			String orderStr, int start, int limit) {
+		return pDao.list(Page.class, conditions, orderStr, start, limit);
+	}
 
 	public List<Page> list(String userID, String sortStr, int limit) {
 		return pDao.list(userID, sortStr, limit);
@@ -142,9 +151,9 @@ public class PageService {
 		return pDao.hashCode();
 	}
 
-	public Page getByID(String id) {
-		return pDao.getByID(id);
-	}
+//	public Page getByID(String id) {
+//		return pDao.getByID(id);
+//	}
 
 	public List<Page> getByUserID(String userID, String orderBy) {
 		return pDao.getByUserID(userID, orderBy);

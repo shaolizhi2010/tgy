@@ -1,4 +1,11 @@
 $( document ).ready(function() {
+	 
+	if($('#keyword').val()!=''){
+		$('#search-pagination').show();
+	}
+	else{
+		$('#search-pagination').hide();
+	}
 	
 	$.ajax(
 		{
@@ -21,6 +28,17 @@ $( document ).ready(function() {
 		
 	 
 });
+
+$('.pages-part-page-name').hover(
+	function(){
+		$(this).parent().parent().children('.pages-part-page-comment').eq(0).show();
+	}
+	,
+	function(){
+		$(this).parent().parent().children('.pages-part-page-comment').eq(0).hide();
+	}
+);
+
 
 function panSearch(){
 	location.href =  $('#contextPath').val()+'/pan/'+$('#pan_search_value').val();

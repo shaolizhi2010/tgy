@@ -22,11 +22,11 @@ public class GroupUserService {
 	GroupUserDao dao = new GroupUserDao();
 	
 	public List<GroupUser> list( 
-			Map<String, String> conditions, String orderStr, int limit) {
+			Map<String, Object> conditions, String orderStr, int limit) {
 		return dao.list(GroupUser.class, conditions, orderStr, limit);
 	}
 
-	public GroupUser get( Map<String, String> conditions) {
+	public GroupUser get( Map<String, Object> conditions) {
 		return dao.get(GroupUser.class, conditions);
 	}
 

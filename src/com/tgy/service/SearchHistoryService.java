@@ -27,17 +27,17 @@ public class SearchHistoryService {
 	}
 
 	public SearchHistory get( 
-			Map<String, String> conditions) {
+			Map<String, Object> conditions) {
 		return dao.get(SearchHistory.class, conditions);
 	}
 
 	public List<SearchHistory> list( 
-			Map<String, String> conditions, String orderStr, int limit) {
+			Map<String, Object> conditions, String orderStr, int limit) {
 		return dao.list(SearchHistory.class, conditions, orderStr, limit);
 	}
 
 	public List<SearchHistory> list( 
-			Map<String, String> conditions, String orderStr, int start,
+			Map<String, Object> conditions, String orderStr, int start,
 			int limit) {
 		return dao.list(SearchHistory.class, conditions, orderStr, start, limit);
 	}

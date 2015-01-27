@@ -1,10 +1,13 @@
 package com.tgy.web;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.math.NumberUtils;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -12,6 +15,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.tgy.dao.UserDao;
 import com.tgy.entity.User;
+import com.tgy.entity.group.InterestGroupPage;
+import com.tgy.service.group.InterestGroupPageService;
+import com.tgy.util.ConditionMap;
+import com.tgy.util.PageType;
 import com.tgy.util.U;
 
 @RestController
@@ -122,6 +129,16 @@ public class IndexContoller extends HttpServlet {
 		}
 		
 		 
+	}
+	
+	@RequestMapping(value = {"/article"} )
+	public void article(HttpServletRequest req, HttpServletResponse res) {
+		int start = NumberUtils.toInt(req.getParameter("start"));
+		InterestGroupPageService ps = new InterestGroupPageService();
+		List<InterestGroupPage> pages = ps.list(new ConditionMap().add("type", PageType.article).add("isShare", true), "-createDate",  10);
+		req.setAttribute("pages", pages);
+		req.setAttribute("type", "article");
+		U.forward(req, res, "/index-all.jsp");
 	}
 	
 }

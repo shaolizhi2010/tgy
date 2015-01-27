@@ -194,11 +194,11 @@ public class VisitHistoryService {
 		return dao.byID(id);
 	}
 	public VisitHistory get( 
-			Map<String, String> conditions) {
+			Map<String, Object> conditions) {
 		return dao.get(VisitHistory.class, conditions);
 	}
 	public List<VisitHistory> list( 
-			Map<String, String> conditions, String orderStr, int limit) {
+			Map<String, Object> conditions, String orderStr, int limit) {
 		return dao.list(VisitHistory.class, conditions, orderStr, limit);
 	}
 

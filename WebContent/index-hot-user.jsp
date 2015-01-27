@@ -20,16 +20,10 @@ PageService ps = new PageService();
 UserService us = new UserService();
 long userCount = us.count();
 
-long pageTotal = userCount/10+1;
-if(pageTotal>=0){//最多先显示前10页
-	pageTotal=10;
-}
 int start =0;
 if(request.getParameter("start")!=null){
 	start = Integer.parseInt(request.getParameter("start"));
 }
-int curPageNum = start/10+1;
-
 
 List<User> users = us.list("-favScore",start,10);
 %>
@@ -216,32 +210,12 @@ List<User> users = us.list("-favScore",start,10);
 		
 		<div class="col-sm-12">
 		<!-- 翻页 -->
-		<nav>
-		  <ul class="pagination">
-		    <li>
-		      <a href="<%=request.getContextPath()%>/index-hot-user.jsp?start=<%=curPageNum*10-20%>" aria-label="Previous">
-		        <span aria-hidden="true">&laquo;</span>
-		      </a>
-		    </li>
-		    <%
-		    for(int i = 1;i<11;i++){
-		    	String selectedStyle="";
-		    	if(i==curPageNum){
-		    		selectedStyle="background-color:#072;color:#fff;";
-		    	}
-		   		%>
-		   		 <li><a style="<%=selectedStyle %>" href="<%=request.getContextPath()%>/index-hot-user.jsp?start=<%=i*10-10%>"><%=i %></a></li>
-		   		<% 	
-		    }
-		    %>
-		   
-		    <li>
-		      <a href="<%=request.getContextPath()%>/index-hot-user.jsp?start=<%=curPageNum*10%>" aria-label="Next">
-		        <span aria-hidden="true">&raquo;</span> 
-		      </a>
-		    </li>
-		  </ul>
-		</nav>
+		<jsp:include page="part/pagination.jsp">
+	    	<jsp:param name="url" value='<%=request.getContextPath()+"/index-hot-user.jsp"%>'/>
+	    	<jsp:param name="count" value='<%=userCount %>'/>
+	    	<jsp:param name="start" value='<%=start %>'/>
+	    </jsp:include>
+		<!-- 翻页end -->
 		</div>
 	</div>
 	<!-- 主体内容 end-->
@@ -253,11 +227,11 @@ List<User> users = us.list("-favScore",start,10);
 	</div>
 	
 	
-	<input type="hidden" id="loginFlag" value="<%=loginFlag %>">
-	<input type="hidden" id="userID" value="<%=showUserID %>">
-	<input type="hidden" id="contextPath" value="<%=contextPath%>">
-	<input type="hidden" id="fid" value="<%=showFolderID%>">
-	<input type="hidden" id="curFolder" value="<%=showFolderName%>">
+	<input type="hidden" id="loginFlag" value='<%=loginFlag %>'>
+	<input type="hidden" id="userID" value='<%=showUserID %>'>
+	<input type="hidden" id="contextPath" value='<%=contextPath%>'>
+	<input type="hidden" id="fid" value='<%=showFolderID%>'>
+	<input type="hidden" id="curFolder" value='<%=showFolderName%>'>
 	<input type="hidden" id="edit_pid" value="">
 	<input type="hidden" id="edit_name" value="">
 	<input type="hidden" id="edit_url" value="">
@@ -269,7 +243,7 @@ List<User> users = us.list("-favScore",start,10);
 	<jsp:include page="part/foot.jsp" />
 	<jsp:include page="part/importAtFoot.jsp" />
 	
-	<script src="<%=request.getContextPath()%>/myjs/pageMainApp.js"></script>
-	<script src="<%=request.getContextPath()%>/myjs/common.js"></script>
+	<script src="<%=request.getContextPath()%>/myjs/pageMainApp.js" defer="defer"></script>
+	<script src="<%=request.getContextPath()%>/myjs/common.js" defer="defer"></script>
 </body>
 </html>

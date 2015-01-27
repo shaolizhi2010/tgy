@@ -17,21 +17,26 @@ import com.mongodb.WriteConcern;
 import com.mongodb.WriteResult;
 import com.tgy.dao.group.InterestGroupDao;
 import com.tgy.entity.group.InterestGroup;
+import com.tgy.util.ConditionMap;
 
 public class InterestGroupService {
 	InterestGroupDao dao = new InterestGroupDao();
 	
+	public InterestGroup byName( String name) {
+		return dao.get(InterestGroup.class, new ConditionMap().add("name", name));
+	}
+	
 	public InterestGroup get( 
-			Map<String, String> conditions) {
+			Map<String, Object> conditions) {
 		return dao.get(InterestGroup.class, conditions);
 	}
 
 	public List<InterestGroup> list( 
-			Map<String, String> conditions, String orderStr, int limit) {
+			Map<String, Object> conditions, String orderStr, int limit) {
 		return dao.list(InterestGroup.class, conditions, orderStr, limit);
 	}
 	public List<InterestGroup> list( 
-			Map<String, String> conditions, String orderStr,int start, int limit) {
+			Map<String, Object> conditions, String orderStr,int start, int limit) {
 		return dao.list(InterestGroup.class, conditions, orderStr,start, limit);
 	}
 	public InterestGroup byID(String id) {

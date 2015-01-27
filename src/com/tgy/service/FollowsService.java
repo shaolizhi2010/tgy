@@ -26,11 +26,11 @@ public class FollowsService {
 		return dao.byID(id);
 	}
 
-	public Follows get(  Map<String, String> conditions) {
+	public Follows get(  Map<String, Object> conditions) {
 		return dao.get(Follows.class, conditions);
 	}
 
-	public List<Follows> list(  Map<String, String> conditions,
+	public List<Follows> list(  Map<String, Object> conditions,
 			String orderStr, int limit) {
 		return dao.list(Follows.class, conditions, orderStr, limit);
 	}

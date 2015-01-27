@@ -25,11 +25,14 @@ import com.tgy.entity.group.InterestGroupPage;
 import com.tgy.exception.BaseException;
 import com.tgy.service.FolderService;
 import com.tgy.service.PageService;
+import com.tgy.util.ConditionMap;
 import com.tgy.util.U;
 
 public class InterestGroupFolderService {
 
 	InterestGroupFolderDao fDao = new InterestGroupFolderDao();
+	
+	
 	
 	public void copy(String folderID, String userID) throws BaseException{
 		FolderService fService = new FolderService();
@@ -67,6 +70,10 @@ public class InterestGroupFolderService {
 		}
 	}
 	
+	public InterestGroupFolder byNameAndGroupID(String name, String groupID){
+		return get(new ConditionMap().add("name", name).add("groupID", groupID));
+	}
+	
 	public List<InterestGroupFolder> ByName(String folderName) {
 
 		Query<InterestGroupFolder> query = App.getInstance().getDatastore()
@@ -81,12 +88,12 @@ public class InterestGroupFolderService {
 	}
 
 	public InterestGroupFolder get( 
-			Map<String, String> conditions) {
+			Map<String, Object> conditions) {
 		return fDao.get(InterestGroupFolder.class, conditions);
 	}
 
 	public List<InterestGroupFolder> list( 
-			Map<String, String> conditions, String orderStr, int limit) {
+			Map<String, Object> conditions, String orderStr, int limit) {
 		return fDao.list(InterestGroupFolder.class, conditions, orderStr, limit);
 	}
 

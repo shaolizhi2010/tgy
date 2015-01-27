@@ -1,0 +1,64 @@
+<%@page import="org.apache.commons.lang3.math.NumberUtils"%>
+<%@page import="org.apache.commons.lang3.StringUtils"%>
+<%@ page language="java" pageEncoding="UTF-8"%>
+
+<%
+//1 2 3
+//第一页start是0
+
+String url = "#"; //页面地址
+if(StringUtils.isNotBlank(request.getParameter("url"))){
+	url = request.getParameter("url");
+}
+
+int count = 0; //总共有多少条
+if(StringUtils.isNotBlank(request.getParameter("count"))){
+	count = NumberUtils.toInt( request.getParameter("count") );
+}
+
+int start=0;//当前显示的记录是从第多少条开始的
+if(StringUtils.isNotBlank(request.getParameter("start"))){
+	start = NumberUtils.toInt( request.getParameter("start") );
+}
+
+
+int currentPageNum = start/10+1;
+int pageCount = count/10+1;
+
+//从多少条开始显示，如果记录条数太多，比如1万条，不能在页面显示一千个页数。只显示前n个和后n个
+int startPageNum = currentPageNum-3<1 ? 1: currentPageNum-3;
+int endPageNum = currentPageNum+3>pageCount ? pageCount: currentPageNum+3;
+
+%>
+
+<!-- 翻页 -->
+<div class="col-sm-12 no-padding">
+	<nav>
+	  <ul class="pagination">
+	    <li>
+	      <a href="<%=url%>?start=0">
+	        <span >首页</span>
+	      </a>
+	    </li>
+	    <%
+	    for(int i = startPageNum;i<=endPageNum;i++){
+	    	String selectedStyle="";
+	    	if(i== currentPageNum){
+	    		selectedStyle="background-color:#072;color:#fff;";
+	    	}
+	   		%>
+	   		 <li><a style="<%=selectedStyle %>" href="<%=url%>?start=<%=i*10-10%>"><%=i %></a></li>
+	   		<% 	
+	    }
+	    %>
+	   
+	    <li>
+	      <a href="<%=url%>?start=<%=(count/10)*10%>" 
+	      	title="尾页" >
+	        <span>尾页</span> 
+	      </a>
+	    </li>
+	  </ul>
+	</nav>
+</div>	
+<!-- 翻页end -->

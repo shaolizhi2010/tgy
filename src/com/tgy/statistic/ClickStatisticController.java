@@ -36,7 +36,7 @@ public class ClickStatisticController extends HttpServlet {
 
 			if ("page".equals(type)) {
 				PageDao pDao = new PageDao();
-				Page page = pDao.getByID(id);
+				Page page = pDao.byID(id);
 				if (page != null) {
 					page.clicks++;
 					page.favScore++;

@@ -54,7 +54,7 @@ public class UpDownController extends HttpServlet {
 			new CommonValidator().isNotNull(id, null);//isLogin(req, null).
 
 			PageDao pDao = new PageDao();
-			Page page = pDao.getByID(id);
+			Page page = pDao.byID(id);
 			if (page != null) {
 				page.ups++;
 				page.favScore+=C.scoreUp;
@@ -87,7 +87,7 @@ public class UpDownController extends HttpServlet {
 			new CommonValidator().isNotNull(id, null);//isLogin(req, null).
 
 			PageDao pDao = new PageDao();
-			Page page = pDao.getByID(id);
+			Page page = pDao.byID(id);
 			if (page != null) {
 				page.downs++;
 				page.favScore+=C.scoreDown;

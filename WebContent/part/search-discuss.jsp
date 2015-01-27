@@ -37,14 +37,14 @@
 		<%
 			//Random rad = new Random();
 			for(Discuss d : discusses){
-				String userName = "百度盘找资源" ;
+				String userName = "百度网盘找资源" ;
 				String headUrl = "";
 				String userUrl = "#";
 				String userID = "";
 				int shortIp = 1;//123.123.123.11 ip最后一段
 				String splitToken = ":";
 				if(StringUtils.isBlank(d.userID)){
-					shortIp = IpUtils.lastPartIp(d.soucrceIP);
+					shortIp = IpUtils.lastPartIp(d.fromIP);
 					userName +=shortIp;
 				}
 				else{

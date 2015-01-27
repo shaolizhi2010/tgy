@@ -14,7 +14,15 @@ jQuery.fn.setSelection = function(selectionStart, selectionEnd) {
     }
  
     return this;
-}
+};
+
+String.prototype.replaceAll = function(s1,s2){
+	return this.replace(new RegExp(s1,"gm"),s2);
+};
+
+
+
+
 /*
 $(window).scroll(function(){
 	if($(document).scrollTop()>100){
@@ -26,7 +34,9 @@ $(window).scroll(function(){
 });
 */
 $(document).ready(function() {
-	$("img").lazyload();
+	$("img").lazyload({
+		failure_limit : 1000
+	});
 	$(".draggable").draggable({
         cursor: 'move', //拖动的时候鼠标样式  
 	});
@@ -34,21 +44,17 @@ $(document).ready(function() {
 });
 
 //鼠标经过 自动焦点
-$(".hover-focus").hover( 
-	function() { 
+$(document).on('mouseenter',".hover-focus",  
+	function(e) { 
 		$(this).focus();
-	}
-	,
-	function() { 
 	}
 );
 
 //回车执行某函数
-$(".enterInput").keydown(
-		 function(e){ 
+$(document).on('keydown',".enterInput", function(e){ 
 			    if(!e) e = window.event;//火狐中是 window.event 
 			    if((e.keyCode || e.which) == 13){ 
-			    	e.preventDefault(); 
+			    	e.preventDefault();
 			    	var funcName = $(this).attr("data-func-name") ;
 			    	eval(funcName + "()");
 			    	//$(".enterBtn").eq(0).click(); 

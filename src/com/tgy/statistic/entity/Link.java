@@ -46,7 +46,7 @@ public class Link extends BaseEntity  implements Serializable,Comparable  {
 	@Reference(ignoreMissing = true,lazy=true)
 	public List<User> users; //收藏了这个link的所有用户
 	
-	//收藏此网站的用户
+	//评论，（只保存直接评论，简介评论不保存）
 	@Reference(ignoreMissing = true,lazy=true)
 	public List<Discuss> discusses; //link的所有评论
 	

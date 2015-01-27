@@ -15,6 +15,8 @@
 
 <%@include file="group-data.jsp"  %> 
 <%
+ 
+ 
 %>
 <!-- 显示网址页面开始 -->
 <div id="pages-part" class="col-sm-12 no-padding sub-page-with-title">
@@ -43,7 +45,6 @@
 	</div>
 	<div class="sub-page-body col-sm-12 no-padding" style="background: #fff;">
 	<%
- 
 	if(CollectionUtils.isEmpty(pages)){
  		%>
  		<div class="col-sm-12 ">
@@ -52,119 +53,19 @@
  		<%
  	}
  	else{
- 			Collections.sort(pages);
- 			Collections.reverse(pages);
- 			LinkService lService = new LinkService();
-			for (InterestGroupPage p : pages) {
-				String linkStr =p.url;
-				Link link = lService.getByUrl(p.url);
-				if(link==null){
-					link = new Link();
-				}
-				
-				if(linkStr!=null && !linkStr.startsWith("http:")){
-					linkStr = "http://"+linkStr;
-				}
-				String linkshow = p.url;
-				//link
-				if (linkshow != null) {
-					if (linkshow.startsWith("http://")) {
-						linkshow = linkshow.replaceAll("http://", "");
-					}
-					if (linkshow.startsWith("https://")) {
-						linkshow = linkshow.replaceAll("https://", "");
-					}
-					int linkLength = linkshow.length();
-					if (linkLength > 28) {
-						linkshow = linkshow.substring(0, 18) + "..."
-								+ linkshow.substring(linkLength - 10);
-					}
-				}
-				
-				String pageName = p.name;
-				if(StringUtils.isBlank(pageName)){
-					pageName =linkshow;
-				}
-				//name
-				if (pageName != null && pageName.length() > 24) {
-					pageName = pageName.substring(0, 24) + "...";
-				}
-		%>
-		<div class="col-sm-12 pages-part-page hoverAble">
-		<a target="_blank" class="col-sm-8  pageMark" href="<%=linkStr%>" 
-			onclick="openLink('<%=p.id %>','page')" title = "<%=p.name %>"
-			data-id="<%=p.id%>" data-name="<%=p.name%>">
-		<%					String iconPath = "";
-						if(StringUtils.isNoneBlank(p.iconPath)  ){
-							iconPath = p.iconPath;
-							if(iconPath.startsWith(App.imgPath)){
-								iconPath = request.getContextPath()+"/"+iconPath;
-							}
-						}
-						else{
-							iconPath = request.getContextPath()+"/images/defaultFav.png";
-						}
-					%>
-					<img class="img18" data-original="<%=iconPath%> " alt='*' >
-			 		<span class="pages-part-page-name" > <%=pageName%></span> - <span class="pages-part-page-link"><%=linkshow%></span>
-		</a>  
-		
-		<%
-		if(editAble){//TODO
+		Collections.sort(pages);
+		Collections.reverse(pages);
+		for (InterestGroupPage p : pages) {
 			%>
-			<div class="page-edit-div">
-				<a href="<%=request.getContextPath()%>/group/group.page.edit.jsp?pageID=<%=p.id%>&groupID=<%=groupID%>"   class="pull-right  " data-id="<%=p.id %>" title="编辑这个网址">
-					<span  class="pull-right glyphicon glyphicon-cog "></span>  
-				</a>
-				<a href="#" class="pull-right deletePage" data-id="<%=p.id %>" title="删除这个网址">
-					<span  class="pull-right glyphicon glyphicon-remove" ></span> 
-				</a>
-			</div>		
-			<span class="pull-right" style="padding-left: 10px;padding-right: 10px;padding-top: 6px;"> | </span>
-		<%} %>
-
-		<div class="page-comment-div">
-			<!-- 
-			<a onclick="preAddPageFunction('<%=p.name%>','<%=p.url%>')" href="#" 
-				class="  pull-right  addPage hoverAble3" > 
-				<span class="glyphicon glyphicon glyphicon-plus pull-right" title="复制到我的收藏夹"  ></span>
-			</a>
-			  -->
-			<a href="#" onclick="downGroupPage('<%=p.id%>')" class="pull-right pageUp hoverAble3" title=" >不推荐< (有<%=link.downs %>人不推荐)">
-				 <span style="color:green;" class="glyphicon glyphicon-thumbs-down"></span> 
-			</a>
-			<a href="#" onclick="upGroupPage('<%=p.id%>')" class="pull-right pageUp hoverAble3" title=" >推荐< (有<%=link.ups %>人推荐)">
-				 <span style="color:green;" class="glyphicon glyphicon-thumbs-up"></span> 
-			</a>
+			<jsp:include page="element/articleElement.jsp">
+				<jsp:param name="pageID" value='<%=p.id.toString() %>'/>
+				<jsp:param name="groupID" value='<%=groupID %>'/>
+				<jsp:param name="editAble" value='<%=editAble %>'/>
+			</jsp:include>
 			<%
-			if(link!=null&&link.id!=null&&StringUtils.isNotBlank(link.id.toString())){
-			%>
-				<a style="font-size: 13px;" href="<%=request.getContextPath()%>/discuss/link/<%=link.id %>" class="pull-right pageComment hoverAble3" title="评论一下 (已有<%=link.commentsCount %>次评论)">
-					<%=link.lastDiscuss!=null?StringUtils.substring(link.lastDiscuss, 0,5):""  %>..评论(<%=link.commentsCount %>)
-				</a>
-			<%
-			}
-			%>
-
-		</div>
-		<!-- 
-		<div title="访问:<%=p.favScore %>, 受欢迎度:<%=link.favScore %> ">
-			<span style="font-size: 12px;color: #999;" ><%=p.favScore %></span>
-			<span>/</span> 
-			<span style="font-size: 12px;color: #999;" ><%=link.favScore %></span>
-		</div>
-		 -->
-		</div><!-- 1155cc --> 
-		<%
-			}//end for
-		}//end else
-		%>
-		
-		
-		
+		}//end for
+	}//end else
+	%>
 	</div>
-
-	
- 		 
 </div>
 <!-- 显示网址页面结束 -->

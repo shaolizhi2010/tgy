@@ -2,7 +2,9 @@ body {
 	background-color: #fff;
 	font-family: Arial, Helvetica, sans-serif;
 }
- 
+div{
+	width:auto;
+}
 a,a:link,a:visited,a:active {
 	color: #4183c4;
 	text-decoration: none;
@@ -10,20 +12,48 @@ a,a:link,a:visited,a:active {
 a {
 	text-decoration: none;
 }
- a:hover{
- 	font-weight: bold;
- 	color: red;
- }
-
+a:hover{
+	font-weight: bold;
+	color: #ce310d;
+}
 span,p,div,a{
 	color: #333;
 	font-size: 12px;
 	font-family: Arial, Helvetica, sans-serif;
 	font-weight: normal;
+}
+em{
+	font-family: Arial, Helvetica, sans-serif;
+	font-style:normal;
+	color: #900;
+}
+.myPagination{
+	 
+}
+.myPagination a{
+	padding:3px;
+	font-size: 13px;
+}
+.myBtn{
+	margin-top:5px;
+	display:block;
+	background-color:blue;
+	color:#fff;
+	width:50px;
+	height:20px;
+	text-align: center;
+	line-height: 20px;
+}
+.myBtn:hover{
+	color: #fff;
+}
+
+.test{
+	border: 1px solid #ce310d;
 } 
 .close span{
 	font-size: 24px;
-	color: red;
+	color: #ce310d;
 	font-weight: bold;
 }
 .close span:hover{
@@ -90,6 +120,15 @@ span,p,div,a{
 #head-sub-menu-public:hover{
 	border-bottom: 3px solid #e85205;	 
 }
+.headImg-20{
+	 width:20px ;-moz-border-radius: 100px;-webkit-border-radius: 100px;border-radius: 100px;
+}
+.headImg-30{
+	 width:25px ;-moz-border-radius: 100px;-webkit-border-radius: 100px;border-radius: 100px;
+}
+.headImg-40{
+	 width:40px ;-moz-border-radius: 100px;-webkit-border-radius: 100px;border-radius: 100px;
+}
 #user-operation-btn{
 	font-size: 18px;color: #222;font-weight: bold;padding : 10px;text-align: center; 
 }
@@ -124,6 +163,7 @@ span,p,div,a{
 .menu-slide-tab span {
 	
 }
+
 .sub-page{
 	background-color: #fff;
 	padding:10px;
@@ -161,7 +201,7 @@ span,p,div,a{
 .sub-page-body{
 	display:block;
 	padding: 10px; 
-	background-color: #f8fffa;
+	background-color: #fefefe;-- #f8fffa;
 }
 .no-outline{
 	outline: 0;
@@ -194,11 +234,15 @@ span,p,div,a{
 	background-color: orange;
 }
 .hoverAble-red:hover{
-	color: red;
+	color: #ce310d;
 	font-weight: bold;
 }
 .hoverAble-discuss:hover{
 	background-color: #fbfbfb;
+}
+.hoverAble-discuss2:hover{
+	border-top: 1px solid #fff;;
+	border-bottom: 1px solid #fff;
 }
 .hoverAble-head:hover{
 	background-color: #007722;
@@ -231,7 +275,7 @@ span,p,div,a{
 }
 .folder-pages-link span:hover{
 	font-weight: bold ;
-	color: red;
+	color: #ce310d;
 }
 .add-link-div{
 	display: none;
@@ -266,7 +310,7 @@ span,p,div,a{
 	color:#333;
 }
 .folder-index-element:hover{
-	color: red;
+	color: #ce310d;
 	font-weight: bold;
 }
 .public-folder-element{
@@ -301,21 +345,30 @@ span,p,div,a{
 }
 .pages-part-page-name{
 	color: #333; 
-	padding-left: 15px;
 	font-size: 13px;
 }
-.pages-part-page-name:hover{
-	color: red;
-	font-weight: bold;
-}
+ 
 .pages-part-page-link{
 	color:green;font-size: 11px;
 }
 .pages-part-page-link:hover{
 	font-weight: bold;
 }
+.search-page-link{
+	color:green;font-size: 11px;
+}
+.search-page-link:hover{
+}
+
+.pages-part-page-comment{
+	display: none;
+}
+
 .img18{
 	width: 18px;height:18px;float: left; 
+}
+.img40{
+	width: 40px;height:40px;float: left; 
 }
 .addPage{
 	padding-left: 10px;padding-right: 10px;padding-top: 6px;padding-bottom: 6px;
@@ -380,8 +433,8 @@ span,p,div,a{
 }
 .tabs a{
 	display: block;
-	padding-left:30px;
-	padding-right:30px;
+	padding-left:10px;
+	padding-right:10px;
 	text-decoration: none;
 	float: left;
 }
@@ -484,7 +537,7 @@ background-color:#fcfcfc;
 
 #pan-search-results{
 	margin-top: 20px;
-	min-height: 300px;
+	min-height: 200px;
 }
 
 .group-info{
@@ -520,12 +573,121 @@ background-color:#fcfcfc;
 .discuss-username:visited,
 .discuss-username:active{
 	color: #a4a4a4;
-	font-size: 13px;
+	font-size: 12px;
 }
 .discuss-username:hover{
 	color: green;
 }
+.discuss-reply-btn{
+}
+
+.discuss-reply-show-btn , 
+.discuss-reply-show-btn:link,
+.discuss-reply-show-btn:visited,
+.discuss-reply-show-btn:active{
+	color: #999;
+}
+.discuss-reply-show-btn:hover{
+	color: #ce310d;
+	font-weight: bold;	
+}
+.discuss-reply-show-date{
+	font-size: 10px; 
+	float: right;
+	color: 	#c7c7c7;
+	padding-left: 3px;
+	padding-right: 3px;
+}
+.discuss-element-sub-container{
+	 
+}
 #searchHistroy{
 	margin-top: 40px;
 }
+.ad-img{
+	width:260px;
+	height:260px;
+	border-radius:2px; 
+	border: 1px solid #eee;
+} 
+/* 文章        */
+.article-container{
+	border-bottom: 1px solid #f2f2f2;
+	
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+.article-tag{
+	display:block;
+	padding-top:10px;
+	padding-bottom:10px;
+	padding-left:0px;
+	color: #3C8FE6;
+	font-weight: bold;
+	font-size: 14px;
+	font-family: 'Open Sans', Arial, 'Hiragino Sans GB', 'Microsoft YaHei', 微软雅黑, STHeiti, 'WenQuanYi Micro Hei', SimSun, sans-serif;
+}
+.article-tag:HOVER{
+	color: #1d75d4;
+	text-decoration: none;
+	}
+.article-img{
+	
+}
+
+.article-author{
+}
+.article-author a{
+	display: block;
+	
+}
+.article-author-head{
+	text-align: center;
+}
+
+.article-author-img{
+	-moz-border-radius: 100px;
+	-webkit-border-radius: 100px;
+	border-radius: 100px;
+}
+.article-authorName{
+	padding :10px;
+	 
+}
+.article-authorName-span{
+	color: #999;
+}
+.article-authorName-url:hover{
+	text-decoration: underline;
+	color: #333;
+}
+.article-title-a{
+	font-size: 20px;
+	font-family: 微软雅黑, 黑体;
+	 
+}
+.article-title-a:hover{
+	color:#ce310d; 
+	text-decoration: underline;
+}
+.article-summry-container{
+	padding-top:10px;
+	padding-bottom:40px;	
+	min-height: 80px;
+}
+.article-summry-a ,
+.article-summry-a:link,
+.article-summry-a:visited,
+.article-summry-a:active{
+	font-size: 14px;
+	color: #666;
+	font-weight: normal;
+	font-family: 'Microsoft Yahei', 'Hiragino Sans GB', '冬青黑体简体中文 w3', STXihei, 华文细黑, 微软雅黑, SimSun, 宋体, Heiti, 黑体, sans-serif;
+} 
+.article-time{
+	 
+}	
+.article-time-span{
+	font-size: 12px;
+	color: #999;
 }

@@ -1,3 +1,156 @@
+-moz-border-radius: 100px;-webkit-border-radius: 100px;border-radius: 100px;
+	$.ajax(
+			{
+				url : $('#contextPath').val()
+						+ "/discuss/list",
+				method : "POST",
+				data : {
+					"primaryDiscussID" : target.attr("data-discussID"),
+					"start" : 3  
+				}
+			}).success(
+			function(data) {
+				 var discussList = JSON.parse(data);
+				 thisContainer.hide();
+				 target.find(".subDiscussPagination").show(); 
+				// target.children(".discuss-element-sub-list").eq(0).empty();
+				 for(var i=0;i<discussList.length;i++){
+					  target.find(".discuss-element-sub-list").eq(0).append(
+							  $("<div></div>").load( $('#contextPath').val()+"/part/discuss-element.jsp?discussID="+discussList[i].id,function(){ //discuss-element
+								  target.find('img').lazyload();
+								  // alert($(this).html());
+								 // var newHtml = $(this).html().replace('<%=message%>','ok')
+								 // $(this).html(function(index,html){
+								//	    return html.replace('<%=message%>','ok');
+								 // }); //
+								  
+								  /*
+								   * ,
+									  fromUserName: 'fromUserName',
+									  toUserName: 'toUserName',
+									  fromUserHeadUrl: 'fromUserHeadUrl',
+									  fromUserUrl: 'fromUserUrl',
+									  fromUserID: 'fromUserID'
+								   */
+								  
+								  //alert($(this).html());
+								 // $(this).html()
+							  }));
+
+					  
+					  //target.append('<div>'+discussList[i].message +'</div>' );
+				  }
+			}).error(
+			function(data) {
+				alert('服务器正在飞速运转，请稍后再试' +  (data));
+				// $scope.status = status;
+			});		
+			<!-- 
+				<jsp:include page="discussPagination.jsp">
+				 	<jsp:param name="start" value='<%=start %>'/>
+				</jsp:include>
+				 -->
+<!-- 
+		<nav>
+		  <ul class="pagination">
+		    <li>
+		      <a href="<%=request.getContextPath()%>/index-hot-user.jsp?start=<%=curPageNum*10-20%>" aria-label="Previous">
+		        <span aria-hidden="true">&laquo;</span>
+		      </a>
+		    </li>
+		    <%
+		    for(int i = 1;i<11;i++){
+		    	String selectedStyle="";
+		    	if(i==curPageNum){
+		    		selectedStyle="background-color:#072;color:#fff;";
+		    	}
+		   		%>
+		   		 <li><a style="<%=selectedStyle %>" href="<%=request.getContextPath()%>/index-hot-user.jsp?start=<%=i*10-10%>"><%=i %></a></li>
+		   		<% 	
+		    }
+		    %>
+		   
+		    <li>
+		      <a href="<%=request.getContextPath()%>/index-hot-user.jsp?start=<%=curPageNum*10%>" aria-label="Next">
+		        <span aria-hidden="true">&raquo;</span> 
+		      </a>
+		    </li>
+		  </ul>
+		</nav>
+		 -->
+<link href="<%= request.getContextPath()%>/stylesheets/awesome.min.css" rel="stylesheet">
+<script src="<%=request.getContextPath()%>/myjs/discuss.js"></script>
+<div class="col-sm-12 no-padding hoverAble-discuss discuss-element-primary" 
+			style="padding:10px;padding-bottom:0px; border-bottom: 1px solid #f2f2f2;"
+			data-discussID="<%=d.id.toString() %>"
+			>
+				<!-- 主评论头像  -->
+				<a href="<%=userUrl%>" class="col-sm-1 no-padding" style=" " >
+					<jsp:include page="../part/discuss-user-head-img.jsp">
+				    	<jsp:param name="radNum" value="<%=IpUtils.lastPartIp(d.fromIP)/2+1  %>"/>
+				    	<jsp:param name="headUrl" value="<%=d.fromUser!=null?d.fromUser.headImgUrl:null %>"/>
+				    	<jsp:param name="size" value="40"/>
+				    </jsp:include>
+				</a>
+				
+				<!-- 主评论 内容 -->
+				<div class=" col-sm-11 no-padding discuss-element-msg" 
+					style="  "
+					data-discussID="<%=d.id.toString()%>"
+					> 
+					<!-- 主评论用户名  -->
+					<div class="col-sm-12 no-padding " style=" ">
+						<a href="<%=userUrl%>" 
+							class="discuss-username no-padding"
+							style="display: block;padding-left: 10px;float: left;"
+							target="_blank">
+						<%= U.shortString(userName, 20) %></a>
+						<a class="discuss-reply-show-btn "  href="javascript:void(0)" style="font-size: 10px; float: right;">
+							  [回复] 
+						</a>
+					</div>
+					<!-- 主评论 文字 -->
+					<div style="" class=" col-sm-12 no-padding">
+						<p class="" style="float:left; color:#333;  padding-left:10px; padding-top:5px;  font-size: 14px;font-weight: normal;word-wrap: break-word; word-break: break-all;">
+							<%=U.addLinkForMessage( d.message)  %>  
+							<%
+								if(StringUtils.isNotBlank(d.sourceBoardName)){
+									%>
+									 <span style="color: #ccc;"> (来自 <%=U.shortString(d.sourceBoardName, 6)  %>) </span>
+									<%
+								}
+							%>
+						</p>					
+					</div>
+				</div>
+		</div>
+<!-- 
+	<div class="col-sm-12 " style="padding-bottom: 10px; border-bottom: 1px solid #eee;">
+		<img style="width: 33px;height: 33px;" data-original="http://g.tbcdn.cn/trip/tools/img/favicon.ico" />
+		<span style="font-size: 22px; color:#a5dafd;font-weight: bold; " >阿里旅行</span>
+	</div>
+	<div class="col-sm-12"  style="margin-top: 20px;"  >
+		<a class="container col-sm-4  " 
+			href="http://s.click.taobao.com/t?e=m%3D2%26s%3DclwfUC5XDmEcQipKwQzePCperVdZeJviEViQ0P1Vf2kguMN8XjClAso1nQCO8X1o9gERx%2BSm1ScXPsBJarhjrlQlUTpNxHAmhwgR3V8%2FXHujxIzsH0Qljn7uq6sLYIqu0Q7QOybCaQy9AmARIwX9K9E0MBlxnM%2FDnaYpFBIfC%2F3FQLGzEOqkxaF8%2F9dV%2FVjhKcdlDWLdoL8omj23vbNXrDEj3OyDuzCRH4w5SWVGzNcKGsL6jbgXj8V80rMhQJBm" target="_blank"
+			style="border: 1px solid #f5f5f5; ">
+			<img style="height: 300px; min-height:150px;width: 240px;min-width: 120px;" 
+				data-original="<%=request.getContextPath() %>/images/ad/ali-3.gif"/>
+		</a>
+		 <a class="container col-sm-4  "  
+			href="http://s.click.taobao.com/t?e=m%3D2%26s%3DclwfUC5XDmEcQipKwQzePCperVdZeJviEViQ0P1Vf2kguMN8XjClAso1nQCO8X1o9gERx%2BSm1ScXPsBJarhjrlQlUTpNxHAmhwgR3V8%2FXHujxIzsH0Qljn7uq6sLYIqu0Q7QOybCaQy9AmARIwX9K9E0MBlxnM%2FDnaYpFBIfC%2F3FQLGzEOqkxaF8%2F9dV%2FVjhKcdlDWLdoL8omj23vbNXrDEj3OyDuzCRH4w5SWVGzNcKGsL6jbgXj8V80rMhQJBm" target="_blank"
+			style=" border: 1px solid #f5f5f5; ">
+			<img  style="height: 300px; min-height:150px;width: 240px;min-width: 120px;"  
+				data-original="http://www.webhezi.com/images/ad/ali-1.gif"/>
+		</a>
+	 	 <a class="container col-sm-4  "  
+			href="http://s.click.taobao.com/t?e=m%3D2%26s%3Dob3okwHTYZ0cQipKwQzePCperVdZeJviEViQ0P1Vf2kguMN8XjClAgeBu%2Bmx6P5DYzajr9m7HbEXPsBJarhjrlQlUTpNxHAmhwgR3V8%2FXHujxIzsH0Qljn7uq6sLYIqu0Q7QOybCaQy9AmARIwX9K9E0MBlxnM%2FDnaYpFBIfC%2F3FQLGzEOqkxaF8%2F9dV%2FVjhrZ%2FtP3rzXjYkz8EWC4H7i5Wt%2BJ0XY5iJIYULNg46oBA%3D" target="_blank"
+			style="display:block;  border: 1px solid #f5f5f5;  ">
+			<img style="height: 300px; min-height:150px;width: 240px;min-width: 120px;" 
+				data-original="http://www.webhezi.com/images/ad/ali-2.gif"/>
+		</a>
+ 	</div>
+ 	 -->
+
 <%
 if(request.getRequestURL().indexOf("localhost") <0){
 	%>

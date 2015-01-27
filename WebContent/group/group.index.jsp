@@ -237,6 +237,6 @@ List<InterestGroup> groups = service.list(null, "-favScore",start, 10);
 	<jsp:include page="../part/foot.jsp" />
 	<jsp:include page="../part/importAtFoot.jsp" />
 	
-	<script src="<%=request.getContextPath()%>/myjs/common.js"></script>
+	<script src="<%=request.getContextPath()%>/myjs/common.js" defer="defer"></script>
 </body>
 </html>

@@ -18,7 +18,7 @@
 <%
 	UserService uService = new UserService();
 	DiscussService disService = new DiscussService();
-	List<Discuss> discusses = disService.list(null, null, "share_want", 40, null);
+	List<Discuss> discusses = null;//disService.list(null, null, "share_want", 40, null);
 %>
 
 <!DOCTYPE html>
@@ -52,8 +52,8 @@
 						String userUrl = "";
 						//String userID = "";
 						if(StringUtils.isBlank(d.userID)){
-							if(StringUtils.isNotBlank(d.soucrceIP)){
-								userName = d.soucrceIP;
+							if(StringUtils.isNotBlank(d.fromIP)){
+								userName = d.fromIP;
 							}
 						}
 						else{

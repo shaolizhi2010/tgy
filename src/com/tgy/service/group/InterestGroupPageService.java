@@ -31,11 +31,11 @@ public class InterestGroupPageService {
 		return pDao.byID(id);
 	}
 
-	public InterestGroupPage get(Map<String, String> conditions) {
+	public InterestGroupPage get(Map<String, Object> conditions) {
 		return pDao.get(InterestGroupPage.class, conditions);
 	}
 
-	public List<InterestGroupPage> list(Map<String, String> conditions,
+	public List<InterestGroupPage> list(Map<String, Object> conditions,
 			String orderStr, int limit) {
 		return pDao.list(InterestGroupPage.class, conditions, orderStr, limit);
 	}
@@ -71,10 +71,16 @@ public class InterestGroupPageService {
 	public Class<InterestGroupPage> getEntityClass() {
 		return pDao.getEntityClass();
 	}
-
+	
 	public Key<InterestGroupPage> save(InterestGroupPage page) {
+		return save(page,true);
+	}
+
+	public Key<InterestGroupPage> save(InterestGroupPage page,boolean getPageInfo) {
 		Key<InterestGroupPage> key= pDao.save(page);
-		if(StringUtils.isBlank(page.name)){
+		
+		//没有name并且实时获取
+		if(getPageInfo && StringUtils.isBlank(page.name)){
 			
 			LinkDao linkDao = new LinkDao();
 			

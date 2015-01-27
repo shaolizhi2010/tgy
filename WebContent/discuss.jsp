@@ -55,8 +55,8 @@
 						String userUrl = "";
 						//String userID = "";
 						if(StringUtils.isBlank(d.userID)){
-							if(StringUtils.isNotBlank(d.soucrceIP)){
-								userName = d.soucrceIP;
+							if(StringUtils.isNotBlank(d.fromIP)){
+								userName = d.fromIP;
 							}
 						}
 						else{

@@ -1,7 +1,7 @@
+<%@page import="com.tgy.util.ConditionMap"%>
 <%@page import="com.tgy.service.UserService"%>
 <%@page import="com.tgy.entity.group.GroupUser"%>
 <%@page import="com.tgy.service.group.GroupUserService"%>
-<%@page import="com.tgy.util.ConditionMap"%>
 <%@page import="com.tgy.service.group.InterestGroupService"%>
 <%@page import="org.apache.commons.lang3.StringUtils"%>
 <%@page import="com.tgy.util.GravatarUtil"%>
@@ -13,7 +13,7 @@
 <%
 GroupUserService gus = new GroupUserService();
 UserService us = new UserService();
-List<GroupUser>  users = gus.list(new ConditionMap().add("groupID", groupID), null, 50);
+List<GroupUser>  users = gus.list(new ConditionMap().add("groupID", groupID), null, 50); 
 %>
 
 <div  class="container col-sm-12 clearfix no-padding sub-page-with-title">
