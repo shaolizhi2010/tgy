@@ -48,12 +48,15 @@ public class PageDao extends BaseBasicDAO<Page, ObjectId> {
 
 	public void saveWithRef(Page page) {
 		save(page);
-
+		String folderID = page.folderID;
+		if(StringUtils.isBlank(folderID)){
+			folderID = page.pid;
+		}
 		// 文件夹中保存的网址
-		if (StringUtils.isNotBlank(page.pid)) {
+		if (StringUtils.isNotBlank(folderID)) {
 
 			FolderDao folderDao = new FolderDao();
-			Folder pFolder = folderDao.getByID(page.pid);
+			Folder pFolder = folderDao.getByID(folderID);
 			if (pFolder != null) {
 				pFolder.add(page);
 				folderDao.save(pFolder);

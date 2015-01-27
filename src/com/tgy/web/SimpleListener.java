@@ -12,6 +12,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 import com.tgy.App;
 import com.tgy.timer.CreateRobotUserTask;
 import com.tgy.timer.DigArticleTask;
+import com.tgy.timer.DigBaiduYunTask;
 import com.tgy.timer.GetPageInfoTask;
 import com.tgy.timer.StatisticTask;
 
@@ -68,7 +69,15 @@ public class SimpleListener implements ServletContextListener {
 		new Timer().schedule(articleTask, articleTaskCalendar.getTime(),
 				2 * 67 * 60 * 1000); // 2小时左右执行一次
 		
+		//自动抓取百度云资源
+		DigBaiduYunTask baiduYunTask = new DigBaiduYunTask();
 		
+		Calendar baiduYunTaskCalendar = Calendar.getInstance();
+		baiduYunTaskCalendar.set(Calendar.HOUR, 18);// 
+		baiduYunTaskCalendar.set(Calendar.MINUTE,10);//
+		
+		new Timer().schedule(baiduYunTask, baiduYunTaskCalendar.getTime(),
+				2 * 67 * 60 * 1000); // 2小时左右执行一次
 		
 //		//创建robot user 丰富网站数据
 //		CreateRobotUserTask createRobotUserTask  = new CreateRobotUserTask(); 

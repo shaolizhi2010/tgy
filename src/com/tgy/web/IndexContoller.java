@@ -10,13 +10,12 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.math.NumberUtils;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.tgy.dao.UserDao;
+import com.tgy.entity.Page;
 import com.tgy.entity.User;
-import com.tgy.entity.group.InterestGroupPage;
-import com.tgy.service.group.InterestGroupPageService;
+import com.tgy.service.PageService;
 import com.tgy.util.ConditionMap;
 import com.tgy.util.PageType;
 import com.tgy.util.U;
@@ -40,7 +39,7 @@ public class IndexContoller extends HttpServlet {
 		if(StringUtils.isBlank(lastLoginUserID) ){//第一次访问 && StringUtils.isBlank(lastViewUserID)
 			
 			//U.forward(req, res, "/公用导航");
-			U.forward(req, res, "/index-hot-user.jsp");
+			U.forward(req, res, "/all");
 			return;
 		}
 		else{
@@ -56,7 +55,7 @@ public class IndexContoller extends HttpServlet {
 				
 				User user = new UserDao().getByID(userID);
 				if(user==null){
-					U.forward(req, res, "/index-hot-user.jsp");
+					U.forward(req, res, "/all");
 					//U.forward(req, res, "/公用导航"); 
 					return;
 				}
@@ -127,18 +126,44 @@ public class IndexContoller extends HttpServlet {
 				e.printStackTrace();
 			}
 		}
-		
-		 
+	}
+	
+	@RequestMapping(value = {"/all"} )
+	public void all(HttpServletRequest req, HttpServletResponse res) {
+		int start = NumberUtils.toInt(req.getParameter("start"));
+		PageService ps = new PageService();
+		List<Page> pages = ps.list(new ConditionMap().add("isShare", true), "-createDate", start,10);
+		long count = ps.count(ps.createQuery(new ConditionMap().add("isShare", true), "-createDate", 0,0));
+		req.setAttribute("pages", pages);
+		req.setAttribute("type", PageType.all);
+		req.setAttribute("start", start);
+		req.setAttribute("count", count);
+		U.forward(req, res, "/index-all.jsp");
 	}
 	
 	@RequestMapping(value = {"/article"} )
 	public void article(HttpServletRequest req, HttpServletResponse res) {
 		int start = NumberUtils.toInt(req.getParameter("start"));
-		InterestGroupPageService ps = new InterestGroupPageService();
-		List<InterestGroupPage> pages = ps.list(new ConditionMap().add("type", PageType.article).add("isShare", true), "-createDate",  10);
+		PageService ps = new PageService();
+		List<Page> pages = ps.list(new ConditionMap().add("type", PageType.article).add("isShare", true), "-createDate", start,10);
+		long count = ps.count(ps.createQuery(new ConditionMap().add("type", PageType.article).add("isShare", true), "-createDate", 0,0));
 		req.setAttribute("pages", pages);
-		req.setAttribute("type", "article");
+		req.setAttribute("type", PageType.article);
+		req.setAttribute("start", start);
+		req.setAttribute("count", count);
 		U.forward(req, res, "/index-all.jsp");
 	}
 	
+	@RequestMapping(value = {"/baidupan"} )
+	public void baidupan(HttpServletRequest req, HttpServletResponse res) {
+		int start = NumberUtils.toInt(req.getParameter("start"));
+		PageService ps = new PageService();
+		List<Page> pages = ps.list(new ConditionMap().add("type", PageType.baidupan).add("isShare", true), "-createDate", start,10);
+		long count = ps.count(ps.createQuery(new ConditionMap().add("type", PageType.baidupan).add("isShare", true), "-createDate", 0,0));
+		req.setAttribute("pages", pages);
+		req.setAttribute("type", PageType.baidupan);
+		req.setAttribute("start", start);
+		req.setAttribute("count", count);
+		U.forward(req, res, "/index-all.jsp");
+	}
 }

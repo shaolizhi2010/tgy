@@ -1,3 +1,4 @@
+ 
 <%@page import="java.util.Random"%>
 <%@page import="org.apache.commons.lang3.StringUtils"%>
 <%@page import="com.tgy.util.GravatarUtil"%>
@@ -71,3 +72,4 @@ if(showUser!=null){
 		</div>
 	</div>
 </div>
+  

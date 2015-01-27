@@ -22,6 +22,7 @@ import com.tgy.asyn.GetPageInfoThread;
 import com.tgy.dao.FolderDao;
 import com.tgy.dao.LinkDao;
 import com.tgy.dao.PageDao;
+import com.tgy.entity.Discuss;
 import com.tgy.entity.Folder;
 import com.tgy.entity.Page;
 import com.tgy.exception.BaseException;
@@ -31,6 +32,12 @@ import com.tgy.util.U;
 public class PageService {
 	
 	PageDao pDao = new PageDao();
+	
+	public Query<Page> createQuery( 
+			Map<String, Object> conditions,String orderStr, int start, int limit) {
+		return pDao.createQuery(Page.class, conditions,orderStr,start,limit);
+	}
+
 	
 	public Page byID(String id) {
 		return pDao.byID(id);

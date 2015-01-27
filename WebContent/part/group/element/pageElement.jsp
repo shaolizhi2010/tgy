@@ -38,7 +38,7 @@ Link link = new LinkService().getByUrl(p.url);
 <%
 			String linkStr =PageUtil.urlWithHttp(p);
 			String linkshow = PageUtil.shortUrl(p, 28);
-			String pageName = PageUtil.shortName(p, 24);
+			String pageName = U.shortString(p.name,24);//  PageUtil.shortName(p, 24);
 			String iconPath = PageUtil.iconPath(p);
 		%>
 		<div class="col-sm-12 pages-part-page hoverAble">

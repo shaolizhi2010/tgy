@@ -25,7 +25,6 @@
 <%@include file="../login-user-data.jsp"  %>  
 
 <%
-System.out.println("in all-discuss");
 DiscussService ds = new DiscussService();  
 
 String sourceBoardID = null;

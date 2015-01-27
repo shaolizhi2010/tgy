@@ -1,3 +1,5 @@
+<%@page import="org.apache.commons.lang3.math.NumberUtils"%>
+<%@page import="com.tgy.util.PageType"%>
 <%@page import="com.tgy.entity.group.InterestGroupPage"%>
 <%@page import="java.util.Random"%>
 <%@ page language="java" pageEncoding="UTF-8"%>
@@ -16,6 +18,8 @@
 
 <%
 	List<InterestGroupPage> pages = (List<InterestGroupPage>)U.paramList(request, "pages");
+	PageType type = (PageType)request.getAttribute("type");
+
 %>
 <!DOCTYPE html>
 <html  >
@@ -32,7 +36,7 @@
 		<!-------- 书签主页面 --------->
 		<div id="pageMain" class="col-sm-8 no-padding" style=" padding-right: 30px; ">
 		  	<div class="col-sm-12" style="margin-top: 10px;"></div>
-		 	<span style=" color:#747F8C;font-size: 20px;">网址分享 - 文章</span>
+		 	<span style=" color:#747F8C;font-size: 20px;">网址分享 - <%=type.value()%></span>
 		  	<!-- 
 		  	 	<span style=" color:#333;font-size: 13px;font-weight: bold;">网友分享的文章</span>
 		  	<span style=" color:#747F8C;font-size: 20px;">网友分享的文章</span>
@@ -58,7 +62,7 @@
 	<!-- 书签主页面结束-->
 	
 	<!-- hidden var end -->
-	<input type="hidden" id="pageID" value="index-<%=request.getAttribute("type")%>">
+	<input type="hidden" id="pageID" value="index-<%=type%>">
 	
 	<jsp:include page="part/foot.jsp" />
 	<jsp:include page="part/importAtFoot.jsp" />

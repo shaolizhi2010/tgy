@@ -8,12 +8,13 @@ import com.tgy.util.PageType;
 public class Page extends BasePage {
 	public String folderID;//v0.3开始，替代之前的pid
 	
+	//下边这几个字段，不管是什么类型的网页，都需要
 	public PageType type;
+	public String imgSrc; //配图
+	public String summry; //概要
+	public String title; //标题
 	
 	//type is article
-	public String title; //文章标题
-	public String imgSrc; //文章配图
-	public String summry; //文章概要
 	public String content; //文章内容
 	public String orignDate; //文章发表时间，（不是抓取时间）
 	//public String url; //文章链接
@@ -21,5 +22,11 @@ public class Page extends BasePage {
 	public String authorName; //作者名字 
 	public String authorUrl; //做着url，如新浪微博的文章，authro url就是做着新浪账号url
 	public String authorHearImgSrc; //author 头像图像链接
+	
+	//article end
+	
+	//type is wang pan
+	//empty
+	//wang pan end
 	
 }

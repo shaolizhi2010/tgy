@@ -1,12 +1,9 @@
+<%@page import="java.util.Random"%>
 <%@page import="com.tgy.entity.User"%>
 <%@page import="com.tgy.service.UserService"%>
 <%@page import="com.tgy.util.DiscussUtils"%>
 <%@page import="org.apache.commons.lang3.EnumUtils"%>
 <%@page import="com.tgy.util.PageType"%>
-<%@page import="com.tgy.entity.group.InterestGroupPage"%>
-<%@page import="com.tgy.service.group.InterestGroupPageService"%>
-<%@page import="com.tgy.service.article.ArticleService"%>
-<%@page import="com.tgy.entity.Article"%>
 <%@page import="org.apache.commons.lang3.BooleanUtils"%>
 <%@page import="com.tgy.util.PageUtil"%>
 <%@ page language="java" pageEncoding="UTF-8"%>
@@ -35,14 +32,18 @@ if(StringUtils.isBlank(pageID)){
 a = as.byID(pageID); 
  
 //无图不显示
-if(a==null || StringUtils.isBlank(a.imgSrc) ||  !PageType.article.equals(a.type)){
-	return ;
-}
+//if(a==null || StringUtils.isBlank(a.imgSrc) ||  !PageType.article.equals(a.type)){
+//	return ;
+//}
 
 UserService us = new UserService();
 User u = us.getByID(a.userID);
 String userUrl = u!=null? request.getContextPath()+"/u/"+u.id.toString():"";
 String userName = u!=null?u.name:"";
+String userHeadImgUrl = u!=null?u.headImgUrl:"";
+if(StringUtils.isBlank(userHeadImgUrl)){
+	userHeadImgUrl = request.getContextPath()+ "/images/ava/ava"+userName.length()+".png";
+}
 //boolean editAble = BooleanUtils.toBoolean(request.getParameter("editAble")) ;
 //String groupID = request.getParameter("groupID");
 
@@ -52,31 +53,63 @@ String userName = u!=null?u.name:"";
 String url =PageUtil.urlWithHttp(a); 
 String authorUrl = PageUtil.urlWithHttp(a.authorUrl);
 //String linkshow = PageUtil.shortUrl(a, 28);
-String pageName = PageUtil.shortName(a, 24);
+String pageName = U.shortString(a.name,24);//PageUtil.shortName(a, 24);
 String iconPath = PageUtil.iconPath(a); 
+PageType type = (PageType)request.getAttribute("type");
 %>
 
 <div class="col-sm-12 article-container no-padding ">
-	
-	<div class="col-sm-12 no-padding">
-		<a   href='<%=request.getContextPath()+"/"+a.type.toString()%>' class=" col-sm-4 article-tag ">分类：<%=a.type.value()  %></a>
-	</div>
-	
-	<div class="col-sm-12 no-padding">
-		<div class="col-sm-4 no-padding">
-			<a class="col-sm-12 no-padding" target="_blank"   href="<%=url%>"  title = "<%=a.title %>" >
-				<img class="img-responsive col-sm-11 no-padding article-img" data-original="<%=a.imgSrc%> " alt=' <%=pageName%>' >
-			</a>
+	<%
+	if(type.equals(PageType.all)){
+		%>
+		<div class="col-sm-6 col-sm-offset-2 no-padding article-type">
+			<a   href='<%=request.getContextPath()+"/"+a.type.toString()%>' class="article-tag ">分类：<%=a.type.value()  %></a>
 		</div>
-		<div class="col-sm-8 no-padding">
+		<%
+	}
+	%>
+
+	<div class="col-sm-12 no-padding">
+		<div class="col-sm-2 no-padding">
+			<div class="col-sm-12 no-padding  " style="  align: center;" >
+				<a class="  " href="<%=userUrl %>" style="  text-align: center;display: block;" target="_blank">
+					<img  style="" class="  headImg-50" data-original="<%=userHeadImgUrl%>" alt='<%=userName+"的网址分享"%>' />
+				</a>
+			</div>
+			<div class="col-sm-12" style="height: 5px;" ></div>
+			<div class="col-sm-12 no-padding  " style="  text-align: center;" >
+				<a class="    article-authorName-url" 
+					style=""
+					href="<%=userUrl %>" target="_blank">
+						<span class="article-authorName-span"><%=userName %></span> 
+				</a>
+			</div>
+			
+		</div>
+		<div class="col-sm-10 no-padding">
+
 			<a class="col-sm-12 article-title no-padding" href="<%=url%>" target="_blank" >
 				<span class="article-title-a"> <%=pageName%> </span>
 			</a>
 			<div class="col-sm-12 article-summry-container no-padding" >
 				<a class="col-sm-12 article-summry-a no-padding" href="<%=url%>" target="_blank" >
-					<%=StringUtils.substring(a.summry, 0,100)+"..."  %>
+					<%=U.shortString(a.summry, 100) %>
 				</a>
 			</div>
+			<%
+			if(StringUtils.isNotBlank(a.imgSrc)){
+				%>
+				<div class="col-sm-12 no-padding">
+					<a class="col-sm-5 no-padding" target="_blank"   href="<%=url%>"  title = "<%=a.title %>" >
+						<img class="img-responsive col-sm-12 no-padding article-img" 
+						data-original="<%=a.imgSrc%> " alt=' <%=pageName%>' />
+					</a>
+				</div>
+				<%
+			}
+			%>
+
+			<div class="col-sm-12" style="height: 20px;" ></div>
 			<div class="col-sm-12 container no-padding">
 				<div class="col-sm-3 article-time no-padding" >
 					<span class="article-time-span"><%=U.dateTimeShort(a.orignDate)  %></span> 

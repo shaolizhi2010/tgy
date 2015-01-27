@@ -6,9 +6,12 @@
 //1 2 3
 //第一页start是0
 
-String url = "#"; //页面地址
+String url = ""; //页面地址
 if(StringUtils.isNotBlank(request.getParameter("url"))){
 	url = request.getParameter("url");
+}
+if(StringUtils.isBlank(url)){
+	url = request.getAttribute("javax.servlet.forward.request_uri").toString();	
 }
 
 int count = 0; //总共有多少条

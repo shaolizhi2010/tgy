@@ -34,7 +34,7 @@ if (showUserNameShort != null && showUserNameShort.length() > 8) {
 	</div>
 	<div id="head-sub-menu" class="col-sm-3 container no-padding"> 
 		 <a id="head-sub-menu-personal"  class="col-sm-5 col-sm-offset-1  no-padding  " href="<%=request.getContextPath()%>/me"  ><span style="color: #387bb6;">网址收藏</span></a>
-		 <a id="head-sub-menu-public" class="col-sm-6    no-padding  " href="<%=request.getContextPath()%>/pan"><span style="color: #e85205;" >网址分享</span></a>
+		 <a id="head-sub-menu-public" class="col-sm-6    no-padding  " href="<%=request.getContextPath()%>/all"><span style="color: #e85205;" >网址分享</span></a>
 		 <!--  
 		  <a class="col-sm-3    hoverAble2 " href="<%=request.getContextPath()%>/公用导航"><span  >导航</span></a>
 		 -->

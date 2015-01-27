@@ -13,6 +13,7 @@ import org.jdom2.Attribute;
 import org.jdom2.Document;
 import org.jdom2.Element;
 
+import com.tgy.util.PageType;
 import com.tgy.util.SimpleConnecter;
 import com.tgy.util.X;
 
@@ -22,7 +23,10 @@ public class TestMain {
 		try {
 			System.out.println("start");
 			
-			System.out.println( NumberUtils.toInt(""));
+			System.out.println(PageType.article);
+			System.out.println(PageType.article.value());
+			
+//			System.out.println( NumberUtils.toInt(""));
 			
 //			List<String> list = (List<String>)null; 
 //			System.out.println(list);

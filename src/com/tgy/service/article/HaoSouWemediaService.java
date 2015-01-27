@@ -8,44 +8,39 @@ import org.apache.commons.lang3.StringUtils;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.tgy.entity.Article;
+import com.tgy.entity.Folder;
 import com.tgy.entity.Page;
 import com.tgy.entity.User;
-import com.tgy.entity.group.InterestGroup;
-import com.tgy.entity.group.InterestGroupFolder;
-import com.tgy.entity.group.InterestGroupPage;
+import com.tgy.service.FolderService;
 import com.tgy.service.PageService;
 import com.tgy.service.UserService;
-import com.tgy.service.group.InterestGroupFolderService;
-import com.tgy.service.group.InterestGroupPageService;
-import com.tgy.service.group.InterestGroupService;
 import com.tgy.util.ConditionMap;
 import com.tgy.util.Connecter;
 import com.tgy.util.PageType;
 
-public class HaoSouWemediaService {
+public class HaoSouWemediaService { 
 	
 	public void digAndSave(){
 		
-		InterestGroupService gs = new InterestGroupService();
-		InterestGroup g = gs.byName("g5");
-		if(g==null||g.id==null)return;
+		UserService us = new UserService();
+		User u = us.getByName("自媒体");
+		if(u==null||u.id==null)return;
 		
-		InterestGroupFolderService fs = new InterestGroupFolderService();
-		InterestGroupFolder f = fs.byNameAndGroupID("doc", g.id.toString());
+		FolderService fs = new FolderService();
+		Folder f  = fs.ByUserIDAndName("自媒体", u.id.toString());
 		if(f==null||f.id==null)return;
 		
-		List<InterestGroupPage> articles = dig();
-		InterestGroupPageService ps = new InterestGroupPageService();
+		List<Page> articles = dig();
+		PageService ps = new PageService();
 		int savedCount = 0;
-		for(InterestGroupPage a : articles){
+		for(Page a : articles){
 			try {
 				a.folderID = f.id.toString();
-				a.groupID = g.id.toString();
+				a.userID = u.id.toString();
 				
 				//不存在 防重复
-				if(ps.list(new ConditionMap().add("url", a.url).add("folderID", a.folderID), null, 0).size()<=0){
-					ps.save(a,false);
+				if(ps.list(new ConditionMap().add("url", a.url).add("folderID", a.folderID), null,0, 0).size()<=0){
+					ps.save(a);
 					f.add(a);
 					fs.save(f);
 					savedCount++;
@@ -58,8 +53,8 @@ public class HaoSouWemediaService {
 		System.out.println("HaoSouWemediaService : " +savedCount + " saved.");
 	}
 	
-	public List<InterestGroupPage> dig(){
-		List<InterestGroupPage> articles = new ArrayList<>();
+	public List<Page> dig(){
+		List<Page> articles = new ArrayList<>();
 		String s  = Connecter.getPageSource("http://wemedia.haosou.com/", "utf-8");
 		s = StringUtils.substringBetween(s, "firstData =",";");
 		if(StringUtils.isBlank(s)){
@@ -73,7 +68,7 @@ public class HaoSouWemediaService {
 		List<Map<String,String>> list = new Gson().fromJson(s, new TypeToken< List<Map<String,String>>>(){}.getType());
 		for(Map<String,String> m : list){
 			try {
-				InterestGroupPage   a = new InterestGroupPage();
+				Page   a = new Page();
 				a.title = m.get("title");
 				a.name = m.get("title");
 				a.summry = m.get("description");
