@@ -3,7 +3,6 @@
 <%@page import="com.tgy.service.UserService"%>
 <%@page import="com.tgy.util.DiscussUtils"%>
 <%@page import="org.apache.commons.lang3.EnumUtils"%>
-<%@page import="com.tgy.util.PageType"%>
 <%@page import="org.apache.commons.lang3.BooleanUtils"%>
 <%@page import="com.tgy.util.PageUtil"%>
 <%@ page language="java" pageEncoding="UTF-8"%>
@@ -41,6 +40,9 @@ User u = us.getByID(a.userID);
 String userUrl = u!=null? request.getContextPath()+"/u/"+u.id.toString():"";
 String userName = u!=null?u.name:"";
 String userHeadImgUrl = u!=null?u.headImgUrl:"";
+if(StringUtils.isNoneBlank(userHeadImgUrl) && userHeadImgUrl.startsWith("/images")){
+	userHeadImgUrl = request.getContextPath()+userHeadImgUrl;
+}
 if(StringUtils.isBlank(userHeadImgUrl)){
 	userHeadImgUrl = request.getContextPath()+ "/images/ava/ava"+userName.length()+".png";
 }
@@ -53,17 +55,17 @@ if(StringUtils.isBlank(userHeadImgUrl)){
 String url =PageUtil.urlWithHttp(a); 
 String authorUrl = PageUtil.urlWithHttp(a.authorUrl);
 //String linkshow = PageUtil.shortUrl(a, 28);
-String pageName = U.shortString(a.name,24);//PageUtil.shortName(a, 24);
+String pageName = U.shortString(a.name,60);//PageUtil.shortName(a, 24);
 String iconPath = PageUtil.iconPath(a); 
-PageType type = (PageType)request.getAttribute("type");
+String tagName = (String)request.getAttribute("tagName");
 %>
 
 <div class="col-sm-12 article-container no-padding ">
 	<%
-	if(type.equals(PageType.all)){
+	if(StringUtils.isBlank(tagName) || tagName.equals("all")){
 		%>
 		<div class="col-sm-6 col-sm-offset-2 no-padding article-type">
-			<a   href='<%=request.getContextPath()+"/"+a.type.toString()%>' class="article-tag ">分类：<%=a.type.value()  %></a>
+			<a   href='<%=request.getContextPath()+"/share/"+a.tagName%>' class="article-tag ">分类：<%=a.tagName  %></a>
 		</div>
 		<%
 	}
@@ -90,11 +92,10 @@ PageType type = (PageType)request.getAttribute("type");
 
 			<a class="col-sm-12 article-title no-padding" href="<%=url%>" target="_blank" >
 				<span class="article-title-a"> <%=pageName%> </span>
+				<a></a>
 			</a>
 			<div class="col-sm-12 article-summry-container no-padding" >
-				<a class="col-sm-12 article-summry-a no-padding" href="<%=url%>" target="_blank" >
-					<%=U.shortString(a.summry, 100) %>
-				</a>
+					<%=U.shortString(a.summry, 200) %>
 			</div>
 			<%
 			if(StringUtils.isNotBlank(a.imgSrc)){
@@ -111,17 +112,18 @@ PageType type = (PageType)request.getAttribute("type");
 
 			<div class="col-sm-12" style="height: 20px;" ></div>
 			<div class="col-sm-12 container no-padding">
-				<div class="col-sm-3 article-time no-padding" >
+				<div class="col-sm-6 col-xs-12 article-time no-padding" >
 					<span class="article-time-span"><%=U.dateTimeShort(a.orignDate)  %></span> 
 				</div>
-				<div class="    article-author pull-right">
+				<div class="col-sm-6 col-xs-12 no-padding article-author pull-right ">
 					<!-- 
 					<a target="_blank" class=" " href="<%=authorUrl%>"  title = "<%=a.authorName %>" >
 						<img  width="30"  class="img-responsive article-author-img" data-original="<%=a.authorHearImgSrc%> " alt=' <%=pageName%>' >
 					</a>
 					-->
-					<a target="_blank" class="article-authorName-url" href="<%=userUrl%>"  title = "<%=a.authorName %>" >
-						<span class="  article-authorName-span ">来源： <%=userName %> 的网址分享</span>
+					<a target="_blank" class="article-source-url" 
+						href="<%=userUrl%>"  title = "<%=userName %>" >
+						<span class="article-authorName-span ">来源： <%=userName %> 的网址分享</span>
 					</a>
 				 
 				</div>

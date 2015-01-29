@@ -40,7 +40,7 @@ int endPageNum = currentPageNum+3>pageCount ? pageCount: currentPageNum+3;
 <div class="col-sm-12 no-padding myPagination">
       <a 
       	 
-      	href="javascript:void(0)" class="discuss-pg-num" data-pageNum="0" >
+      	href="#discuss-container" class="discuss-pg-num" data-pageNum="0" >
        	首页 
       </a>
 	    <%
@@ -55,11 +55,11 @@ int endPageNum = currentPageNum+3>pageCount ? pageCount: currentPageNum+3;
 	   		 	class="discuss-pg-num" 
 	   		 		style="<%=selectedStyle %>" 
 	   		 		data-pageNum="<%=i*10-10 %>"
-	   		 		href="javascript:void(0)"><%=i %></a> 
+	   		 		href="#discuss-container"><%=i %></a> 
 	   		<% 	
 	    }
 	    %>
-      <a href="javascript:void(0)"
+      <a href="#discuss-container"
       	  
      	 class="discuss-pg-num" 
      	 data-pageNum="<%=(count/10)*10 %>"

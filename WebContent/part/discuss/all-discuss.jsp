@@ -89,11 +89,24 @@ if(request.getParameter("start")!=null){
 		
 		<div class="col-sm-12" style="margin-top: 40px;" >
 			 <div class="col-sm-12" style=" padding: 10px;background-color: #f8f8f8; ">
+				<div class="col-sm-12 discuss-content" style="padding: 10px;font-size: 14px;">
+					<a href="<%=request.getContextPath()%>/网址盒子" target="_blank" class="  no-padding" style="float: left;padding-right: 5px; " >
+						<jsp:include page="discuss-user-head-img.jsp">
+					    	<jsp:param name="radNum" value="100"/>
+					    	<jsp:param name="headUrl" value='<%=request.getContextPath()+"/images/ava/ava100.png"%>'/>
+					    	<jsp:param name="size" value='20'/>
+					    </jsp:include>
+					</a>
+					<a href="<%=request.getContextPath()%>/网址盒子" target="_blank" class="  no-padding" style="float: left;font-size: 14px; padding-right: 5px;" >
+						网址盒子
+					</a>
+					对你说: 说说你想要的网址或资源？盒子帮你找
+				</div>
 				<div  style=" ">
 		         		<textarea  style="border:1px solid #ccc;" id="createDiscussMessage" 
 		         			data-func-name="createDiscussForAllFunction" 
 		         			class="form-control enterInput hover-focus" rows="4" 
-		         			placeholder="快到碗里来说两句"></textarea> 
+		         			placeholder="输入想要的网址或资源"></textarea> 
 	         	</div>
 				<div  style="margin-top: 5px; " >
 	         	    <a href="javascript:void(0)">

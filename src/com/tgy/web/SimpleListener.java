@@ -2,17 +2,15 @@ package com.tgy.web;
 
 import java.util.Calendar;
 import java.util.Timer;
+import java.util.TimerTask;
 
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
 
-import org.springframework.scheduling.annotation.Scheduled;
-
 import com.tgy.App;
-import com.tgy.timer.CreateRobotUserTask;
-import com.tgy.timer.DigArticleTask;
-import com.tgy.timer.DigBaiduYunTask;
+import com.tgy.service.article.HaoSouWemediaService;
+import com.tgy.service.ziyuan.BaiduPanDigService;
 import com.tgy.timer.GetPageInfoTask;
 import com.tgy.timer.StatisticTask;
 
@@ -59,25 +57,42 @@ public class SimpleListener implements ServletContextListener {
 				24 * 60 * 60 * 1000); // 24小时执行一次
 		//timer2.schedule(statisticTask, 0);// 立刻开始
 	
-		//自动抓取文章
-		DigArticleTask articleTask = new DigArticleTask();
+//		// 抓360
+//		Calendar calendarArticle = Calendar.getInstance();
+//		calendarArticle.set(Calendar.HOUR, 6);// 
+//		calendarArticle.set(Calendar.MINUTE,5);//
+//		new Timer(false).schedule(new TimerTask() {
+//			@Override
+//			public void run() {
+//				int hour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY);
+//				if(1<hour && hour<5){//凌晨1-5点休息
+//					return;
+//				}
+//				new HaoSouWemediaService().digAndSave(); //自动抓取文章
+//			}
+//		}, calendarArticle.getTime(), 2 * 60 * 60 * 1000); 
 		
-		Calendar articleTaskCalendar = Calendar.getInstance();
-		articleTaskCalendar.set(Calendar.HOUR, 10);// 
-		articleTaskCalendar.set(Calendar.MINUTE,0);//
-		
-		new Timer().schedule(articleTask, articleTaskCalendar.getTime(),
-				2 * 67 * 60 * 1000); // 2小时左右执行一次
+//		// n小时左右执行一次
+//		new Timer(false).schedule(new TimerTask() {
+//			@Override
+//			public void run() {
+//				int hour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY);
+//				if(1<hour && hour<8){//凌晨1-8点休息
+//					return;
+//				}
+//				new BaiduPanDigService().digAndSave("百度网盘", "电影", "美剧", "小说下载", "高清下载");//自动抓取百度云资源
+//			}
+//		}, 11*60, 2*60 * 60 * 1000); 
 		
 		//自动抓取百度云资源
-		DigBaiduYunTask baiduYunTask = new DigBaiduYunTask();
-		
-		Calendar baiduYunTaskCalendar = Calendar.getInstance();
-		baiduYunTaskCalendar.set(Calendar.HOUR, 18);// 
-		baiduYunTaskCalendar.set(Calendar.MINUTE,10);//
-		
-		new Timer().schedule(baiduYunTask, baiduYunTaskCalendar.getTime(),
-				2 * 67 * 60 * 1000); // 2小时左右执行一次
+//		DigBaiduYunTask baiduYunTask = new DigBaiduYunTask();
+//		
+//		Calendar baiduYunTaskCalendar = Calendar.getInstance();
+//		baiduYunTaskCalendar.set(Calendar.HOUR, 18);// 
+//		baiduYunTaskCalendar.set(Calendar.MINUTE,10);//
+//		
+//		new Timer(false).schedule(baiduYunTask, baiduYunTaskCalendar.getTime(),
+//				1 * 60 * 60 * 1000); // 1小时左右执行一次
 		
 //		//创建robot user 丰富网站数据
 //		CreateRobotUserTask createRobotUserTask  = new CreateRobotUserTask(); 

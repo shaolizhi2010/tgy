@@ -44,7 +44,7 @@ int curPageNum = start/10+1;
 	<div class="  col-sm-12" style="margin-top: 20px;"></div>
  	<input type="hidden" id="keyword" value="<%=keyword%>"/>
 	<!-- 主体内容 -->
-	<div class=" col-sm-6 container no-padding " style="margin-right: 50px;">
+	<div class=" col-sm-8 container no-padding "  >
 		<div class="  col-sm-12 no-padding" style="margin-top: 10px;"></div>
 		<div class="  col-sm-11 col-sm-offset-1 no-padding " style="margin-top: 10px;"><span style="font-size:22px;">百度网盘搜索</span><span style="font-size:11px;" >   (找资源、找电影、找剧集、找资料...)</span></div>
 		<div id="pan-search-input" class="col-sm-11 col-sm-offset-1 ">
@@ -183,7 +183,7 @@ int curPageNum = start/10+1;
 	 	<input type="hidden" id="pageID" value="pan">
 	
 	 	<!-- 菜单 -->
- 	<div class=" col-sm-5 no-padding" style="border-left:1px solid #eee;padding-left: 10px; padding-top: 20px;">
+ 	<div class=" col-sm-4 no-padding" style="border-left:1px solid #eee;padding-left: 10px; padding-top: 20px;">
 		<div id="discuss-container" class=" col-sm-10  no-padding" >
 			<jsp:include page="part/discuss/all-discuss.jsp">
 		    	<jsp:param name="sourceBoardName" value="百度网盘搜索"/>

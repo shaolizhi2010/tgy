@@ -52,10 +52,10 @@ if(d.fromUser!= null && d.fromUser.id!=null){
   
  %>
  <!-- 每一条帖子，可以是主贴，或回帖 -->
-<div class="col-sm-12 hoverAble-discuss2 discuss-element" style="padding: 5px;"
+<div class="col-sm-12 container hoverAble-discuss2 discuss-element" style="padding: 5px;"
 	id="<%=d.id.toString()%>">
 	<!-- 评论头像  -->
-	<a href="<%=fromUserUrl%>" target="_blank" class="col-sm-1 no-padding" style=" " >
+	<a href="<%=fromUserUrl%>" target="_blank" class="col-sm-1 col-xs-3 no-padding" style=" " >
 		<jsp:include page="discuss-user-head-img.jsp">
 	    	<jsp:param name="radNum" value="<%=IpUtils.lastPartIp(d.fromIP)/2+1  %>"/>
 	    	<jsp:param name="headUrl" value='<%=d.fromUser!=null?d.fromUser.headImgUrl:"" %>'/>
@@ -64,7 +64,7 @@ if(d.fromUser!= null && d.fromUser.id!=null){
 	</a>
 	
 	<!-- 评论 内容 -->
-	<div class=" col-sm-11 no-padding discuss-element-msg" 
+	<div class=" col-sm-11 col-xs-9 no-padding discuss-element-msg" 
 		style="  "
 		data-discussID="<%=d.id.toString()%>"
 		data-fromUsername="<%=U.shortString(fromUserName, 20)%>"
@@ -80,15 +80,17 @@ if(d.fromUser!= null && d.fromUser.id!=null){
 			<a class="discuss-reply-show-btn"  href="#<%=primaryDiscussID %>" style="font-size: 10px; float: right;">
 				  [回复] 
 			</a>
+			<!-- 
 			<span class="discuss-reply-show-date" style=""><%= U.dateTimeShort( d.createDate)  %></span>
+			 -->
 		</div>
-		<!-- 评论 文字 -->
+		<!-- 文字 -->
 		<div style="" class=" col-sm-12 no-padding">
-			<p class="" style='float:left; color:#333;  padding-left:10px; padding-top:5px;  font-size: <%=d.isPrimary?"15px":"13px" %>;font-weight: normal;word-wrap: break-word; word-break: break-all;'>
+			<p class="discuss-content" style='font-size: <%=d.isPrimary?"15px":"13px" %>;'>
 				
 				<%if(d.isReply && d.replyToDiscuss!=null && d.replyToDiscuss.isReply) {//回复非主贴，加@
 				%>
-				<span title="<%=toUserName %>">
+				<span class="discuss-reply-at" title="<%=toUserName %>">
 				@<%=toUserName %>:
 				<% }%></span>
 				

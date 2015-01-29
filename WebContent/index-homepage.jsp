@@ -35,8 +35,45 @@
 	<div class="container col-sm-12 clearfix " style="padding-top: 0px;">  
 		<!-------- 书签主页面 --------->
 		<div id="pageMain" class="col-sm-8 no-padding" style=" padding-right: 30px; ">
+		  	
+		  
 		  	<div class="col-sm-12" style="margin-top: 10px;"></div>
-		 	<span style=" color:#747F8C;font-size: 20px;">网址分享 - <%=tagName%></span>
+		  	<div class="col-sm-12 no-padding" style="margin-top: 10px;">
+		  		<span style=" color:#747F8C;font-size: 20px;">热点分类</span>
+		  	</div>
+		  	
+		  	<div class="col-sm-12   container " style="padding: 10px;">
+					<a class="  index-tag" href="<%=request.getContextPath()%>/share/自媒体" 
+						style=" ">
+						 自媒体
+					</a>
+					<a class="  index-tag" href="<%=request.getContextPath()%>/share/百度网盘" 
+						style=" ">
+						 百度网盘
+					</a>
+ 	 			  	<a class="  index-tag" href="<%=request.getContextPath()%>/share/电影" 
+						style=" ">
+						电影
+					</a>
+					<a class="  index-tag" href="<%=request.getContextPath()%>/share/美剧" 
+						style=" ">
+						 美剧
+					</a>
+					<a class="  index-tag" href="<%=request.getContextPath()%>/share/小说下载" 
+						style=" ">
+						 小说下载
+					</a> 
+					<a class="  index-tag" href="<%=request.getContextPath()%>/share/高清下载" 
+						style=" ">
+						高清下载
+					</a> 
+						 
+		  	</div>
+		  	
+		  	<div class="col-sm-12" style="border: 1px solid #eee;"></div>
+		  	 
+		  	<div class="col-sm-12" style="margin-top: 10px;"></div>
+		 	<span style=" color:#747F8C;font-size: 20px;">最新网址分享 </span>
 		  	<!-- 
 		  	 	<span style=" color:#333;font-size: 13px;font-weight: bold;">网友分享的文章</span>
 		  	<span style=" color:#747F8C;font-size: 20px;">网友分享的文章</span>
@@ -62,7 +99,7 @@
 	<!-- 书签主页面结束-->
 	
 	<!-- hidden var end -->
-	<input type="hidden" id="pageID" value="index-<%=tagName%>">
+	<input type="hidden" id="pageID" value="index-homepage">
 	
 	<jsp:include page="part/foot.jsp" />
 	<jsp:include page="part/importAtFoot.jsp" />

@@ -8,21 +8,40 @@
 <%@include file="bookmark-data.jsp" %>
 <%
 	String title = "网址盒子";
-	String userName = "";
-	if(loginUserName!=null){
-		userName = loginUserName;
+	if(request.getAttribute("keywordForMeta")!=null){
+		title = request.getAttribute("keywordForMeta")+" - " + title;
 	}
-	if( StringUtils.isNotBlank(showUserName )  ){
-		title = showUserName+"的网址收藏  - " +title;
+	else{
+		String userName = "";
+		if(loginUserName!=null){
+			userName = loginUserName;
+		}
+		if( StringUtils.isNotBlank(showUserName )  ){
+			title = showUserName+"的网址收藏  - " +title;
+		}
+		if( StringUtils.isNotBlank(showFolderName )  ){
+			title = showFolderName+" - " + title;
+		}
 	}
-	if( StringUtils.isNotBlank(showFolderName )  ){
-		title = showFolderName+" - " + title;
+	
+	String desc = "网址盒子，专注于网址收藏和网址分享，存网址-找网址，到网址盒子";
+	if(request.getAttribute("keywordForMeta")!=null){
+		desc = request.getAttribute("keywordForMeta")+" - " + desc;
 	}
+	else{
+		
+	}
+	
+	String keyword = "网址盒子 网址收藏   网址导航 网址分享 自定义网址导航  在线收藏夹  网络收藏夹 网站收藏 网址导航 在线保存网址 网站收集 云收藏 ";
+	if(request.getAttribute("keywordForMeta")!=null){
+		keyword = request.getAttribute("keywordForMeta")+"   " + keyword;
+	}
+	
 %>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <title><%=title %></title>
-<meta name='description' content='网址盒子，网址收藏，网址导航，上网导航，收藏网址，自己的导航，分享收藏的网址，在线保存网址,网站收集，网址分享'/>
-<meta name='keywords' content='网址盒子 网址收藏   网址导航 网址分享 自定义网址导航  在线收藏夹  网络收藏夹 网站收藏 网址导航 在线保存网址 网站收集 云收藏 '/>
+<meta name='description' content='<%=desc%>'/>
+<meta name='keywords' content='<%=keyword%>'/>
 <meta http-equiv="Content-Language" content="zh-CN" />
 <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
 <meta name="baidu_union_verify" content="22b8f1d552d7aa7971e01d375296bf63">

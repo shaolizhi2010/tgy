@@ -83,7 +83,8 @@ public class HaoSouWemediaService {
 				a.authorName = m.get("weibo_name");
 				a.authorUrl = "weibo.com/"+m.get("weibo_uid");
 				a.isShare = true;
-				a.type= PageType.article; 
+				a.tagName = "自媒体";
+				a.type= PageType.word; 
 				articles.add(a);
 			}
 			catch (Exception e) {

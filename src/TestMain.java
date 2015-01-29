@@ -1,5 +1,6 @@
 import java.io.StringReader;
 import java.net.URLEncoder;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Random;
 
@@ -23,8 +24,10 @@ public class TestMain {
 		try {
 			System.out.println("start");
 			
-			System.out.println(PageType.article);
-			System.out.println(PageType.article.value());
+			System.out.println(Calendar.getInstance().get(Calendar.HOUR_OF_DAY));
+			
+//			System.out.println(PageType.article);
+//			System.out.println(PageType.article.value());
 			
 //			System.out.println( NumberUtils.toInt(""));
 			

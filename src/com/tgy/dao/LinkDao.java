@@ -14,8 +14,9 @@ import org.mongodb.morphia.query.UpdateOperations;
 import com.tgy.App;
 import com.tgy.statistic.entity.Link;
 import com.tgy.statistic.entity.Tag;
+import com.tgy.util.ConditionMap;
 
-public class LinkDao extends BasicDAO<Link, ObjectId> {
+public class LinkDao extends BaseBasicDAO<Link, ObjectId> {
 
 	public LinkDao() {
 		super(Link.class, App.getInstance().getDatastore());
@@ -38,16 +39,12 @@ public class LinkDao extends BasicDAO<Link, ObjectId> {
 			return find(query).asList();
 		}
 	
-	public List<Link> getByTag(String tagID){
-		//List<Link> links = new ArrayList<>();
 		
-		Tag tag = new TagDao().getByID(tagID);
-		if(tag!=null){
-			return tag.links;
-		}
-		else{
-			return new  ArrayList<>();
-		}
+		
+	public List<Link> getByTag(String tagID){
+		return list(Link.class, new ConditionMap().add("tagID", tagID),null, 0);
+		
+ 
 		/*//TODO 
 		Query<Link> query1 = App.getInstance().getDatastore()
 				.createQuery(Link.class)

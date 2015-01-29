@@ -8,6 +8,9 @@ import com.tgy.util.PageType;
 public class Page extends BasePage {
 	public String folderID;//v0.3开始，替代之前的pid
 	
+	public boolean isShare;//是否是用户推荐共享的
+	public String tagName;//共享所属tag名
+	
 	//下边这几个字段，不管是什么类型的网页，都需要
 	public PageType type;
 	public String imgSrc; //配图

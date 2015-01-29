@@ -95,8 +95,11 @@
 	 			%>
 				 <div class="col-sm-12   " style="margin-top: 10px;  margin-bottom: 10px;">
 			 		<input type="hidden" id="createlinkComment_targetID" value="<%=linkID%>">
+			 		<div>
+			 			
+			 		</div>
 			 		<div  style="margin-top: 5px;" >
-	            		<textarea   id="createlinkCommentMessage"  class="form-control" rows="5" placeholder=""></textarea>            </div>
+	            		<textarea   id="createlinkCommentMessage"  class="form-control" rows="5" placeholder=""></textarea></div>
 	            	<div  style="margin-top: 10px;" >
 		                <button onclick="createDiscussFunction()" id="createFolder-ok" type="button"
 		                        class="btn btn-primary pull-right">发送

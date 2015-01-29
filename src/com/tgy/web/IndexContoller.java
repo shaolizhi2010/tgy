@@ -39,7 +39,7 @@ public class IndexContoller extends HttpServlet {
 		if(StringUtils.isBlank(lastLoginUserID) ){//第一次访问 && StringUtils.isBlank(lastViewUserID)
 			
 			//U.forward(req, res, "/公用导航");
-			U.forward(req, res, "/all");
+			U.forward(req, res, "/share");
 			return;
 		}
 		else{
@@ -55,7 +55,7 @@ public class IndexContoller extends HttpServlet {
 				
 				User user = new UserDao().getByID(userID);
 				if(user==null){
-					U.forward(req, res, "/all");
+					U.forward(req, res, "/share");
 					//U.forward(req, res, "/公用导航"); 
 					return;
 				}
@@ -127,43 +127,5 @@ public class IndexContoller extends HttpServlet {
 			}
 		}
 	}
-	
-	@RequestMapping(value = {"/all"} )
-	public void all(HttpServletRequest req, HttpServletResponse res) {
-		int start = NumberUtils.toInt(req.getParameter("start"));
-		PageService ps = new PageService();
-		List<Page> pages = ps.list(new ConditionMap().add("isShare", true), "-createDate", start,10);
-		long count = ps.count(ps.createQuery(new ConditionMap().add("isShare", true), "-createDate", 0,0));
-		req.setAttribute("pages", pages);
-		req.setAttribute("type", PageType.all);
-		req.setAttribute("start", start);
-		req.setAttribute("count", count);
-		U.forward(req, res, "/index-all.jsp");
-	}
-	
-	@RequestMapping(value = {"/article"} )
-	public void article(HttpServletRequest req, HttpServletResponse res) {
-		int start = NumberUtils.toInt(req.getParameter("start"));
-		PageService ps = new PageService();
-		List<Page> pages = ps.list(new ConditionMap().add("type", PageType.article).add("isShare", true), "-createDate", start,10);
-		long count = ps.count(ps.createQuery(new ConditionMap().add("type", PageType.article).add("isShare", true), "-createDate", 0,0));
-		req.setAttribute("pages", pages);
-		req.setAttribute("type", PageType.article);
-		req.setAttribute("start", start);
-		req.setAttribute("count", count);
-		U.forward(req, res, "/index-all.jsp");
-	}
-	
-	@RequestMapping(value = {"/baidupan"} )
-	public void baidupan(HttpServletRequest req, HttpServletResponse res) {
-		int start = NumberUtils.toInt(req.getParameter("start"));
-		PageService ps = new PageService();
-		List<Page> pages = ps.list(new ConditionMap().add("type", PageType.baidupan).add("isShare", true), "-createDate", start,10);
-		long count = ps.count(ps.createQuery(new ConditionMap().add("type", PageType.baidupan).add("isShare", true), "-createDate", 0,0));
-		req.setAttribute("pages", pages);
-		req.setAttribute("type", PageType.baidupan);
-		req.setAttribute("start", start);
-		req.setAttribute("count", count);
-		U.forward(req, res, "/index-all.jsp");
-	}
+
 }

@@ -26,7 +26,7 @@ if(StringUtils.isNotBlank(request.getParameter("start"))){
 
 
 int currentPageNum = start/10+1;
-int pageCount = count/10+1;
+int pageCount = (count-1)/10+1; //9条1页 10条1页 11条2页
 
 //从多少条开始显示，如果记录条数太多，比如1万条，不能在页面显示一千个页数。只显示前n个和后n个
 int startPageNum = currentPageNum-3<1 ? 1: currentPageNum-3;
@@ -43,6 +43,11 @@ int endPageNum = currentPageNum+3>pageCount ? pageCount: currentPageNum+3;
 	        <span >首页</span>
 	      </a>
 	    </li>
+	    <li>
+	      <a href="<%=url%>?start=<%=currentPageNum*10-20>0?currentPageNum*10-20:0%>">
+	        <span >上一页</span>
+	      </a>
+	    </li>
 	    <%
 	    for(int i = startPageNum;i<=endPageNum;i++){
 	    	String selectedStyle="";
@@ -54,14 +59,24 @@ int endPageNum = currentPageNum+3>pageCount ? pageCount: currentPageNum+3;
 	   		<% 	
 	    }
 	    %>
-	   
+	    <li>
+	      <a href="<%=url%>?start=<%=currentPageNum*10%>">
+	        <span >下一页</span>
+	      </a>
+	    </li>
 	    <li>
 	      <a href="<%=url%>?start=<%=(count/10)*10%>" 
 	      	title="尾页" >
 	        <span>尾页</span> 
 	      </a>
 	    </li>
+	    <li>
+	      <a style="color:#333;">
+	          	共<span style="color: red;"> <%=pageCount %></span>页 
+	      </a>
+	    </li>
 	  </ul>
 	</nav>
+	
 </div>	
 <!-- 翻页end -->

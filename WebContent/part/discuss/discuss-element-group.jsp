@@ -19,7 +19,7 @@ if(StringUtils.isBlank(primaryDiscussID)){
 }
  
  %>
- <div class="hoverAble-discuss col-sm-12 discuss-element-group"  
+ <div class="hoverAble-discuss col-sm-12 container discuss-element-group"  
 	style="padding: 10px;border-bottom: 1px solid #eee;"
 	data-discussID="<%=primaryDiscussID%>"
 	id="<%=primaryDiscussID%>"

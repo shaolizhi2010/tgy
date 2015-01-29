@@ -21,6 +21,8 @@ span,p,div,a{
 	font-size: 12px;
 	font-family: Arial, Helvetica, sans-serif;
 	font-weight: normal;
+	word-wrap: break-word; 
+	word-break: break-all;
 }
 em{
 	font-family: Arial, Helvetica, sans-serif;
@@ -134,6 +136,9 @@ em{
 }
 .headImg-60{
 	width:60px ;-moz-border-radius: 100px;-webkit-border-radius: 100px;border-radius: 100px;
+}
+.round{
+	-moz-border-radius: 1000px;-webkit-border-radius: 1000px;border-radius: 1000px;
 }
 #user-operation-btn{
 	font-size: 18px;color: #222;font-weight: bold;padding : 10px;text-align: center; 
@@ -260,6 +265,27 @@ em{
 #logo a span{
 	color: #0e959d;font-size: 32px;font-weight:bold;
 }
+
+/* index*/
+.index-tag  ,
+.index-tag:link,
+.index-tag:visited,
+.index-tag:active{
+	padding: 10px; 
+	margin:5px;
+	text-align:center;
+	background-color: #e9f4e4;
+	line-height: 40px;
+	color: #359300;
+	font-size: 14px;
+	border: 1px solid #eee;
+	border-radius:5px;
+}
+.index-tag:hover{
+	color:#fff;
+	background-color: #65c330;
+}
+
 .folder-pages{
 	padding: 5px; 
 	margin-bottom: 20px; 
@@ -604,6 +630,17 @@ background-color:#fcfcfc;
 	padding-left: 3px;
 	padding-right: 3px;
 }
+.discuss-reply-at{
+	color: 	#a7a7a7;
+}
+.discuss-content{
+	float:left; color:#333;  
+	padding-left:10px; 
+	padding-top:5px; 
+	font-weight: normal;
+	word-wrap: break-word; 
+	word-break: break-all;
+}
 .discuss-element-sub-container{
 	 
 }
@@ -638,7 +675,7 @@ background-color:#fcfcfc;
 	text-decoration: underline;
 	}
 .article-img{
-	
+	 
 }
 
 .article-author{
@@ -664,10 +701,15 @@ background-color:#fcfcfc;
 	padding-left :8px;
 	color: #999;
 }
+.article-authorName-url{
+}
 .article-authorName-url:hover{
 	
 	text-decoration: underline;
 	color: #333;
+}
+.article-source-url{
+	float: right;
 }
 .article-title-a{
 	font-size: 20px;
@@ -682,6 +724,10 @@ background-color:#fcfcfc;
 	padding-top:10px;
 	padding-bottom:20px;	
 	min-height: 80px;
+	font-size: 14px;
+	color: #666;
+	font-weight: normal;
+	font-family: 'Microsoft Yahei', 'Hiragino Sans GB', '冬青黑体简体中文 w3', STXihei, 华文细黑, 微软雅黑, SimSun, 宋体, Heiti, 黑体, sans-serif;
 }
 .article-summry-a ,
 .article-summry-a:link,
