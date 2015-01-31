@@ -2,6 +2,7 @@ package com.tgy.statistic.service;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import org.bson.types.ObjectId;
 import org.mongodb.morphia.Datastore;
@@ -20,18 +21,36 @@ import com.tgy.dao.FolderDao;
 import com.tgy.dao.TagDao;
 import com.tgy.dao.UserDao;
 import com.tgy.entity.Folder;
+import com.tgy.entity.Tag;
 import com.tgy.entity.User;
 import com.tgy.service.FolderService;
-import com.tgy.statistic.entity.Tag;
+import com.tgy.service.PageTagMapService;
+import com.tgy.util.PageType;
 
 public class TagService {
 
 	FolderService fService = new FolderService();
+	PageTagMapService pts = new PageTagMapService();
 	
 	TagDao tagDao = new TagDao();
 	
 	public List<Tag> list(int num) {
 		return tagDao.list(num);
+	}
+
+	public List<Tag> list(  Map<String, Object> conditions,
+			String orderStr, int start, int limit) {
+		return tagDao.list(Tag.class, conditions, orderStr, start, limit);
+	}
+
+
+
+	public Tag byID(String id) {
+		return tagDao.byID(id);
+	}
+
+	public Tag getByName(String name, PageType type) {
+		return tagDao.getByName(name, type);
 	}
 
 	public Tag getByName(String name) {
@@ -193,40 +212,39 @@ public class TagService {
 
 	//扫描 folder表， 并声称Tag
 	public void scan() {
-		FolderDao fDao = new FolderDao();
-		UserDao uDao = new UserDao();
-		
-		//TODO 分组 -> mapreduce
-		
-		//找到从来没处理过的
-		Query<Folder> query = App.getInstance().getDatastore()
-				.createQuery(Folder.class).filter("scanTimes",0);
-		
-		Iterator<Folder> it = fDao.find(query).iterator();
-		while (it.hasNext()) {
-			Folder folder = it.next();
-			folder.scanTimes ++;
-			fDao.save(folder);
-			
-			User user = uDao.getByID(folder.userID);
-
-			TagDao tDao = new TagDao();
-			Tag tag = tDao.getByName(folder.name);
-			if (tag == null) { // tag第一次被创建
-				tag = new Tag();
-				tag.name = folder.name;
-				tag.createDate = folder.createDate;
-				tag.keeps = 1;
-				tag.favScore = Tag.keepScore;
-
-			} else { // tag已存在,计数加一
-				tag.keeps++;
-				tag.favScore += Tag.keepScore;
-
-			}
-			tag.add(user);
-			tDao.save(tag);// save tag
-		}
+//		FolderDao fDao = new FolderDao();
+//		UserDao uDao = new UserDao();
+//		
+//		
+//		//找到从来没处理过的
+//		Query<Folder> query = App.getInstance().getDatastore()
+//				.createQuery(Folder.class).filter("scanTimes",0);
+//		
+//		Iterator<Folder> it = fDao.find(query).iterator();
+//		while (it.hasNext()) {
+//			Folder folder = it.next();
+//			folder.scanTimes ++;
+//			fDao.save(folder);
+//			
+//			User user = uDao.getByID(folder.userID);
+//
+//			TagDao tDao = new TagDao();
+//			Tag tag = tDao.getByName(folder.name);
+//			if (tag == null) { // tag第一次被创建
+//				tag = new Tag();
+//				tag.name = folder.name;
+//				tag.createDate = folder.createDate;
+//				tag.keeps = 1;
+//				tag.favScore = Tag.keepScore;
+//
+//			} else { // tag已存在,计数加一
+//				tag.keeps++;
+//				tag.favScore += Tag.keepScore;
+//
+//			}
+//			//tag.add(user);
+//			tDao.save(tag);// save tag
+//		}
 
 	}
 	

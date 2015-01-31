@@ -1,10 +1,10 @@
+<%@page import="com.tgy.entity.Tag"%>
 <%@page import="org.apache.tomcat.util.buf.UDecoder"%>
 <%@page import="com.tgy.service.FolderService"%>
 <%@page import="com.tgy.statistic.service.LinkService"%>
 <%@page import="com.tgy.statistic.service.TagService"%>
 <%@page import="com.tgy.service.UserService"%>
 <%@page import="com.tgy.statistic.entity.Link"%>
-<%@page import="com.tgy.statistic.entity.Tag"%>
 <%@page import="com.tgy.dao.TagDao"%>
 <%@page import="com.tgy.dao.LinkDao"%>
 <%@page import="com.tgy.entity.User"%>

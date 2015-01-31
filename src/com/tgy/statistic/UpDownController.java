@@ -3,7 +3,6 @@ package com.tgy.statistic;
 import java.io.IOException;
 
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -11,19 +10,13 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.tgy.dao.FolderDao;
 import com.tgy.dao.LinkDao;
 import com.tgy.dao.PageDao;
-import com.tgy.dao.TagDao;
-import com.tgy.entity.Folder;
 import com.tgy.entity.Page;
 import com.tgy.entity.group.InterestGroupPage;
 import com.tgy.exception.BaseException;
 import com.tgy.service.group.InterestGroupPageService;
-import com.tgy.service.group.InterestGroupService;
 import com.tgy.statistic.entity.Link;
-import com.tgy.statistic.entity.Tag;
-import com.tgy.statistic.service.LinkService;
 import com.tgy.util.C;
 import com.tgy.util.U;
 import com.tgy.validator.CommonValidator;

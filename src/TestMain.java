@@ -14,6 +14,10 @@ import org.jdom2.Attribute;
 import org.jdom2.Document;
 import org.jdom2.Element;
 
+import com.tgy.entity.Tag;
+import com.tgy.service.PageService;
+import com.tgy.statistic.service.TagService;
+import com.tgy.util.ConditionMap;
 import com.tgy.util.PageType;
 import com.tgy.util.SimpleConnecter;
 import com.tgy.util.X;
@@ -24,7 +28,27 @@ public class TestMain {
 		try {
 			System.out.println("start");
 			
-			System.out.println(Calendar.getInstance().get(Calendar.HOUR_OF_DAY));
+			System.out.println(PageType.valueOf("abcde"));
+			
+//			System.out.println("abc".contains("-"));
+//			
+//			String[] arr = " abc - abcd".split("-");
+//			System.out.println(arr[0]);
+//			System.out.println(arr[1]);
+			
+			//TagService ts = new TagService();//new ConditionMap().add("type", PageType.resource)
+			//List<Tag> tags =  ts.list(null, null, 0	, 0);
+			//System.out.println(ts.count());
+			
+//			for(Tag t : tags){
+//				System.out.println(t.name);
+//				System.out.println(t.type.value());
+//			}
+			
+//			PageService ps = new PageService();
+//			ps.list(new ConditionMap().add("type", page), orderStr, start, limit)
+			
+			//System.out.println(Calendar.getInstance().get(Calendar.HOUR_OF_DAY));
 			
 //			System.out.println(PageType.article);
 //			System.out.println(PageType.article.value());

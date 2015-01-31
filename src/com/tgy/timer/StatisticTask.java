@@ -9,9 +9,9 @@ public class StatisticTask extends java.util.TimerTask {
 
 	@Override
 	public void run() {
-		new TagService().scan();
-		new LinkService().scan();
-		new LinkInfoService().scan();
+		//new TagService().scan();
+		//new LinkService().scan();
+		//new LinkInfoService().scan();
 		//new RefreshIconPathService().scan();
 	}
 

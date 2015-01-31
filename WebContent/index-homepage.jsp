@@ -1,3 +1,6 @@
+<%@page import="com.tgy.entity.Tag"%>
+<%@page import="com.tgy.util.ConditionMap"%>
+<%@page import="com.tgy.statistic.service.TagService"%>
 <%@page import="org.apache.commons.lang3.math.NumberUtils"%>
 <%@page import="com.tgy.util.PageType"%>
 <%@page import="com.tgy.entity.group.InterestGroupPage"%>
@@ -43,30 +46,20 @@
 		  	</div>
 		  	
 		  	<div class="col-sm-12   container " style="padding: 10px;">
-					<a class="  index-tag" href="<%=request.getContextPath()%>/share/自媒体" 
-						style=" ">
-						 自媒体
-					</a>
-					<a class="  index-tag" href="<%=request.getContextPath()%>/share/百度网盘" 
-						style=" ">
-						 百度网盘
-					</a>
- 	 			  	<a class="  index-tag" href="<%=request.getContextPath()%>/share/电影" 
-						style=" ">
-						电影
-					</a>
-					<a class="  index-tag" href="<%=request.getContextPath()%>/share/美剧" 
-						style=" ">
-						 美剧
-					</a>
-					<a class="  index-tag" href="<%=request.getContextPath()%>/share/小说下载" 
-						style=" ">
-						 小说下载
-					</a> 
-					<a class="  index-tag" href="<%=request.getContextPath()%>/share/高清下载" 
-						style=" ">
-						高清下载
-					</a> 
+		  	
+		  		<%
+		  			TagService ts = new TagService();
+		  			List<Tag> tags = ts.list();
+		  			for(Tag t : tags){
+		  				%>
+		  				<a class="index-tag" href="<%=request.getContextPath()%>/share/<%=t.name %>" 
+							style=" ">
+							 <%=t.name %>
+						</a>
+		  				
+		  				<%
+		  			}
+		  		%>
 						 
 		  	</div>
 		  	

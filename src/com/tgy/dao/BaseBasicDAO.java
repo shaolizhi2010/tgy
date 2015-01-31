@@ -31,6 +31,7 @@ public class BaseBasicDAO<T,K> extends BasicDAO<T, K> {
 		//filter by conditions
 		if(conditions!=null && conditions.size()!=0){
 			for(Map.Entry<String, Object> e : conditions.entrySet()){
+				if(e.getValue()==null)continue;
 				query.filter(e.getKey(), e.getValue());
 			}
 		}
@@ -43,6 +44,7 @@ public class BaseBasicDAO<T,K> extends BasicDAO<T, K> {
 		//filter by conditions
 		if(conditions!=null && conditions.size()!=0){
 			for(Map.Entry<String, Object> e : conditions.entrySet()){
+				if(e.getValue()==null)continue;
 				query.filter(e.getKey(), e.getValue());
 			}
 		}
@@ -55,6 +57,7 @@ public class BaseBasicDAO<T,K> extends BasicDAO<T, K> {
 		//filter by conditions
 		if(conditions!=null && conditions.size()!=0){
 			for(Map.Entry<String, Object> e : conditions.entrySet()){
+				if(e.getValue()==null)continue;
 				query.filter(e.getKey(), e.getValue());
 			}
 		}
@@ -86,6 +89,7 @@ public class BaseBasicDAO<T,K> extends BasicDAO<T, K> {
 		//filter by conditions
 		if(conditions!=null && conditions.size()!=0){
 			for(Map.Entry<String, Object> e : conditions.entrySet()){
+				if(e.getValue()==null)continue;
 				query.filter(e.getKey(), e.getValue());
 			}
 		}

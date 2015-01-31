@@ -13,6 +13,16 @@ if(StringUtils.isNotBlank(request.getParameter("url"))){
 if(StringUtils.isBlank(url)){
 	url = request.getAttribute("javax.servlet.forward.request_uri").toString();	
 }
+String queryString = request.getQueryString();
+if(StringUtils.isNotBlank(queryString)){
+	if(queryString.contains("?start=")){
+		queryString = StringUtils.substringBefore(queryString, "?start=");
+	}
+	url = url+"?" + queryString;	
+}
+
+
+String contactStr = url.contains("?") ? "&":"?"; //url中已经有 '？'了，那么后续参数用&链接，否则用？
 
 int count = 0; //总共有多少条
 if(StringUtils.isNotBlank(request.getParameter("count"))){
@@ -44,7 +54,7 @@ int endPageNum = currentPageNum+3>pageCount ? pageCount: currentPageNum+3;
 	      </a>
 	    </li>
 	    <li>
-	      <a href="<%=url%>?start=<%=currentPageNum*10-20>0?currentPageNum*10-20:0%>">
+	      <a href="<%=url%><%=contactStr%>start=<%=currentPageNum*10-20>0?currentPageNum*10-20:0%>">
 	        <span >上一页</span>
 	      </a>
 	    </li>
@@ -55,17 +65,17 @@ int endPageNum = currentPageNum+3>pageCount ? pageCount: currentPageNum+3;
 	    		selectedStyle="background-color:#072;color:#fff;";
 	    	}
 	   		%>
-	   		 <li><a style="<%=selectedStyle %>" href="<%=url%>?start=<%=i*10-10%>"><%=i %></a></li>
+	   		 <li><a style="<%=selectedStyle %>" href="<%=url%><%=contactStr%>start=<%=i*10-10%>"><%=i %></a></li>
 	   		<% 	
 	    }
 	    %>
 	    <li>
-	      <a href="<%=url%>?start=<%=currentPageNum*10%>">
+	      <a href="<%=url%><%=contactStr%>start=<%=currentPageNum*10%>">
 	        <span >下一页</span>
 	      </a>
 	    </li>
 	    <li>
-	      <a href="<%=url%>?start=<%=(count/10)*10%>" 
+	      <a href="<%=url%><%=contactStr%>start=<%=(count/10)*10%>" 
 	      	title="尾页" >
 	        <span>尾页</span> 
 	      </a>

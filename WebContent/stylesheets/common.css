@@ -267,12 +267,13 @@ em{
 }
 
 /* index*/
-.index-tag  ,
+.index-tag, 
 .index-tag:link,
 .index-tag:visited,
 .index-tag:active{
-	padding: 10px; 
-	margin:5px;
+	padding: 0px 10px 0px 10px; 
+	margin:10px;
+	margin-bottom:10px;
 	text-align:center;
 	background-color: #e9f4e4;
 	line-height: 40px;
@@ -280,12 +281,17 @@ em{
 	font-size: 14px;
 	border: 1px solid #eee;
 	border-radius:5px;
+	display: block;
+	float: left;
 }
 .index-tag:hover{
 	color:#fff;
 	background-color: #65c330;
 }
-
+.index-tag-selected{
+	color:#fff;
+	background-color: #65c330;
+}
 .folder-pages{
 	padding: 5px; 
 	margin-bottom: 20px; 

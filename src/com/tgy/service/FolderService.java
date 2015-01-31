@@ -1,6 +1,7 @@
 package com.tgy.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.bson.types.ObjectId;
 import org.mongodb.morphia.Datastore;
@@ -25,6 +26,12 @@ public class FolderService {
 
 	FolderDao fDao = new FolderDao();
 	
+	
+	public List<Folder> list(  Map<String, Object> conditions,
+			String orderStr, int start, int limit) {
+		return fDao.list(Folder.class, conditions, orderStr, start, limit);
+	}
+
 	public List<Folder> list(int num){
 		return fDao.list(num);
 	}

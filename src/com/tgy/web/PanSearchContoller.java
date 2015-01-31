@@ -20,6 +20,7 @@ import com.tgy.entity.SearchHistory;
 import com.tgy.service.PanSearchCacheService;
 import com.tgy.statistic.entity.Link;
 import com.tgy.util.BaidupanSearchSevice;
+import com.tgy.util.BaseSearchService;
 import com.tgy.util.BingSearchSevice;
 import com.tgy.util.GoogleSearchSevice;
 import com.tgy.util.SougouSearchSevice;
@@ -60,9 +61,13 @@ public class PanSearchContoller extends HttpServlet {
 				//SougouSearchSevice bs = new SougouSearchSevice();
 //				YahooSearchSevice bs = new YahooSearchSevice();
 //				GoogleSearchSevice bs = new GoogleSearchSevice();
-				BaidupanSearchSevice bs = new BaidupanSearchSevice();
+				BaseSearchService bs = new GoogleSearchSevice();
 				
-				results = bs.search(keyword,start);
+				results = bs.search(keyword,start); 
+				if(CollectionUtils.isEmpty(results)){
+					bs = new BaidupanSearchSevice();
+					results = bs.search(keyword,start); 
+				}
 				
 				pcs.cacheAll(results,key);
 			}

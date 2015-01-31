@@ -12,14 +12,18 @@ import org.jdom2.Element;
 
 import com.tgy.entity.Folder;
 import com.tgy.entity.Page;
+import com.tgy.entity.PageTagMap;
+import com.tgy.entity.Tag;
 import com.tgy.entity.TiebaDigHistory;
 import com.tgy.entity.User;
 import com.tgy.exception.BaseException;
 import com.tgy.service.FolderService;
 import com.tgy.service.PageService;
+import com.tgy.service.PageTagMapService;
 import com.tgy.service.TiebaDigHistoryService;
 import com.tgy.service.UserService;
 import com.tgy.service.WebInfo;
+import com.tgy.statistic.service.TagService;
 import com.tgy.util.ConditionMap;
 import com.tgy.util.Connecter;
 import com.tgy.util.PageType;
@@ -29,9 +33,29 @@ import com.tgy.util.X;
 
 public class BaiduPanDigService {
 	
+	/**
+	 * 抓取tieba 内容
+	 * 有时候贴吧名字不适合作为tag名字，就在空格后写tagname
+	 * 那么如果参数是 "abc吧   abc" ，中间空格前边是贴吧名，后边是tag名，
+	 * @param tiebaNames
+	 */
 	public void digAndSave(String... tiebaNames){
-		for(String tiebaName : tiebaNames){
-			digAndSave(tiebaName);
+		for(String tiebaStr : tiebaNames){
+			String tiebaName = "";
+			String tagName = "";
+			if(tiebaStr.trim().contains("-")){
+				String[] arr = tiebaStr.split("-");
+				tiebaName = arr[0].trim();
+				tagName = arr[1].trim();
+				if(StringUtils.isBlank(tagName)){
+					tagName = tiebaName;
+				}
+			}
+			else{
+				tiebaName = tiebaStr;
+				tagName = tiebaStr;
+			}
+			digAndSave(tiebaName,tagName);
 			try {
 				Thread.sleep(2*60*1000);//休息n分钟
 			} catch (InterruptedException e) {
@@ -40,38 +64,49 @@ public class BaiduPanDigService {
 		}
 	}
 	
-	public void digAndSave(String tiebaName){
+	public void digAndSave(String tiebaName, String tagName){ 
 		
 		UserService us = new UserService();
 		
-		User u = us.getByName(tiebaName);
+		User u = us.getByName(tagName);
 		if(u==null||u.id==null){
 			u=new User();
-			u.name = tiebaName;
+			u.name = tagName;
 			u.password = "r";
 			u.isRobot = true;
 			u.headImgUrl = "/images/ava/ava"+ (new Random().nextInt(120)+1) +".png";
-			u.publicMessage = tiebaName;
+			u.publicMessage = tagName;
 			us.save(u);
 		}
 		
 		FolderService fs = new FolderService();
-		Folder f  = fs.ByUserIDAndName(tiebaName, u.id.toString());
+		Folder f  = fs.ByUserIDAndName(tagName, u.id.toString());
 		if(f==null||f.id==null){
 			f = new Folder();
-			f.name = tiebaName;
+			f.name = tagName;
 			f.isRobot = true;
 			f.userID = u.id.toString();
 			try {
 				fs.save(f);
 			} catch (BaseException e) {
 				// TODO Auto-generated catch block
-				System.out.println("BaiduPanDigService: 文件夹 " + tiebaName +" 无法创建");
+				System.out.println("BaiduPanDigService: 文件夹 " + tagName +" 无法创建");
 				return;
 			}
 		}
 		
-		List<Page> pages = dig(tiebaName);
+		TagService ts = new TagService();
+		Tag t = ts.getByName( tagName , PageType.resource);
+		if(t==null || t.id==null){ //create tag if not exist
+			t = new Tag();
+			t.name = tagName;
+			t.type = PageType.resource;
+			ts.save(t);
+		}
+		
+		PageTagMapService ptms = new PageTagMapService();
+		
+		List<Page> pages = dig(tiebaName,tagName);
 		PageService ps = new PageService();
 		int savedCount = 0;
 		for(Page a : pages){
@@ -84,12 +119,19 @@ public class BaiduPanDigService {
 				//不存在 防重复
 				if(ps.list(new ConditionMap().add("url", a.url).add("folderID", a.folderID), null,0, 0).size()<=0){
 					ps.save(a);
+					
+					//save page tag map
+					PageTagMap ptm = new PageTagMap();
+					ptm.pageID = a.id;
+					ptm.tagID = t.id;
+					ptms.save(ptm);
+					
 					//f.add(a);
 					//fs.save(f);
 					savedCount++;
 				}
 				else{
-					System.out.println("BaiduPanDigService : 资源以存在 " + a.url  );
+					System.out.println("BaiduPanDigService : 资源已存在 " + a.url  );
 				}
 				
 			} catch (Exception e) {
@@ -100,7 +142,7 @@ public class BaiduPanDigService {
 		System.out.println("BaiduPanDigService : " +savedCount + " saved.");
 	}
 
-	public List<Page> dig(String tiebaName){
+	public List<Page> dig(String tiebaName,String tagName){
 		
 		List<Page> returnList = new ArrayList<>();
 		
@@ -117,8 +159,12 @@ public class BaiduPanDigService {
 				
 				try {
 					WebInfo info = new WebInfoUtil().info(z.url,false);
-					if(StringUtils.isNotBlank(info.title) //
-							&& !StringUtils.contains(info.title, "请输入提取密码") 
+					if(StringUtils.isNotBlank(info.title) // 
+							&& !StringUtils.contains(info.title, "请输入提取密码")
+							&& !StringUtils.contains(info.title, "百度云升级")
+							&& !StringUtils.contains(info.title, "页面无法找到")
+							&& !StringUtils.contains(info.title, "error 404")
+							&& !StringUtils.contains(info.title, "页面不存在")
 							&& !StringUtils.contains(info.title, "链接不存在")){ //加密资源忽略
 						Page p = new Page();
 						String title = info.title;
@@ -130,7 +176,7 @@ public class BaiduPanDigService {
 						p.orignDate = U.dateTime();
 						p.url = z.url;
 						p.isShare = true;
-						p.tagName = tiebaName;
+						p.tagName = tagName;
 						
 						returnList.add(p);
 					}
@@ -225,6 +271,8 @@ public class BaiduPanDigService {
 						&& !e.getText().trim().startsWith("http://pan.baidu.com/mbox") //无标题，滤掉!
 						&& !e.getText().trim().startsWith("http://pan.baidu.com/play") //无标题，滤掉!
 						&& !e.getText().trim().startsWith("http://pan.baidu.com/inbox") //无标题，滤掉!
+						&& !e.getText().trim().startsWith("http://pan.baidu.com/disk/home#") //无意义
+						&& !e.getText().trim().equals("http://pan.baidu.com/disk/home") //无意义
 						){
 					Page p = new Page();
 					p.url = e.getText();//
@@ -247,7 +295,7 @@ public class BaiduPanDigService {
 //	}
 	
 	public static void main(String[] args) {
-		new BaiduPanDigService().digAndSave("百度网盘");
+		new BaiduPanDigService().digAndSave("资源-百度网盘",  "美剧资源站-美剧", "百度网盘");
 //		U.printList(list);
 		System.out.println("end");
 	}

@@ -39,12 +39,12 @@ public class Link extends BaseEntity  implements Serializable,Comparable  {
 	
 	public String url;
 
-	@Reference(ignoreMissing = true,lazy=true)
-	public List<Tag> tags; //收藏了这个link的所有标签
+//	@Reference(ignoreMissing = true,lazy=true)
+//	public List<Tag> tags; //收藏了这个link的所有标签
 	
 	//收藏此网站的用户
-	@Reference(ignoreMissing = true,lazy=true)
-	public List<User> users; //收藏了这个link的所有用户
+//	@Reference(ignoreMissing = true,lazy=true)
+//	public List<User> users; //收藏了这个link的所有用户
 	
 	//评论，（只保存直接评论，简介评论不保存）
 	@Reference(ignoreMissing = true,lazy=true)
@@ -61,18 +61,18 @@ public class Link extends BaseEntity  implements Serializable,Comparable  {
 	
 	public int digTimes; //抓取网页信息（title description） 次数，如超过一定次数（如3次）就不再抓取了
 
-	public void add(Tag tag) {
-		if (tags == null) {
-			tags = new ArrayList<>();
-		}
-		tags.add(tag);
-	}
-	public void add(User user) {
-		if (users == null) {
-			users = new ArrayList<>();
-		}
-		users.add(user);
-	}
+//	public void add(Tag tag) {
+//		if (tags == null) {
+//			tags = new ArrayList<>();
+//		}
+//		tags.add(tag);
+//	}
+//	public void add(User user) {
+//		if (users == null) {
+//			users = new ArrayList<>();
+//		}
+//		users.add(user);
+//	}
 	public void add(Discuss discuss) {
 		if (discusses == null) {
 			discusses = new ArrayList<>();

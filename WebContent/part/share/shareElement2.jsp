@@ -55,7 +55,7 @@ if(StringUtils.isBlank(userHeadImgUrl)){
 String url =PageUtil.urlWithHttp(a); 
 String authorUrl = PageUtil.urlWithHttp(a.authorUrl);
 //String linkshow = PageUtil.shortUrl(a, 28);
-String pageName = U.shortString(a.name,60);//PageUtil.shortName(a, 24);
+String pageName = U.shortString(a.name,40);//PageUtil.shortName(a, 24);
 String iconPath = PageUtil.iconPath(a); 
 String tagName = (String)request.getAttribute("tagName");
 %>

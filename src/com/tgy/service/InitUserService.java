@@ -1,12 +1,14 @@
 package com.tgy.service;
 
-import com.tgy.entity.Folder;
-import com.tgy.entity.Page;
-import com.tgy.exception.BaseException;
+import org.apache.commons.collections.CollectionUtils;
 
 import com.tgy.entity.Folder;
 import com.tgy.entity.Page;
 import com.tgy.exception.BaseException;
+import com.tgy.entity.Folder;
+import com.tgy.entity.Page;
+import com.tgy.exception.BaseException;
+import com.tgy.util.ConditionMap;
  
 public class InitUserService {
 	 
@@ -14,6 +16,10 @@ public class InitUserService {
 		//init folder and init pages
 		FolderService fs = new FolderService();
 		PageService ps = new PageService();
+		
+		if(!CollectionUtils.isEmpty(fs.list(new ConditionMap().add("userID", ""),null,0,0))){
+			return;
+		}
 		
 		try {
 			//常用

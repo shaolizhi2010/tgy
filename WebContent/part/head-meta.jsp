@@ -8,8 +8,16 @@
 <%@include file="bookmark-data.jsp" %>
 <%
 	String title = "网址盒子";
+	String metaWord = "";
 	if(request.getAttribute("keywordForMeta")!=null){
-		title = request.getAttribute("keywordForMeta")+" - " + title;
+		metaWord = (String)request.getAttribute("keywordForMeta");
+	}
+	metaWord = metaWord.replace("null", "");
+	
+
+	if(metaWord!=null){
+		title = metaWord+" - " + title;
+		 
 	}
 	else{
 		String userName = "";
@@ -25,16 +33,16 @@
 	}
 	
 	String desc = "网址盒子，专注于网址收藏和网址分享，存网址-找网址，到网址盒子";
-	if(request.getAttribute("keywordForMeta")!=null){
-		desc = request.getAttribute("keywordForMeta")+" - " + desc;
+	if(metaWord!=null){
+		desc = metaWord+" - " + desc;
 	}
 	else{
 		
 	}
 	
 	String keyword = "网址盒子 网址收藏   网址导航 网址分享 自定义网址导航  在线收藏夹  网络收藏夹 网站收藏 网址导航 在线保存网址 网站收集 云收藏 ";
-	if(request.getAttribute("keywordForMeta")!=null){
-		keyword = request.getAttribute("keywordForMeta")+"   " + keyword;
+	if(metaWord!=null){
+		keyword = metaWord+"   " + keyword;
 	}
 	
 %>

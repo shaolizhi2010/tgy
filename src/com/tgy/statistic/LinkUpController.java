@@ -8,15 +8,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.tgy.dao.FolderDao;
-import com.tgy.dao.LinkDao;
-import com.tgy.dao.PageDao;
-import com.tgy.dao.TagDao;
-import com.tgy.entity.Folder;
-import com.tgy.entity.Page;
 import com.tgy.exception.BaseException;
 import com.tgy.statistic.entity.Link;
-import com.tgy.statistic.entity.Tag;
 import com.tgy.statistic.service.LinkService;
 import com.tgy.util.U;
 import com.tgy.validator.CommonValidator;

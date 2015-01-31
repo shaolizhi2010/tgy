@@ -2,21 +2,18 @@ package com.tgy.util;
 
 import java.io.InputStream;
 import java.io.StringReader;
-import java.net.URL;
+import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.HttpEntity;
+import org.apache.http.HttpHost;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
-import org.apache.http.cookie.CookieSpecFactory;
-import org.apache.http.cookie.MalformedCookieException;
-import org.apache.http.impl.cookie.BrowserCompatSpec;
-import org.apache.http.params.HttpParams;
+import org.apache.http.conn.params.ConnRouteParams;
 import org.htmlcleaner.CleanerProperties;
 import org.htmlcleaner.HtmlCleaner;
 import org.htmlcleaner.SimpleXmlSerializer;
@@ -29,11 +26,10 @@ import com.tgy.App;
 import com.tgy.dao.SearchHistoryDao;
 import com.tgy.entity.Page;
 import com.tgy.entity.SearchHistory;
-import com.tgy.statistic.entity.Link;
 
-public class GoogleSearchSevice {
+public class GoogleSearchSevice extends BaseSearchService {
 
-	public List<Page> search(String keyword ) {
+	public List<Page> search(String keyword,int start ) {
 		try {
 			
 			//搜索历史 记录到后台
@@ -55,7 +51,7 @@ public class GoogleSearchSevice {
 			
 			List<Page>  results = new ArrayList<>();
 			keyword = URLEncoder.encode(keyword,"utf-8");
-			String url = "http://209.85.228.22/search?q="+keyword+"+site%3Apan.baidu.com";
+			String url = "http://www.google.com.hk/search?q="+keyword+"+site%3Apan.baidu.com"+"&start="+start;
 			
 			//String s  = SimpleConnecter.connect(url, "utf-8");
 			//String s  = IOUtils.toString(new URL(url));
@@ -68,7 +64,11 @@ public class GoogleSearchSevice {
 			httpget.setHeader("User-Agent", "Mozilla/5.0 (Windows; U; Windows NT 5.1; zh-CN; rv:1.9.1.2)"); 
 			httpget.setHeader("Accept-Language", "zh-CN");
 			httpget.setHeader("Accept-Charset", "UTF-8,GBK;q=0.7");
-			httpget.setHeader("Referer", "209.85.228.22");  
+			httpget.setHeader("Referer", "www.google.com.hk");  
+			
+			HttpHost proxy = new HttpHost("209.85.228.22",80, null);  // /
+			httpclient.getParams().setParameter(ConnRouteParams.DEFAULT_PROXY, proxy);  
+			
 			HttpResponse response = httpclient.execute(httpget);
 //
 			HttpEntity entity = response.getEntity();
@@ -78,17 +78,30 @@ public class GoogleSearchSevice {
 			TagNode node = hc.clean(entityContent);
 			
 			String pageSource = getPageSourceFromNode(node);
+			//System.out.println(pageSource);
+			
 			
 			Document doc = new org.jdom2.input.SAXBuilder().build(new StringReader(pageSource));
 			List<Element> elementList = X.getSubElementList(doc, "//a");
 			
 			for(Element e : elementList){
-				Attribute attr = e.getAttribute("href");
+//				String text = e.getText();
+				Attribute attr = e.getAttribute("href"); //data-href
 				if(attr!=null){
 					String href = attr.getValue();
+					//System.out.println(href);
+					
+					href = StringUtils.substringBetween(href, "?q=","&");
+					//System.out.println(href);
+					
+					if(href!=null)href= URLDecoder.decode(href,"utf-8");
+					//System.out.println("decoded : "+href);
+					//System.out.println("---------------");
+					
 					if(StringUtils.startsWith(href, "http://pan.baidu.com")){
+						
 						//System.out.println(e.getValue());
-					//	System.out.println(href);
+						//System.out.println(href);
 						Page p = new Page();
 						p.name = e.getValue();
 						p.url = href;
@@ -105,61 +118,7 @@ public class GoogleSearchSevice {
 
  
 	
-	public List<Page> search2(String keyword ) {
-		try {
-			
-			//搜索历史 记录到后台
-			SearchHistoryDao dao = new SearchHistoryDao();
-			
-			List<Page>  results = new ArrayList<>();
-			keyword = URLEncoder.encode(keyword+"网站");
-			
-			int index = 0;
-			while(index<=10 && results.size()<5){//没凑够5条结果，并且搜索记录少于20条，继续搜素
-				String url = "http://cn.bing.com/search?q="+keyword +"&first="+index;
-				
-				String s  = SimpleConnecter.connect(url, "utf-8");
-				
-				HtmlCleaner hc = new HtmlCleaner();
-
-				TagNode node = hc.clean(s);
-				String pageSource = getPageSourceFromNode(node);
-				
-				Document doc = new org.jdom2.input.SAXBuilder().build(new StringReader(pageSource));
-				List<Element> elementList = X.getSubElementList(doc, "//a");
-				
-				for(Element e : elementList){
-					Attribute attr = e.getAttribute("href");
-					if(attr!=null){
-						String href = attr.getValue();
-						//String hrefTemp = StringUtils.replace(href, "://", "");
-						//hrefTemp = StringUtils.replaceOnce(hrefTemp, "/", "");
-						//StringUtils.countMatches("", sub)
-						
-						//System.out.println(href +"---");
-						if( StringUtils.startsWith(href, "http")&& StringUtils.countMatches(href, "/")<=3&&StringUtils.endsWith(href, "/")&& !StringUtils.contains(href, "bing.com")){//url中不包含/， 是根域名
-							//System.out.println(e.getValue());
-							//System.out.println(href);
-							Page p = new Page();
-							p.name = e.getValue();
-							p.url = href;
-							results.add(p);
-						}
-					}
-				}
-				index+=12;
-			}
-			
-		
-			
-			
-			
-			return results;
-		} catch (Exception e) {
-			System.out.println("WebInfoUtil Exception : "+e.getMessage());
-			return new ArrayList<>();
-		}
-	}
+ 
 	
 	public  String getPageSourceFromNode(TagNode node) {
 		// long start = System.currentTimeMillis();
@@ -184,7 +143,11 @@ public class GoogleSearchSevice {
 		return pageSource;
 	}
 	public static void main(String[] args) {
-		List<Page> pages = new GoogleSearchSevice().search("abc");
+		List<Page> pages = new GoogleSearchSevice().search("权利的游戏",10);
+		for(Page p : pages){
+			System.out.println(p.name);
+			System.out.println(p.url);
+		}
 		System.out.println(pages.size());
 	}
 	

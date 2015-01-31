@@ -6,7 +6,6 @@ import org.mongodb.morphia.query.Query;
 
 import com.tgy.App;
 import com.tgy.entity.User;
-import com.tgy.statistic.entity.Tag;
 import com.tgy.util.U;
 
 public class UserDao extends BasicDAO<User, ObjectId> {

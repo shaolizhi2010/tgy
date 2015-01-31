@@ -7,16 +7,16 @@ package com.tgy.util;
  */
 public enum PageType {
 	
-	all("全部"),
+	//all("全部"),
 	common("普通"),
-	word("文字"),
+	word("热文"),
 	resource("资源"),//下载地址之类
 	link("链接"),
 	pic("图片"),
 	video("视频"),
 	website("网站"),
-	article("文章"),
-	baidupan("百度盘"),
+	//article("文章"),
+	//baidupan("百度盘"),
 	
 	;
 	

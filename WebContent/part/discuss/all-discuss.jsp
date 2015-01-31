@@ -100,7 +100,7 @@ if(request.getParameter("start")!=null){
 					<a href="<%=request.getContextPath()%>/网址盒子" target="_blank" class="  no-padding" style="float: left;font-size: 14px; padding-right: 5px;" >
 						网址盒子
 					</a>
-					对你说: 说说你想要的网址或资源？盒子帮你找
+					对你说: 回复想要的网址或资源，盒子帮你找！
 				</div>
 				<div  style=" ">
 		         		<textarea  style="border:1px solid #ccc;" id="createDiscussMessage" 

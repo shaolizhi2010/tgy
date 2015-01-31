@@ -12,10 +12,9 @@ import com.tgy.App;
 import com.tgy.entity.BasePage;
 import com.tgy.entity.Folder;
 import com.tgy.entity.Page;
-import com.tgy.statistic.entity.Tag;
 import com.tgy.util.U;
 
-public class FolderDao extends BasicDAO<Folder, ObjectId> {
+public class FolderDao extends BaseBasicDAO<Folder, ObjectId> {
 
 	public FolderDao() {
 		super(Folder.class, App.getInstance().getDatastore());
