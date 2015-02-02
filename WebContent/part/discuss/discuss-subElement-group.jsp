@@ -46,7 +46,7 @@ if(StringUtils.isNotBlank(request.getParameter("count"))){
 			%>
 			<!-- 翻页 -->
 			 <jsp:include page="subDiscussPagination.jsp">
-			 	<jsp:param name="start" value='<%=start %>'/>
+			 	<jsp:param name="start" value='0'/>
 			 </jsp:include>
 			<%
 		}

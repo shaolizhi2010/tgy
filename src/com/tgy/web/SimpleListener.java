@@ -21,10 +21,18 @@ public class SimpleListener implements ServletContextListener {
 	Timer timer1 = new Timer();
 	Timer timer2 = new Timer();
 	Timer timer3 = new Timer();
+	Timer timer4 = new Timer();
+	Timer timer5 = new Timer();
+	Timer timer6 = new Timer();
 	
 	@Override
 	public void contextDestroyed(ServletContextEvent arg0) {
 		timer1.cancel();
+		timer2.cancel();
+		timer3.cancel();
+		timer4.cancel();
+		timer5.cancel();
+		timer6.cancel();
 
 	}
 
@@ -60,9 +68,9 @@ public class SimpleListener implements ServletContextListener {
 	
 		// 抓360 首页
 		Calendar calendarArticle = Calendar.getInstance();
-		calendarArticle.set(Calendar.HOUR, 6);// 
+		calendarArticle.set(Calendar.HOUR, 30);// 
 		calendarArticle.set(Calendar.MINUTE,5);//
-		new Timer(false).schedule(new TimerTask() {
+		timer3.schedule(new TimerTask() {
 			@Override
 			public void run() {
 				int hour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY);
@@ -71,28 +79,30 @@ public class SimpleListener implements ServletContextListener {
 				}
 				new HaoSouWemediaService().digAndSave("自媒体","http://wemedia.haosou.com/"); //自动抓取文章
 			}
-		}, calendarArticle.getTime(), 5 * 60 * 1000); //10分钟一次 
+		}, calendarArticle.getTime(), 5 * 60 * 1000); // 
 	
 		// 抓360
-				Calendar calendarArticle2 = Calendar.getInstance();
-				calendarArticle2.set(Calendar.HOUR, 8);// 
-				calendarArticle2.set(Calendar.MINUTE,5);//
-				new Timer(false).schedule(new TimerTask() {
-					@Override
-					public void run() {
-						int hour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY);
-						if(1<hour && hour<5){//凌晨1-5点休息
-							return;
-						}
-						HaoSouWemediaService ms = new HaoSouWemediaService();
-						
-						ms.digAndSaveAllFiled("教育","母婴","健康","摄影","财经","科技","命理","旅游"
-								,"法律","美食","科普","幽默","游戏","文化","动漫","情感","两性","体育"
-								,"时评","娱乐");
-					}
-				}, calendarArticle2.getTime()); // 
+		Calendar calendarArticle2 = Calendar.getInstance();
+		calendarArticle2.set(Calendar.HOUR, 28);// 
+		calendarArticle2.set(Calendar.MINUTE,5);//
+		timer4.schedule(new TimerTask() {
+			@Override
+			public void run() {
+				int hour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY);
+				if(1<hour && hour<5){//凌晨1-5点休息
+					return;
+				}
+				HaoSouWemediaService ms = new HaoSouWemediaService();
+				
+				ms.digAndSaveAllFiled("教育","母婴","健康","摄影","财经","科技","命理","旅游"
+						,"法律","美食","科普","幽默","游戏","文化","动漫","情感","两性","体育"
+						,"时评","娱乐");
+			}
+		}, calendarArticle2.getTime()); // 
 		 
-		new Timer(false).schedule(new TimerTask() {
+		
+		//抓虎嗅
+		timer5.schedule(new TimerTask() {
 			@Override
 			public void run() {
 				int hour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY);
@@ -104,14 +114,15 @@ public class SimpleListener implements ServletContextListener {
 		}, 5*60, 8*60 * 60 * 1000); // 
 		
 		// n小时左右执行一次
-		new Timer(false).schedule(new TimerTask() {
+		timer6.schedule(new TimerTask() {
 			@Override
 			public void run() {
 				int hour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY);
 				if(1<hour && hour<8){//凌晨1-8点休息
 					return;
 				}
-				new BaiduPanDigService().digAndSave("小说下载-小说","百度网盘", "云盘资源共享-百度网盘", "资源-百度网盘","高清下载", "动漫", "英剧", "美剧资源站-美剧",   "美剧-美剧",   "电影-电影");//自动抓取百度云资源
+				//"小说下载-小说", "动漫","云盘资源共享-百度网盘","高清下载", 
+				new BaiduPanDigService().digAndSave("百度网盘", "资源-百度网盘","英剧", "美剧资源站-美剧", "美剧-美剧", "电影-电影");//自动抓取百度云资源
 			}
 		}, 11*60, 2*60 * 60 * 1000); 
 		

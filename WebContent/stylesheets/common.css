@@ -92,6 +92,11 @@ em{
 .selected{
 	background-color: #eee;
 }
+.pagination-btn{
+	display:block;
+	padding: 5px;
+	min-width: 20px;
+}
 #head-menu{
 	padding-top: 10px;
 	padding-bottom: 10px;
@@ -373,17 +378,19 @@ em{
 	font-size: 14px;color: #666;font-weight:bold;
 }
 .pages-part-page{
-	 
+	 min-height: 30px;
+	 padding: 5px;
 }
 .pages-part-page a{
-	 padding-top: 6px;padding-bottom: 6px;
+	 padding-top: 6px;
+	 padding-bottom: 6px;
 }
 .pages-part-page a:hover{
 	
 }
 .pages-part-page-name{
 	color: #333; 
-	font-size: 13px;
+	font-size: 15px;
 }
  
 .pages-part-page-link{
@@ -717,7 +724,11 @@ background-color:#fcfcfc;
 .article-source-url{
 	float: right;
 }
+.article-title{
+	display: block;
+}
 .article-title-a{
+	
 	font-size: 20px;
 	font-family: 微软雅黑, 黑体;
 	 

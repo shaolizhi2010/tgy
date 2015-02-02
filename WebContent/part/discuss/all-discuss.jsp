@@ -40,8 +40,8 @@ if(StringUtils.isBlank(sourceBoardName)){
 long discussCount = ds.count();
 
 int start =0;
-if(request.getParameter("start")!=null){
-	start = Integer.parseInt(request.getParameter("start"));
+if(request.getParameter("discussStart")!=null){
+	start = Integer.parseInt(request.getParameter("discussStart"));
 }
 
 %>

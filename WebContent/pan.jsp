@@ -172,9 +172,10 @@ int curPageNum = start/10+1;
  		
  		 <!-- 群组推荐 -->
 		 <div id="searchHistroy" class="col-sm-10 col-sm-offset-1 no-padding" >
-		 	<span style="font-size: 13px;font-weight: bold;">资源群组 : </span>
-		 	<a  href="<%=request.getContextPath()%>/g/美剧" target="_blank" style=" "> <span class="hoverAble-red" style="padding:5px;color: red;font-weight: bold;">美剧</span></a>
-		 	<a  href="<%=request.getContextPath()%>/g/电影" target="_blank" style=" "> <span class="hoverAble-red" style="padding:5px;">电影</span></a>
+		 	<span style="font-size: 13px;font-weight: bold;">热点标签 : </span>
+		 	<a  href="<%=request.getContextPath()%>/share/resource?tagName=美剧" target="_blank" style=" "> <span class="hoverAble-red" style="padding:5px;color: red;font-weight: bold;">美剧</span></a>
+		 	<a  href="<%=request.getContextPath()%>/share/resource?tagName=电影" target="_blank" style=" "> <span class="hoverAble-red" style="padding:5px;">电影</span></a>
+		 	<a  href="<%=request.getContextPath()%>/share/resource?tagName=百度网盘" target="_blank" style=" "> <span class="hoverAble-red" style="padding:5px;">百度 网盘</span></a>
 		 </div> 
  		<!-- 群组推荐 end-->
  		

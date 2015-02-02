@@ -49,6 +49,8 @@
 <jsp:include page="part/importAtHead.jsp" />
 </head>
 <body>
+
+	
 	<jsp:include page="part/head.jsp" />
 	<jsp:include page="part/public-tabs.jsp" />
  	
@@ -57,7 +59,7 @@
 		<!-------- 书签主页面 --------->
 		<div id="pageMain" class="col-sm-8 no-padding" style=" padding-right: 30px; ">
 		
-		<div class="col-sm-12" style="margin-top: 10px;"></div>
+		<div class="col-sm-12 hidden-xs" style="margin-top: 10px; ">
 			  	<div class="col-sm-12 no-padding" style="margin-top: 10px;">
 			  		<span style=" color:#747F8C;font-size: 20px;">热点分类</span>
 			  	</div>
@@ -80,6 +82,7 @@
 						 
 		  	</div>
 		  	
+		  </div>
 		  	<div class="col-sm-12" style="border: 1px solid #eee;"></div>
 		
 		  	<div class="col-sm-12" style="margin-top: 10px;"></div>

@@ -448,6 +448,9 @@ public class U {
 				// not date, do nothing
 			}
 		}
+		if(StringUtils.isBlank(datetime)){
+			return "";
+		}
 		return datetime;
 	}
 

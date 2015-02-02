@@ -32,7 +32,7 @@ if(StringUtils.isBlank(primaryDiscussID)){
 	<!-- 每一条主贴 end -->
 	
 	<!-- 子评论列表开始 -->
-	<div class="col-sm-11 col-sm-offset-1 no-padding" style="" >
+	<div class="col-sm-11 col-sm-offset-1 no-padding discuss-subElement-group" style="" >
 		<jsp:include page="discuss-subElement-group.jsp">
 		 	<jsp:param name="primaryDiscussID" value='<%=primaryDiscussID %>'/>
 		 </jsp:include>

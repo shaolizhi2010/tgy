@@ -18,8 +18,8 @@ if(StringUtils.isNotBlank(request.getParameter("primaryDiscussID"))){
 int count = (int)ds.count(new ConditionMap().add("isPrimary", false).add("primaryDiscussID", primaryDiscussID)); //总共有多少条
 
 int start=0;//当前显示的记录是从第多少条开始的
-if(StringUtils.isNotBlank(request.getParameter("start"))){
-	start = NumberUtils.toInt( request.getParameter("start") );
+if(StringUtils.isNotBlank(request.getParameter("subDiscussStart"))){
+	start = NumberUtils.toInt( request.getParameter("subDiscussStart") );
 }
 
 

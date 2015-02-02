@@ -31,28 +31,30 @@ public class PageTypeContoller extends HttpServlet {
 	@RequestMapping(value = {"/",""} )
 	public void type(HttpServletRequest req, HttpServletResponse res) {
 		
-		int start = NumberUtils.toInt(req.getParameter("start"));
-		String tagName = req.getParameter("tagName");
-		if(StringUtils.isBlank(tagName)){
-			tagName = null;
-		}
+		U.forward(req, res, "/share/"+PageType.resource);
 		
-		TagService ts = new TagService();
-		List<Tag> tags = ts.list(null, "-favScore", 0, 20);
-		
-		
-		PageService ps = new PageService();
-		List<Page> pages = ps.list(new ConditionMap().add("tagName", tagName). add("isShare", true) , "-createDate", start,10);
-		long count = ps.count(ps.createQuery(new ConditionMap().add("tagName", tagName). add("isShare", true), "-createDate", 0,0));
-		req.setAttribute("pages", pages);
-		req.setAttribute("tags", tags);
-		req.setAttribute("tagName", tagName);
-		//req.setAttribute("type", null);
-		req.setAttribute("start", start);
-		req.setAttribute("count", count);
-		req.setAttribute("keywordForMeta",tagName+ "网址分享");
+//		int start = NumberUtils.toInt(req.getParameter("start"));
+//		String tagName = req.getParameter("tagName");
+//		if(StringUtils.isBlank(tagName)){
+//			tagName = null;
+//		}
+//		
+//		TagService ts = new TagService();
+//		List<Tag> tags = ts.list(null, "-favScore", 0, 10);
+//		
+//		
+//		PageService ps = new PageService();
+//		List<Page> pages = ps.list(new ConditionMap().add("tagName", tagName). add("isShare", true).add("tagName", PageType.resource) , "-createDate", start,10);
+//		long count = ps.count(ps.createQuery(new ConditionMap().add("tagName", tagName). add("isShare", true).add("tagName", PageType.resource), "-createDate", 0,0));
+//		req.setAttribute("pages", pages);
+//		req.setAttribute("tags", tags);
+//		req.setAttribute("tagName", tagName);
+//		//req.setAttribute("type", null);
+//		req.setAttribute("start", start);
+//		req.setAttribute("count", count);
+//		req.setAttribute("keywordForMeta",tagName+ "网址分享");
 	 
-		U.forward(req, res, "/index-all.jsp");
+	//	U.forward(req, res, "/index-all.jsp");
 	}
 	
 	
@@ -60,7 +62,7 @@ public class PageTypeContoller extends HttpServlet {
 	public void tag(HttpServletRequest req, HttpServletResponse res,
 			@PathVariable("type") String type) {
 		
-		int start = NumberUtils.toInt(req.getParameter("start"));
+		int pageStart = NumberUtils.toInt(req.getParameter("pageStart"));
 		if(StringUtils.isBlank(type) || !EnumUtils.isValidEnum(PageType.class, type)){
 			type = null;
 		}
@@ -70,16 +72,16 @@ public class PageTypeContoller extends HttpServlet {
 			tagName = null;
 		}
 		TagService ts = new TagService();
-		List<Tag> tags = ts.list(new ConditionMap().add("type", type), "-favScore", 0, 20);
+		List<Tag> tags = ts.list(new ConditionMap().add("type", type), "-favScore", 0, 10);
 		
 		PageService ps = new PageService();
-		List<Page> pages = ps.list(new ConditionMap().add("type", type).add("tagName", tagName).add("isShare", true), "-createDate", start,10);
+		List<Page> pages = ps.list(new ConditionMap().add("type", type).add("tagName", tagName).add("isShare", true), "-createDate", pageStart,10);
 		long count = ps.count(ps.createQuery(new ConditionMap().add("type", type).add("tagName", tagName).add("isShare", true), "-createDate", 0,0));
 		req.setAttribute("pages", pages);
 		req.setAttribute("tags", tags);
 		req.setAttribute("tagName", tagName);
 		req.setAttribute("type", type);
-		req.setAttribute("start", start);
+		req.setAttribute("pageStart", pageStart);
 		req.setAttribute("count", count);
 		req.setAttribute("keywordForMeta",(tagName!=null?tagName:"") + PageType.valueOf(type).value() +"网址分享");
 	 

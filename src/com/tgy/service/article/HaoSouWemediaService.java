@@ -26,7 +26,7 @@ import com.tgy.util.PageType;
 
 public class HaoSouWemediaService { 
 	
-	public int MaxDigCount = 10;
+	public int MaxDigCount = 5;
 	
 	public void digAndSaveAllFiled(String... fileds){
 		
@@ -41,13 +41,12 @@ public class HaoSouWemediaService {
 				} catch (Exception e) {
 					continue;
 				}
-				
-				if(savedCount>10){
+					
+				//每个栏目每天最多几篇文章
 					if(savedCount>MaxDigCount){
 						System.out.println("HaoSouWemediaService : filed = " +filed + " savedCount="+savedCount+" . 采够"+MaxDigCount+"条，退出");
 						return;
 					}
-				}
 				
 				
 //				List<Page> pages=  dig(filed,m.get("media_url"));

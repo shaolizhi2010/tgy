@@ -55,7 +55,7 @@ if(d.fromUser!= null && d.fromUser.id!=null){
 <div class="col-sm-12 container hoverAble-discuss2 discuss-element" style="padding: 5px;"
 	id="<%=d.id.toString()%>">
 	<!-- 评论头像  -->
-	<a href="<%=fromUserUrl%>" target="_blank" class="col-sm-1 col-xs-3 no-padding" style=" " >
+	<a href="<%=fromUserUrl%>" target="_blank" class="col-sm-1 hidden-xs no-padding " style=" " >
 		<jsp:include page="discuss-user-head-img.jsp">
 	    	<jsp:param name="radNum" value="<%=IpUtils.lastPartIp(d.fromIP)/2+1  %>"/>
 	    	<jsp:param name="headUrl" value='<%=d.fromUser!=null?d.fromUser.headImgUrl:"" %>'/>

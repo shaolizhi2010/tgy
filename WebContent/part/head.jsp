@@ -26,7 +26,7 @@ if (showUserNameShort != null && showUserNameShort.length() > 8) {
 	<div id="logo" class="col-sm-2 no-padding">
 		<a href="/" title="网址收藏 网站分享"><span>网址盒子</span> </a>
 	</div> 
-	<div id="god-div" class="col-sm-3 col-xs-0 no-padding"> 
+	<div id="god-div" class="col-sm-3 col-xs-0 no-padding hidden-xs "> 
 		<input id="god-input" class="form-control hover-focus" style="height: 40px;border-radius:10px;"   placeholder="搜 资源、网址、网站名称" />
 		<div id= "god-content-div" 
 			class="col-sm-12"  
@@ -34,7 +34,7 @@ if (showUserNameShort != null && showUserNameShort.length() > 8) {
 		</div> 
 		<a id="god_link" href="#" target="_blank" style="display: none;"></a>
 	</div>
-	<div id="head-sub-menu" class="col-sm-3 container no-padding"> 
+	<div id="head-sub-menu" class="col-sm-3 container no-padding hidden-xs"> 
 		 <a id="head-sub-menu-personal"  class="col-sm-5 col-sm-offset-1  no-padding  " href="<%=request.getContextPath()%>/me"  ><span style="color: #387bb6;">网址收藏</span></a>
 		 <a id="head-sub-menu-public" class="col-sm-6    no-padding  " href="<%=request.getContextPath()%>/share"><span style="color: #e85205;" >网址分享</span></a>
 		 <!--  
@@ -43,7 +43,7 @@ if (showUserNameShort != null && showUserNameShort.length() > 8) {
 	</div>
  
 	<% if (loginFlag) { %>
-		<div id= "user-operation-div" class="col-sm-2 col-sm-offset-2 no-padding">
+		<div id= "user-operation-div" class="col-sm-2 col-sm-offset-2 hidden-xs no-padding">
 	   		<a id= "user-operation-btn" class="col-sm-12  hoverAble2" href="<%=request.getContextPath() %>/u/<%=loginUserID %>" 
 				title="<%=loginUserName%>">
 				<%
@@ -70,7 +70,7 @@ if (showUserNameShort != null && showUserNameShort.length() > 8) {
 	<%
 		} else {
 	%>
-	<div class="col-sm-3 col-sm-offset-1" style="font-size: 12px; color: #555;">
+	<div class="col-sm-3 col-sm-offset-1 hidden-xs" style="font-size: 12px; color: #555;">
 		
 		<a style="float:right;display: block;margin-left: 5px; " title="使用QQ登录" href="https://graph.qq.com/oauth2.0/authorize?response_type=code&client_id=101171952&redirect_uri=http://www.webhezi.com/qqcallback.jsp&state=test">
 			<img alt="使用QQ帐号登录" style="height: 35px;;width: 35px;" src="<%=request.getContextPath() %>/images/qq-login.jpg">

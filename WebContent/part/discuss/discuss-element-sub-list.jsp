@@ -16,8 +16,8 @@ if(StringUtils.isNotBlank(request.getParameter("primaryDiscussID"))){
 }
 
 int start =0;
-if(request.getParameter("start")!=null){
-	start = Integer.parseInt(request.getParameter("start"));
+if(request.getParameter("subDiscussStart")!=null){
+	start = Integer.parseInt(request.getParameter("subDiscussStart"));
 }
 
 int showCount = 3;//显示多少条

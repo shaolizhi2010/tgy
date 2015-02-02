@@ -60,11 +60,11 @@ String iconPath = PageUtil.iconPath(a);
 String tagName = (String)request.getAttribute("tagName");
 %>
 
-<div class="col-sm-12 article-container no-padding ">
+<div class="col-sm-12 container article-container no-padding ">
 	<%
 	if(StringUtils.isBlank(tagName) || tagName.equals("all")){
 		%>
-		<div class="col-sm-6 col-sm-offset-2 no-padding article-type">
+		<div class="col-sm-6 col-sm-offset-2   no-padding article-type  ">
 			<a   href='<%=request.getContextPath()+"/share/"+a.tagName%>' class="article-tag ">分类：<%=a.tagName  %></a>
 		</div>
 		<%
@@ -72,7 +72,8 @@ String tagName = (String)request.getAttribute("tagName");
 	%>
 
 	<div class="col-sm-12 no-padding">
-		<div class="col-sm-2 no-padding">
+		<div class="col-sm-2 col-xs-0  no-padding">
+		<!-- 
 			<div class="col-sm-12 no-padding  " style="  align: center;" >
 				<a class="  " href="<%=userUrl %>" style="  text-align: center;display: block;" target="_blank">
 					<img  style="" class="  headImg-50" data-original="<%=userHeadImgUrl%>" alt='<%=userName+"的网址分享"%>' />
@@ -86,13 +87,13 @@ String tagName = (String)request.getAttribute("tagName");
 						<span class="article-authorName-span"><%=userName %></span> 
 				</a>
 			</div>
-			
+			 -->
 		</div>
-		<div class="col-sm-10 no-padding">
+		<div class="col-sm-10 col-xs-12 no-padding">
 
 			<a class="col-sm-12 article-title no-padding" href="<%=url%>" target="_blank" >
 				<span class="article-title-a"> <%=pageName%> </span>
-				<a></a>
+			 
 			</a>
 			<div class="col-sm-12 article-summry-container no-padding" >
 					<%=U.shortString(a.summry, 200) %>
@@ -113,7 +114,7 @@ String tagName = (String)request.getAttribute("tagName");
 			<div class="col-sm-12" style="height: 20px;" ></div>
 			<div class="col-sm-12 container no-padding">
 				<div class="col-sm-6 col-xs-12 article-time no-padding" >
-					<span class="article-time-span"><%=U.dateTimeShort(a.orignDate)  %></span> 
+					<span class="article-time-span"><%=!StringUtils.equals( U.dateTimeShort(a.orignDate), "null") ?U.dateTimeShort(a.orignDate):"" %></span> 
 				</div>
 				<div class="col-sm-6 col-xs-12 no-padding article-author pull-right ">
 					<!-- 

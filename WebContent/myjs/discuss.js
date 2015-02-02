@@ -35,7 +35,7 @@ var createDiscussForAllFunction = function() {
 $(document).on('click','.discuss-pg-num',function(){
 	var start = $(this).attr('data-pageNum');
 	 
-	$("#discuss-container").load($('#contextPath').val() + "/part/discuss/all-discuss.jsp?start="+start,function(){ //discuss-element
+	$("#discuss-container").load($('#contextPath').val() + "/part/discuss/all-discuss.jsp?discussStart="+start,function(){ //discuss-element
 		
 //		$.getScript($('#contextPath').val()+'/myjs/discuss.js',function(){
 //		});
@@ -52,8 +52,8 @@ $(document).on('click','.subDiscussPagination-num',function(){
 	var discussElementGroupContainer = $(this).closest(".discuss-element-group");
 	var primaryDiscussID = discussElementGroupContainer.attr('data-discussID');
 	
-	discussElementGroupContainer.find(".discuss-element-sub-list").eq(0).load(
-		$('#contextPath').val() +"/part/discuss/discuss-element-sub-list.jsp?primaryDiscussID="+primaryDiscussID+"&count="+10+"&start="+start,
+	discussElementGroupContainer.find(".discuss-subElement-group").eq(0).load(
+		$('#contextPath').val() +"/part/discuss/discuss-subElement-group.jsp?primaryDiscussID="+primaryDiscussID+"&count="+10+"&subDiscussStart="+start,
 		function(){
 			discussElementGroupContainer.find('img').lazyload();
 			//discussElementGroupContainer.find(".discuss-showAll-container").eq(0).hide();

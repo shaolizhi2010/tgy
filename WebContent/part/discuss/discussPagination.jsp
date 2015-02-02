@@ -24,8 +24,8 @@ if(StringUtils.isNotBlank(primaryDiscussID)){//get sub message
 int count = (int)ds.count(new ConditionMap().add("isPrimary", isPrimary).add("primaryDiscussID", primaryDiscussID)); //总共有多少条
 
 int start=0;//当前显示的记录是从第多少条开始的
-if(StringUtils.isNotBlank(request.getParameter("start"))){
-	start = NumberUtils.toInt( request.getParameter("start") );
+if(StringUtils.isNotBlank(request.getParameter("discussStart"))){
+	start = NumberUtils.toInt( request.getParameter("discussStart") );
 }
 
 int currentPageNum = start/10+1;

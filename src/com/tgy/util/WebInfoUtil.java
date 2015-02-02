@@ -96,9 +96,9 @@ public class WebInfoUtil {
 			}
 			
 
-			System.out.println( "WebInfoUtil 总共时间 "+(
-			 System.currentTimeMillis()-starttime));
-			System.out.println("info.iconPath "+ info.iconPath);
+			//System.out.println( "WebInfoUtil 总共时间 "+(
+			// System.currentTimeMillis()-starttime));
+			//System.out.println("info.iconPath "+ info.iconPath);
 			return info;
 		} catch (Exception e) {
 			System.out.println("WebInfoUtil Exception : "+e.getMessage());

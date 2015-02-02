@@ -324,8 +324,9 @@ function godPrompt(event){
 								  $("#god-content-div").append('<div id="god_element_'+i+'" data-index="'+i+'" class="col-sm-12 god-element" style="padding: 5px; padding-left:10px; padding-top: 10px;  border-bottom: 1px solid #eee;" dataurl="'+dataJson[i].url+'"><span style="color: #2e8cd8;  font-weight: bold;;font-size: 14px;"> '+dataJson[i].name+'</span> - <span style="color:green;font-size: 11px;"> '+dataJson[i].urlShow+'</span></div>');
 							  }
 							  //i++;
+							  $("#god-content-div").append('<div id="god_element_'+i +'" data-index="'+i+'" class="col-sm-12 god-element" style="padding: 5px; padding-left:10px; padding-top: 10px;  border-bottom: 1px solid #eee;" dataurl="www.webhezi.com/pan/'+ $('#god-input').val()  +'"> <span style="color:#ce310d;  font-weight: bold;;font-size: 14px;">百度网盘搜索  </span><span style="color: #2e8cd8;  font-weight: bold;;font-size: 14px;">'+$('#god-input').val() +'</span> </div>');
+							  i++;
 							  $("#god-content-div").append('<div id="god_element_'+i +'" data-index="'+i+'" class="col-sm-12 god-element" style="padding: 5px; padding-left:10px; padding-top: 10px;  border-bottom: 1px solid #eee;" dataurl="www.baidu.com/s?wd='+ $('#god-input').val()  +'"><span style="color: #2e8cd8;  font-weight: bold;;font-size: 14px;"> 百度搜索 '+$('#god-input').val() +'</span> </div>');
-							 
 							  var RegUrl = new RegExp(); 
 							  RegUrl.compile("^.+[.].+$");
 							  
@@ -340,7 +341,7 @@ function godPrompt(event){
 								  $("#god-content-div").append('<div id="god_element_'+i +'" data-index="'+i+'" class="col-sm-12 god-element" style="padding: 5px; padding-left:10px; padding-top: 10px;  border-bottom: 1px solid #eee;" dataurl="www.bing.com/search?q='+ $('#god-input').val()  +'"><span style="color: #2e8cd8;  font-weight: bold;;font-size: 14px;"> 必应搜索 '+$('#god-input').val() +'</span> </div>');
 
 								  i++;
-								  $("#god-content-div").append('<div id="god_element_'+i +'" data-index="'+i+'" class="col-sm-12 god-element" style="padding: 5px; padding-left:10px; padding-top: 10px;  border-bottom: 1px solid #eee;" dataurl="www.google.com.hk/search?q='+ $('#god-input').val()  +'"><span style="color: #2e8cd8;  font-weight: bold;;font-size: 14px;"> Google搜索 '+$('#god-input').val() +'</span> </div>');
+								  $("#god-content-div").append('<div id="god_element_'+i +'" data-index="'+i+'" class="col-sm-12 god-element" style="padding: 5px; padding-left:10px; padding-top: 10px;  border-bottom: 1px solid #eee;" dataurl="www.gusouk.com/search?q='+ $('#god-input').val()  +'"><span style="color: #2e8cd8;  font-weight: bold;;font-size: 14px;"> Google免翻墙搜 '+$('#god-input').val() +'</span> </div>');
 				
 							  }
 							  if(dataJson.length<=0){ 

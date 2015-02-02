@@ -131,7 +131,7 @@ public class BaiduPanDigService {
 					savedCount++;
 				}
 				else{
-					System.out.println("BaiduPanDigService : 资源已存在 " + a.url  );
+					//System.out.println("BaiduPanDigService : 资源已存在 " + a.url  );
 				}
 				
 			} catch (Exception e) {
@@ -155,7 +155,7 @@ public class BaiduPanDigService {
 
 			List<Page> ziyuanList = s.getZiyuanLinks(tieziId);
 			for(Page z : ziyuanList){
-				System.out.println(z.url);
+				//System.out.println(z.url);
 				
 				try {
 					WebInfo info = new WebInfoUtil().info(z.url,false);
@@ -180,7 +180,7 @@ public class BaiduPanDigService {
 						
 						returnList.add(p);
 					}
-					System.out.println(info.title);
+					//System.out.println(info.title);
 					digCount++;
 				} catch (Exception e) {
 					System.out.println("dig "+z.url + " error : "+e.getMessage());
