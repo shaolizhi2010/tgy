@@ -7,7 +7,7 @@
 
 <%@include file="group-data.jsp" %>
 <%
-	String title = "网址盒子";
+	String title = "网盘盒子";
 	String userName = "";
 	if(loginUserName!=null){
 		userName = loginUserName;

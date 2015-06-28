@@ -41,6 +41,8 @@ public class User extends BaseEntity implements Serializable{
 	public String openID; //如果用qq登录，会有这个id
 	public String headImgUrl; //如如果qq登录，用户头像
 	
+	public long fulidou;//多少福利豆 福利豆是站内货币使用。
+	
 	@Override
 	public boolean equals(Object obj) {//只根据id判断
 		if(obj instanceof User){

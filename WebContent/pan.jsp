@@ -1,3 +1,9 @@
+<%@page import="com.tgy.service.cache.AppCache"%>
+<%@page import="java.net.URLEncoder"%>
+<%@page import="java.net.URLDecoder"%>
+<%@page import="com.tgy.service.SearchHistoryService"%>
+<%@page import="com.tgy.util.ConditionMap"%>
+<%@page import="com.tgy.entity.SearchHistory"%>
 <%@page import="org.apache.commons.lang3.math.NumberUtils"%>
 <%@page import="com.tgy.App"%>
 <%@page import="com.tgy.statistic.entity.Link"%>
@@ -30,7 +36,7 @@ int curPageNum = start/10+1;
 <html>
 <head lang="en">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<title>百度网盘搜索-百度网盘下载-网址盒子</title>
+<title>百度网盘搜索-百度网盘下载-网盘盒子</title>
 <meta name='description' content='百度网盘搜索-百度网盘-百度网盘资源-百度网盘电影-百度网盘下载-百度网盘在线-百度网盘电视剧-百度网盘美剧'/>
 <meta name='keywords' content='百度网盘搜索 百度网盘 百度网盘资源 百度网盘电影 百度网盘下载 百度网盘在线 百度网盘电视剧  百度网盘美剧'/>
 <meta http-equiv="Content-Language" content="zh-CN" />
@@ -49,11 +55,11 @@ int curPageNum = start/10+1;
 		<div class="  col-sm-11 col-sm-offset-1 no-padding " style="margin-top: 10px;"><span style="font-size:22px;">百度网盘搜索</span><span style="font-size:11px;" >   (找资源、找电影、找剧集、找资料...)</span></div>
 		<div id="pan-search-input" class="col-sm-11 col-sm-offset-1 ">
 			<div  class="col-sm-9   no-padding" >
-				<input id="pan_search_value" class=" form-control hover-focus enterInput"   data-func-name="panSearch"
+				<input id="pan_search_value2" class=" form-control hover-focus enterInput"   data-func-name="panSearch2"
 					value="<%=keyword %>" style="height: 40px;border-radius:3px;" placeholder="百度网盘搜索" />
 			</div>
 			<div class="col-sm-3">
-				<input class="btn btn-primary col-sm-12" style="height: 40px;border-radius:3px;" onclick="panSearch()" 
+				<input class="btn btn-primary col-sm-12" style="height: 40px;border-radius:3px;" onclick="panSearch2()" 
 					 type="button" value="搜索资源">
 			</div>
 		</div>
@@ -61,10 +67,23 @@ int curPageNum = start/10+1;
 		<div id="pan-search-results" class="col-sm-11 col-sm-offset-1 no-padding">
 		
 			<%
-			if(results==null||results.size()==0){
-				%>
+			if(StringUtils.isBlank(keyword)){
+			%>
 				<span style="font-size: 9px;padding-left: 10px;">请输入要找的资源</span>
-				<%
+			<%
+			}
+			if(StringUtils.isNotBlank(keyword) && (results==null||results.size()==0) ){
+			%>
+			<!-- 
+			http://209.85.228.19/custom
+			https://sg.search.yahoo.com/search?p=大西洋帝国&vs=pan.baidu.com
+			 -->
+			<iframe  src="http://cn.bing.com/search?q=site%3apan.baidu.com+<%=URLEncoder.encode(keyword, "UTF-8") %>"  
+				frameborder="0" scrolling="auto" width="100%" height="100%" 
+				style=""
+				onload="document.all['myframe'].style.width=myframe.document.body.scrollWidth" >
+			</iframe>
+			<%
 			}
 			for (Page pageObj : results) {
  
@@ -93,8 +112,8 @@ int curPageNum = start/10+1;
 						pageName =linkshow;
 					}
 					//name
-					if (pageName != null && pageName.length() > 30) {
-						pageName = pageName.substring(0, 30) + "...";
+					if (pageName != null && pageName.length() > 80) {
+						pageName = pageName.substring(0, 80) + "...";
 					}
 		%>
 	
@@ -165,17 +184,34 @@ int curPageNum = start/10+1;
 		<!-- 翻页end -->
 		 
 		 <!-- 搜索历史 -->
+		 <!--
 		 <div id="searchHistroy" class="col-sm-10 col-sm-offset-1 no-padding" >
 		 	<span style="font-size: 13px;font-weight: bold;">热门搜索 : </span>
 		 </div>
+		 -->
  		<!-- 搜索历史  end-->
  		
  		 <!-- 群组推荐 -->
 		 <div id="searchHistroy" class="col-sm-10 col-sm-offset-1 no-padding" >
-		 	<span style="font-size: 13px;font-weight: bold;">热点标签 : </span>
-		 	<a  href="<%=request.getContextPath()%>/share/resource?tagName=美剧" target="_blank" style=" "> <span class="hoverAble-red" style="padding:5px;color: red;font-weight: bold;">美剧</span></a>
-		 	<a  href="<%=request.getContextPath()%>/share/resource?tagName=电影" target="_blank" style=" "> <span class="hoverAble-red" style="padding:5px;">电影</span></a>
-		 	<a  href="<%=request.getContextPath()%>/share/resource?tagName=百度网盘" target="_blank" style=" "> <span class="hoverAble-red" style="padding:5px;">百度 网盘</span></a>
+		 	<span style="font-size: 13px;font-weight: bold;">最新搜索 : </span>
+		 	<a  href="<%=request.getContextPath()%>/share/resource?tagName=动漫" target="_blank" style=" "> <span class="hoverAble-red" style="padding:6px;">动漫</span></a>
+		 	<a  href="<%=request.getContextPath()%>/share/resource?tagName=美剧" target="_blank" style=" "> <span class="hoverAble-red" style="padding:6px;">美剧</span></a>
+		 	<a  href="<%=request.getContextPath()%>/share/resource?tagName=电影" target="_blank" style=" "> <span class="hoverAble-red" style="padding:6px;">电影</span></a>
+		 	<a  href="<%=request.getContextPath()%>/share/resource?tagName=百度网盘" target="_blank" style=" "> <span class="hoverAble-red" style="padding:6px;">百度 网盘</span></a>
+		 	<%
+		 	List<String> histories = AppCache.newKeywords();
+		 	for(String hk : histories){
+		 		hk = URLDecoder.decode(hk);
+ 
+		 		if(U.isNotMessCode(hk) && hk.length()<20 ){
+		 			
+		 		%>
+		 		 <a  href="<%=request.getContextPath()%>/pan/<%=hk %>" target="_blank" style=" "> <span class="hoverAble-red" style="padding:6px;"><%=hk %></span></a>
+		 		<%
+		 		}
+		 	}
+		 	%>
+		 	<a  href="<%=request.getContextPath()%>/search/history/baiduWangpan" target="_blank" style=" "> <span class="hoverAble-red" style="padding:6px;color: red;font-weight: bold;">全部百度盘搜索</span></a>
 		 </div> 
  		<!-- 群组推荐 end-->
  		
@@ -185,6 +221,20 @@ int curPageNum = start/10+1;
 	
 	 	<!-- 菜单 -->
  	<div class=" col-sm-4 no-padding" style="border-left:1px solid #eee;padding-left: 10px; padding-top: 20px;">
+		
+		<%
+			if(AppCache.top200Keywords().contains(keyword)){
+				%>
+				<jsp:include page="topic/topic-slide.jsp">
+		    		<jsp:param name="tagName" value= "<%=keyword%>" />
+		   		 </jsp:include>
+				<%
+			}
+		%>
+		
+		
+		<jsp:include page="part/page-slide-hotKeywords.jsp"/>
+		
 		<div id="discuss-container" class=" col-sm-10  no-padding" >
 			<jsp:include page="part/discuss/all-discuss.jsp">
 		    	<jsp:param name="sourceBoardName" value="百度网盘搜索"/>
@@ -197,6 +247,7 @@ int curPageNum = start/10+1;
 	<jsp:include page="part/importAtFoot.jsp" />
 	<script src="<%=request.getContextPath()%>/myjs/common.js"  ></script>
 	<script src="<%=request.getContextPath()%>/myjs/pan.js" defer="defer"></script>
+	<script src="<%=request.getContextPath()%>/myjs/topic.js" defer="defer"></script>
 </body>
 
 </html>

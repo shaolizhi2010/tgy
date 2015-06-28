@@ -1,6 +1,5 @@
 <%@page import="com.tgy.service.UserService"%>
 <%@page import="com.tgy.service.UserService"%>
-<%@page import="com.tgy.statistic.entity.Tag"%>
 <%@page import="com.tgy.statistic.service.TagService"%>
 <%@page import="com.tgy.dao.UserDao"%>
 <%@page import="com.tgy.util.URLUtils"%>

@@ -1,7 +1,28 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
+<!-- 
+<script type="text/javascript">var jd_union_pid="275603151";var jd_union_euid="";</script>
+<script type="text/javascript" src="http://ads.union.jd.com/static/js/union.js"></script>  
+  -->
 
   <div   class="container col-sm-12 "
 	style="padding: 10px; padding-bottom:30px;  margin-top: 140px; border: 2px solid #eee;background-color: #fdfdfd;">
+	<h4>友情链接：</h4>
+	 <a target="_blank" style=" margin-left: 10px;margin-right: 10px;" href="http://so.baiduyun.me/">百度网盘搜索</a>
+	 <a target="_blank" style=" margin-left: 10px;margin-right: 10px;" href="http://www.wangpansou.cn/">网盘搜</a>
+	 <a target="_blank" style=" margin-left: 10px;margin-right: 10px;" href="http://www.pansou.com/">PanSou盘搜</a>
+	 <a target="_blank" style=" margin-left: 10px;margin-right: 10px;" href="http://www.bdyunso.com/">百度云搜</a>
+	 <a target="_blank" style=" margin-left: 10px;margin-right: 10px;" href="http://www.panbaidu.net/">盘百度</a>  
+	<a target="_blank" style=" margin-left: 10px;margin-right: 10px;" href="http://wowenda.com/">百度网盘之家</a>
+	<a target="_blank" style=" margin-left: 10px;margin-right: 10px;" href="http://www.friok.com/">百度网盘资源</a>
+	<a target="_blank" style=" margin-left: 10px;margin-right: 10px;" href="http://www.sobaidupan.com/">搜百度盘</a>
+	<a target="_blank" style=" margin-left: 10px;margin-right: 10px;" href="http://www.dm456.com">动漫456</a>
+	<a target="_blank" style=" margin-left: 10px;margin-right: 10px;" href="http://www.iqiyi.com/dongman/">爱奇艺动漫</a>
+	<a target="_blank" style=" margin-left: 10px;margin-right: 10px;" href="http://www.bilibili.com/">哔哩哔哩</a>
+	<a target="_blank" style=" margin-left: 10px;margin-right: 10px;" href="http://www.acfun.tv/">AcFun</a>
+	<a target="_blank" style=" margin-left: 10px;margin-right: 10px;" href="http://rrmj.tv/">人人美剧</a>
+	<a target="_blank" style=" margin-left: 10px;margin-right: 10px;" href="http://www.ttmeiju.com/">天天美剧</a>
+	<a target="_blank" style=" margin-left: 10px;margin-right: 10px;" href="http://www.u17.com/">有妖气</a>
+	
 	
 	<!-- 
 	<div class="col-sm-12 " style="padding-bottom: 10px; border-bottom: 1px solid #eee;">
@@ -36,7 +57,34 @@
  -->
 
 <div id="foot-setFav" class="container col-sm-12 no-padding" style="margin-top: 40px; ">
-	<span class="col-sm-12 no-padding" style="text-align: center;font-size: 14px; ">欢迎按住 Ctrl+D <a href="#" onclick="AddFavorite(this)"> 收藏本页</a>    </span> 
+	<!-- 
+		<span class="col-sm-12 no-padding" style="text-align: center;font-size: 14px; ">欢迎按住 Ctrl+D <a href="#" onclick="AddFavorite(this)"> 收藏本页</a>    </span>
+		 -->
+			<h1 class="  col-sm-4"style="font-size:50px; text-align:center;color:#0e959d;">网盘盒子</h1>
+
+			<div class="thumbnail col-sm-2" style="border: none;">
+               <a href="http://app.zhui.cn/Soft/Down/Last/OTA/3284990/new.aspx">
+               	<img class=" " style="height: 80px;width: 80px;"  alt=" " src="<%=request.getContextPath() %>/images/code/androidCode.png" />
+               </a>	
+               <p style="text-align:center;font-size: 14px;">Android
+               </p>
+			</div>
+			<div class="thumbnail col-sm-2" style="border: none;">
+               <a href="http://app.zhui.cn/Soft/Down/Last/OTA/3284989/new.aspx"> <img class=" " style="height: 80px;width: 80px;" alt=" " src="<%=request.getContextPath() %>/images/code/IPhoneCode.png" />
+                </a>	<p style="text-align:center;font-size: 14px;">IPhone
+               </p>
+			</div>
+
+			<div class="thumbnail col-sm-2" style="border: none;">
+                <a href="http://www.webhezi.com"><img class=" "  style="height: 80px;width: 80px;" alt=" " src="<%=request.getContextPath() %>/images/code/webCode.png" />
+                </a>	 <p style="text-align:center;font-size: 14px;">网站
+               </p>
+			</div>
+			<div class="thumbnail col-sm-2" style="border: none;">
+                <a href="http://app.zhui.cn/Soft/Down/Last/OTA/3284994/new.aspx"><img class=" " style="height: 80px;width: 80px;"  alt=" " src="<%=request.getContextPath() %>/images/code/WPCode.png" />
+               </a> <p style="text-align:center;font-size: 14px;">WP
+               </p>
+			</div>
 </div>
 
 <!-- 
@@ -61,7 +109,7 @@
   
 <div id="footer" class="container col-sm-12 "
 	style="padding: 3px;  text-align: center;margin-top:  40px;">
-	<span style="color: #ccc;font-size: 12px;">@2015  网址盒子 辽ICP备13008200号-3</span> 
+	<span style="color: #ccc;font-size: 12px;">@2014-2015  网盘盒子 辽ICP备13008200号-3,E-mail:2350233623@qq.com</span> 
 </div>
  
 <!-- 
@@ -82,4 +130,25 @@
 	 <%
  }
  %>
+
+<script type="text/javascript">
+    (function(win,doc){
+        var s = doc.createElement("script"), h = doc.getElementsByTagName("head")[0];
+        if (!win.alimamatk_show) {
+            s.charset = "gbk";
+            s.async = true;
+            s.src = "http://a.alimama.cn/tkapi.js";
+            h.insertBefore(s, h.firstChild);
+        };
+        var o = {
+            pid: "mm_41911274_8730892_30296123",/*推广单元ID，用于区分不同的推广渠道*/
+            appkey: "",/*通过TOP平台申请的appkey，设置后引导成交会关联appkey*/
+            unid: "",/*自定义统计字段*/
+            type: "click" /* click 组件的入口标志 （使用click组建必设）*/
+        };
+        win.alimamatk_onload = win.alimamatk_onload || [];
+        win.alimamatk_onload.push(o);
+    })(window,document);
+</script>
+ 
 

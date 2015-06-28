@@ -43,6 +43,13 @@ PageService ps = new PageService();
 	<jsp:include page="../part/private-tabs.jsp" />
 	<div class="  col-sm-12" style=""><h3>我的关注</h3></div>
 	
+	<!-- 菜单 -->
+ 	<div class=" col-sm-3 no-padding" >
+		<div class=" col-sm-10 col-sm-offset-1 no-padding" >
+			<jsp:include page="part/social.menu.slide.jsp"/>
+		</div>
+	</div>
+	
 	<!-- 主体内容 -->
 	<div class=" col-sm-9 no-padding container">
 		<!-- one column start -->
@@ -180,12 +187,7 @@ PageService ps = new PageService();
 	
 	</div>
 	<!-- 主体内容 end-->
-	<!-- 菜单 -->
- 	<div class=" col-sm-3 no-padding" >
-		<div class=" col-sm-10 col-sm-offset-1 no-padding" >
-			<jsp:include page="part/social.menu.slide.jsp"/>
-		</div>
-	</div>
+
 	
 	<input type="hidden" id="contextPath" value="<%=contextPath%>">
 	<input type="hidden" id="pageID" value="personal-social">

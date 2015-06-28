@@ -1,36 +1,48 @@
 package com.tgy.web;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang3.EnumUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
+import com.github.stuxuhai.jpinyin.PinyinHelper;
 import com.tgy.dao.FolderDao;
 import com.tgy.entity.Folder;
 import com.tgy.entity.Page;
+import com.tgy.entity.PanSearchCache;
+import com.tgy.entity.Tag;
 import com.tgy.entity.User;
 import com.tgy.exception.BaseException;
+import com.tgy.service.FolderService;
 import com.tgy.service.PageService;
+import com.tgy.service.PanSearchCacheService;
 import com.tgy.service.UserService;
+import com.tgy.service.cache.AppCache;
+import com.tgy.statistic.service.TagService;
 import com.tgy.util.C;
+import com.tgy.util.FuliDou;
+import com.tgy.util.PageType;
 import com.tgy.util.U;
+import com.tgy.util.URLUtils;
 import com.tgy.validator.CommonValidator;
 
-@WebServlet("/page/create")
+@RestController
+@RequestMapping("/page/create")
 public class CreatePageContoller extends HttpServlet {
 
-	@Override
-	protected void service(HttpServletRequest req, HttpServletResponse res)
+	@RequestMapping()
+	protected void createPage(HttpServletRequest req, HttpServletResponse res)
 			throws ServletException, IOException {
 
 		User user = U.param(req, C.user, User.class);
@@ -47,6 +59,7 @@ public class CreatePageContoller extends HttpServlet {
 		page.name = name;
 		page.url = pageUrl;
 		page.folderID = pid;
+		page.lastModifyDate = U.dateTime();
 		try {
 			CommonValidator validator = new CommonValidator();
 			validator.isLonger(page.url, 1, "需要填写网址");//isLogin(req, null).isSameUser(user, page,null).
@@ -143,6 +156,162 @@ public class CreatePageContoller extends HttpServlet {
 
 		return list;
 
+	}
+	
+	@RequestMapping("/share")
+	protected void createSharePage(HttpServletRequest req, HttpServletResponse res)
+			throws ServletException, IOException {
+		
+		String pageUrl = U.filterCharacter(req.getParameter("url"));
+		try {
+			CommonValidator validator = new CommonValidator();
+			validator.isLonger(pageUrl, 1, "需要填写网址");
+		} catch (BaseException e) {
+			U.resFailed(res, e.getMessage());
+		}
+		if(!URLUtils.isValid(pageUrl)){
+			U.resFailed(res, "无法识别网址");
+		}
+		
+		UserService us = new UserService();
+		
+		Page page = new Page();
+		
+		String tagName = U.filterCharacter(req.getParameter("tagName"));
+		String type = U.filterCharacter(req.getParameter("type"));
+		
+		String name = U.filterCharacter(req.getParameter("name"));
+		String comment = U.filterCharacter(req.getParameter("comment"));
+		String imgSrc = U.filterCharacter(req.getParameter("imgSrc"));
+		
+		page.title = name;page.name = name;
+		
+		page.comment = comment;page.description = comment;page.summary=comment;
+		page.imgSrc = imgSrc;
+		
+		String firstLetter = PinyinHelper.getShortPinyin(name);
+		page.firstLetter = firstLetter;
+		page.lastModifyDate = U.dateTime();
+		
+		if(StringUtils.isBlank(type) || !EnumUtils.isValidEnum(PageType.class, type)){
+			type = PageType.resource.name();
+		}
+		PageType pType = PageType.valueOf(type);
+		
+		
+		//user
+		User user = U.param(req, C.user, User.class);
+//		if(user == null){
+//			user = us.getByName("游客");//if not login, use guest
+//		}
+		
+		if(StringUtils.isBlank(tagName)){
+			tagName = "百度网盘";
+		}
+		//create tag if not exist.
+		TagService ts = new TagService();
+		Tag t = ts.getByName( tagName , pType);
+		if(t==null || t.id==null){ //create tag if not exist
+			t = new Tag();
+			t.name = tagName;
+			t.type = pType;
+			ts.save(t);
+		}
+		
+		//folder
+//		FolderService fs = new FolderService();
+//		if(user==null || user.id==null){
+//			System.out.println(this.getClass().getName()+ " 无法找到 文件夹 " + tagName +" ");
+//			return;
+//		}
+//		Folder f  = fs.ByUserIDAndName(tagName,user.id.toString());
+//		if(f==null||f.id==null){ //if not exist, create it
+//			f = new Folder();
+//			f.name = tagName;
+//			f.userID = user.id.toString();
+//			try {
+//				fs.save(f);
+//			} catch (BaseException e) {
+//				System.out.println(this.getClass().getName()+ ": 文件夹 " + tagName +" 无法创建");
+//				return;
+//			}
+//		}
+		
+		page.url = pageUrl;
+		page.tagName = tagName;
+		page.type = pType;
+		if(user!=null && user.id!=null){
+			page.userID = user.id.toString();
+		}
+		
+//		page.pid = f.id.toString();
+//		page.folderID = f.id.toString();
+		page.isShare = true;
+		page.orignDate = U.dateTime();
+		try {
+			PageService ps = new PageService();
+			ps.save(page);
+		} catch (BaseException e) {
+			System.out.println(this.getClass().getName()+" : 保存网址失败 " + page.ups );
+			System.out.println(e.getMessage());
+			return;
+		}
+
+		U.resSuccess(res);
+		
+		if(user!=null){
+			user.fulidou += FuliDou.createSharePageScore;
+			new UserService().save(user);
+		}
+		
+		//重置缓存
+		AppCache.defaultPagesClear();
+		
+	}
+	
+	@RequestMapping("/cache")
+	protected void createCache(HttpServletRequest req, HttpServletResponse res)
+			throws ServletException, IOException {
+		
+		String name = U.filterCharacter(req.getParameter("name"));
+		String comment = U.filterCharacter(req.getParameter("comment"));
+		String imgSrc = U.filterCharacter(req.getParameter("imgSrc"));
+		String url = U.filterCharacter(req.getParameter("url"));
+		String key = U.filterCharacter(req.getParameter("key"));
+		
+		if(StringUtils.isNotBlank(name)){
+			name = URLDecoder.decode(name, "utf-8");
+		}
+		if(StringUtils.isNotBlank(comment)){
+			comment = URLDecoder.decode(comment, "utf-8");
+		}
+		if(StringUtils.isNotBlank(imgSrc)){
+			imgSrc = URLDecoder.decode(imgSrc, "utf-8");
+		}
+		if(StringUtils.isNotBlank(url)){
+			url = URLDecoder.decode(url, "utf-8");
+		}
+		if(StringUtils.isNotBlank(key)){
+			key = URLDecoder.decode(key, "utf-8");
+		}
+		PanSearchCacheService s = new PanSearchCacheService();
+		
+		PanSearchCache cache = new PanSearchCache();
+		
+		cache.title = name;
+		cache.name = name;
+		
+		cache.comment = comment;
+		cache.description = comment;
+		cache.summary=comment;
+		cache.imgSrc = imgSrc;
+		
+		cache.url = url;
+		
+		cache.key = key;
+		
+		s.save(cache);
+		
 	}
 
 }

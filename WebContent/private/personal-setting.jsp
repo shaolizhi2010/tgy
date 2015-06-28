@@ -36,7 +36,7 @@
 		 	<!-- 个人签名 -->
 		 	<div class=" container col-sm-12 sub-page-with-title">
 	 			<div class="sub-page-title">
-					<span style="font-size: 20px; ">编辑个性签名</span>
+					<span style="font-size: 20px; ">我的签名</span>
 				</div>
 				<div class="col-sm-12 container sub-page-body no-padding" style=" ">
 					<div class="col-sm-10    " style="padding: 10px; ">
@@ -51,7 +51,7 @@
 		 	<!-- 个人签名 -->
 		 	<div class=" container col-sm-12 sub-page-with-title">
 	 			<div class="sub-page-title">
-					<span style="font-size: 20px; ">设置我的头像</span>
+					<span style="font-size: 20px; ">我的头像</span>
 				</div>
 				<div class="col-sm-12 container sub-page-body no-padding" style=" ">
 					<div class="col-sm-10" style="padding: 10px; ">
@@ -69,7 +69,7 @@
 		 	<!-- 设置邮箱  -->
 		 	<div class=" container col-sm-12 sub-page-with-title" style="margin-top: 40px;">
 	 			<div class="sub-page-title">
-					<span style="font-size: 20px; ">设置邮箱</span>
+					<span style="font-size: 20px; ">我的邮箱</span>
 				</div>
 				<div class="col-sm-12 container sub-page-body no-padding" style=" ">
 			 		<div class="col-sm-11   " style=" " >
@@ -82,7 +82,7 @@
 		 	<!-- 是否公开 -->
 		 	<div class=" container col-sm-12 sub-page-with-title" style="margin-top: 40px;">
 	 			<div class="sub-page-title">
-					<span style="font-size: 20px;">设置权限</span>
+					<span style="font-size: 20px;">大家的权限</span>
 				</div>
 				<div class="col-sm-12 container sub-page-body no-padding" style=" ">
 					<div class="col-sm-12    " style="padding: 10px; ">

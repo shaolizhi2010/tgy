@@ -41,7 +41,7 @@ List<User> users = us.list("-favScore",start,10);
 	
 	<!-- 网站介绍 -->
 	<div class="col-sm-9  container" style="background-color:#e8edf1;padding: 30px;padding-top: 10px;padding-bottom: 10px;"> 
-		<div class="col-sm-12" style="font-size: 26px;font-weight: bold;color: #de9590;">网址盒子 - 网址收藏 网站分享</div>
+		<div class="col-sm-12" style="font-size: 26px;font-weight: bold;color: #de9590;">网盘盒子 - 网址收藏 网站分享</div>
 		
 		<div class=" col-sm-12" style="margin-top: 10px;"></div>
 		

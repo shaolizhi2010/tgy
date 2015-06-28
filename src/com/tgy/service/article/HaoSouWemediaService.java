@@ -30,9 +30,11 @@ public class HaoSouWemediaService {
 	
 	public void digAndSaveAllFiled(String... fileds){
 		
-		int savedCount  =0;
+		
 		
 		for(String filed : fileds){
+			
+			int savedCount  =0;
 			List<Map<String,String>> authors = getAuthorList(filed);
 			for( Map<String,String> m : authors){
 				//System.out.println(m.get("media_url"));
@@ -186,14 +188,15 @@ public class HaoSouWemediaService {
 	public List<Page> dig(String name,String url){
 		List<Page> articles = new ArrayList<>(); //http://wemedia.haosou.com/
 		String s  = Connecter.getPageSource(url, "utf-8");
-		s = StringUtils.substringBetween(s, "firstData =",";");
+		s = StringUtils.substringBetween(s, "firstData =","];");
 		if(StringUtils.isBlank(s)){
-			s = StringUtils.substringBetween(s, "firstData=",";");
+			s = StringUtils.substringBetween(s, "firstData=","];");
 		}
 		if(StringUtils.isBlank(s)){
 			System.out.println("抓取haoso文章失败！");
 			return articles;
 		}
+		s = s+"]";
 		//ArticleService as = new ArticleService();
 		List<Map<String,String>> list = new Gson().fromJson(s, new TypeToken< List<Map<String,String>>>(){}.getType());
 		for(Map<String,String> m : list){
@@ -201,7 +204,7 @@ public class HaoSouWemediaService {
 				Page   a = new Page();
 				a.title = m.get("title");
 				a.name = m.get("title");
-				a.summry = m.get("description");
+				a.summary = m.get("description");
 				a.description = m.get("description");
 				a.url = m.get("pc_url");
 				a.imgSrc = m.get("big_img");

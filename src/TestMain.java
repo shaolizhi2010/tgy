@@ -1,4 +1,5 @@
 import java.io.StringReader;
+import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.Calendar;
 import java.util.List;
@@ -14,21 +15,96 @@ import org.jdom2.Attribute;
 import org.jdom2.Document;
 import org.jdom2.Element;
 
+import com.github.stuxuhai.jpinyin.PinyinFormat;
+import com.github.stuxuhai.jpinyin.PinyinHelper;
 import com.tgy.entity.Tag;
+import com.tgy.service.JDRedirectService;
 import com.tgy.service.PageService;
 import com.tgy.statistic.service.TagService;
 import com.tgy.util.ConditionMap;
 import com.tgy.util.PageType;
+import com.tgy.util.ResourceContentDigSevice;
 import com.tgy.util.SimpleConnecter;
+import com.tgy.util.U;
 import com.tgy.util.X;
 
 public class TestMain {
+	
+	
+	// public static String toUnicode(String s){
+	// if(StringUtils.isBlank(s)){
+	// return s;
+	// }
+	// StringBuffer us = new StringBuffer();
+	// char[] ss = s.toCharArray();
+	// for(int i=0;i<ss.length;i++){
+	// String sss = "\\u" + Integer.toHexString(ss[i] | 0x10000).substring(1);
+	// us.append(sss);
+	// }
+	// return us.toString();
+	// }
 
 	public static void main(String[] args) {
 		try {
 			System.out.println("start");
 			
-			System.out.println(PageType.valueOf("abcde"));
+//			String s = "【荐】魔法少女小圆.rmvb（2011年4月）_免费高速下载|百度云";
+//			
+//			s = s.replaceAll("^【*】$", "");
+//			System.out.println(s);
+			
+			String refer = "http://localhost/tgy/share/resource?tagName=美剧";
+			String keywordParam = "tagName=";
+			
+			String keyword = StringUtils.substringBetween(refer, "?"+keywordParam,"&");
+			if(StringUtils.isBlank(keyword))keyword = StringUtils.substringAfterLast(refer, "?"+keywordParam);
+			if(StringUtils.isBlank(keyword))keyword = StringUtils.substringBetween(refer, "&"+keywordParam,"&");
+			if(StringUtils.isBlank(keyword))keyword = StringUtils.substringAfterLast(refer, "&"+keywordParam);
+		System.out.println(keyword);
+			
+			//System.out.println(  new ResourceContentDigSevice().hasSpecialChar("123") );
+			
+//			String returnStr =  SimpleConnecter.connect("http://www.webhezi1.com");
+//			
+//			System.out.println(returnStr);
+//			System.out.println(returnStr.length());
+		
+			//Runtime.getRuntime().exec("F:\\devall\\gitdb\\tgy\\src\\restartTomcat.bat");
+			
+			
+			
+//			String r =  JDRedirectService.getInstance().redirect("斯巴达克斯");
+//			System.out.println(r);
+			
+//			for(PageType pt : PageType.values()){
+//				System.out.println(pt.name());
+//			}
+			
+			
+			//System.out.println(SimpleConnecter.connect("http://www.smzdm.com/URL/AA/FX/ECDB671ED0DF8860")); 
+			
+//			char c = 'A';
+//			System.out.println( (int)'A' - (int)'a');
+//			System.out.println(  (int)'Z');
+			
+
+			
+			//  String str = "[webhezi.com]你好世界 hello world";
+//			   System.out.println(  PinyinHelper.convertToPinyinString(str, ",", PinyinFormat.WITH_TONE_MARK) );
+//			   System.out.println( PinyinHelper.convertToPinyinString(str, ",", PinyinFormat.WITH_TONE_NUMBER));
+//			    System.out.println( PinyinHelper.convertToPinyinString(str, ",", PinyinFormat.WITHOUT_TONE));
+			 //   System.out.println( PinyinHelper.getShortPinyin(str));
+			
+// try {
+//				barName = URLEncoder.encode(barName,"utf-8");
+//			} catch (UnsupportedEncodingException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
+            
+//            System.out.println(barName);
+			
+			//System.out.println(PageType.valueOf("abcde"));
 			
 //			System.out.println("abc".contains("-"));
 //			
@@ -142,12 +218,14 @@ public class TestMain {
 //			}
 //			//System.out.println(new Gson().toJson(list));
 			
+			System.out.println("end");
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
 	}
-	
+
 	public static String getPageSourceFromNode(TagNode node) {
 		// long start = System.currentTimeMillis();
 		HtmlCleaner hc = new HtmlCleaner();

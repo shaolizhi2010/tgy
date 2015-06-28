@@ -60,7 +60,8 @@ public class IndexContoller extends HttpServlet {
 					return;
 				}
 				else{
-					U.forward(req, res, "/"+user.name);
+					U.forward(req, res, "/share");
+					//U.forward(req, res, "/"+user.name);
 					return;
 				}
 				

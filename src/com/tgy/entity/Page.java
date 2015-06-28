@@ -6,6 +6,9 @@ import com.tgy.util.PageType;
 
 @Entity
 public class Page extends BasePage {
+	
+	public String idStr;
+	
 	public String folderID;//v0.3开始，替代之前的pid
 	
 	public boolean isShare;//是否是用户推荐共享的
@@ -14,7 +17,7 @@ public class Page extends BasePage {
 	//下边这几个字段，不管是什么类型的网页，都需要
 	public PageType type;
 	public String imgSrc; //配图
-	public String summry; //概要
+	public String summary; //概要
 	public String title; //标题
 	
 	//type is article
@@ -26,7 +29,14 @@ public class Page extends BasePage {
 	public String authorUrl; //做着url，如新浪微博的文章，authro url就是做着新浪账号url
 	public String authorHearImgSrc; //author 头像图像链接
 	
+	public String firstLetter ; //页面标题首字母，便于安字母查看资源
+	
 	//article end
+	
+	public String price;
+	
+	public String lastReplyTime;
+	
 	
 	//type is wang pan
 	//empty

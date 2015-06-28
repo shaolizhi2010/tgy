@@ -35,7 +35,7 @@ if(StringUtils.isBlank(pageID)){
 a = as.byID(pageID); 
  
 //无图不显示
-if(a==null || StringUtils.isBlank(a.imgSrc) ||  !PageType.article.equals(a.type)){
+if(a==null || StringUtils.isBlank(a.imgSrc) ||  !PageType.word.equals(a.type)){
 	return ;
 }
 
@@ -74,7 +74,7 @@ String iconPath = PageUtil.iconPath(a);
 			</a>
 			<div class="col-sm-12 article-summry-container no-padding" >
 				<a class="col-sm-12 article-summry-a no-padding" href="<%=url%>" target="_blank" >
-					<%=StringUtils.substring(a.summry, 0,100)+"..."  %>
+					<%=StringUtils.substring(a.summary, 0,100)+"..."%>
 				</a>
 			</div>
 			<div class="col-sm-12 container no-padding">

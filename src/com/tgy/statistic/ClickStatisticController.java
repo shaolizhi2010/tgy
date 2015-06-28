@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang3.StringUtils;
+
 import com.tgy.dao.FolderDao;
 import com.tgy.dao.LinkDao;
 import com.tgy.dao.PageDao;
@@ -17,6 +19,7 @@ import com.tgy.entity.Page;
 import com.tgy.entity.Tag;
 import com.tgy.exception.BaseException;
 import com.tgy.statistic.entity.Link;
+import com.tgy.statistic.service.TagService;
 import com.tgy.util.U;
 import com.tgy.validator.CommonValidator;
 
@@ -39,6 +42,7 @@ public class ClickStatisticController extends HttpServlet {
 				Page page = pDao.byID(id);
 				if (page != null) {
 					page.clicks++;
+					page.showTimes++;
 					page.favScore++;
 					pDao.save(page);
 					
@@ -46,6 +50,7 @@ public class ClickStatisticController extends HttpServlet {
 					Folder folder = fDao.getByID(page.pid);
 					if (folder != null) {
 						folder.showTimes+=1;
+						folder.clicks++;
 						folder.favScore+=1;
 						fDao.save(folder);
 	 
@@ -55,10 +60,32 @@ public class ClickStatisticController extends HttpServlet {
 					Link link = lDao.getByUrl(page.url);
 					if (link != null) {
 						link.clicks++;
+						link.showTimes++;
 						link.favScore++;
 						lDao.save(link);
 					}
+					if(StringUtils.isNotBlank(page.tagName)){
+						TagService ts = new TagService();
+						Tag t = ts.getByName(page.tagName, page.type);
+						if (t != null) {
+							t.clicks ++;
+							t.showTimes++;
+							t.favScore++;
+							ts.save(t);
+						}
+
+					}
 				}
+			}
+			else if ("tag".equals(type)) {
+				 TagService ts = new TagService();
+				 Tag t = ts.byID(id);
+				 if (t != null) {
+					 t.clicks ++;
+					 t.showTimes++;
+					 t.favScore++;
+					 ts.save(t);
+				 }
 			}
 			else if ("folder".equals(type)) {
 				FolderDao fDao = new FolderDao();
@@ -75,9 +102,6 @@ public class ClickStatisticController extends HttpServlet {
 					tDao.save(tag);
  
 				} 
-				
-				
-
 			}
 
 		} catch (BaseException e) {

@@ -6,7 +6,7 @@ $( document ).ready(function() {
 	else{
 		$('#search-pagination').hide();
 	}
-	
+	/*
 	$.ajax(
 		{
 			url : $('#contextPath').val()
@@ -25,7 +25,7 @@ $( document ).ready(function() {
 			  }
 		}
 	)
-		
+		*/
 	 
 });
 
@@ -40,8 +40,8 @@ $('.pages-part-page-name').hover(
 );
 
 
-function panSearch(){
-	location.href =  $('#contextPath').val()+'/pan/'+$('#pan_search_value').val();
+function panSearch2(){
+	location.href =  $('#contextPath').val()+'/pan/'+$('#pan_search_value2').val();
 }
 
 var createDiscussForSearchFunction = function() {

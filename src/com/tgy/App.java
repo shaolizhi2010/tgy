@@ -62,19 +62,24 @@ public class App {
 	public Datastore getDatastore() {
 
 		try {
-			if(client == null){
+//			if(client == null){
+//				MongoCredential credential = MongoCredential.createMongoCRCredential(mogoUserName, "admin", mogoPassword.toCharArray());
+//				ServerAddress address = new ServerAddress("127.0.0.1");
+//				client = new MongoClient(address,Arrays.asList(credential));
+//			}
+			if(ds==null){
+				
 				MongoCredential credential = MongoCredential.createMongoCRCredential(mogoUserName, "admin", mogoPassword.toCharArray());
 				ServerAddress address = new ServerAddress("127.0.0.1");
 				client = new MongoClient(address,Arrays.asList(credential));
-			}
-			if(ds==null){
+				
 //				new Morphia().createDatastore(mongoClient, dbName)
 				ds= new Morphia().createDatastore(client, "tgy" );
 				
 			}
 			 
 			return ds;
-		} catch (UnknownHostException e) {
+		} catch (Exception e) {
 			System.out.println("找不到Mongo数据库");
 			return null;
 		}

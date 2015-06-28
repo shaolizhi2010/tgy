@@ -1,6 +1,8 @@
 package com.tgy.entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
 import org.mongodb.morphia.annotations.Entity;
@@ -24,6 +26,10 @@ public class Tag extends BaseEntity  implements Serializable {
  
 	public String name;
 	public PageType type;//类型 文字？图片？默认是link
+	
+	public boolean isTopLevel;//顶层tag？ 在首页显示
+	
+	public List<String> subTags = new ArrayList<String>();
 
 //	@Reference(ignoreMissing = true,lazy=true)
 //	public User firstCreateBy;//第一个创建人

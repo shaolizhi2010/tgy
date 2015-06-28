@@ -35,6 +35,19 @@ public class U {
 	public static final String pattern_dateTime_withoutYear = "MM-dd HH:mm:ss";
 	public static final String pattern_date = "yyyy-MM-dd";
 
+	public static String toUnicode(String s){
+		if(StringUtils.isBlank(s)){
+			return s;
+		}
+		StringBuffer us = new StringBuffer();
+		char[] ss = s.toCharArray();
+		for(int i=0;i<ss.length;i++){
+			String sss = "\\u" + Integer.toHexString(ss[i] | 0x10000).substring(1);
+			us.append(sss);
+		}
+		return us.toString();
+	}
+	
 	public static String addLinkForMessage(String msg){
 		if(StringUtils.isBlank(msg) || !msg.contains("http")){
 			return msg;
@@ -160,7 +173,7 @@ public class U {
 		try {
 			res.getOutputStream().write(message.getBytes("UTF-8"));
 			res.getOutputStream().flush();
-			res.getOutputStream().close();
+			//res.getOutputStream().close();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -208,8 +221,19 @@ public class U {
 		try {
 			req.getRequestDispatcher(path).forward(req, res);
 		} catch (Exception e) {
-			System.out.println("forward to " + path + " exception");
-			e.printStackTrace();
+			System.out.println("forward to " + path + " exception" + " : " + e.getMessage());
+			//e.printStackTrace();
+		}
+	}
+	
+	public static void redirect(ServletRequest req, ServletResponse res,
+			String path) {
+		try {
+			HttpServletResponse response = (HttpServletResponse)res;
+			response.sendRedirect(path);
+		} catch (Exception e) {
+			System.out.println("redirect to " + path + " exception" + " : " + e.getMessage());
+			//e.printStackTrace();
 		}
 	}
 
@@ -299,6 +323,10 @@ public class U {
 	public static boolean isNotMessCode(String s) {
 		if (StringUtils.isBlank(s))
 			return true;
+		if(StringUtils.contains(s, "�") || StringUtils.contains(s, "æ")){
+			return false;
+		}
+		
 		for (int i = 0; i < s.length(); i++) {
 
 			int code = (int) s.charAt(i);
@@ -407,6 +435,15 @@ public class U {
 		return false;
 	}
 
+	//取之前 或之后几天的 日期
+	public static String dateTime(int days) {
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(new Date());
+		cal.add(Calendar.DATE,days);//把日期往后增加.整数往后推,负数往前移动 
+		SimpleDateFormat sdf = new SimpleDateFormat(pattern_dateTime);
+		return sdf.format(cal.getTime());
+	}
+	
 	// current date time
 	public static String dateTime() {
 		Calendar cal = Calendar.getInstance();

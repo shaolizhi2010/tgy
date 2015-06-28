@@ -1,3 +1,4 @@
+<%@page import="com.tgy.service.cache.AppCache"%>
 <%@page import="org.bson.types.ObjectId"%>
 <%@page import="com.tgy.util.DiscussUtils"%>
 <%@page import="com.tgy.util.IpUtils"%>
@@ -50,9 +51,7 @@ if(request.getParameter("discussStart")!=null){
 <%
 	UserService uService = new UserService(); 
 	
-	List<Discuss> discusses = ds.list(new ConditionMap().add("targetIsAllSite", true).add("isPrimary", true) , "-lastModifyDate",start, 10);
-	//List<ObjectId> discussIds = ds.findIds(ds.createQuery(new ConditionMap().add("targetIsAllSite", true).add("isPrimary", true) , "-lastModifyDate",start, 10 )) ;
-	Collections.reverse( discusses); 
+	List<Discuss> discusses = AppCache.discusses(start);
 %>
 
 	<div class=" container col-sm-12 sub-page-with-title"  >
@@ -98,15 +97,15 @@ if(request.getParameter("discussStart")!=null){
 					    </jsp:include>
 					</a>
 					<a href="<%=request.getContextPath()%>/网址盒子" target="_blank" class="  no-padding" style="float: left;font-size: 14px; padding-right: 5px;" >
-						网址盒子
+						网盘盒子
 					</a>
-					对你说: 回复想要的网址或资源，盒子帮你找！
+					对你说: 想要什么资源，告诉网盘盒子吧！
 				</div>
 				<div  style=" ">
 		         		<textarea  style="border:1px solid #ccc;" id="createDiscussMessage" 
 		         			data-func-name="createDiscussForAllFunction" 
 		         			class="form-control enterInput hover-focus" rows="4" 
-		         			placeholder="输入想要的网址或资源"></textarea> 
+		         			placeholder="随便说说吧"></textarea> 
 	         	</div>
 				<div  style="margin-top: 5px; " >
 	         	    <a href="javascript:void(0)">

@@ -13,19 +13,19 @@
 					
 					<div class="col-sm-12" style="margin-top: 40px;display: block;"> 
 						<span style="color: #99d233;" class="glyphicon glyphicon-ok-sign"> </span>
-						<span  style=" font-size: 13px;font-weight:bold; color: #3997f8;">注册网址盒子</span>
+						<span  style=" font-size: 13px;font-weight:bold; color: #3997f8;">注册网盘盒子</span>
 					</div>
 					<div class="col-sm-12" style="margin-top: 10px;display: block;"> 
-						<span style="color: #99d233;" class="glyphicon glyphicon-ok-sign"> </span>
-						<span class=" " style=" font-size: 11px;color: #666; ">在线 收藏喜欢的网址</span>
+						<span style="color: #99d233;" class="glyphicon glyphicon-ok-sign">好资源大家一起分享</span>
+						<span class=" " style=" font-size: 11px;color: #666; "></span>
 					</div>	
 					<div class="col-sm-12" style="margin-top: 10px;display: block;"> 
 						<span style="color: #99d233;" class="glyphicon glyphicon-ok-sign"> </span>
-						<span class=" " style=" font-size: 11px;color: #666; ">设置自己的上网导航</span>
-					</div>			
-					<div class="col-sm-12" style="margin-top: 10px;display: block;"> 
-						<span style="color: #99d233;" class="glyphicon glyphicon-ok-sign"> </span>
-						<span class=" " style=" font-size: 11px;color: #666; ">和朋友们分享</span>
+						<span class=" " style=" font-size: 11px;color: #666; ">发布自己收藏的网盘</span>
+					</div>		
+					<div class="col-sm-12" style="margin-top: 10px;display: block;">
+						<span style="color: #99d233;" class="glyphicon glyphicon-ok-sign"></span>
+						<span class=" " style=" font-size: 11px;color: #666; ">发帖回帖赚福利豆</span>
 					</div>
 				</div>
 			</div>

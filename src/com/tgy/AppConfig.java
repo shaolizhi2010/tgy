@@ -13,6 +13,10 @@ public class AppConfig extends WebMvcConfigurerAdapter {
 
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
+		
+		registry.addResourceHandler("/hailunhuafei/**").addResourceLocations(
+				"/hailunhuafei/**");
+		
 		registry.addResourceHandler("/javascripts/**").addResourceLocations(
 				"/javascripts/**");
 		registry.addResourceHandler("/myjs/**")
@@ -33,6 +37,10 @@ public class AppConfig extends WebMvcConfigurerAdapter {
 				"/images/**");
 		registry.addResourceHandler("/html/**").addResourceLocations(
 				"/html/**");
+		registry.addResourceHandler("/che/**").addResourceLocations(
+				"/che/**");
+
+	 
  
 //		registry.addResourceHandler("/folder/favicon").addResourceLocations(
 //				"/fonts/**");

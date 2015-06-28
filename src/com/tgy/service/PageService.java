@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
 
+import org.apache.commons.lang3.EnumUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.bson.types.ObjectId;
 import org.mongodb.morphia.Datastore;
@@ -27,6 +28,7 @@ import com.tgy.entity.Folder;
 import com.tgy.entity.Page;
 import com.tgy.exception.BaseException;
 import com.tgy.statistic.entity.Link;
+import com.tgy.util.PageType;
 import com.tgy.util.U;
 
 public class PageService {
@@ -73,6 +75,42 @@ public class PageService {
 			query.order("-favScore");
 		}
 		
+		return find(query).asList();
+		
+	}
+	
+	public List<Page> searchSharePage( String name ,String url, PageType type, String orderStr,int start,int limit){
+		Query<Page> query = App.getInstance().getDatastore()
+				.createQuery(Page.class);
+ 
+		if(StringUtils.isNotBlank(name)){
+			name = name.trim();
+			query.filter("name", Pattern.compile(".*"+name+".*", Pattern.CASE_INSENSITIVE));
+		}
+		if(StringUtils.isNotBlank(url)){
+			url = url.trim();
+			query.filter("url", Pattern.compile(".*"+url+".*", Pattern.CASE_INSENSITIVE));
+		}	
+		if(type!=null  ){
+			query.filter("type", PageType.resource);//只搜资源
+		}
+		
+		query.filter("isShare", true);
+		query.filter("createDate >", U.dateTime(-30));
+		
+		if(start>0){
+			query.offset(start);
+		}
+		if(limit!=0){
+			query.limit(limit);
+		}
+		
+		if(StringUtils.isNotBlank(orderStr)){
+			query.order(orderStr);
+		}
+		else{
+			query.order("-favScore");
+		}
 		return find(query).asList();
 		
 	}

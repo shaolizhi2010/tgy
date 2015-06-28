@@ -23,6 +23,7 @@ import com.tgy.entity.group.InterestGroup;
 import com.tgy.exception.BaseException;
 import com.tgy.service.DiscussService;
 import com.tgy.service.IndexService;
+import com.tgy.service.cache.AppCache;
 import com.tgy.service.group.InterestGroupFolderService;
 import com.tgy.service.group.InterestGroupService;
 import com.tgy.statistic.entity.Link;
@@ -475,6 +476,7 @@ public class DiscussContoller extends HttpServlet {
 			}else{
 				U.forward(req, res, "/part/discuss/discuss-element.jsp?discussID="+dc.id.toString());
 			}
+			AppCache.discussesClear();//清空缓存 这样用户会实时看到自己发的帖子，如果发帖频率很频繁的话 就需改进
 			
 		} catch (BaseException e) {
 			U.resFailed(res, e.getMessage());

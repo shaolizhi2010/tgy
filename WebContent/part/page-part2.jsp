@@ -19,27 +19,40 @@
 //}
 int start =   (Integer)request.getAttribute("pageStart");
 long count =  (Long)request.getAttribute("count");
-
+String tagName = request.getAttribute("tagName")!=null?(String)request.getAttribute("tagName"):"";
 %>
 <!-- 显示网址页面开始 -->
 <div id="pages-part" class="col-sm-12 no-padding ">
  
-	<div class="  col-sm-12 no-padding" style="background: #fff;">
+	<div id="pages-part-elements" class="  col-sm-12 no-padding" style="background: #fff;">
+	<input type="hidden" id="replyToPageID" value="">
 	<%
 	List< Page> pages = (List<Page>)request.getAttribute("pages");
  	if(pages==null){
  		return;
  	}
 	for (Page p : pages) {
-	%>
+		if(p==null || p.id==null){
+			continue;
+		}
+		request.setAttribute("page-temp", p);
+		%>
+		
 		<jsp:include page="share/shareElement2.jsp">
 			<jsp:param name="pageID" value='<%=p.id.toString() %>'/>
 		</jsp:include>
+
 	<%
+		request.removeAttribute("page-temp");
 	}//end for
- 	
- 	 
  	%>
+ 	
+ 	<!-- ad -->
+ 	<%--
+ 	<jsp:include page="ad/page-ad-template.jsp"/>
+ 	 --%>
+ 	<!-- ad -->
+ 	
 	<!-- 翻页 -->
 	<jsp:include page="pagination.jsp">
 		<jsp:param name="start" value='<%=start+"" %>'/>
@@ -52,3 +65,4 @@ long count =  (Long)request.getAttribute("count");
  		 
 </div>
 <!-- 显示网址页面结束 -->
+<script src="<%=request.getContextPath()%>/myjs/statistic.js" defer="defer"></script>

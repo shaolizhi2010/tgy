@@ -37,17 +37,14 @@ em{
 	font-size: 13px;
 }
 .myBtn{
-	margin-top:5px;
-	display:block;
-	background-color:blue;
-	color:#fff;
-	width:50px;
-	height:20px;
-	text-align: center;
-	line-height: 20px;
+	font-size: 14px;
+	font-weight: bold;
+	color: #888;
+	line-height: 30px;
 }
 .myBtn:hover{
-	color: #fff;
+	color:#ce310d; 
+	text-decoration: underline;
 }
 
 .test{
@@ -268,7 +265,7 @@ em{
 	 }
 #logo a{text-decoration: none;}
 #logo a span{
-	color: #0e959d;font-size: 32px;font-weight:bold;
+	color: #0e959d;font-size: 36px;font-weight:bold;
 }
 
 /* index*/
@@ -478,8 +475,8 @@ em{
 }
 .tabs a{
 	display: block;
-	padding-left:10px;
-	padding-right:10px;
+	padding-left:5px;
+	padding-right:5px;
 	text-decoration: none;
 	float: left;
 }
@@ -496,6 +493,32 @@ em{
 }
 .tabs-quick-link{
  
+}
+.indexAll-tabs{
+	padding-left:0px;
+	 text-align: center;
+	 text-decoration: none;
+	 background-color: #fdfdfd;
+}
+.indexAll-tab-a{
+	padding:10px;
+	display: block;
+	padding-left:5px;
+	padding-right:5px;
+	text-decoration: none;
+	float: left;
+}
+.indexAll-tab{
+	min-width:60px;
+	font-size: 15px;
+	font-weight: 555;
+	color: #072;
+	padding: 5px;
+	
+
+}
+.indexAll-tab-selected{
+	border-bottom: 3px solid #2a70e8;
 }
 #foot-prompt{
 	top:85%;
@@ -739,8 +762,8 @@ background-color:#fcfcfc;
 }
 .article-summry-container{
 	padding-top:10px;
-	padding-bottom:20px;	
-	min-height: 80px;
+	padding-bottom:10px;	
+	min-height: 40px;
 	font-size: 14px;
 	color: #666;
 	font-weight: normal;
@@ -761,4 +784,39 @@ background-color:#fcfcfc;
 .article-time-span{
 	font-size: 12px;
 	color: #999;
+}
+
+.hotPages-title{
+	font-size: 14px;font-family: 微软雅黑, 黑体;
+	color: #666;
+}
+.hotPages-title:hover{
+	color:#ce310d; 
+	text-decoration: underline;
+}
+.shareElement-main{
+	padding-right:8px; 
+}
+.shareElement-comment{
+	border-left: 3px solid #eee;
+	padding-left: 14px;
+	color: #999;
+}
+.pageElement-reply-content{
+	padding:5px;
+	margin-right: 10px;
+	color: #aaa;
+}
+.discuss-reply-btn{
+}
+
+.pageElement-reply-show-btn , 
+.pageElement-reply-show-btn:link,
+.pageElement-reply-show-btn:visited,
+.pageElement-reply-show-btn:active{
+	color: #999;
+}
+.pageElement-reply-show-btn:hover{
+	color: #ce310d;
+	font-weight: bold;	
 }

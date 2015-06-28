@@ -46,11 +46,13 @@ public class PanSearchCacheService   {
 		List<PanSearchCache> caches =  list(new ConditionMap().add("key", key), null, 0, 0);
 		List<Page> pages = new ArrayList<>();
 		for(PanSearchCache c : caches){
-			Page p = new Page();
-			p.name = c.name;
-			p.url = c.url;
-			p.comment = c.comment;
-			pages.add(p);
+			//Page p =  (Page)c; //new Page();
+//			p.name = c.name;
+//			p.url = c.url;
+//			p.comment = c.comment;
+//			p.id  = c.id;
+			
+			pages.add(c);
 		}
 		return pages;
 	}

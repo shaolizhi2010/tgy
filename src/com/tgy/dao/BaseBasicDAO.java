@@ -90,6 +90,10 @@ public class BaseBasicDAO<T,K> extends BasicDAO<T, K> {
 		if(conditions!=null && conditions.size()!=0){
 			for(Map.Entry<String, Object> e : conditions.entrySet()){
 				if(e.getValue()==null)continue;
+				if(e.getValue().equals("null")){
+					query.filter(e.getKey(), null);
+					continue;
+				}
 				query.filter(e.getKey(), e.getValue());
 			}
 		}

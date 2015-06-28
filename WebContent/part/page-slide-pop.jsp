@@ -19,7 +19,7 @@
 
 			String tagName = showFolder.name;
 			LinkService lService = new LinkService();
-			List<Link> links = lService.searchByTagName(tagName);
+			List<Link> links = lService.getByName(tagName);
 			
 			if (!CollectionUtils.isEmpty(links)) {
 				if(links.size()>8)links=links.subList(0, 8);

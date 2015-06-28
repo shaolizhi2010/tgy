@@ -116,60 +116,7 @@
 			
 			<!-- ad -->
 			<div class="col-sm-12"  style="margin-top: 20px;"  >
-				<span>阿里旅游</span>
-				<%
-				int randomCount = 5;
-				Random rad =  new Random();
-				int i = 0;
-				while(i<1){//找5圈，没有就退出
-					if(rad.nextInt(randomCount)==1){
-						%>
-						<a class="col-sm-12 no-padding " 
-							href="http://s.click.taobao.com/t?e=m%3D2%26s%3DVYPmic1qpAgcQipKwQzePCperVdZeJviEViQ0P1Vf2kguMN8XjClAruVGqbGPB3AqqacliaqsdAXPsBJarhjrlQlUTpNxHAmFMDQ4pd8PyuQnSfqJhGOSX7uq6sLYIqu0Q7QOybCaQy9AmARIwX9K9E0MBlxnM%2FDnaYpFBIfC%2F385cnhcjSS%2B6aAacK%2BFPJn" target="_blank"
-							style="padding: 5px; ">
-							<img  class="ad-img img-responsive" alt="阿里旅游" title="阿里旅游"
-								data-original="http://gtms04.alicdn.com/tps/i4/TB13.MaGVXXXXX6XFXXBFn_2pXX-190-195.jpg"/>
-						</a>
-						<%
-						i++;break;
-					}				
-					if(rad.nextInt(randomCount)==1){
-						%>
-						<a class="col-sm-12  no-padding " 
-							href="http://s.click.taobao.com/t?e=m%3D2%26s%3DVYPmic1qpAgcQipKwQzePCperVdZeJviEViQ0P1Vf2kguMN8XjClAruVGqbGPB3AqqacliaqsdAXPsBJarhjrlQlUTpNxHAmFMDQ4pd8PyuQnSfqJhGOSX7uq6sLYIqu0Q7QOybCaQy9AmARIwX9K9E0MBlxnM%2FDnaYpFBIfC%2F385cnhcjSS%2B6aAacK%2BFPJn" target="_blank"
-							style=" padding: 5px; ">
-							<img  class="ad-img img-responsive" alt="阿里旅游" title="阿里旅游"
-								data-original="http://gtms02.alicdn.com/tps/i2/TB1C9fHGVXXXXXnXFXXBFn_2pXX-190-195.jpg"/>
-						</a>
-						<%
-						i++;break;
-					}
-					if(rad.nextInt(randomCount)==1){
-						%>
-						<a class="col-sm-12 no-padding  " 
-							href="http://s.click.taobao.com/t?e=m%3D2%26s%3DVYPmic1qpAgcQipKwQzePCperVdZeJviEViQ0P1Vf2kguMN8XjClAruVGqbGPB3AqqacliaqsdAXPsBJarhjrlQlUTpNxHAmFMDQ4pd8PyuQnSfqJhGOSX7uq6sLYIqu0Q7QOybCaQy9AmARIwX9K9E0MBlxnM%2FDnaYpFBIfC%2F385cnhcjSS%2B6aAacK%2BFPJn" target="_blank"
-							style=" padding: 5px;"> 
-							<img  class="ad-img img-responsive" alt="阿里旅游" title="阿里旅游"
-								data-original="http://img.taobao.com/bao/uploaded/i2/1096920918/TB27L.AbXXXXXaUXpXXXXXXXXXX_!!1096920918.jpg_190x190.jpg"/>
-						</a>
-						<%
-						i++;break;
-					}
-					if(rad.nextInt(randomCount)==1){
-						%>
-						<a class="col-sm-12  no-padding " 
-							href="http://s.click.taobao.com/t?e=m%3D2%26s%3DVYPmic1qpAgcQipKwQzePCperVdZeJviEViQ0P1Vf2kguMN8XjClAruVGqbGPB3AqqacliaqsdAXPsBJarhjrlQlUTpNxHAmFMDQ4pd8PyuQnSfqJhGOSX7uq6sLYIqu0Q7QOybCaQy9AmARIwX9K9E0MBlxnM%2FDnaYpFBIfC%2F385cnhcjSS%2B6aAacK%2BFPJn" target="_blank"
-							style=" padding: 5px;">
-							<img  class="ad-img img-responsive" alt="阿里旅游" title="阿里旅游"
-								data-original="http://img.taobao.com/bao/uploaded/i2/852175380/TB2PZWBXVXXXXXoXXXXXXXXXXXX_!!852175380.jpg_190x190.jpg"/>
-						</a>
-						<%
-						i++;break;
-					}
-				}
-				
-				%>
-				 
+					<script charset="gbk" type="text/javascript" src="http://union.dangdang.com/adapi/bang/?from=P-315609"></script>
 				
 		 	</div>
 			<!-- ad end -->

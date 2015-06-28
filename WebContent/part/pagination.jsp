@@ -15,11 +15,11 @@ if(StringUtils.isBlank(url)){
 }
 String queryString = request.getQueryString();
 if(StringUtils.isNotBlank(queryString)){
-	System.out.println("queryString "+queryString);
+	//System.out.println("queryString "+queryString);
 	if(queryString.contains("pageStart=")){
 		queryString = StringUtils.substringBefore(queryString, "pageStart=");
 	}
-	System.out.println("queryString after : "+queryString);
+	//System.out.println("queryString after : "+queryString);
 	url = url+"?" + queryString;	
 }
 String contactStr = "";

@@ -15,6 +15,8 @@ public enum PageType {
 	pic("图片"),
 	video("视频"),
 	website("网站"),
+	commodity("网购"),
+	game("游戏")
 	//article("文章"),
 	//baidupan("百度盘"),
 	
@@ -29,6 +31,8 @@ public enum PageType {
     private  PageType(String value ) {
         this.value = value;
     } 
+    
+    //汉字
     public String value(){
     	return this.value;
     }

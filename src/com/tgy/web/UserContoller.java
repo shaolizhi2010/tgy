@@ -59,13 +59,22 @@ public class UserContoller extends HttpServlet {
 			@CookieValue(value = "lastPsCode", defaultValue = "", required = false) String lastPsCode)
 			throws ServletException, IOException {
 		
+		
+		
 		String showType = req.getParameter("t");//1 竖版显示 2横板（个人导航）显示 3 横板 公共导航页
 		//redirect
-		if(StringUtils.equals(userName, "pan")){
+		if(StringUtils.equals(userName, "pan") || StringUtils.equals(userName, "pan/")){
 			U.forward(req, res, "/pan.jsp");
 			return;
 		}
+		if(StringUtils.equals(userName, "commodity")){
+			return;
+		}
 		if(StringUtils.equals(userName, "null") || StringUtils.isBlank(userName)){
+			return;
+		}
+		if("bdunion".equals(userName)	){
+			U.message(res, "e15d3593647ad0fda081e443d32b215b");
 			return;
 		}
 		User showUser = new UserDao().getByName(userName);

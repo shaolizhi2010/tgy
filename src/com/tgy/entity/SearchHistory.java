@@ -1,6 +1,7 @@
 package com.tgy.entity;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import org.apache.commons.lang3.StringUtils;
 import org.bson.types.ObjectId;
@@ -16,6 +17,8 @@ public class SearchHistory extends BaseEntity implements Serializable{
 	public String keyword;
 	
 	public long times;//访问次数
+	
+	public String lastDigTime;
 	
 	
 }

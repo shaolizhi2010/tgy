@@ -5,6 +5,16 @@ import org.apache.commons.lang3.StringUtils;
 
 public class URLUtils {
 	
+	public static boolean isValid(String url){
+		if(StringUtils.isBlank(url)){
+			return false;
+		}
+		if (url.matches("^.+[.].+$")) {// 是url
+			return true;
+		}
+		return false;
+	}
+	
 	/**
 	 * 将不规范的url 转为 规范的, http开头的
 	 * @param url

@@ -19,7 +19,7 @@
 	
 		if (showFolder != null) {//通过tagname取
 			tagName = showFolder.name;
-			links = lService.searchByTagName(tagName);
+			links = lService.getByName(tagName);
 		}
 		if(CollectionUtils.isEmpty(links)){ //无限制条件，取分数最多的
 			links = lService.list(linkCount);	

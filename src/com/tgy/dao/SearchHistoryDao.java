@@ -1,7 +1,6 @@
 package com.tgy.dao;
 
 import org.bson.types.ObjectId;
-import org.mongodb.morphia.dao.BasicDAO;
 import org.mongodb.morphia.query.Query;
 
 import com.tgy.App;

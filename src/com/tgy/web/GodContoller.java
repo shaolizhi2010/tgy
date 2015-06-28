@@ -21,6 +21,7 @@ import com.tgy.service.PageService;
 import com.tgy.statistic.entity.Link;
 import com.tgy.util.BingSearchSevice;
 import com.tgy.util.C;
+import com.tgy.util.ConditionMap;
 import com.tgy.util.U;
 
 /**
@@ -61,23 +62,32 @@ public class GodContoller extends HttpServlet {
 				}
 			 
 			}
-			//结果太少，则通过 link表 的 name字段查询
-			if(returnList.size()<5){
-				LinkDao lDao = new LinkDao();
-				List<Link> links =  lDao.getByName(inputValue);
-				
-				for(Link l : links){
-					addToResult(returnList, linkToMap(l));
-				}
-				//结果太少，则通过link表的 url字段查询
-				if(returnList.size()<5){
-					//get by url
-					links =  lDao.searchByUrl(inputValue)   ;
-					for(Link l : links){
-						addToResult(returnList, linkToMap(l));
-					}
-				}
+			//share page
+			 PageService ps = new PageService();
+			 List<Page> pages = ps.searchSharePage(inputValue,null,null, null, 0, 10);
+			
+			for(Page p : pages){
+				addToResult(returnList, pageToMap(p) );
 			}
+			 
+			 
+//			//结果太少，则通过 link表 的 name字段查询
+//			if(returnList.size()<5){
+//				LinkDao lDao = new LinkDao();
+//				List<Link> links =  lDao.getByName(inputValue);
+//				
+//				for(Link l : links){
+//					addToResult(returnList, linkToMap(l));
+//				}
+//				//结果太少，则通过link表的 url字段查询
+//				if(returnList.size()<5){
+//					//get by url
+//					links =  lDao.searchByUrl(inputValue)   ;
+//					for(Link l : links){
+//						addToResult(returnList, linkToMap(l));
+//					}
+//				}
+//			}
 			
 //			if(returnList.size()<5){
 //				//搜索网盘

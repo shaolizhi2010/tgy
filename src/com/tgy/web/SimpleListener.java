@@ -11,6 +11,7 @@ import javax.servlet.annotation.WebListener;
 import com.tgy.App;
 import com.tgy.service.article.HaoSouWemediaService;
 import com.tgy.service.article.HuxiuDigService;
+import com.tgy.service.sitemap.SitemapGenerator;
 import com.tgy.service.ziyuan.BaiduPanDigService;
 import com.tgy.timer.GetPageInfoTask;
 import com.tgy.timer.StatisticTask;
@@ -24,6 +25,7 @@ public class SimpleListener implements ServletContextListener {
 	Timer timer4 = new Timer();
 	Timer timer5 = new Timer();
 	Timer timer6 = new Timer();
+	Timer timer7 = new Timer();
 	
 	@Override
 	public void contextDestroyed(ServletContextEvent arg0) {
@@ -33,6 +35,7 @@ public class SimpleListener implements ServletContextListener {
 		timer4.cancel();
 		timer5.cancel();
 		timer6.cancel();
+		timer7.cancel();
 
 	}
 
@@ -44,6 +47,7 @@ public class SimpleListener implements ServletContextListener {
 		App.basePath = basePath;
 		
 		// 取page info
+		/*
 		GetPageInfoTask getPageInfoTask = new GetPageInfoTask();
  	
 		Calendar calendar = Calendar.getInstance();
@@ -52,6 +56,7 @@ public class SimpleListener implements ServletContextListener {
 		
 		timer1.schedule(getPageInfoTask, calendar.getTime(),
 				24 * 60 * 60 * 1000); // 24小时执行一次
+				*/
 		//timer1.schedule(getPageInfoTask, 0);// 立刻开始
 		
 		
@@ -66,65 +71,67 @@ public class SimpleListener implements ServletContextListener {
 //				24 * 60 * 60 * 1000); // 24小时执行一次
 		//timer2.schedule(statisticTask, 0);// 立刻开始
 	
-		// 抓360 首页
-		Calendar calendarArticle = Calendar.getInstance();
-		calendarArticle.set(Calendar.HOUR, 30);// 
-		calendarArticle.set(Calendar.MINUTE,5);//
-		timer3.schedule(new TimerTask() {
-			@Override
-			public void run() {
-				int hour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY);
-				if(1<hour && hour<5){//凌晨1-5点休息
-					return;
-				}
-				new HaoSouWemediaService().digAndSave("自媒体","http://wemedia.haosou.com/"); //自动抓取文章
-			}
-		}, calendarArticle.getTime(), 5 * 60 * 1000); // 
+//		// 抓360 首页
+//		Calendar calendarArticle = Calendar.getInstance();
+//		calendarArticle.set(Calendar.HOUR, 6);// 
+//		calendarArticle.set(Calendar.MINUTE,5);//
+//		timer3.schedule(new TimerTask() {
+//			@Override
+//			public void run() {
+//				int hour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY);
+//				if(1<hour && hour<5){//凌晨1-5点休息
+//					return;
+//				}
+//				new HaoSouWemediaService().digAndSave("自媒体","http://wemedia.haosou.com/"); //自动抓取文章
+//			}
+//		}, calendarArticle.getTime(), 60 * 60 * 1000); // 
 	
-		// 抓360
-		Calendar calendarArticle2 = Calendar.getInstance();
-		calendarArticle2.set(Calendar.HOUR, 28);// 
-		calendarArticle2.set(Calendar.MINUTE,5);//
-		timer4.schedule(new TimerTask() {
-			@Override
-			public void run() {
-				int hour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY);
-				if(1<hour && hour<5){//凌晨1-5点休息
-					return;
-				}
-				HaoSouWemediaService ms = new HaoSouWemediaService();
-				
-				ms.digAndSaveAllFiled("教育","母婴","健康","摄影","财经","科技","命理","旅游"
-						,"法律","美食","科普","幽默","游戏","文化","动漫","情感","两性","体育"
-						,"时评","娱乐");
-			}
-		}, calendarArticle2.getTime()); // 
+//		// 抓360
+//		Calendar calendarArticle2 = Calendar.getInstance();
+//		calendarArticle2.set(Calendar.HOUR, 7);// 
+//		calendarArticle2.set(Calendar.MINUTE,5);//
+//		timer4.schedule(new TimerTask() {
+//			@Override
+//			public void run() {
+//				int hour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY);
+//				if( (16<hour && hour<24)){//高峰时段休息休息
+//				//if( (1<hour && hour<8) ){//半夜不用抓了，没人发帖
+//					return;
+//				}
+//				HaoSouWemediaService ms = new HaoSouWemediaService();
+//				
+//				ms.digAndSaveAllFiled("教育","母婴","健康","摄影","财经","科技","命理","旅游"
+//						,"法律","美食","科普","幽默","游戏","文化","动漫","情感","两性","体育"
+//						,"时评","娱乐");
+//			}
+//		}, calendarArticle2.getTime()); // 
 		 
 		
-		//抓虎嗅
-		timer5.schedule(new TimerTask() {
-			@Override
-			public void run() {
-				int hour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY);
-				if(1<hour && hour<5){//凌晨1-5点休息
-					return;
-				}
-				new HuxiuDigService().digAndSave("互联网"); //自动抓取文章
-			}
-		}, 5*60, 8*60 * 60 * 1000); // 
+//		//抓虎嗅
+//		timer5.schedule(new TimerTask() {
+//			@Override
+//			public void run() {
+//				int hour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY);
+//				if(1<hour && hour<5){//凌晨1-5点休息
+//					return;
+//				}
+//				new HuxiuDigService().digAndSave("互联网"); //自动抓取文章
+//			}
+//		}, 5*60*1000, 8*60 * 60 * 1000); // 
 		
 		// n小时左右执行一次
 		timer6.schedule(new TimerTask() {
 			@Override
 			public void run() {
 				int hour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY);
-				if(1<hour && hour<8){//凌晨1-8点休息
+				//if( (16<hour && hour<18)||(20<hour && hour<24)){//高峰时段休息休息
+				if( (1<hour && hour<8) ){//半夜不用抓了，没人发帖
 					return;
 				}
-				//"小说下载-小说", "动漫","云盘资源共享-百度网盘","高清下载", 
-				new BaiduPanDigService().digAndSave("百度网盘", "资源-百度网盘","英剧", "美剧资源站-美剧", "美剧-美剧", "电影-电影");//自动抓取百度云资源
+				//"小说下载-小说", "动漫","云盘资源共享-百度网盘","高清下载", 动漫资源
+				new BaiduPanDigService().digAndSave("百度网盘", "腐女动漫-动漫","资源-百度网盘","英剧","动漫网盘-动漫", "美剧资源站-美剧","动漫资源-动漫", "行尸走肉","后宫动漫-动漫","权利的游戏","斯巴达克斯","生活大爆炸","美剧-美剧", "电影-电影");//自动抓取百度云资源
 			}
-		}, 11*60, 2*60 * 60 * 1000); 
+		}, 1*11*60 *1000, 2*60 * 60 * 1000); 
 		
 		//自动抓取百度云资源
 //		DigBaiduYunTask baiduYunTask = new DigBaiduYunTask();
@@ -146,6 +153,18 @@ public class SimpleListener implements ServletContextListener {
 //				24 * 60 * 60 * 1000); // 24小时执行一次
 		
 		
+		
+		// 自动生成sitemap
+		Calendar calendarArticle7 = Calendar.getInstance();
+		calendarArticle7.set(Calendar.HOUR, 2);// 
+		calendarArticle7.set(Calendar.MINUTE,5);//
+		timer7.schedule(new TimerTask() {
+			@Override
+			public void run() {
+				SitemapGenerator sg = new SitemapGenerator();
+				sg.gen();
+			}
+		}, calendarArticle7.getTime()); // 
 		
 		//timer2.schedule(statisticTask, 0);// 立刻开始
 	}

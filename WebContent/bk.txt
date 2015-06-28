@@ -1,3 +1,228 @@
+<div class="col-sm-12" >
+			
+			<%
+			int rad = new Random().nextInt(3);
+			if(rad==0 || rad==1){
+				%>
+			<a class="col-sm-12"  href="http://bobo.163.com/recommend/liveRoom?m=QQzone07&sss=bobologin" style="text-align:center;">
+				<img class="img-responsive" src="http://playad.xjmg.com/upload/ADImage/D/95/D956F339D4.gif"/>
+			</a> 			
+				
+				<%
+			}
+			else if(rad==11){
+				%>
+			<a class="col-sm-12"  href="http://download.pplive.com/PPTV_forqd2043.exe" style="text-align:center;">
+				<img class="img-responsive" src="http://playad.xjmg.com/upload/ADImage/9/7C/97C2333D45.jpg"/>
+			</a> 				
+				
+				<%
+			}
+			else{
+				 %>
+				 
+			<a class="col-sm-12"  href="http://down2.uc.cn/pcbrowser/down.php?id=101&pid=4510&type=downloader" style="text-align:center;">
+				<img class="img-responsive" src="http://playad.xjmg.com/upload/ADImage/D/AA/DAAE06A231.jpg"/>
+			</a> 
+				 <%
+			}
+			%>
+			
+
+			
+
+			 
+			</div>
+
+		<!--  ad begin -->
+ 	<%
+ 	if(false){//用户指定分类查看时，广告不现实 //StringUtils.isBlank(tagName)
+ 		%>
+ 		
+ 		 <div class="col-sm-12 container article-container no-padding ">
+	  
+			<div class="col-sm-6 col-sm-offset-2   no-padding article-type  ">
+						 <a   href='javascript:void(0)' class="article-tag ">分类：网购发现</a>
+			</div>
+			<div class="col-sm-12 no-padding">
+				<div class="col-sm-2 col-xs-0  no-padding">
+					
+				</div>
+				<div class="col-sm-10 col-xs-12 no-padding">
+					
+					<a class="col-sm-12 article-title no-padding" href="http://www.amazon.cn/gp/product/B00HPU34M4/?ie=UTF8&camp=536&creative=3200&linkCode=ur2&pf_rd_i=899254051&pf_rd_m=A1AJ19PSB66TGU&pf_rd_p=247027532&pf_rd_r=1Y2BCQH1MRFZP1T6RXKP&pf_rd_s=center-2&pf_rd_t=101&tag=bijia365-23"
+						 target="_blank">
+						<span class="article-title-a"> 小米(MI) 10400mAh 原装正品移动电源 LG/三星进口电芯 铝合金外壳【银色】 </span>
+					 
+					</a>
+					<div class="col-sm-12 article-summry-container no-padding">
+							小米的移动电源，官方价69， 
+							10400mAh的电池容量 够大, 普通手机可充电2-5次, LG/三星 锂离子电芯<br>
+							小巧便携，全铝合金金属外壳<br>
+							</div>
+					<div class="col-sm-12 no-padding">
+							<a class="col-sm-3 no-padding" target="_blank" href="http://www.amazon.cn/gp/product/B00HPU34M4/?ie=UTF8&camp=536&creative=3200&linkCode=ur2&pf_rd_i=899254051&pf_rd_m=A1AJ19PSB66TGU&pf_rd_p=247027532&pf_rd_r=1Y2BCQH1MRFZP1T6RXKP&pf_rd_s=center-2&pf_rd_t=101&tag=bijia365-23 " 
+							title="小米(MI) 10400mAh 原装正品移动电源 LG/三星进口电芯 铝合金外壳【银色】">
+								<img class="img-responsive col-sm-12 no-padding article-img" 
+									data-original="http://ec4.images-amazon.com/images/I/81xR1i8J-OL._SL1500_.jpg " alt="  " 
+									src="  " style="display: block;">
+							</a>
+						</div>
+						<div class="col-sm-12" style="height: 20px;"></div>
+					<div class="col-sm-12 container no-padding">
+						<div class="col-sm-6 col-xs-12 article-time no-padding">
+							<span class="article-time-span"><%=U.dateTime() %></span> 
+						</div>
+						<div class="col-sm-6 col-xs-12 no-padding article-author pull-right ">
+							<!-- 
+							<a target="_blank" class=" " href="http://weibo.com/1454525442"  title = "范亚飞老师" >
+								<img  width="30"  class="img-responsive article-author-img" data-original="http://p8.qhimg.com/dmfd/70_70_/t01102c860173353887.jpg " alt=' 11个国内找不到的自学免费英语网站' >
+							</a>
+							-->
+							<a target="_blank" class="article-source-url" href="javascript:void(0)" title="">
+								<span class="article-authorName-span ">来源：热购 的网址分享</span>
+							</a>
+						 
+						</div>
+					</div>
+			
+					<div class="col-sm-6 article-author-head  no-padding"></div>
+					<div class="col-sm-6 article-authorName no-padding">
+			
+					</div>
+				</div>
+			</div>
+		</div>
+ 		
+ 		<%
+ 	}
+ 	%>
+ 	
+
+ 	<div id="indexAll-slide-ads" class="  col-sm-12 no-padding" style="background: #fff;" >
+	
+	</div>
+ 	
+ 	
+ 	<!-- ad end  -->
+	
+	
+	//alert(  $('#share_pageUrl').val());
+	//alert(  $('#tagName').val());
+	//alert(  $('#type').val());
+	//myAjax("/page/create/share", {url:$("#share_pageUrl").val(),tagName:$("#tagName").val(),type:$("#type").val()});
+	alert( document.getElementsByTagName("iframe")[0] );// .contents().find( "input" ).eq(0) 
+	var iframe = document.getElementsByTagName("iframe")[0];
+	var iframeWindow =  iframe.contentWindow? iframe.contentWindow : iframe.contentDocument.defaultView;
+	alert(iframeWindow.getElementsByTagName('input')[0]);
+
+
+
+{var url_prefix = "http://ads.union.jd.com/pre?callback=callback";
+function parallelLoadScripts(scripts, callback) {
+	if (typeof (scripts) != "object") {
+		var scripts = [ scripts ]
+	}
+	var HEAD = document.getElementsByTagName("head").item(0)
+			|| document.documentElement, s = new Array(), loaded = 0;
+	for ( var i = 0; i < scripts.length; i++) {
+		s[i] = document.createElement("script");
+		s[i].setAttribute("type", "text/javascript");
+		s[i].onload = s[i].onreadystatechange = function() {
+			if (!/*@cc_on!@*/0 || this.readyState == "loaded" || this.readyState == "complete") {
+				loaded++;
+				if (loaded == scripts.length && typeof (callback) == "function") {
+					callback()
+				}
+			}
+		};
+		s[i].setAttribute("src", scripts[i]+"&t="+new Date().getTime());
+		HEAD.appendChild(s[i])
+	}
+}
+function insertAfter(c, b) {
+	var a = b.parentNode;
+	if (a.lastChild == b) {
+		a.appendChild(c)
+	} else {
+		a.insertBefore(c, b.nextSibling)
+	}
+}
+function callback(data) {
+	eval(data)
+}
+function requestApi() {
+	var union = {
+		pid	: jd_union_pid,
+		cuid: "",
+		euid: ""
+	};
+	if("undefined" != typeof jd_union_cuid){
+		union.cuid = jd_union_cuid;
+	}
+	if("undefined" != typeof jd_union_euid){
+		union.euid = jd_union_euid;
+	}
+	var userData = {
+		browser : navigator,
+		charSet : function() {
+			var charSet = "";
+			var oType = "";
+			if (navigator.userAgent.indexOf("MSIE") != -1) {
+				oType = "IE"
+			} else {
+				if (navigator.userAgent.indexOf("Firefox") != -1) {
+					oType = "FIREFOX"
+				}
+			}
+			switch (oType) {
+			case "IE":
+				charSet = document.charset;
+				break;
+			case "FIREFOX":
+				charSet = document.characterSet;
+				break;
+			default:
+				charSet = document.characterSet;
+				break
+			}
+			return charSet
+		},
+		windowSize : window.screen.width + "," + window.screen.height,
+		documentSize : document.body.clientWidth + "," + document.body.clientHeight
+	};
+	var scripts = document.getElementsByTagName("script");
+	var script = scripts[scripts.length - 1];
+	var time = new Date().getTime();
+	var apiUrl = url_prefix + "&pid=" + union.pid + "&cuid="+union.cuid + "&euid=" + union.euid +"&cb=jd" + time;
+	parallelLoadScripts(apiUrl, function() {
+		var adUrl = eval("jd" + time);
+		if (adUrl) {
+			var w = 0,h = 0;
+			var regW = /&w=\d+/;
+			var regH = /&h=\d+/;
+			var regNum = /\d+/;
+			w = regNum.exec(regW.exec(adUrl));
+			h = regNum.exec(regH.exec(adUrl));
+			if(!w){w = window.screen.width;}
+			if(!h){h = window.screen.height;}
+			var siteSize = w+","+h;
+			var m_content = document.createElement("iframe");
+			m_content.scrolling = "no";
+			m_content.setAttribute("frameborder", "0", 0);
+			var iframeSrc = adUrl;
+			iframeSrc += "&charSet=" + userData.charSet();
+			iframeSrc += "&windowSize=" + siteSize;
+			m_content.width = w/1<50?"100%": w + "px";
+			m_content.height = h/1<50?"100%":h + "px";
+			m_content.src = iframeSrc;
+			insertAfter(m_content, script);
+			alert(iframeSrc);
+		}
+	})
+}
+requestApi();}
+
 -moz-border-radius: 100px;-webkit-border-radius: 100px;border-radius: 100px;
 	$.ajax(
 			{

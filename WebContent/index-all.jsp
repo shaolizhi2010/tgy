@@ -1,15 +1,17 @@
+<%@page import="com.tgy.entity.TopicPic"%>
+<%@page import="com.tgy.entity.TopicSumary"%>
+<%@page import="org.apache.commons.collections.CollectionUtils"%>
+<%@page import="com.tgy.entity.Topic"%>
+<%@page import="com.tgy.service.TopicService"%>
 <%@page import="org.apache.commons.lang3.EnumUtils"%>
 <%@page import="com.tgy.entity.Tag"%>
 <%@page import="com.tgy.statistic.service.TagService"%>
 <%@page import="org.apache.commons.lang3.math.NumberUtils"%>
 <%@page import="com.tgy.util.PageType"%>
-<%@page import="com.tgy.entity.group.InterestGroupPage"%>
 <%@page import="java.util.Random"%>
 <%@ page language="java" pageEncoding="UTF-8"%>
 <%@ page trimDirectiveWhitespaces="true" %> 
-<%@page import="com.tgy.entity.User"%>
 <%@page import="java.util.ArrayList"%>
-<%@page import="com.tgy.web.vo.BookmarkData"%>
 <%@page import="com.tgy.util.C"%>
 <%@page import="com.tgy.entity.Folder"%>
 <%@page import="com.tgy.util.U"%>
@@ -18,10 +20,18 @@
 <%@page import="org.apache.commons.lang3.StringUtils"%>
  
 <%@include file="part/common.jsp" %>
+<%
+//String url = request.getAttribute("javax.servlet.forward.request_uri").toString();
+//System.out.println("url : "+ url ) ;
+//String queryString  = request.getQueryString();
+
+%>
 
 <%
-	List<InterestGroupPage> pages = (List<InterestGroupPage>)U.paramList(request, "pages");
-	String tagName = (String)request.getAttribute("tagName");
+	List<Page> pages = (List<Page>)U.paramList(request, "pages");
+	String tagName = request.getAttribute("tagName")!=null?(String)request.getAttribute("tagName"):"";
+	
+	String firstLetter =  request.getAttribute("firstLetter")!=null?(String)request.getAttribute("firstLetter"):"";
 	String type =  request.getAttribute("type")!=null?(String)request.getAttribute("type"):"";
 	String pageID = type;
 	List<Tag> tags = new ArrayList<Tag>();
@@ -45,66 +55,141 @@
 <!DOCTYPE html>
 <html  >
 <head lang="en">
-<jsp:include page="part/head-meta.jsp" />
+<jsp:include page="part/head-meta-indexAll.jsp" />
 <jsp:include page="part/importAtHead.jsp" />
 </head>
 <body>
-
+	
+	<input id="tagName" type="hidden" value="<%=tagName%>">
+	<input id="type" type="hidden" value="<%=type%>">
 	
 	<jsp:include page="part/head.jsp" />
 	<jsp:include page="part/public-tabs.jsp" />
  	
 	<!-- 书签主页面开始 -->
-	<div class="container col-sm-12 clearfix " style="padding-top: 0px;">  
+	<div class="container col-sm-12 clearfix " style="padding-top: 0px;padding-left: 0px;">  
+	
+
+	
 		<!-------- 书签主页面 --------->
-		<div id="pageMain" class="col-sm-8 no-padding" style=" padding-right: 30px; ">
+		<div id="pageMain" class="col-sm-8 col-xs-12 no-padding  " >
 		
-		<div class="col-sm-12 hidden-xs" style="margin-top: 10px; ">
-			  	<div class="col-sm-12 no-padding" style="margin-top: 10px;">
-			  		<span style=" color:#747F8C;font-size: 20px;">热点分类</span>
-			  	</div>
-			  	
-			  	<div class="col-sm-12   container " style="padding: 10px;">
-		  		<%
-		  			for(Tag t : tags){
-		  				String selectedClass = "";
-		  				if(t.name.equals(tagName)){ selectedClass = "color:#fff;background-color: #65c330;";}
-		  				else{selectedClass = "";}
-		  				%>
-		  				<a class="index-tag" href="<%=request.getContextPath()%>/share/<%=type %>?tagName=<%=t.name %>" 
-							style="<%=selectedClass %> ">
-							 <%=t.name %>
-						</a>
-		  				
-		  				<%
-		  			}
-		  		%>
+			<div class="col-sm-12 no-padding  " >
+				<jsp:include page="part/indexAll-tabs.jsp" />
+			</div>
+			
+			<div class="col-sm-12    " style=" padding-right: 30px; ">
+				<div id="indexAll-tags" class="col-sm-12 " style="margin-top: 10px; display: none;">
+			
+				  	<div class="col-sm-12   container " style="padding: 10px;">
+			  		<%
+			  			for(Tag t : tags){
+			  				String selectedClass = "";
+			  				if(t.name.equals(tagName)){ selectedClass = "color:#fff;background-color: #65c330;";}
+			  				else{selectedClass = "";}
+			  				%>
+			  				<a class="index-tag" href="<%=request.getContextPath()%>/share/<%=type %>?tagName=<%=t.name %> " 
+								style="<%=selectedClass %> ">
+								 <%=t.name %>
+							</a>
+			  				
+			  				<%
+			  			}
+			  		%>
 						 
-		  	</div>
+		  			</div>
 		  	
-		  </div>
-		  	<div class="col-sm-12" style="border: 1px solid #eee;"></div>
+		 		 </div>
+		 		 
+		 		 <%
+		 		 if(StringUtils.equals(type, PageType.resource.name())){
+		 			 %>
+		 			 <div id="indexAll-firstLetters" class="col-sm-12 container no-padding " style="display: none;">
+			 		 	<%
+			 		 	for(int i=(int)'A';i<=(int)'Z';i++){
+							%>
+							<a href="<%=request.getContextPath()%>/share/<%=type %>?tagName=<%=tagName %>&letter=<%=(char)(i+32) %>" class="  index-tag"><%=(char)i %> </a>
+							<%
+			 		 		 
+						}
+						%>
+			 		 </div>
+		 			 <%
+		 		 }
+		 		 %>
+		 		 
+			  	<div class="col-sm-12" style="border: 1px solid #f9f9f9;"></div>
+			
+			  	<div class="col-sm-12" style="margin-top: 10px;"></div>
+			 	<div class="col-sm-12 no-padding"  >
+			 		<span style=" color:#747F8C;font-size: 20px;">网盘分享 - <%=pageName%></span>
+			 		<a class="pull-right " href="#create-share-link" >
+			 			<span class=" myBtn" style="">[发布分享]</span></a>
+			  	</div>
+			  	<!-- 
+			  	 	<span style=" color:#333;font-size: 13px;font-weight: bold;">网友分享的文章</span>
+			  	<span style=" color:#747F8C;font-size: 20px;">网友分享的文章</span>
+			  	<div class="col-sm-12  " style="border: 1px solid #eee;"></div>
+			  	 -->
+		  		<div class="col-sm-12   " style="margin-top: 10px;"></div>
+		  	
+	 			<jsp:include page="part/page-part2.jsp"/>
+	 			
+	 			<div class="col-sm-12   " style="margin-top: 10px;"></div>
+			</div>
+			<div class="col-sm-12   " style="margin-top: 50px;"></div>
+			<div id="create-share-link" class="col-sm-12  " style=" padding: 30px ;  ">
+				<h2>给小伙伴们发福利，分享我的网盘资源链接</h2>
+				<div  class="col-md-5    " style="padding-left: 0px;" >
+					<input id="share_pageUrl"  class=" form-control enterInput"  
+						style=" border-radius:5px;border:1px solid #ddd;height: 40px;" placeholder="资源链接"  type="text" value=""/>
+				</div>
+				<div  class="col-md-5" style="padding-left: 0px;" >
+					<input id="share_pageName"  class=" form-control enterInput"  
+						style=" border-radius:5px;border:1px solid #ddd;height: 40px;" placeholder="资源标题"  type="text" value=""/>
+				</div>
+				<div class="col-sm-2  " style="padding-left: 0px;" >
+					<input id="create-share-link-btn" class="btn btn-primary col-sm-12" style="height: 40px;border-radius:5px;"  
+						 type="button" value="发布">
+				</div>
+			</div>
+			<div class="col-sm-12   " style="margin-top: 50px;"></div>
+			
+		 
 		
-		  	<div class="col-sm-12" style="margin-top: 10px;"></div>
-		 	<span style=" color:#747F8C;font-size: 20px;">网址分享 - <%=pageName%></span>
-		  	<!-- 
-		  	 	<span style=" color:#333;font-size: 13px;font-weight: bold;">网友分享的文章</span>
-		  	<span style=" color:#747F8C;font-size: 20px;">网友分享的文章</span>
-		  	<div class="col-sm-12  " style="border: 1px solid #eee;"></div>
-		  	 -->
-		  	<div class="col-sm-12   " style="margin-top: 10px;"></div>
-		  	
-	 		<jsp:include page="part/page-part2.jsp"/>
 		</div>
 		<!--------  书签列表页面 end  --->
 		
 		<!-- 显示推荐页面开始 -->
-		<div class="col-sm-4" style="border-left:1px solid #eee;padding-left: 10px; ">
+		<div class="col-sm-4 col-xs-12" style="border-left:1px solid #eee;padding-left: 10px; ">
+			
+			<div class="col-sm-12   " style="margin-top: 20px;"></div>
+			
+ 
+			<jsp:include page="topic/topic-slide.jsp">
+		    	<jsp:param name="tagName" value= "<%=tagName%>" />
+		    </jsp:include>
+ 
+			
+			
+			<div class="col-sm-10" style="height: 50px;"></div>
+			
+			<jsp:include page="part/page-slide-tags.jsp"/>
+			
+			<div class="col-sm-12   " style="margin-top: 20px;"></div>
+			
+			<jsp:include page="part/page-slide-hotKeywords.jsp"/>
+			
+			<jsp:include page="part/page-slide-firstLetter.jsp"/>
+			
+			<jsp:include page="part/page-slide-hotSharePages.jsp"/>
+			
 			<div id="discuss-container" class="  col-sm-12">
 				<jsp:include page="part/discuss/all-discuss.jsp">
 			    	<jsp:param name="sourceBoardName" value= "首页" />
 			    </jsp:include>
 			</div>		
+			
 		</div>
 		<!-- 显示推荐页面结束 -->
 
@@ -115,11 +200,12 @@
 	<input type="hidden" id="pageID" value="index-<%=pageID%>">
 	
 	<jsp:include page="part/foot.jsp" />
-	<jsp:include page="part/importAtFoot.jsp" />
 	
 	<script src="<%=request.getContextPath()%>/myjs/common.js"  ></script>
+	<script src="<%=request.getContextPath()%>/myjs/index-all.js" defer="defer"></script>
+	<script src="<%=request.getContextPath()%>/myjs/reply.js" defer="defer"></script>
+	<script src="<%=request.getContextPath()%>/myjs/topic.js" defer="defer"></script>
 	<script src="<%=request.getContextPath()%>/myjs/user-info.js" defer="defer"></script>
-	<script src="<%=request.getContextPath()%>/myjs/index-1.js" defer="defer"></script>
 </body>
 
 </html>

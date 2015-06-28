@@ -1,7 +1,6 @@
 <%@page import="com.tgy.App"%>
 <%@page import="com.tgy.statistic.entity.Link"%>
 <%@page import="com.tgy.statistic.service.LinkService"%>
-<%@page import="com.tgy.statistic.entity.Tag"%>
 <%@page import="com.tgy.statistic.service.TagService"%>
 <%@page import="com.tgy.dao.FolderDao"%>
 <%@page import="com.tgy.util.URLUtils"%>

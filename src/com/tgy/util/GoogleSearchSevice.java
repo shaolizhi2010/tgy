@@ -33,25 +33,26 @@ public class GoogleSearchSevice extends BaseSearchService {
 		try {
 			
 			//搜索历史 记录到后台
-			SearchHistoryDao dao = new SearchHistoryDao();
+//			SearchHistoryDao dao = new SearchHistoryDao();
+//			
+//			SearchHistory sh = dao.byKeyword(keyword);
+//			if(sh==null){
+//				sh = new SearchHistory();
+//				sh.keyword = keyword;
+//				sh.createDate = U.dateTime();
+//				sh.times=1; 
+//				//sh.userID = user
+//			}
+//			else{
+//				sh.times++;
+//			}
+//			dao.save(sh);
 			
-			SearchHistory sh = dao.byKeyword(keyword);
-			if(sh==null){
-				sh = new SearchHistory();
-				sh.keyword = keyword;
-				sh.createDate = U.dateTime();
-				sh.times=1; 
-				//sh.userID = user
-			}
-			else{
-				sh.times++;
-			}
-			dao.save(sh);
-			
+			//http://209.85.228.19/
 			
 			List<Page>  results = new ArrayList<>();
 			keyword = URLEncoder.encode(keyword,"utf-8");
-			String url = "http://www.google.com.hk/search?q="+keyword+"+site%3Apan.baidu.com"+"&start="+start;
+			String url = "http://209.85.228.19/search?q="+keyword+"+site%3Apan.baidu.com"+"&start="+start;
 			
 			//String s  = SimpleConnecter.connect(url, "utf-8");
 			//String s  = IOUtils.toString(new URL(url));
@@ -66,8 +67,8 @@ public class GoogleSearchSevice extends BaseSearchService {
 			httpget.setHeader("Accept-Charset", "UTF-8,GBK;q=0.7");
 			httpget.setHeader("Referer", "www.google.com.hk");  
 			
-			HttpHost proxy = new HttpHost("209.85.228.22",80, null);  // /
-			httpclient.getParams().setParameter(ConnRouteParams.DEFAULT_PROXY, proxy);  
+//			HttpHost proxy = new HttpHost("209.85.228.22",80, null);  // /
+//			httpclient.getParams().setParameter(ConnRouteParams.DEFAULT_PROXY, proxy);  
 			
 			HttpResponse response = httpclient.execute(httpget);
 //
@@ -111,7 +112,7 @@ public class GoogleSearchSevice extends BaseSearchService {
 			}
 			return results;
 		} catch (Exception e) {
-			System.out.println("WebInfoUtil Exception : "+e.getMessage());
+			System.out.println("GoogleSearch Exception : "+e.getMessage());
 			return new ArrayList<>();
 		}
 	}

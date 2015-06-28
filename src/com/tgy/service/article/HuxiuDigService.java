@@ -157,7 +157,7 @@ public class HuxiuDigService {
 						}
 						a.title = title;
 						a.name = title;
-						a.summry = title;// info.description;
+						a.summary = title;// info.description;
 						a.description = title;//info.description;
 						a.url = href;
 						a.imgSrc = imgUrl;

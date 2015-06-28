@@ -4,7 +4,7 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
 
 <%
-new HaoSouWemediaService().digAndSave();
+//new HaoSouWemediaService().digAndSave();
 new BaiduPanDigService().digAndSave();
 
 %>

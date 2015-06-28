@@ -3,6 +3,7 @@ package com.tgy.util;
 import java.io.File;
 import java.io.InputStream;
 import java.net.URI;
+import java.net.URLEncoder;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
@@ -55,12 +56,13 @@ public class WebInfoUtil {
 			
 			String baseUrl = URLUtils.getBaseUrl(url);
 			String formatedUrl = URLUtils.getFormatedUrl(url);
+			//formatedUrl = URLEncoder.encode(formatedUrl, "UTF-8");
 			httpget = new HttpGet(formatedUrl);
 			httpget.setHeader("Accept",
 					"text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8");
 			 httpget.setHeader("Accept-Language", "zh-CN");
 			httpget.setHeader("Accept-Charset", "UTF-8");
-			// httpget.setHeader("Referer", baseUrl); // 模拟浏览器//TODO
+			httpget.setHeader("Referer", baseUrl); // 模拟浏览器//TODO
 
 			// L.trace(null,"Connecter start download page, time is " +
 			// starttime );
@@ -91,9 +93,9 @@ public class WebInfoUtil {
 			info.description = StringUtils.trim(getDescription(contentNew));
 			
 			// icon操作放在后边，加快前台返回速度
-			if(getIconFlag){//TODO for test 
-				info.iconPath = StringUtils.trim(getIconPath(contentNew,url));
-			}
+			//if(getIconFlag){//TODO for test 
+			//	info.iconPath = StringUtils.trim(getIconPath(contentNew,url));
+			//}
 			
 
 			//System.out.println( "WebInfoUtil 总共时间 "+(

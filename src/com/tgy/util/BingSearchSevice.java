@@ -25,9 +25,9 @@ import com.tgy.entity.Page;
 import com.tgy.entity.SearchHistory;
 import com.tgy.statistic.entity.Link;
 
-public class BingSearchSevice {
+public class BingSearchSevice extends BaseSearchService {
 
-	public List<Page> search(String keyword ) {
+	public List<Page> search(String keyword,int start ) {
 		try {
 			
 			//搜索历史 记录到后台
@@ -48,7 +48,7 @@ public class BingSearchSevice {
 			
 			List<Page>  results = new ArrayList<>();
 			keyword = URLEncoder.encode(keyword,"utf-8");
-			String url = "http://cn.bing.com/search?q="+keyword+"++site%3Apan.baidu.com";
+			String url = "http://cn.bing.com/search?q="+keyword+"++site%3Apan.baidu.com&first="+start;
 			
 //			String s  = SimpleConnecter.connect(url, "utf-8");
 			
@@ -173,5 +173,8 @@ public class BingSearchSevice {
 		// (System.currentTimeMillis() -start));
 		return pageSource;
 	}
+
+
+ 
 
 }

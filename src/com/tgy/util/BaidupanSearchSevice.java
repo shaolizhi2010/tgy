@@ -6,7 +6,6 @@ import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -24,7 +23,6 @@ import com.tgy.App;
 import com.tgy.dao.SearchHistoryDao;
 import com.tgy.entity.Page;
 import com.tgy.entity.SearchHistory;
-import com.tgy.statistic.entity.Link;
 
 //baidupan.net
 public class BaidupanSearchSevice extends BaseSearchService {
