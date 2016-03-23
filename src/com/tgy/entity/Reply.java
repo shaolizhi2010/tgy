@@ -23,5 +23,5 @@ public class Reply extends BaseEntity implements Serializable{
 	@Reference(ignoreMissing = true)
 	public User fromUser;
 	
-	
+	public String type; //url text
 }

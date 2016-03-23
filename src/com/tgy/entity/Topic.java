@@ -15,6 +15,9 @@ public class Topic extends BaseEntity {
 
 	public String createrUserID;
 	public String createrUserName;
+	
+	public boolean isTopLevel;	//是否是顶层话题，如 动漫 美剧 电影等
+	public String parentTopicID;
 
 }
 

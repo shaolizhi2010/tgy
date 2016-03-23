@@ -1,3 +1,4 @@
+<%@page import="com.tgy.util.FuliDou"%>
 <%@page import="org.apache.commons.lang3.StringUtils"%>
 <%@page import="com.tgy.entity.TopicPic"%>
 <%@page import="com.tgy.entity.TopicSumary"%>
@@ -22,12 +23,12 @@
 
 	<div class="col-sm-11   no-padding">
 		<div id="topic-tilte-container" class="col-sm-12">
-			<h1><%=tagName%></h1>
+			<h1>专题:<%=tagName%></h1>
 		</div>
 
 
 		<div id="topic-summary-container" class="col-sm-12">
-			<h3>资源信息:</h3>
+			<h3>相关介绍:</h3>
 			<div id="topic-summary-text" class="col-sm-12">
 				<%
 					TopicService ts = new TopicService();
@@ -38,7 +39,7 @@
 					}
 					if (CollectionUtils.isEmpty(topic.sumaries)) {
 				%>
-					<a class="topic-sumary-show-btn" style=" " href="javascript:void(0)">[ 添加简介]</a>
+					<a class="topic-sumary-show-btn" style=" " href="javascript:void(0)" title="奖励 <%=FuliDou.createTopicInfoScore %>个 福利豆">[ 添加简介]</a>
 				<%
 					} else {
 						for (TopicSumary sumary : topic.sumaries) {
@@ -53,7 +54,7 @@
 				%>
 			</div>
 			<div class="col-sm-12">
-				<a class="topic-sumary-show-btn" style="float: right;" href="javascript:void(0)">[ 添加简介]</a>
+				<a class="topic-sumary-show-btn" style="float: right;" href="javascript:void(0)" title="奖励 <%=FuliDou.createTopicInfoScore %>个 福利豆">[ 添加简介]</a>
 			</div>
 		</div>
 
@@ -63,7 +64,7 @@
 				<%
 					if (CollectionUtils.isEmpty(topic.pics)) {
 				%>
-				<a class="topic-pic-show-btn" style=" " href="javascript:void(0)">[ 添加图片]</a>
+				<a class="topic-pic-show-btn" style=" " href="javascript:void(0)" title="奖励 <%=FuliDou.createTopicInfoScore %>个 福利豆" >[ 添加图片]</a>
 				<%
 					} else {
 						for (TopicPic pic : topic.pics) {
@@ -80,7 +81,7 @@
 
 			</div>
 			<div class="col-sm-12" >
-				<a class="topic-pic-show-btn" style="float: right;" href="javascript:void(0)">[ 添加图片]</a>
+				<a class="topic-pic-show-btn" style="float: right;" href="javascript:void(0)" title="奖励 <%=FuliDou.createTopicInfoScore %>个 福利豆">[ 添加图片]</a>
 			</div>
 		</div>
 	</div>

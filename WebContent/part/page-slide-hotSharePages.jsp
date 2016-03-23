@@ -35,15 +35,21 @@ if(StringUtils.isBlank(type) || !EnumUtils.isValidEnum(PageType.class, type)){
 		</div>
 	
 	<%
-		 
 		 List<Page> pages =  AppCache.hotSharePages(typeEnum, tagName);
 		 for(Page p: pages){
+						
+			 String pageName = p.name;
+			 if(StringUtils.isBlank(pageName)){
+				 pageName = p.title;
+			 }
+			 if(StringUtils.isBlank(pageName)){
+				 pageName = "未命名资源";
+			 }
 			 
-		
 		 %>
 		 	<div style="margin-top: 10px;   height: 20px;">
-				<a target="_blank" href="<%=p.url%>" class="col-sm-12">  
-					<span class="hotPages-title" style=" "> <%= U.shortString(p.title,22) %></span> <!-- #ff076e #1155cc; 0000cc-->
+				<a   onclick="checkFulidou('<%=p.id.toString() %>','<%=p.url%>',<%=p.needFulidou+1%>)" href="javascript:void(0)"    class="col-sm-12">  
+					<span class="hotPages-title" style=" ">[<%=p.needFulidou+1 %>豆] <%= U.shortString(pageName,22) %></span> <!-- #ff076e #1155cc; 0000cc-->
 				</a>  
 			</div>
 		 

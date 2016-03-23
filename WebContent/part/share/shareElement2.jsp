@@ -1,3 +1,5 @@
+<%@page import="java.net.URLEncoder"%>
+<%@page import="com.tgy.util.FuliDou"%>
 <%@page import="net.sourceforge.htmlunit.corejs.javascript.IdScriptableObject"%>
 <%@page import="com.tgy.service.cache.AppCache"%>
 <%@page import="com.tgy.util.PageReplyUtils"%>
@@ -72,22 +74,26 @@ if(StringUtils.isBlank(userHeadImgUrl)){
 %>
 
 <%
-String url =PageUtil.urlWithHttp(a); 
-String authorUrl = PageUtil.urlWithHttp(a.authorUrl);
-//String linkshow = PageUtil.shortUrl(a, 28);
 String pageName = a.name;
-	//pageName =StringUtils.replace(pageName, "_免费高速下载|百度云", "");
-  pageName = U.shortString(pageName,40);//PageUtil.shortName(a, 24);
+//pageName =StringUtils.replace(pageName, "_免费高速下载|百度云", "");
+pageName = U.shortString(pageName,40);//PageUtil.shortName(a, 24);
 if(StringUtils.isBlank(pageName)){
-	pageName = U.shortString(a.url,40);
+pageName = U.shortString(a.url,40);
 }
 if(StringUtils.contains(pageName, "error 40")  ){
-	return;
+return;
 }
 if(StringUtils.isBlank(pageName)){
-	return;
+return;
 }
+
 //TODO
+
+if(StringUtils.contains(pageName, "a播放器")){
+return;	
+}
+
+
 pageName = pageName.replaceAll("关注微信", "");
 pageName = pageName.replaceAll("公众平台", "");
 pageName = pageName.replaceAll("高清下载吧", "");
@@ -95,9 +101,19 @@ pageName = pageName.replaceAll("gqxzb.com", "");
 pageName = pageName.replaceAll("【", "");
 pageName = pageName.replaceAll("】", "");
 
+
+String url =PageUtil.urlWithHttp(a); 
+String url2 = request.getContextPath()+"/resource-detail.jsp?url="+URLEncoder.encode(url, "utf-8")+"&name="+pageName;
+
+//System.out.println("url2 : " + url2);
+
+String authorUrl = PageUtil.urlWithHttp(a.authorUrl);
+//String linkshow = PageUtil.shortUrl(a, 28);
+
 String iconPath = PageUtil.iconPath(a); 
 String tagName = request.getAttribute("tagName")!=null?(String)request.getAttribute("tagName"):"";
 String type =  request.getAttribute("type")!=null?(String)request.getAttribute("type"):"";
+int fuliScore = U.parseInt( request.getAttribute("fuliScore")) ;
 %>
 
 <div class="col-sm-12 container article-container no-padding " id="<%=a.id.toString()%>">
@@ -107,7 +123,8 @@ String type =  request.getAttribute("type")!=null?(String)request.getAttribute("
 				data-id="<%=a.id.toString() %>"
 				href='<%=request.getContextPath()+"/share/"+type+"?tagName=" +a.tagName%>' >分类：<%=a.tagName  %></a>
 				
-			<a class="pageElement-reply-show-btn   col-sm-3 hidden-xs pull-right" data-pageID="<%=a.id.toString() %>" href="javascript:void(0)" style="font-size: 10px; float: right;text-align: right;">
+			<a class="pageElement-reply-show-btn   col-sm-3 hidden-xs pull-right" data-pageID="<%=a.id.toString() %>" href="javascript:void(0)" style="font-size: 10px; float: right;text-align: right;" 
+			title="奖励  <%=FuliDou.replyScore %>个 福利豆">
 				  [回复] 
 			</a>
 				
@@ -116,29 +133,34 @@ String type =  request.getAttribute("type")!=null?(String)request.getAttribute("
 
 	<div class="col-sm-12 no-padding">
 		<div class="col-sm-2 col-xs-0  no-padding">
-		<!-- 
-			<div class="col-sm-12 no-padding  " style="  align: center;" >
-				<a class="  " href="<%=userUrl %>" style="  text-align: center;display: block;" target="_blank">
-					<img  style="" class="  headImg-50" data-original="<%=userHeadImgUrl%>" alt='<%=userName+"的网址分享"%>' />
-				</a>
-			</div>
-			<div class="col-sm-12" style="height: 5px;" ></div>
-			<div class="col-sm-12 no-padding  " style="  text-align: center;" >
-				<a class="    article-authorName-url" 
-					style=""
-					href="<%=userUrl %>" target="_blank">
-						<span class="article-authorName-span"><%=userName %></span> 
-				</a>
-			</div>
-			 -->
+		 
 		</div>
-		<%//TODO %>
-		<div class=" col-sm-7 col-xs-7 no-padding shareElement-main"  >
+	 
+		<div class=" col-sm-9 col-xs-9 no-padding shareElement-main"  >
 
-			<a class="col-sm-12 article-title no-padding statistic-page" 
+			<a class="col-sm-12 article-title no-padding statistic-page " 
 				data-id="<%=a.id.toString() %>"
-				href="<%=url%>" target="_blank" >
+				<% if(a.needFulidou > 0) { //资源需要福利豆
+						if(a.needFulidou > fuliScore){//福利豆不够 走js ，alert 
+							%>
+							onclick="checkFulidou('<%=a.id.toString() %>','<%=url2%>',<%=a.needFulidou%>)" href="#">
+							<%
+						}else{//福利豆够 直接显示连接
+							%>
+							 onclick="consumeFulidou('<%=a.id.toString() %>')" href="<%=url2%>"  target="_blank" >
+							<%
+						}
+					%> 
+					
+				<span class="article-title-a"> [<%=a.needFulidou %>豆] <%=pageName%> </span>
+				<%} else{ //资源不用福利豆
+					%>
+					href="<%=url2%>"  target="_blank" >
 				<span class="article-title-a"> <%=pageName%> </span>
+					<%
+				}
+				%>
+				 
 			 
 			</a>
 			<%
@@ -151,11 +173,6 @@ String type =  request.getAttribute("type")!=null?(String)request.getAttribute("
 			}
 			%>
 
-			 	<!-- 
-			<div class="col-sm-12   no-padding" data-bk="">
-				<div class="shareElement-reply col-sm-3 ">张三丰 回复：看不了了</div> <div class="shareElement-reply col-sm-3">李小虎 回复 有没有第三季？</div>   
-			</div>
-			-->
 			<%
 			if(StringUtils.isNotBlank(a.imgSrc)){
 				%>
@@ -174,19 +191,10 @@ String type =  request.getAttribute("type")!=null?(String)request.getAttribute("
 			<div class="col-sm-12" style="height: 20px;" ></div>
 			<div class="col-sm-12 container no-padding">
 				<div class="col-sm-6 col-xs-12 article-time no-padding" >
-					<span class="article-time-span"><%=!StringUtils.equals( U.dateTimeShort(a.orignDate), "null") ?U.dateTimeShort(a.orignDate):"" %>   / <%=userName %>  </span> 
+					<span class="article-time-span"><%=StringUtils.substringBeforeLast(StringUtils.substringAfter(a.orignDate, "-"), " ")%>   / <%=userName %>  </span> 
 				</div>
 				<div class="col-sm-6 col-xs-12 no-padding article-author pull-right ">
-					<!-- 
-					<a target="_blank" class=" " href="<%=authorUrl%>"  title = "<%=a.authorName %>" >
-						<img  width="30"  class="img-responsive article-author-img" data-original="<%=a.authorHearImgSrc%> " alt=' <%=pageName%>' >
-					</a>
-					
-					<a target="_blank" class="article-source-url" 
-						href="<%=userUrl%>"  title = "<%=userName %>" >
-						<span class="article-authorName-span ">来源： <%=userName %> 的网址分享</span>
-					</a>
-				 -->
+ 
 				</div>
 			</div>
 	
@@ -196,39 +204,7 @@ String type =  request.getAttribute("type")!=null?(String)request.getAttribute("
 			</div>
 		</div>
 		
-		<div class=" col-sm-3  hidden-xs  no-padding shareElement-comment"  >
-			<div class="pageElement-reply-content extendable"  >
-				<%
-					List<Reply> replies = AppCache.repliesByToID(a.id.toString()); 
-				
-					if(CollectionUtils.isEmpty(replies)){ //无回复
-						String pageNameTrimed = StringUtils.replace(pageName, "_免费高速下载|百度云","");
-						if(StringUtils.length(pageNameTrimed)<10){
-						%>
-							小盒  回复: <a target="_blank" href="<%=request.getContextPath()%>/pan/<%=pageNameTrimed %>">百度盘搜:<%=pageNameTrimed %></a><br/>
-						<%	
-						}else{
-						%>
-							暂无回复<br/>	
-						<%
-						}
-						 
-					}
-					else{ //有回复
-						for(Reply reply : replies){
-							String from = PageReplyUtils.fromUserName(reply);
-							String msg = U.addLinkForMessage(reply.content);
-							%> <%=from%> 回复: <%=msg%> <br/><%
-						}
-					}
-				
-				
-				%>
-			</div>
-			 
-			<div class="pageElement-reply-textarea-div col-sm-11"  style="display: none;" >
-			</div>
-		</div>
+		 
 		<!--  -->
 	</div>
 	 

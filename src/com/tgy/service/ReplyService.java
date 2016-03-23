@@ -16,6 +16,7 @@ import com.mongodb.DBCollection;
 import com.mongodb.WriteConcern;
 import com.mongodb.WriteResult;
 import com.tgy.dao.ReplyDao;
+import com.tgy.entity.Discuss;
 import com.tgy.entity.Reply;
 import com.tgy.util.ConditionMap;
 
@@ -29,6 +30,10 @@ public class ReplyService {
 	 
 	public Reply byID(String id) {
 		return dao.byID(id);
+	}
+	
+	public List<Reply> byUserID(String userID){
+		return dao.list( Reply.class, new ConditionMap().add("userID", userID), null, 0, 0);
 	}
 
 	public Reply get(Class<Reply> C, Map<String, Object> conditions) {

@@ -28,8 +28,8 @@ $(document).on('click','.topic-pic-show-btn',showTopicPicTextarea);
 
 
 var updateTopicSummaryFunction = function(){
-	if($('#topic-sumary-textarea').val().length < 20){
-		alert('最少20字哦亲');
+	if($('#topic-sumary-textarea').val().length < 10){
+		alert('最少10字哦亲');
 		return;
 	}
 	
@@ -88,6 +88,36 @@ var updateTopicPicFunction = function(){
 				alert('服务器正在飞速运转，请耐心等待' + data);
 			});
 };
+
+
+var createTopicFunction = function(){
+	
+	$.ajax(
+			{
+				url : $('#contextPath').val()
+						+ "/topic/update",
+				method : "POST",
+				data : {
+					"title":	$('#topicName').val() ,
+					"sumary" : $('#topic-sumary-textarea').val() ,
+					"picUrl" : $('#topic-pic-textarea').val(),
+					"parentTopicID":$('#parentTopicID').val()
+				}
+			}).success(
+			function(data) {
+				if(data.indexOf("操作未成功")>=0 ){
+					alert(data);
+				}
+				else{
+					alert('操作成功');
+					location.reload(true);
+				}
+			}).error(
+			function(data) {
+				alert('服务器正在飞速运转，请耐心等待' + data);
+			});
+};
+
 $(document).on('click','.topic-summary-submit-btn',updateTopicSummaryFunction);
 $(document).on('click','.topic-summary-cancel-btn',function(){
 	$("#topic-summary-update-div").remove( );
@@ -98,5 +128,11 @@ $(document).on('click','.topic-pic-cancel-btn',function(){
 	$("#topic-pic-update-div").remove( );
 });
 
+$(document).on('click','#topic-create-submit-btn',createTopicFunction);
+
+$(document).on('click','.pre-create-topic',function(){
+	var topicID = $(this).closest('.topic-row').attr("data-topicID") ;
+	$("#parentTopicID").val(topicID);
+});
 
 

@@ -26,6 +26,7 @@ import com.tgy.service.cache.AppCache;
 import com.tgy.statistic.service.TagService;
 import com.tgy.util.BaidupanSearchSevice;
 import com.tgy.util.BaseSearchService;
+import com.tgy.util.C;
 import com.tgy.util.ConditionMap;
 import com.tgy.util.GoogleSearchSevice;
 import com.tgy.util.PageType;
@@ -36,8 +37,17 @@ import com.tgy.util.U;
 public class PageTypeContoller extends HttpServlet {
 
 	@RequestMapping(value = { "/", "" })
-	public void type(HttpServletRequest req, HttpServletResponse res) {
-
+	public void type(HttpServletRequest req, HttpServletResponse res,@CookieValue(value = "lastLoginUserID", defaultValue = "",required  = false) String lastLoginUserID) {
+		 User user = U.param(req, C.user, User.class);
+		  if(user==null){ //还没登陆,尝试cooke 登录
+			  String userID = "";
+				if(StringUtils.isNotBlank(lastLoginUserID)  ){ //如有登录id和密码 默认使用登录userid，temp user的密码未空
+					userID = lastLoginUserID;
+					user = new UserDao().getByID(userID);
+					req.getSession().setAttribute(C.user, user);
+				}
+		  }
+		
 		U.forward(req, res, "/share/" + PageType.resource);
 
 		// int start = NumberUtils.toInt(req.getParameter("start"));
@@ -70,12 +80,23 @@ public class PageTypeContoller extends HttpServlet {
 
 	@RequestMapping(value = { "/{type}" })
 	public void tag(HttpServletRequest req, HttpServletResponse res,
-			@PathVariable("type") String type) {
+			@PathVariable("type") String type,@CookieValue(value = "lastLoginUserID", defaultValue = "",required  = false) String lastLoginUserID) {
 
 		if ("favicon".equals(type)) {
 			return;
 		}
 
+
+		 User user = U.param(req, C.user, User.class);
+		  if(user==null){ //还没登陆,尝试cooke 登录
+			  String userID = "";
+				if(StringUtils.isNotBlank(lastLoginUserID)  ){ //如有登录id和密码 默认使用登录userid，temp user的密码未空
+					userID = lastLoginUserID;
+					user = new UserDao().getByID(userID);
+					req.getSession().setAttribute(C.user, user);
+				}
+		  }
+		
 		int pageStart = NumberUtils.toInt(req.getParameter("pageStart"));
 		String orderStr = req.getParameter("orderStr");
 		if (StringUtils.isBlank(orderStr)) {
@@ -113,7 +134,7 @@ public class PageTypeContoller extends HttpServlet {
 		if (StringUtils.isBlank(firstLetter)) {
 			firstLetter = null;
 		}
-
+		
 		// TagService ts = new TagService();
 		// List<Tag> tags = ts.list(new ConditionMap().add("type", TypeEnum),
 		// "-favScore", 0, 20);
@@ -130,12 +151,29 @@ public class PageTypeContoller extends HttpServlet {
 				.add("createDate >", U.dateTime(days)) // n天以内的，链接太久了容易失效
 				.add("isShare", true);
 
+		int needFulidou = NumberUtils.toInt(req.getParameter("needfulidou"));
+		if( needFulidou >0){
+			conditions.add("needFulidou >= ", needFulidou);
+		}
+		
 		// 缓存初始页链接
-		if (TypeEnum.equals(PageType.resource) && tagName == null
+		if (TypeEnum.equals(PageType.resource) && tagName == null && needFulidou ==0
 				&& firstLetter == null && days == -365
 				&& orderStr.equals("-lastModifyDate,-createDate")
 				&& pageStart==0) {
 			pages = AppCache.defaultPages();
+		}
+		else if(TypeEnum.equals(PageType.resource)  
+				&& firstLetter == null && days == -365
+				&& orderStr.equals("-lastModifyDate,-createDate")
+				&& pageStart==0 && StringUtils.isNotBlank(tagName)){
+			pages = AppCache.topicPages(tagName);
+		}
+		else if(TypeEnum.equals(PageType.resource)  
+				&& firstLetter == null && days == -365
+				&& orderStr.equals("-lastModifyDate,-createDate")
+				&& pageStart==0 &&  needFulidou>0){
+			pages = AppCache.fuliPages( );
 		}
 		else{
 			 pages = ps.list(conditions, orderStr, pageStart, 10);
@@ -155,19 +193,19 @@ public class PageTypeContoller extends HttpServlet {
 
 				List<Page> remoteResults = pcs.ListByKey(key); // 利用第三方搜索引擎（如google）搜来的结果，先看本地缓存的结果
 
-				if (CollectionUtils.isEmpty(remoteResults)) {// 无缓存
-					BaseSearchService bs = new GoogleSearchSevice(); // 用
-																		// google搜
-
-					remoteResults = bs.search(tagName, pageStart);
-					if (CollectionUtils.isEmpty(remoteResults)) { // 没结果，用baidupan.net
-																	// 搜
-						bs = new BaidupanSearchSevice();
-						remoteResults.addAll(bs.search(tagName, pageStart));
-					}
-					// 把第三方搜来的结果 放入缓存中，加快搜索时间，减小被屏蔽概率
-					pcs.cacheAll(remoteResults, key);
-				}
+//				if (CollectionUtils.isEmpty(remoteResults)) {// 无缓存
+//					BaseSearchService bs = new GoogleSearchSevice(); // 用
+//																		// google搜
+//
+//					remoteResults = bs.search(tagName, pageStart);
+//					if (CollectionUtils.isEmpty(remoteResults)) { // 没结果，用baidupan.net
+//																	// 搜
+//						bs = new BaidupanSearchSevice();
+//						remoteResults.addAll(bs.search(tagName, pageStart));
+//					}
+//					// 把第三方搜来的结果 放入缓存中，加快搜索时间，减小被屏蔽概率
+//					pcs.cacheAll(remoteResults, key);
+//				}
 				pages.addAll(remoteResults);
 			}
 
@@ -184,8 +222,16 @@ public class PageTypeContoller extends HttpServlet {
 		req.setAttribute("orderStr", req.getParameter("orderStr"));
 		req.setAttribute("keywordForMeta", (tagName != null ? tagName : "")
 				+ PageType.valueOf(type).value() + "网址分享");
-
-		U.forward(req, res, "/index-all.jsp");
+		
+		if(needFulidou > 0 ){
+			U.forward(req, res, "/index-fuli.jsp");
+			return;
+		}
+		else{
+			U.forward(req, res, "/index-all.jsp");
+			return;
+		}
+		
 
 	}
 

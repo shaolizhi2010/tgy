@@ -16,6 +16,7 @@ import com.tgy.dao.UserDao;
 import com.tgy.entity.Page;
 import com.tgy.entity.User;
 import com.tgy.service.PageService;
+import com.tgy.util.C;
 import com.tgy.util.ConditionMap;
 import com.tgy.util.PageType;
 import com.tgy.util.U;
@@ -36,31 +37,35 @@ public class IndexContoller extends HttpServlet {
 //			req.setAttribute("isNewUser", "true");
 //		}
 		
-		if(StringUtils.isBlank(lastLoginUserID) ){//第一次访问 && StringUtils.isBlank(lastViewUserID)
+		if(StringUtils.isBlank(lastLoginUserID) ){	//第一次访问 && StringUtils.isBlank(lastViewUserID)
 			
 			//U.forward(req, res, "/公用导航");
-			U.forward(req, res, "/share");
+			U.forward(req, res, "/share/resource");
 			return;
 		}
 		else{
 			try {
-				String userID = "";
-				if(StringUtils.isNotBlank(lastLoginUserID)  ){ //如有登录id和密码 默认使用登录userid，temp user的密码未空
-					userID = lastLoginUserID;
-					
-				}
-//				else if(StringUtils.isNotBlank(lastViewUserID)){//如没有登录userid，使用 上次看过的userid
-//					userID = lastViewUserID;
-//				}
 				
-				User user = new UserDao().getByID(userID);
+				  User user = U.param(req, C.user, User.class);
+				  if(user==null){ //还没登陆,尝试cooke 登录
+					  String userID = "";
+						if(StringUtils.isNotBlank(lastLoginUserID)  ){ //如有登录id和密码 默认使用登录userid，temp user的密码未空
+							userID = lastLoginUserID;
+							
+						}
+						user = new UserDao().getByID(userID);
+						req.getSession().setAttribute(C.user, user);
+				  }
+				
+				
+				
 				if(user==null){
-					U.forward(req, res, "/share");
+					U.forward(req, res, "/share/resource");
 					//U.forward(req, res, "/公用导航"); 
 					return;
 				}
 				else{
-					U.forward(req, res, "/share");
+					U.forward(req, res, "/share/resource");
 					//U.forward(req, res, "/"+user.name);
 					return;
 				}

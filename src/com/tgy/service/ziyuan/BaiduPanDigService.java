@@ -58,11 +58,11 @@ public class BaiduPanDigService {
 				tagName = tiebaStr;
 			}
 			digAndSave(tiebaName,tagName);
-			try {
-				Thread.sleep(2*60*1000);//休息n分钟
-			} catch (InterruptedException e) {
-				//empty
-			}
+//			try {
+//				Thread.sleep(2*60*1000);//休息n分钟
+//			} catch (InterruptedException e) {
+//				//empty
+//			}
 		}
 	}
 	
@@ -119,9 +119,9 @@ public class BaiduPanDigService {
 				a.userID = u.id.toString();
 				a.isShare = true;
 				a.lastModifyDate = U.dateTime();
-				
-				//不存在 防重复
-				if(ps.list(new ConditionMap().add("url", a.url).add("folderID", a.folderID), null,0, 0).size()<=0){
+				a.isRobot = true;
+//				不存在 防重复  
+				if(true){ //ps.list(new ConditionMap().add("url", a.url), null,0, 0).size()<=0
 					
 					
 //					String comment = commentService.getContent(a.title);
@@ -144,9 +144,15 @@ public class BaiduPanDigService {
 					savedCount++;
 				}
 				else{
-					//System.out.println("BaiduPanDigService : 资源已存在 " + a.url  );
+					System.out.println("BaiduPanDigService : 资源已存在 " + a.url  );
 				}
 				
+//					try {
+//						Thread.sleep(2000);//减轻服务器压力
+//					} catch (Exception e) {
+//						continue;
+//					}
+					
 			} catch (Exception e) {
 				e.printStackTrace();
 				//empty
@@ -170,10 +176,10 @@ public class BaiduPanDigService {
 
 			List<Page> ziyuanList = s.getZiyuanLinks(tieziId);
 			for(Page z : ziyuanList){
-				//System.out.println(z.url);
+				System.out.println("digging : "+z.url);
 				
 				try {
-					WebInfo info = webInfoUtil.info(z.url,false);
+					WebInfo info = new WebInfoUtil().info(z.url,false);
 					if(StringUtils.isNotBlank(info.title) // 
 							&& !StringUtils.contains(info.title, "请输入提取")
 							&& !StringUtils.contains(info.title, "百度云升级")
@@ -184,6 +190,8 @@ public class BaiduPanDigService {
 							&& !StringUtils.contains(info.title, "链接不存在")
 							&& !StringUtils.contains(info.title, ".jpg")
 							&& !StringUtils.contains(info.title, ".gif")
+							&& !StringUtils.contains(info.title, "302")
+							//&& !StringUtils.contains(info.title, "not allowed")
 							){ //加密资源忽略
 						Page p = new Page();
 						String title = info.title;
@@ -202,7 +210,9 @@ public class BaiduPanDigService {
 						title = title.replaceAll("微博", ""); //去掉重复字符串
 						title = title.replaceAll("@", ""); //去掉重复字符串
 						
-						
+						if(StringUtils.contains(title, "405")){
+							System.out.println("waooo! 405  :"+z.url);
+						}
 						
 						String firstString = title;
 						firstString = firstString.trim();
@@ -349,8 +359,16 @@ public class BaiduPanDigService {
 //	}
 	
 	public static void main(String[] args) {
-		new BaiduPanDigService().digAndSave("资源-百度网盘",  "美剧资源站-美剧", "百度网盘");
+		new BaiduPanDigService().digAndSave("资源-百度网盘");
 //		U.printList(list);
+		//http://tieba.baidu.com/p/3624358624?pid=65347916025&cid=0#65347916025
+//		List<Page> list = new BaiduPanDigService().getZiyuanLinks("3624358624" );
+//		System.out.println(list.size());
+//		U.printList(list);
+		
+//		WebInfo info = new WebInfoUtil().info("http://pan.baidu.com/s/1f6mU2");
+//		
+//		System.out.println(info);
 		System.out.println("end");
 	}
 

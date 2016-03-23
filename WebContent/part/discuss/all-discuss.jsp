@@ -51,12 +51,12 @@ if(request.getParameter("discussStart")!=null){
 <%
 	UserService uService = new UserService(); 
 	
-	List<Discuss> discusses = AppCache.discusses(start);
+	List<Discuss> discusses = AppCache.discusses(sourceBoardName);
 %>
 
 	<div class=" container col-sm-12 sub-page-with-title"  >
 		<div class="">
-			<span style="font-size: 13px;font-weight: bold;">盒子论坛 - <%=sourceBoardName %></span>
+			<span style="font-size: 20px;font-weight: bold;">盒子论坛 - </span><span style="font-size: 16px;font-weight: bold;"><%=sourceBoardName %></span>
 			<a href="#createDiscussMessage" style="float: right;font-size: 13px;font-weight: bold;">[ 我要发帖 ]</a>
 		</div>
 		<div class="col-sm-12 sub-page-body  no-padding" 
@@ -88,6 +88,7 @@ if(request.getParameter("discussStart")!=null){
 		
 		<div class="col-sm-12" style="margin-top: 40px;" >
 			 <div class="col-sm-12" style=" padding: 10px;background-color: #f8f8f8; ">
+			 <!-- 
 				<div class="col-sm-12 discuss-content" style="padding: 10px;font-size: 14px;">
 					<a href="<%=request.getContextPath()%>/网址盒子" target="_blank" class="  no-padding" style="float: left;padding-right: 5px; " >
 						<jsp:include page="discuss-user-head-img.jsp">
@@ -101,11 +102,15 @@ if(request.getParameter("discussStart")!=null){
 					</a>
 					对你说: 想要什么资源，告诉网盘盒子吧！
 				</div>
-				<div  style=" ">
+				 -->
+				 <div class="col-sm-12 discuss-content" style="padding: 10px;font-size: 14px;">
+				 	随便说说
+				 </div>
+				<div  class="col-sm-12  "  style=" ">
 		         		<textarea  style="border:1px solid #ccc;" id="createDiscussMessage" 
 		         			data-func-name="createDiscussForAllFunction" 
 		         			class="form-control enterInput hover-focus" rows="4" 
-		         			placeholder="随便说说吧"></textarea> 
+		         			placeholder=" 找资源 ???   "></textarea> 
 	         	</div>
 				<div  style="margin-top: 5px; " >
 	         	    <a href="javascript:void(0)">

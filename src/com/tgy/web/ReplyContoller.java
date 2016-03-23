@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.tgy.entity.Discuss;
 import com.tgy.entity.Page;
 import com.tgy.entity.Reply;
 import com.tgy.entity.User;
@@ -31,18 +32,39 @@ public class ReplyContoller extends HttpServlet {
 		String message = req.getParameter("message");
 		String replyToPageID = req.getParameter("replyToPageID");
 		
+		User user = U.param(req, C.user, User.class);
+		
+		if(user==null || user.id == null ){
+			U.resFailed(res, "需登录哦亲");
+			return;
+		}
+		
+		ReplyService svs = new ReplyService();
+		
+		if(user.totalOnlineTime< 30){//累计在线时长n分钟以上用户
+//			List<Reply> list = svs.byUserID(user.id.toString());
+//			
+//			if(list.size()>=3){
+//				U.resFailed(res, "新用户暂时最多回复三次哦亲~ 在站内多逛会吧");
+//				return;
+//			}
+			
+			U.resFailed(res, "您累计在线时间为"+user.totalOnlineTime+"分钟,需大于30分钟才能发布哦亲");
+			return;
+			
+		}
 
 		Reply entity = new Reply();
 		entity.content = message;
 		entity.toID = replyToPageID;
 		
 		//从哪来
-		User user = U.param(req, C.user, User.class);
+		
 		entity.fromIP = U.getIpAddr(req);
 		entity.fromUser = user;
 		entity.userID = U.getUserID(req);
 		
-		ReplyService svs = new ReplyService();
+		
 		svs.save(entity);
 		
 		List<Reply> list = svs.list(Reply.class, new ConditionMap().add("toID", replyToPageID), "-createDate", 3);

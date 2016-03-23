@@ -30,8 +30,12 @@
  
 		List<String> keywords = AppCache.hotKeywords();
 		for(String k : keywords){
+			if(k.contains("优衣库") ||k.contains("自慰") ||k.contains("巨乳") ){
+				continue;
+			}
 			%>
-			<a class="index-tag" href="<%=request.getContextPath()%>/pan/<%=k %> " 
+			<a class="index-tag"  
+			onclick="checkFulidou('','<%=request.getContextPath()%>/pan/<%=k %>',1)" href="javascript:void(0)"
 				style="">
 				 <%=k %>
 			</a>

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.google.gson.Gson;
 import com.tgy.entity.Page;
 import com.tgy.entity.Reply;
 import com.tgy.entity.Topic;
@@ -20,14 +21,24 @@ import com.tgy.entity.TopicSumary;
 import com.tgy.entity.User;
 import com.tgy.service.PageService;
 import com.tgy.service.TopicService;
+import com.tgy.service.UserService;
 import com.tgy.service.cache.AppCache;
 import com.tgy.util.C;
+import com.tgy.util.ConditionMap;
+import com.tgy.util.FuliDou;
 import com.tgy.util.PageType;
 import com.tgy.util.U;
 
 @RestController
 @RequestMapping(value = { "/topic" })
 public class TopicContoller extends HttpServlet {
+	
+ 
+		@RequestMapping(value = { "","/" })
+		public void index(HttpServletRequest req, HttpServletResponse res) {
+			 
+			U.forward(req, res, "/index-topic.jsp");
+		}
 
 	// get by id
 	@RequestMapping(value = { "/id/{topicID}" })
@@ -81,9 +92,11 @@ public class TopicContoller extends HttpServlet {
 		String title = req.getParameter("title");
 		String sumary = req.getParameter("sumary");
 		String picUrl = req.getParameter("picUrl");
+		
+		String parentTopicID = req.getParameter("parentTopicID");
 
 		if(StringUtils.isBlank(title)){
-			U.resFailed(res, "未找到标签");
+			U.resFailed(res, "需专题名称");
 			return;
 		}
 		
@@ -93,6 +106,10 @@ public class TopicContoller extends HttpServlet {
 			U.resFailed(res, "需要登陆");
 			return;
 		}
+//		if(user.totalOnlineTime< 60){//累计在线时长n分钟以上用户
+//			U.resFailed(res, "新用户暂不能操作哦亲~ 在站内多逛会吧");
+//			return;
+//		}
 
 		String userID = U.getUserID(req);
 
@@ -103,6 +120,8 @@ public class TopicContoller extends HttpServlet {
 		if (topic == null) { // no exist then create new one
 			topic = new Topic();
 			topic.title = title;
+			topic.createrUserID = userID;
+			topic.createrUserName = user.name;
 		}
 
 		if (StringUtils.isNotBlank(sumary)) { // add sumary
@@ -119,15 +138,44 @@ public class TopicContoller extends HttpServlet {
 			picObj.picUrl = picUrl;
 			topic.pics.add(picObj);
 		}
+		if (StringUtils.isNotBlank(parentTopicID)) { //add pic
+			topic.parentTopicID = parentTopicID;
+		}
 		
 		ts.save(topic);
 		
 		U.resSuccess(res);
+		
+		//送n 福利豆
+		if(user!=null){
+			user.fulidou += FuliDou.createTopicInfoScore;
+			new UserService().save(user);
+		}
 	}
 
+
+	@RequestMapping(value = { "/topLevels" })
+	public void topLevels(HttpServletRequest req, HttpServletResponse res) {
+		TopicService ts = new TopicService();
+		List<Topic> topics = ts.list(Topic.class, new ConditionMap().add("isTopLevel", true), "favScore", 5);
+		U.message(res, new Gson().toJson(topics));
+	}
+	
 	@RequestMapping(value = { "/list" })
 	public void list(HttpServletRequest req, HttpServletResponse res) {
-
+		
+		int start = 0;
+		if( StringUtils.isNotBlank( req.getParameter("start") ) ){
+			start = Integer.parseInt( req.getParameter("start") );
+		}
+		
+		TopicService ts = new TopicService();
+		List<Topic> topics = ts.list(Topic.class, new ConditionMap().add("isTopLevel", false), "-favScore",start, 10);
+		
+		U.message(res, new Gson().toJson(topics));
+		
 	}
+	
+	
 
 }

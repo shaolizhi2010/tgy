@@ -22,3 +22,9 @@ $(document).on('click','.statistic-page',function(){
 	var type = 'page';
 	statistic(id,type);
 });
+
+$(document).on('click','.statistic-topic',function(){
+	var id = $(this).attr('data-id');
+	var type = 'topic';
+	statistic(id,type);
+});

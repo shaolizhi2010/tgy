@@ -51,13 +51,7 @@
 <meta name='keywords' content='<%=keyword%>'/>
 <meta http-equiv="Content-Language" content="zh-CN" />
 <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-<meta name="baidu_union_verify" content="7af084e1b046a9ce7552f5908ff103cb">
-<meta name="google-site-verification" content="OUnrPw6694Qv4V01iZHP-sENOEoS7jpMHBD5h5B_wRw" />
-<meta property="qc:admins" content="5733125577675205216375" />
-<meta name="sogou_site_verification" content="Qd7VdxsXzG"/>
-<meta name="msvalidate.01" content="272A4B91678EA4354B575FB689707BEE" />
-<meta name="ads8_union_verify" content="d2b3c05f70a983ccd73a75bf413d21ea">
-<meta name="domain_verify" content="pmrgi33nmfuw4ir2ej3wkytimv5gsltdn5wselbcm52wszbchirgizrqgq2genjzgyyggnbuha2dkolfgfstenbwgvrtsztggnsdsmzcfqrhi2lnmvjwc5tfei5dcnbsge2tkmrtg43dqobypu">
 <link rel="sitemap" type="application/xml" title="Sitemap" href="Sitemap.txt" />
 <link rel="shortcut icon"   href="images/favicon.ico" />
 <link rel="icon"  href="favicon.ico" />
+<meta name="360_union_verify" content="525fc68f34dbe466f92433d9dfa0be65">

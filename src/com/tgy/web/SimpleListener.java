@@ -1,6 +1,7 @@
 package com.tgy.web;
 
 import java.util.Calendar;
+import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -9,12 +10,10 @@ import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
 
 import com.tgy.App;
-import com.tgy.service.article.HaoSouWemediaService;
-import com.tgy.service.article.HuxiuDigService;
+import com.tgy.entity.Online;
+import com.tgy.service.OnlineService;
 import com.tgy.service.sitemap.SitemapGenerator;
 import com.tgy.service.ziyuan.BaiduPanDigService;
-import com.tgy.timer.GetPageInfoTask;
-import com.tgy.timer.StatisticTask;
 
 @WebListener
 public class SimpleListener implements ServletContextListener {
@@ -45,6 +44,12 @@ public class SimpleListener implements ServletContextListener {
 		
 		String basePath = arg0.getServletContext().getRealPath("/");
 		App.basePath = basePath;
+		
+		OnlineService os = new OnlineService(); //clear 在线用户记录
+		List<Online> list =  os.list(Online.class, null, null, 0);
+		for(Online ol : list){
+			os.delete(ol);
+		}
 		
 		// 取page info
 		/*
@@ -125,13 +130,12 @@ public class SimpleListener implements ServletContextListener {
 			public void run() {
 				int hour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY);
 				//if( (16<hour && hour<18)||(20<hour && hour<24)){//高峰时段休息休息
-				if( (1<hour && hour<8) ){//半夜不用抓了，没人发帖
-					return;
-				}
-				//"小说下载-小说", "动漫","云盘资源共享-百度网盘","高清下载", 动漫资源
-				new BaiduPanDigService().digAndSave("百度网盘", "腐女动漫-动漫","资源-百度网盘","英剧","动漫网盘-动漫", "美剧资源站-美剧","动漫资源-动漫", "行尸走肉","后宫动漫-动漫","权利的游戏","斯巴达克斯","生活大爆炸","美剧-美剧", "电影-电影");//自动抓取百度云资源
+				//if( (1<hour && hour<7) ){//半夜抓
+					new BaiduPanDigService().digAndSave(  "资源-百度网盘","动漫网盘-动漫", "美剧资源站-美剧","动漫资源-动漫",   "美剧-美剧", "电影-电影");//自动抓取百度云资源
+				//}
+				//"小说下载-小说", "动漫","云盘资源共享-百度网盘","高清下载", 动漫资源 "腐女动漫-动漫","英剧","行尸走肉","后宫动漫-动漫","权利的游戏","斯巴达克斯","日剧","生活大爆炸",
 			}
-		}, 1*11*60 *1000, 2*60 * 60 * 1000); 
+		}, 1 *1000, 4*60 * 60 * 1000);
 		
 		//自动抓取百度云资源
 //		DigBaiduYunTask baiduYunTask = new DigBaiduYunTask();
@@ -151,7 +155,6 @@ public class SimpleListener implements ServletContextListener {
 //		
 //		timer3.schedule(createRobotUserTask, calendar3.getTime(),
 //				24 * 60 * 60 * 1000); // 24小时执行一次
-		
 		
 		
 		// 自动生成sitemap

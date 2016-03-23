@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.google.gson.Gson;
 import com.tgy.entity.Discuss;
+import com.tgy.entity.Page;
 import com.tgy.entity.User;
 import com.tgy.entity.group.InterestGroup;
 import com.tgy.exception.BaseException;
@@ -113,115 +114,115 @@ public class DiscussContoller extends HttpServlet {
 		U.forward(req, res, "part/pagination.jsp?count="+count+"&start="+start+"&url="+url);
 	}
 
-	@RequestMapping(value = { "/link/{linkID}" })
-	public void byLinkID(HttpServletRequest req, HttpServletResponse res,
-			@PathVariable("linkID") String linkID) {
+//	@RequestMapping(value = { "/link/{linkID}" })
+//	public void byLinkID(HttpServletRequest req, HttpServletResponse res,
+//			@PathVariable("linkID") String linkID) {
+//
+//		LinkService ls = new LinkService();
+//		Link link = ls.getByID(linkID);
+//		
+//		List<Discuss> discusses = link.discusses;
+//		if(discusses!=null && discusses.size()>20){
+//			discusses = discusses.subList(discusses.size()-20, discusses.size());
+//		}
+//		
+//		req.setAttribute("target", link);
+//		req.setAttribute("discusses", discusses);
+//		
+//		U.forward(req, res, "/discuss.jsp");
+//	}
 
-		LinkService ls = new LinkService();
-		Link link = ls.getByID(linkID);
-		
-		List<Discuss> discusses = link.discusses;
-		if(discusses!=null && discusses.size()>20){
-			discusses = discusses.subList(discusses.size()-20, discusses.size());
-		}
-		
-		req.setAttribute("target", link);
-		req.setAttribute("discusses", discusses);
-		
-		U.forward(req, res, "/discuss.jsp");
-	}
-
-	@RequestMapping("/link/create")
-	protected void createForLink(HttpServletRequest req, HttpServletResponse res)
-			throws ServletException, IOException {
-
-		DiscussService dcs = new DiscussService();
-		String message = U.filterCharacter(req.getParameter("message")) ;
-		//String sourceID = U.filterCharacter(req.getParameter("sourceID")) ;
-		String linkID = U.filterCharacter(req.getParameter("linkID")) ;
-		String replyToDiscussID = U.filterCharacter(req.getParameter("replyToDiscussID")) ;
-		
-		try {
-			new CommonValidator()
-				.isLonger(message, 1, "信息长度需大于1")
-				.isShorter(message, 300, "信息需小于150个字符");
-			
-			Link lk = null;
-			LinkService ls = new LinkService();
-			
-			//create disccuss for link
-			if(StringUtils.isNotBlank(linkID)){
-				lk = ls.getByID(linkID);
-			}
-			
-			if(lk==null){
-				return;
-			}
-			
-			User user = U.param(req, C.user, User.class);
-			
-			//消息内容 属性
-			Discuss dc = new Discuss();
-			dc.lastModifyDate = U.dateTime();
-			dc.message = message;
-			if(StringUtils.isNotBlank(replyToDiscussID)){
-				dc.isPrimary = false;
-				dc.isReply = true;
-			}
-			else{
-				dc.isPrimary = true;
-				dc.isReply = false;
-			}
-			
-			//从哪来
-			dc.fromIP = U.getIpAddr(req);
-			dc.fromUser = user;
-			dc.userID = U.getUserID(req);
-			
-			//到哪去
-			if(StringUtils.isNotBlank(replyToDiscussID)){
-				Discuss replyToDiscuss = dcs.byID(replyToDiscussID);
-				dc.replyToDiscuss = replyToDiscuss;
-				dc.replyToDiscussID = replyToDiscussID;
-				
-				dc.replyToUser = replyToDiscuss.fromUser;
-				dc.replyToUserID = replyToDiscuss.fromUser!=null?replyToDiscuss.fromUser.id.toString():null;
-				
-				dcs.save(dc);
-				
-				//被回复消息技术++ 回复list +1
-				replyToDiscuss.replyTimes++;
-				replyToDiscuss.add(dc);
-				dcs.save(replyToDiscuss);
-				
-				//如果被回复消息 不是主消息， 主消息 计数++
-				if(!replyToDiscuss.isPrimary && replyToDiscuss.primaryDiscuss!=null){
-					replyToDiscuss.primaryDiscuss.lastModifyDate = U.dateTime();
-					replyToDiscuss.primaryDiscuss.replyTimes++;
-					dcs.save(replyToDiscuss.primaryDiscuss);
-				}
-			}
-			
-			//所属
-			dc.sourceBoardName = lk.title;
-			dc.sourceBoardType = C.sourceBoardType_link;
-			dc.sourceBoardID = linkID;
-			
-			dcs.save(dc);
-			
-			//保存评论到 link 里
-			if(dc.isPrimary){
-				lk.commentsCount++;
-				lk.lastDiscuss = message;
-				lk.add(dc);
-				ls.save(lk);
-			}
-			
-			U.resSuccess(res);
-		} catch (BaseException e) {
-			U.resFailed(res, e.getMessage());
-		}
-	}
+//	@RequestMapping("/link/create")
+//	protected void createForLink(HttpServletRequest req, HttpServletResponse res)
+//			throws ServletException, IOException {
+//
+//		DiscussService dcs = new DiscussService();
+//		String message = U.filterCharacter(req.getParameter("message")) ;
+//		//String sourceID = U.filterCharacter(req.getParameter("sourceID")) ;
+//		String linkID = U.filterCharacter(req.getParameter("linkID")) ;
+//		String replyToDiscussID = U.filterCharacter(req.getParameter("replyToDiscussID")) ;
+//		
+//		try {
+//			new CommonValidator()
+//				.isLonger(message, 1, "信息长度需大于1")
+//				.isShorter(message, 300, "信息需小于150个字符");
+//			
+//			Link lk = null;
+//			LinkService ls = new LinkService();
+//			
+//			//create disccuss for link
+//			if(StringUtils.isNotBlank(linkID)){
+//				lk = ls.getByID(linkID);
+//			}
+//			
+//			if(lk==null){
+//				return;
+//			}
+//			
+//			User user = U.param(req, C.user, User.class);
+//			
+//			//消息内容 属性
+//			Discuss dc = new Discuss();
+//			dc.lastModifyDate = U.dateTime();
+//			dc.message = message;
+//			if(StringUtils.isNotBlank(replyToDiscussID)){
+//				dc.isPrimary = false;
+//				dc.isReply = true;
+//			}
+//			else{
+//				dc.isPrimary = true;
+//				dc.isReply = false;
+//			}
+//			
+//			//从哪来
+//			dc.fromIP = U.getIpAddr(req);
+//			dc.fromUser = user;
+//			dc.userID = U.getUserID(req);
+//			
+//			//到哪去
+//			if(StringUtils.isNotBlank(replyToDiscussID)){
+//				Discuss replyToDiscuss = dcs.byID(replyToDiscussID);
+//				dc.replyToDiscuss = replyToDiscuss;
+//				dc.replyToDiscussID = replyToDiscussID;
+//				
+//				dc.replyToUser = replyToDiscuss.fromUser;
+//				dc.replyToUserID = replyToDiscuss.fromUser!=null?replyToDiscuss.fromUser.id.toString():null;
+//				
+//				dcs.save(dc);
+//				
+//				//被回复消息技术++ 回复list +1
+//				replyToDiscuss.replyTimes++;
+//				replyToDiscuss.add(dc);
+//				dcs.save(replyToDiscuss);
+//				
+//				//如果被回复消息 不是主消息， 主消息 计数++
+//				if(!replyToDiscuss.isPrimary && replyToDiscuss.primaryDiscuss!=null){
+//					replyToDiscuss.primaryDiscuss.lastModifyDate = U.dateTime();
+//					replyToDiscuss.primaryDiscuss.replyTimes++;
+//					dcs.save(replyToDiscuss.primaryDiscuss);
+//				}
+//			}
+//			
+//			//所属
+//			dc.sourceBoardName = lk.title;
+//			dc.sourceBoardType = C.sourceBoardType_link;
+//			dc.sourceBoardID = linkID;
+//			
+//			dcs.save(dc);
+//			
+//			//保存评论到 link 里
+//			if(dc.isPrimary){
+//				lk.commentsCount++;
+//				lk.lastDiscuss = message;
+//				lk.add(dc);
+//				ls.save(lk);
+//			}
+//			
+//			U.resSuccess(res);
+//		} catch (BaseException e) {
+//			U.resFailed(res, e.getMessage());
+//		}
+//	}
 	
 	@RequestMapping("/group/create")
 	protected void createForGroup(HttpServletRequest req, HttpServletResponse res)
@@ -393,7 +394,31 @@ public class DiscussContoller extends HttpServlet {
 	protected void createForAll(HttpServletRequest req, HttpServletResponse res)
 			throws ServletException, IOException {
 
+		User user = U.param(req, C.user, User.class);
+		
+		if(user==null || user.id ==null ){
+			U.resFailed(res, "需登录哦亲");
+			return;
+		}
+		
 		DiscussService dcs = new DiscussService();
+		
+		if(user.totalOnlineTime< 30){//累计在线时长n分钟以上用户
+			
+			
+//			List<Discuss> list = dcs.byUserID(user.id.toString());
+//			
+//			if(list.size()>=3){
+//				U.resFailed(res, "新用户暂时最多发言三次哦亲~ 在站内多逛会吧");
+//				return;
+//			}
+			
+			U.resFailed(res, "您累计在线时间为"+user.totalOnlineTime+"分钟,需大于30分钟才能发布哦亲");
+			return;
+			
+		}
+		
+		
 		String message = U.filterCharacter(req.getParameter("message")) ;
 		String replyToDiscussID = U.filterCharacter(req.getParameter("replyToDiscussID")) ;
 		
@@ -406,7 +431,6 @@ public class DiscussContoller extends HttpServlet {
 				.isLonger(message, 1, "信息长度需大于1")
 				.isShorter(message, 300, "信息需小于150个字符");
  
-			User user = U.param(req, C.user, User.class);
 			
 			//消息内容 属性
 			Discuss dc = new Discuss();
@@ -476,7 +500,7 @@ public class DiscussContoller extends HttpServlet {
 			}else{
 				U.forward(req, res, "/part/discuss/discuss-element.jsp?discussID="+dc.id.toString());
 			}
-			AppCache.discussesClear();//清空缓存 这样用户会实时看到自己发的帖子，如果发帖频率很频繁的话 就需改进
+			AppCache.discussesClear(sourceBoardName);//清空缓存 这样用户会实时看到自己发的帖子，如果发帖频率很频繁的话 就需改进
 			
 		} catch (BaseException e) {
 			U.resFailed(res, e.getMessage());

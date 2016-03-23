@@ -23,6 +23,7 @@
 <%
 List<Page>  results = U.paramList(request, "results");
 String keyword = U.paramString(request, "keyword");
+String tagName = "百度网盘搜索";
 
 int start =0;
 if(request.getAttribute("start")!=null){
@@ -36,7 +37,7 @@ int curPageNum = start/10+1;
 <html>
 <head lang="en">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<title>百度网盘搜索-百度网盘下载-网盘盒子</title>
+<title><%=keyword %> 百度网盘搜索-百度网盘下载-网盘盒子</title>
 <meta name='description' content='百度网盘搜索-百度网盘-百度网盘资源-百度网盘电影-百度网盘下载-百度网盘在线-百度网盘电视剧-百度网盘美剧'/>
 <meta name='keywords' content='百度网盘搜索 百度网盘 百度网盘资源 百度网盘电影 百度网盘下载 百度网盘在线 百度网盘电视剧  百度网盘美剧'/>
 <meta http-equiv="Content-Language" content="zh-CN" />
@@ -77,6 +78,8 @@ int curPageNum = start/10+1;
 			<!-- 
 			http://209.85.228.19/custom
 			https://sg.search.yahoo.com/search?p=大西洋帝国&vs=pan.baidu.com
+			http://cn.bing.com/search?q=site%3apan.baidu.com+
+			http://gl.impress.pw/gsearch?site=pan.baidu.com&q=
 			 -->
 			<iframe  src="http://cn.bing.com/search?q=site%3apan.baidu.com+<%=URLEncoder.encode(keyword, "UTF-8") %>"  
 				frameborder="0" scrolling="auto" width="100%" height="100%" 
@@ -201,7 +204,7 @@ int curPageNum = start/10+1;
 		 	<%
 		 	List<String> histories = AppCache.newKeywords();
 		 	for(String hk : histories){
-		 		hk = URLDecoder.decode(hk);
+		 		hk = URLDecoder.decode(hk.replaceAll("%", "%25"));
  
 		 		if(U.isNotMessCode(hk) && hk.length()<20 ){
 		 			
@@ -215,6 +218,22 @@ int curPageNum = start/10+1;
 		 </div> 
  		<!-- 群组推荐 end-->
  		
+ 				 	<!-- ad -->
+ 			 <%
+			 if(request.getRequestURL().indexOf("localhost") <0){
+			 %>
+		 	<div class="col-sm-10 col-sm-offset-1     " style="margin-top: 100px; ">
+				 <script type="text/javascript">
+				    /*600 250 标签云*/
+				    var cpro_id = "u2188181";
+				</script>
+				<script src="http://cpro.baidustatic.com/cpro/ui/c.js" type="text/javascript"></script>
+ 
+			</div>
+			<%} %>
+		 	<!-- ad -->
+ 		
+ 		
 	</div>
 	
 	 	<input type="hidden" id="pageID" value="pan">
@@ -224,6 +243,7 @@ int curPageNum = start/10+1;
 		
 		<%
 			if(AppCache.top200Keywords().contains(keyword)){
+				tagName = keyword;
 				%>
 				<jsp:include page="topic/topic-slide.jsp">
 		    		<jsp:param name="tagName" value= "<%=keyword%>" />
@@ -235,9 +255,22 @@ int curPageNum = start/10+1;
 		
 		<jsp:include page="part/page-slide-hotKeywords.jsp"/>
 		
+		 <%
+			 if(request.getRequestURL().indexOf("localhost") <0){
+		 %>
+		<!-- ad -->
+		<div class="  col-sm-10 col-sm-offset-1" style="margin-bottom: 10px;">
+				<script type="text/javascript">
+				    var cpro_id="u2199079";
+				    (window["cproStyleApi"] = window["cproStyleApi"] || {})[cpro_id]={at:"3",rsi0:"300",rsi1:"250",pat:"17",tn:"baiduCustNativeAD",rss1:"#FFFFFF",conBW:"1",adp:"1",ptt:"0",titFF:"",titFS:"14",rss2:"#000000",titSU:"0"}
+				</script>
+				<script src="http://cpro.baidustatic.com/cpro/ui/c.js" type="text/javascript"></script>
+		</div>
+		<%} %>
+		
 		<div id="discuss-container" class=" col-sm-10  no-padding" >
 			<jsp:include page="part/discuss/all-discuss.jsp">
-		    	<jsp:param name="sourceBoardName" value="百度网盘搜索"/>
+		    	<jsp:param name="sourceBoardName" value="<%=tagName %>"/>
 		    </jsp:include>
 		</div>
 	</div>
@@ -248,6 +281,15 @@ int curPageNum = start/10+1;
 	<script src="<%=request.getContextPath()%>/myjs/common.js"  ></script>
 	<script src="<%=request.getContextPath()%>/myjs/pan.js" defer="defer"></script>
 	<script src="<%=request.getContextPath()%>/myjs/topic.js" defer="defer"></script>
+ <%
+	 if(request.getRequestURL().indexOf("localhost") <0){
+ %>	
+	<script type="text/javascript">
+    /*搜索推荐*/
+    var cpro_psid = "u2188221";
+	</script>
+	<script src="http://su.bdimg.com/static/dspui/js/f.js"></script>
+	<%} %>
 </body>
 
 </html>

@@ -15,6 +15,8 @@ User loginUser = null;
 String loginUserName = "临时用户";
 String loginUserID = "";
 String loginUserHeadImgUrl = "";
+long fuliScore = 0L;
+
 Object userObj = request.getSession().getAttribute(C.user);
 if (userObj!= null && ((User)userObj).id!=null) {
 	//login user
@@ -28,7 +30,10 @@ if (userObj!= null && ((User)userObj).id!=null) {
 		loginUserID = loginUser.id.toString();
 	}
 	loginUserHeadImgUrl = loginUser.headImgUrl;
+	fuliScore = loginUser.fulidou;
+	request.setAttribute("fuliScore", fuliScore);
 }
 %>
 <input type="hidden" id="loginFlag" value="<%=loginFlag%>">
 <input type="hidden" id="loginUserID" value="<%=loginUserID%>">
+<input type="hidden" id="fuliScore" value="<%=fuliScore%>">

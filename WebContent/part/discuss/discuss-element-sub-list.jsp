@@ -39,23 +39,5 @@ if(StringUtils.isNotBlank(request.getParameter("count"))){
 	}
 	%>
 	
-	<%
-		Discuss pD = ds.byID(primaryDiscussID);
-		String keyword = "";
-		if(pD!=null && StringUtils.isNotBlank(pD.message)){
-			keyword = pD.message;
-			
-			if(keyword.length()<8){
-			%>
-			<jsp:include page="discuss-element-auto.jsp">
-				<jsp:param name="keyword" value='<%=keyword%>'/> 
-			</jsp:include>	
-			<%
-			}
-		}
-		else{
-			out.println("pD is null ");
-		}
-	%>
 </div>
 	 

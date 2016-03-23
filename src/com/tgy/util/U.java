@@ -472,14 +472,14 @@ public class U {
 	public static String dateTimeShort(String datetime) {
 		if (StringUtils.isNotBlank(datetime)) {
 			try {
-				String today = U.date();
-				if(datetime.contains(today)){//当天的，省略掉日期
-					datetime = datetime.replace(today, "");
-					return StringUtils.substringBeforeLast(datetime,":");
-				}
-				else{
+//				String today = U.date();
+//				if(datetime.contains(today)){//当天的，省略掉日期
+//					datetime = datetime.replace(today, "");
+//					return StringUtils.substringBeforeLast(datetime,":");
+//				}
+//				else{
 					return  StringUtils.substringBeforeLast(StringUtils.substringAfter(datetime, "-"), ":");  
-				}
+//				}
 				
 			} catch (Exception e) {
 				// not date, do nothing
@@ -519,6 +519,11 @@ public class U {
 	// return sdf.format(cal.getTime()) ;
 	// }
 
+	public static int parseInt(Object obj) {
+		String str = String.valueOf(obj);
+		return parseInt(str);
+	}
+	
 	// str -> int
 	public static int parseInt(String str) {
 		if (StringUtils.isBlank(str)) {

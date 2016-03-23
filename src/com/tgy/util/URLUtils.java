@@ -1,5 +1,8 @@
 package com.tgy.util;
 
+import java.net.MalformedURLException;
+import java.net.URL;
+
 import org.apache.commons.lang3.StringUtils;
 
 
@@ -15,6 +18,17 @@ public class URLUtils {
 		return false;
 	}
 	
+	public static boolean isValid2(String url){
+		if(StringUtils.isBlank(url)){
+			return false;
+		}
+		try {
+			URL url1 =  new URL(url );
+		} catch (MalformedURLException e) {
+			return false;
+		}
+		return true;
+	}
 	/**
 	 * 将不规范的url 转为 规范的, http开头的
 	 * @param url

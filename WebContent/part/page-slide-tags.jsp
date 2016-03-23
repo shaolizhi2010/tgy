@@ -30,10 +30,10 @@ else{
 }
 %>
 <div id="" class="container col-sm-12 clearfix"
-	style="padding: 2px; padding-left: 20px;padding-bottom: 10px; margin-bottom: 20px;  border-bottom: 1px solid #eee;">
+	style="padding: 2px; padding-left: 20px;padding-bottom: 10px; margin-bottom: 20px;   ">
 	
 		<div class="">
-			<span style="font-size: 13px;font-weight: bold;">热点标签</span>
+			<span style="font-size: 13px;font-weight: bold;">热点专题</span>
 		</div>
 	
 	<%
@@ -48,7 +48,9 @@ else{
 			<%
 		}
 	%>
-
+				<div class="col-md-12   topic-row-title " >
+					<a class="pull-right " style="margin-right:10px; "  href="<%=request.getContextPath()%>/topic"  >[ >>查看全部专题]</a>
+				</div>
 </div>
 
 

@@ -33,7 +33,7 @@
 		 
 	}
 	
-	String desc = "网盘盒子，百度网盘分享 百度网盘搜索";
+	String desc = "网盘盒子，动漫百度盘 美剧百度盘 电影百度盘 游戏百度盘等百度盘分享下载";
 	if(metaWord!=null){
 		desc = metaWord+" - " + desc;
 	}
@@ -53,8 +53,7 @@
 <meta name='keywords' content='<%=keyword%>'/>
 <meta http-equiv="Content-Language" content="zh-CN" />
 <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-<meta name='TTUNION_verify' content='38e8c8ce307dc868f14f9a3fafff72fd'>
-<meta name="baidu_union_verify" content="1e072fca0862723b8454eabb2cdca0bf">
+<meta name="360_union_verify" content="4c97f9c47ed923e1b134e74d5525697b">
 <link rel="sitemap" type="application/xml" title="Sitemap" href="Sitemap.txt" />
-<link rel="shortcut icon"   href="images/favicon.ico" />
-<link rel="icon"  href="favicon.ico" />
+<link rel="shortcut icon"   href="http://www.webhezi.com/images/favicon.ico" />
+<link rel="icon"  href="http://www.webhezi.com/images/favicon.ico" />

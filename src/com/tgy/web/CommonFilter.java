@@ -18,6 +18,7 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang3.StringEscapeUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import com.tgy.util.U;
@@ -116,7 +117,7 @@ public class CommonFilter implements Filter {
 		}
 		*/
 		//redirect end
-		
+		//StringEscapeUtils.escapee
 		//System.out.println("EncodingFilter : default charset is "+Charset.defaultCharset());
 		
 		//System.out.println("do filter");
@@ -143,6 +144,19 @@ public class CommonFilter implements Filter {
 		}
 		*/
 		
+		Map<String, String[]> map = req.getParameterMap();
+		for(String key : map.keySet()){
+			String values[] = map.get(key);
+			for( int i=0 ;i<values.length;i++){
+				values[i] = StringEscapeUtils.escapeEcmaScript(values[i]);
+				values[i] = StringEscapeUtils.escapeJava( values[i]);
+				values[i] = StringEscapeUtils.escapeJson(values[i]);
+				values[i] = StringEscapeUtils.escapeHtml3(values[i]);
+				values[i] = StringEscapeUtils.escapeHtml4(values[i]);
+				//StringEscapeUtils.escapesql
+			}
+		}
+		
 		//depends on container, sometime not work 
 		res.setCharacterEncoding("UTF-8");
 		
@@ -159,7 +173,7 @@ public class CommonFilter implements Filter {
 		if(!StringUtils.contains(refer, websiteStr))return false;
 			
 		try {
-			refer  = URLDecoder.decode(refer,"UTF-8");
+			refer  = URLDecoder.decode(refer.replaceAll("%", "%25"),"UTF-8");
 		} catch (UnsupportedEncodingException e) {
 			System.out.println("CommonFiltr : keywordChain : Decode refer失败" + refer);
 			return false;

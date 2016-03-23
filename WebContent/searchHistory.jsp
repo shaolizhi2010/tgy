@@ -119,7 +119,7 @@
 			 	<div class="col-sm-12 no-padding"  >
 			 		<span style=" color:#747F8C;font-size: 20px;">网盘分享 - 最新百度网盘搜索</span>
 			 		<a class="pull-right " href="#create-share-link" >
-			 			<span class=" myBtn" style="">[发布分享]</span></a>
+			 			<span class=" myBtn" style="font-size: 20px;">[发布分享]</span></a>
 			  	</div>
 			  	<!-- 
 			  	 	<span style=" color:#333;font-size: 13px;font-weight: bold;">网友分享的文章</span>

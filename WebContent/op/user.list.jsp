@@ -46,13 +46,12 @@
 						<thead>
 							<tr class="success">
 								<th>会员</th>
-								<th>robot?</th>
+								<th>福利豆</th>
+								<th>在线时长</th>
+								<th>登录次数</th>
+								<th>上次登录时间</th>
 								<th>注册时间</th>
 								<th>openid</th>
-								<th>上次登录时间</th>
-								<th>istemp</th>
-								<th>登录次数</th>
-								<th>访问次数</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -61,7 +60,7 @@
 								UserService userService = new UserService();
 								
 								
-								List<User> users = userService.list("-createDate",150);
+								List<User> users = userService.list("-lastLoginDate",150);
 								
 								 for(User user: users){
 									 
@@ -70,25 +69,23 @@
 							<tr class="">
 								<td><a href="<%=request.getContextPath()%>/u/<%=user.id%>"><%= user.name %></a>								</td>
 								<td> 
-									<%=user.isRobot%>
+									<%=user.fulidou%>
 								 </td>
 								<td> 
-									<%=user.createDate%>
-								 </td>
-								<td> 
-									<%=user.openID%>
-								 </td>
-								 <td> 
-									<%=user.lastLoginDate%>
-								 </td>
-								<td> 
-									<%=user.isTemp%>
+									<%=user.totalOnlineTime%>
 								 </td>
 								 								<td> 
 									<%=user.loginTimes%>
 								 </td>
-								 								<td> 
-									<%=user.showTimes%>
+								  <td> 
+									<%=user.lastLoginDate%>
+								 </td>
+								 <td> 
+									<%=user.createDate%>
+								 </td>
+
+								 <td> 
+									<%=user.openID%>
 								 </td>
 							</tr>
 							<%

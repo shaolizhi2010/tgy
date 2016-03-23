@@ -26,7 +26,7 @@ if (showUserNameShort != null && showUserNameShort.length() > 8) {
 	<div id="logo" class="col-sm-2 no-padding">
 		<a href="/" title="网址收藏 网站分享"><span>网盘盒子</span> </a>
 	</div> 
-	<div id="god-div" class="col-sm-6 col-xs-0 no-padding hidden-xs "> 
+	<div id="god-div" class="col-sm-5 col-xs-0 no-padding hidden-xs "> 
 		
 		<div id="pan-search-input" class="col-sm-11 col-sm-offset-1 ">
 			<div  class="col-sm-9   no-padding" >
@@ -35,7 +35,7 @@ if (showUserNameShort != null && showUserNameShort.length() > 8) {
 			</div>
 			<div class="col-sm-3">
 				<input class="btn btn-primary col-sm-12" style="height: 40px;border-radius:3px;" onclick="panSearch()" 
-					 type="button" value="搜索网盘">
+					 type="button" value="搜索资源">
 			</div>
 		</div>
 
@@ -43,9 +43,9 @@ if (showUserNameShort != null && showUserNameShort.length() > 8) {
 	</div>
  
 	<% if (loginFlag) { %>
-		<div id= "user-operation-div" class="col-sm-2 col-sm-offset-2 hidden-xs no-padding">
-	   		<a id= "user-operation-btn" class="col-sm-12  hoverAble2" href="<%=request.getContextPath() %>/u/<%=loginUserID %>" 
-				title="<%=loginUserName%>">
+		<div id= "user-operation-div" class="col-sm-4 col-sm-offset-1   no-padding">
+	   		<a id= "user-operation-btn" class="col-sm-8 user-operation-btn  " href="javascript:void(0)" 
+				title="">
 				<%
 					if(StringUtils.isBlank(loginUserHeadImgUrl)){
 						%>
@@ -59,18 +59,23 @@ if (showUserNameShort != null && showUserNameShort.length() > 8) {
 					}
 				%> 
 				
-				 <%=loginUserNameShow%>
-				 <span class="caret"></span>
+				 <%=loginUserNameShow%> 
+				 
+				 <span style="font-size: 12px;color: orange;"  >( <%=fuliScore %> 福利豆 )</span>
+				  
 			</a>
+			<a class="col-sm-3 user-operation-btn" href="#" onclick="logoutFunction()" style="font-size: 12px;padding-top: 15px;">[退出]</a>
+			<!-- 
 			<div id= "user-operation-content" class="col-sm-12 no-padding "  style="">
 		 		<a onclick="preLoginFunction()" class="hoverAble2" href="#" style="">切换账号</a>
 		 		<a onclick="logoutFunction()" class="hoverAble2" href="#" style="">注销</a>
 			</div>
+			 -->
 		</div>
 	<%
 		} else {
 	%>
-	<div class="col-sm-3 col-sm-offset-1 hidden-xs" style="font-size: 12px; color: #555;">
+	<div class="col-sm-3 col-sm-offset-1  " style="font-size: 12px; color: #555;">
 		
 		<a style="float:right;display: block;margin-left: 5px; margin-top: 10px;" title="使用QQ登录" href="https://graph.qq.com/oauth2.0/authorize?response_type=code&client_id=101171952&redirect_uri=http://www.webhezi.com/qqcallback.jsp&state=test">
 			<img alt="使用QQ帐号登录" style="height: 35px;;width: 35px;" src="<%=request.getContextPath() %>/images/qq-login.jpg">

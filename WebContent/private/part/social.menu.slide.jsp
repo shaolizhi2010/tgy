@@ -5,19 +5,10 @@
 				<div class="sub-page-body no-padding col-sm-12 menu-slide-tabs">
 					<div class="col-sm-12  ">
 						<a id="menu-personal-social-follows" class="col-sm-12 menu-slide-tab hoverAble" href="<%=request.getContextPath()%>/private/personal.follows.jsp" >
-			 	 			<span style="">我的关注</span> 
+			 	 			<span style="">我的主页</span> 
 			 	 		</a>
 					</div>
-					<div class="col-sm-12  ">
-						<a id="menu-personal-social-fans"  class="col-sm-12 menu-slide-tab hoverAble" href="<%=request.getContextPath()%>/private/personal.fans.jsp" >
-			 	 			<span style=" ">我的粉丝</span> 
-			 	 		</a>
-					</div>
-					<div class="col-sm-12  ">
-						<a id="menu-personal-social-visitors" class="col-sm-12 menu-slide-tab hoverAble" href="<%=request.getContextPath()%>/private/personal.visitors.jsp" >
-			 	 			<span style=" ">访问过我</span> 
-			 	 		</a>
-					</div>
+					 
 					<!-- 
 					<div class="col-sm-12  ">
 						<a class="col-sm-12 menu-slide-tab hoverAble" href="<%=request.getContextPath()%>/index-hot-link.jsp" >

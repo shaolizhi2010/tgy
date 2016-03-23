@@ -1,3 +1,67 @@
+<div class=" col-sm-3  hidden-xs  no-padding shareElement-comment"  >
+			<div class="pageElement-reply-content extendable"  >
+				<%
+				 
+					List<Reply> replies = AppCache.repliesByToID(a.id.toString()); 
+				
+					if(CollectionUtils.isEmpty(replies)){ //无回复
+						String pageNameTrimed = StringUtils.replace(pageName, "_免费高速下载|百度云","");
+						if(StringUtils.length(pageNameTrimed)<10){
+						--%>
+							小盒  回复: <a target="_blank" href="<%=request.getContextPath()%>/pan/<%=pageNameTrimed %>">百度盘搜:<%=pageNameTrimed %></a><br/>
+						<%	
+						}else{
+						%>
+							暂无回复<br/>	
+						<%
+						}
+						 
+					}
+					else{ //有回复
+						for(Reply reply : replies){
+							String from = PageReplyUtils.fromUserName(reply);
+							String msg = U.addLinkForMessage(reply.content);
+							%> <%=from%> 回复: <%=msg%> <br/><br/><%
+						}
+					}
+				
+				 
+				%>
+			</div>
+			 
+			<div class="pageElement-reply-textarea-div col-sm-11"  style="display: none;" >
+			</div>
+		</div>
+
+<%
+		Discuss pD = ds.byID(primaryDiscussID);
+		String keyword = "";
+		if(pD!=null && StringUtils.isNotBlank(pD.message)){
+			keyword = pD.message;
+			
+			if(keyword.length()<8){
+			--%>
+			<jsp:include page="discuss-element-auto.jsp">
+				<jsp:param name="keyword" value='<%=keyword%>'/> 
+			</jsp:include>	
+			<%
+			}
+		}
+		else{
+			out.println("pD is null ");
+		}
+	%>
+
+
+<% if(a.needFulidou>=0) {%> 
+					onclick="checkFulidou('<%=url%>',<%=5%>)" href="#"
+				<%} else{
+					%>
+					href="<%=url%>"  target="_blank" 
+					<%
+				}
+				%>
+
 <div class="col-sm-12" >
 			
 			<%

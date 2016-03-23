@@ -37,6 +37,7 @@ public class Page extends BasePage {
 	
 	public String lastReplyTime;
 	
+	public int needFulidou ;
 	
 	//type is wang pan
 	//empty

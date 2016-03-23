@@ -69,8 +69,8 @@ public class App {
 //			}
 			if(ds==null){
 				
-				MongoCredential credential = MongoCredential.createMongoCRCredential(mogoUserName, "admin", mogoPassword.toCharArray());
-				ServerAddress address = new ServerAddress("127.0.0.1");
+				MongoCredential credential = MongoCredential.createMongoCRCredential("root", "admin", "cake4you".toCharArray());
+				ServerAddress address = new ServerAddress("127.0.0.1");// 123.56.123.54 127.0.0.1
 				client = new MongoClient(address,Arrays.asList(credential));
 				
 //				new Morphia().createDatastore(mongoClient, dbName)

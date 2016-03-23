@@ -184,6 +184,47 @@ var afterLogin = function(url){
 		location.href = url;
 	}
 }
+var checkFulidou = function(pageID,url,needFulidou){
+ 
+	if(!($('#loginFlag').val()=='true')){
+		alert('此资源需要 '+ needFulidou+' 个福利豆 哦亲，需要登陆并且有福利豆哦！~');
+		return;
+	}
+	else 	if(isNaN( $('#fuliScore').val() )){
+		alert('您的福利豆不够哦亲，快快发布资源赚福利豆吧！~');
+		return;
+	}
+	else if( parseInt($('#fuliScore').val())   < needFulidou ){
+
+		alert('您的福利豆不够哦亲，快快发布资源赚福利豆吧！~');
+		return;
+	}
+	else{ //已改 一般不会走到这个逻辑
+		location.href = url;
+		
+		//$('#tempHiddenLink').attr('href',url);
+		//$('#tempHiddenLink').click();
+		
+		//alert( $(this).attr('data-id') );
+		$.ajax({
+			url : $('#contextPath').val() + "/fulidou/consume",
+			method : "POST",
+			data : {
+				"pageID" : pageID
+			}
+		});
+	}
+}
+
+var consumeFulidou = function(pageID){
+	$.ajax({
+		url : $('#contextPath').val() + "/fulidou/consume",
+		method : "POST",
+		data : {
+			"pageID" : pageID
+		}
+	});
+}
 var loginFunction = function() {
 	$.ajax({
 		url : $('#contextPath').val() + "/user/login",

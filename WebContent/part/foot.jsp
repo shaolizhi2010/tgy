@@ -7,6 +7,7 @@
   <div   class="container col-sm-12 "
 	style="padding: 10px; padding-bottom:30px;  margin-top: 140px; border: 2px solid #eee;background-color: #fdfdfd;">
 	<h4>友情链接：</h4>
+	 <a target="_blank" style=" margin-left: 10px;margin-right: 10px;" href="http://pan.baidu.com/">百度云</a>
 	 <a target="_blank" style=" margin-left: 10px;margin-right: 10px;" href="http://so.baiduyun.me/">百度网盘搜索</a>
 	 <a target="_blank" style=" margin-left: 10px;margin-right: 10px;" href="http://www.wangpansou.cn/">网盘搜</a>
 	 <a target="_blank" style=" margin-left: 10px;margin-right: 10px;" href="http://www.pansou.com/">PanSou盘搜</a>
@@ -15,15 +16,17 @@
 	<a target="_blank" style=" margin-left: 10px;margin-right: 10px;" href="http://wowenda.com/">百度网盘之家</a>
 	<a target="_blank" style=" margin-left: 10px;margin-right: 10px;" href="http://www.friok.com/">百度网盘资源</a>
 	<a target="_blank" style=" margin-left: 10px;margin-right: 10px;" href="http://www.sobaidupan.com/">搜百度盘</a>
-	<a target="_blank" style=" margin-left: 10px;margin-right: 10px;" href="http://www.dm456.com">动漫456</a>
+	<a target="_blank" style=" margin-left: 10px;margin-right: 10px;" href="http://www.mh1234.com/">复仇高中</a>
 	<a target="_blank" style=" margin-left: 10px;margin-right: 10px;" href="http://www.iqiyi.com/dongman/">爱奇艺动漫</a>
 	<a target="_blank" style=" margin-left: 10px;margin-right: 10px;" href="http://www.bilibili.com/">哔哩哔哩</a>
 	<a target="_blank" style=" margin-left: 10px;margin-right: 10px;" href="http://www.acfun.tv/">AcFun</a>
 	<a target="_blank" style=" margin-left: 10px;margin-right: 10px;" href="http://rrmj.tv/">人人美剧</a>
 	<a target="_blank" style=" margin-left: 10px;margin-right: 10px;" href="http://www.ttmeiju.com/">天天美剧</a>
 	<a target="_blank" style=" margin-left: 10px;margin-right: 10px;" href="http://www.u17.com/">有妖气</a>
-	
-	
+	<a target="_blank" style=" margin-left: 10px;margin-right: 10px;" href="http://www.repiankk.com/">热片看看</a>
+	<a target="_blank" style=" margin-left: 10px;margin-right: 10px;" href="http://www.pjnyy.com/">电影院加盟</a>
+	<a target="_blank" style=" margin-left: 10px;margin-right: 10px;" href="http://www.096.me/">名人简介</a>
+	<a target="_blank" style=" margin-left: 10px;margin-right: 10px;" href="http://www.lobias.com/">路边社</a>
 	<!-- 
 	<div class="col-sm-12 " style="padding-bottom: 10px; border-bottom: 1px solid #eee;">
 		<img style="width: 33px;height: 33px;" data-original="http://g.tbcdn.cn/trip/tools/img/favicon.ico" />
@@ -63,8 +66,8 @@
 			<h1 class="  col-sm-4"style="font-size:50px; text-align:center;color:#0e959d;">网盘盒子</h1>
 
 			<div class="thumbnail col-sm-2" style="border: none;">
-               <a href="http://app.zhui.cn/Soft/Down/Last/OTA/3284990/new.aspx">
-               	<img class=" " style="height: 80px;width: 80px;"  alt=" " src="<%=request.getContextPath() %>/images/code/androidCode.png" />
+               <a href="http://www.webhezi.com/app/webhezi.apk">
+               	<img class=" " style="height: 80px;width: 80px;"  alt=" " src="<%=request.getContextPath() %>/images/code/webhezi-download-code.png" />
                </a>	
                <p style="text-align:center;font-size: 14px;">Android
                </p>
@@ -109,7 +112,7 @@
   
 <div id="footer" class="container col-sm-12 "
 	style="padding: 3px;  text-align: center;margin-top:  40px;">
-	<span style="color: #ccc;font-size: 12px;">@2014-2015  网盘盒子 辽ICP备13008200号-3,E-mail:2350233623@qq.com</span> 
+	<span style="color: #ccc;font-size: 12px;">@2014-2016  网盘盒子 辽ICP备13008200号-3,E-mail:53733522@qq.com</span> 
 </div>
  
 <!-- 
@@ -118,37 +121,30 @@
  <%
  if(request.getRequestURL().indexOf("localhost") <0){
 	 %>
-	  <script>
-			var _hmt = _hmt || [];
-			(function() {
-			  var hm = document.createElement("script");
-			  hm.src = "//hm.baidu.com/hm.js?999632e3a1866b83e17f01047bfe0ded";
-			  var s = document.getElementsByTagName("script")[0]; 
-			  s.parentNode.insertBefore(hm, s);
-			})();
+		
+		<script>
+		var _hmt = _hmt || [];
+		(function() {
+		  var hm = document.createElement("script");
+		  hm.src = "//hm.baidu.com/hm.js?636881ce9fd7d5c3c52ce8dfc9fdb9d1";
+		  var s = document.getElementsByTagName("script")[0]; 
+		  s.parentNode.insertBefore(hm, s);
+		})();
 		</script>
+
+<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1257838059'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s95.cnzz.com/z_stat.php%3Fid%3D1257838059' type='text/javascript'%3E%3C/script%3E"));</script>
+
+
+<script type="text/javascript">
+    /* 内文*/
+var cpro_id = "u2188233";
+</script>
+<script src="http://cpro.baidustatic.com/cpro/ui/cnw.js" type="text/javascript"></script>
+		
 	 <%
  }
  %>
-
-<script type="text/javascript">
-    (function(win,doc){
-        var s = doc.createElement("script"), h = doc.getElementsByTagName("head")[0];
-        if (!win.alimamatk_show) {
-            s.charset = "gbk";
-            s.async = true;
-            s.src = "http://a.alimama.cn/tkapi.js";
-            h.insertBefore(s, h.firstChild);
-        };
-        var o = {
-            pid: "mm_41911274_8730892_30296123",/*推广单元ID，用于区分不同的推广渠道*/
-            appkey: "",/*通过TOP平台申请的appkey，设置后引导成交会关联appkey*/
-            unid: "",/*自定义统计字段*/
-            type: "click" /* click 组件的入口标志 （使用click组建必设）*/
-        };
-        win.alimamatk_onload = win.alimamatk_onload || [];
-        win.alimamatk_onload.push(o);
-    })(window,document);
-</script>
- 
-
+		
+		 <!-- 广告位：悬浮 底搜 
+		<script type="text/javascript">BAIDU_CLB_fillSlot("1106543");</script>
+		-->

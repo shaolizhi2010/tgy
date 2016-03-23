@@ -25,7 +25,6 @@ public class TopicService {
 	public Topic byID(String id) {
 		return dao.byID(id);
 	}
-	
 
 	public Topic byTitle(String title) {
 		return get(Topic.class, new ConditionMap().add("title", title));

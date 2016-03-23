@@ -14,12 +14,15 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.tgy.dao.UserDao;
 import com.tgy.entity.Folder;
+import com.tgy.entity.Online;
 import com.tgy.entity.Page;
 import com.tgy.entity.User;
 import com.tgy.exception.BaseException;
 import com.tgy.service.FolderService;
 import com.tgy.service.InitUserService;
+import com.tgy.service.OnlineService;
 import com.tgy.service.PageService;
+import com.tgy.service.UserService;
 import com.tgy.util.C;
 import com.tgy.util.MD5Util;
 import com.tgy.util.U;
@@ -63,10 +66,12 @@ public class CreateUserContoller extends HttpServlet {
 		user.password = MD5Util.toMD5(user.password);
 		user.createDate = U.dateTime();
 
-		new UserDao().save(user);
+		UserService userService = new UserService();
+		userService.save(user);
+		req.getSession().setAttribute(C.userID, user.id.toString());
 		req.getSession().setAttribute(C.user, user);
 		
-		new InitUserService().initUser(user.id.toString());
+//		new InitUserService().initUser(user.id.toString());
 		
 
 		Cookie cookie = new Cookie("lastLoginUserID", user.id.toString());
@@ -79,6 +84,17 @@ public class CreateUserContoller extends HttpServlet {
 		res.addCookie(cookie2);
 		
 		U.resSuccess(res);
+		
+		OnlineService os = new OnlineService();
+		Online online = new Online();
+		online.userID = user.id.toString();
+		online.visitTimestamp = System.currentTimeMillis();
+		os.save(online);
+		
+		user.loginTimes++;
+		user.lastLoginDate = U.dateTime();
+		
+		userService.save(user);
 	}
 
 	@RequestMapping(value = { "/user/create/temp" })

@@ -10,7 +10,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.tgy.dao.UserDao;
+import com.tgy.entity.Online;
 import com.tgy.entity.User;
+import com.tgy.service.OnlineService;
 import com.tgy.service.UserService;
 import com.tgy.util.C;
 import com.tgy.util.MD5Util;
@@ -47,25 +49,35 @@ public class LoginContoller extends HttpServlet {
 
 			Cookie cookie = new Cookie("lastLoginUserID", loginUser.id.toString());
 			cookie.setPath("/");
+			cookie.setMaxAge(Integer.MAX_VALUE);
 			res.addCookie(cookie);
 			
 			Cookie cookie2 = new Cookie("lastPsCode",  loginUser.password );
 			cookie2.setPath("/");
+			cookie2.setMaxAge(Integer.MAX_VALUE);
 			res.addCookie(cookie2);
  
 			// login success
 			//U.refreshSession(req.getSession());
 			req.getSession().invalidate();
-			//req.getSession().setAttribute(C.userID, loginUser.id);
+			req.getSession().setAttribute(C.userID, loginUser.id.toString());
 			req.getSession().setAttribute(C.user, loginUser);
  
 			
 			//U.forward(req, res, "/"+loginUser.name);
 			 
 			U.resSuccess(res);
-			//loginUser.loginTimes++;
-			//loginUser.lastLoginDate = U.dateTime();
-			//userService.save(loginUser);
+			
+			OnlineService os = new OnlineService();
+			Online online = new Online();
+			online.userID = loginUser.id.toString();
+			online.visitTimestamp = System.currentTimeMillis();
+			os.save(online);
+			
+			loginUser.loginTimes++;
+			loginUser.lastLoginDate = U.dateTime();
+			userService.save(loginUser);
+			
 		} else {
 			U.message(res, "用户名或密码错误");
 			return;

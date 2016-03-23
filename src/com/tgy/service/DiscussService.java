@@ -17,6 +17,8 @@ import com.mongodb.WriteConcern;
 import com.mongodb.WriteResult;
 import com.tgy.dao.DiscussDao;
 import com.tgy.entity.Discuss;
+import com.tgy.entity.Page;
+import com.tgy.util.ConditionMap;
 import com.tgy.util.U;
 
 public class DiscussService {
@@ -28,6 +30,10 @@ public class DiscussService {
 
 	public Discuss get(Map<String, Object> conditions) {
 		return dao.get(Discuss.class, conditions);
+	}
+	
+	public List<Discuss> byUserID(String userID){
+		return dao.list(Discuss.class, new ConditionMap().add("userID", userID), null, 0, 0);
 	}
 
 	public List<Discuss> list(  Map<String, Object> conditions,

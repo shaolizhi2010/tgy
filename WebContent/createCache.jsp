@@ -12,19 +12,19 @@ String url = U.filterCharacter(request.getParameter("url"));
 String key = U.filterCharacter(request.getParameter("key"));
 
 if(StringUtils.isNotBlank(name)){
-	name = URLDecoder.decode(name, "utf-8");
+	name = URLDecoder.decode(name.replaceAll("%", "%25"), "utf-8");
 }
 if(StringUtils.isNotBlank(comment)){
-	comment = URLDecoder.decode(comment, "utf-8");
+	comment = URLDecoder.decode(comment.replaceAll("%", "%25"), "utf-8");
 }
 if(StringUtils.isNotBlank(imgSrc)){
-	imgSrc = URLDecoder.decode(imgSrc, "utf-8");
+	imgSrc = URLDecoder.decode(imgSrc.replaceAll("%", "%25"), "utf-8");
 }
 if(StringUtils.isNotBlank(url)){
-	url = URLDecoder.decode(url, "utf-8");
+	url = URLDecoder.decode(url.replaceAll("%", "%25"), "utf-8");
 }
 if(StringUtils.isNotBlank(key)){
-	key = URLDecoder.decode(key, "utf-8");
+	key = URLDecoder.decode(key.replaceAll("%", "%25"), "utf-8");
 }
 PanSearchCacheService s = new PanSearchCacheService();
 

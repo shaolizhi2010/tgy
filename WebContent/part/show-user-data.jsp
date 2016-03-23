@@ -15,6 +15,7 @@ User showUser = null;
 String showUserName = "";
 String showUserID="";
 String showUserHeadImgUrl = "";
+
 if(request.getAttribute("showUser")!=null){
 	showUser =  (User)request.getAttribute("showUser");
 	showUserName = showUser.name;
@@ -23,7 +24,9 @@ if(request.getAttribute("showUser")!=null){
 		showUserID =  showUser.id.toString();
 	}
 	showUserHeadImgUrl = showUser.headImgUrl;
+	
 }
+ 
 boolean isSelf = false;//用户已登陆并且用户是在查看自己的收藏夹
 if(request.getAttribute("isSelf")!=null && (Boolean)request.getAttribute("isSelf")==true ){
 	isSelf = true;

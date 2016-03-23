@@ -12,6 +12,8 @@ import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.DefaultHttpClient;
 
 import com.tgy.App;
 import com.tgy.service.WebInfo;
@@ -49,25 +51,41 @@ public class WebInfoUtil {
 
 		WebInfo info = new WebInfo();
 
+		HttpClient httpclient = new DefaultHttpClient();
+		HttpPost httppost = null;
+		
 		try {
 			long starttime = System.currentTimeMillis();
-			HttpClient httpclient = App.getInstance().getHttpClient();
-			HttpGet httpget = null;
+//			HttpClient httpclient = App.getInstance().getHttpClient();
+
+//			HttpGet httpget = null;
+//			
+//			String baseUrl = URLUtils.getBaseUrl(url);
+//			String formatedUrl = URLUtils.getFormatedUrl(url);
+//			//formatedUrl = URLEncoder.encode(formatedUrl, "UTF-8");
+//			httpget = new HttpGet(formatedUrl);
+//			httpget.setHeader("Accept",
+//					"text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8");
+//			 httpget.setHeader("Accept-Language", "zh-CN");
+//			httpget.setHeader("Accept-Charset", "UTF-8");
+//			httpget.setHeader("Referer", baseUrl); // 模拟浏览器//TODO
+			
+		
 			
 			String baseUrl = URLUtils.getBaseUrl(url);
 			String formatedUrl = URLUtils.getFormatedUrl(url);
 			//formatedUrl = URLEncoder.encode(formatedUrl, "UTF-8");
-			httpget = new HttpGet(formatedUrl);
-			httpget.setHeader("Accept",
+			httppost = new HttpPost(formatedUrl);
+			httppost.setHeader("Accept",
 					"text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8");
-			 httpget.setHeader("Accept-Language", "zh-CN");
-			httpget.setHeader("Accept-Charset", "UTF-8");
-			httpget.setHeader("Referer", baseUrl); // 模拟浏览器//TODO
+			httppost.setHeader("Accept-Language", "zh-CN");
+			httppost.setHeader("Accept-Charset", "UTF-8");
+			httppost.setHeader("Referer", url); // 模拟浏览器//TODO
 
 			// L.trace(null,"Connecter start download page, time is " +
 			// starttime );
-			HttpResponse response = httpclient.execute(httpget);
-
+			HttpResponse response = httpclient.execute(httppost);
+			
 			HttpEntity entity = response.getEntity();
 			InputStream is = entity.getContent();
 			// System.out.println( "链接时间 "+(
@@ -92,6 +110,9 @@ public class WebInfoUtil {
 			info.title = StringUtils.trim(getTitle(contentNew));
 			info.description = StringUtils.trim(getDescription(contentNew));
 			
+			httppost.releaseConnection();
+			
+			
 			// icon操作放在后边，加快前台返回速度
 			//if(getIconFlag){//TODO for test 
 			//	info.iconPath = StringUtils.trim(getIconPath(contentNew,url));
@@ -106,6 +127,9 @@ public class WebInfoUtil {
 			System.out.println("WebInfoUtil Exception : "+e.getMessage());
 			//e.printStackTrace();
 			return null;
+		} finally{
+			httpclient = null;
+			httppost = null;
 		}
 	}
 

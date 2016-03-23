@@ -28,6 +28,7 @@ import com.tgy.entity.Folder;
 import com.tgy.entity.Page;
 import com.tgy.exception.BaseException;
 import com.tgy.statistic.entity.Link;
+import com.tgy.util.ConditionMap;
 import com.tgy.util.PageType;
 import com.tgy.util.U;
 
@@ -43,6 +44,14 @@ public class PageService {
 	
 	public Page byID(String id) {
 		return pDao.byID(id);
+	}
+	
+	public List<Page> byUrl(String url){
+		return pDao.list(Page.class, new ConditionMap().add("url", url), null, 0, 0);
+	}
+	
+	public List<Page> byUserID(String userID){
+		return pDao.list(Page.class, new ConditionMap().add("userID", userID), null, 0, 0);
 	}
 
 	public List<Page> list(  Map<String, Object> conditions,
@@ -157,24 +166,24 @@ public class PageService {
 		//save page
 		pDao.saveWithRef(page);
 		
-		if(StringUtils.isBlank(page.name)){
-			
-			LinkDao linkDao = new LinkDao();
-			
-			Link link = linkDao.getByUrl(page.url);
-			if(link == null || StringUtils.isBlank(link.title) ){
-				new Thread(new GetPageInfoThread(page.url, page.id.toString())).start();
-				try { //wait second
-					new Thread().sleep(1000);
-				} catch (InterruptedException e) {
-				}
-			}
-			else{
-				page.name = link.title;
-				pDao.save(page);
-			}
-		
-		}
+//		if(StringUtils.isBlank(page.name)){
+//			
+//			LinkDao linkDao = new LinkDao();
+//			
+//			Link link = linkDao.getByUrl(page.url);
+//			if(link == null || StringUtils.isBlank(link.title) ){
+//				new Thread(new GetPageInfoThread(page.url, page.id.toString())).start();
+//				try { //wait second
+//					new Thread().sleep(1000);
+//				} catch (InterruptedException e) {
+//				}
+//			}
+//			else{
+//				page.name = link.title;
+//				pDao.save(page);
+//			}
+//		
+//		}
 
 		return page;
 

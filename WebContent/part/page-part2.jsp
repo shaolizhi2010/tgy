@@ -35,6 +35,9 @@ String tagName = request.getAttribute("tagName")!=null?(String)request.getAttrib
 		if(p==null || p.id==null){
 			continue;
 		}
+		if( StringUtils.isNoneBlank(p.name ) && p.name.startsWith("百度云")){
+			continue;
+		}
 		request.setAttribute("page-temp", p);
 		%>
 		
@@ -48,9 +51,7 @@ String tagName = request.getAttribute("tagName")!=null?(String)request.getAttrib
  	%>
  	
  	<!-- ad -->
- 	<%--
- 	<jsp:include page="ad/page-ad-template.jsp"/>
- 	 --%>
+ 
  	<!-- ad -->
  	
 	<!-- 翻页 -->
@@ -60,9 +61,8 @@ String tagName = request.getAttribute("tagName")!=null?(String)request.getAttrib
 	</jsp:include>	
 		
 	</div>
-
-	
  		 
 </div>
 <!-- 显示网址页面结束 -->
 <script src="<%=request.getContextPath()%>/myjs/statistic.js" defer="defer"></script>
+<script src="<%=request.getContextPath()%>/myjs/fulidou.js" defer="defer"></script>

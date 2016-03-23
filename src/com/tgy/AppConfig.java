@@ -40,8 +40,15 @@ public class AppConfig extends WebMvcConfigurerAdapter {
 		registry.addResourceHandler("/che/**").addResourceLocations(
 				"/che/**");
 
-	 
- 
+		registry.addResourceHandler("/ext/**").addResourceLocations(
+				"/ext/**");
+		registry.addResourceHandler("/app/**").addResourceLocations(
+				"/app/**");
+		registry.addResourceHandler("/download/**").addResourceLocations(
+				"/download/**");
+		registry.addResourceHandler("/m/**").addResourceLocations(
+				"/m/**");
+		
 //		registry.addResourceHandler("/folder/favicon").addResourceLocations(
 //				"/fonts/**");
 		

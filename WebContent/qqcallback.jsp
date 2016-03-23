@@ -1,3 +1,5 @@
+<%@page import="com.tgy.entity.Online"%>
+<%@page import="com.tgy.service.OnlineService"%>
 <%@page import="com.tgy.service.InitUserService"%>
 <%@page import="com.tgy.util.C"%>
 <%@page import="com.tgy.entity.User"%>
@@ -47,7 +49,7 @@ try{
 		User loginUser = uService.dealWithOpenID(openId, nickname,headImgUrl); 
 		if(loginUser!=null){
 			
-			new InitUserService().initUser(loginUser.id.toString());
+			//new InitUserService().initUser(loginUser.id.toString());
 			
 			Cookie cookie = new Cookie("lastLoginUserID", loginUser.id.toString());
 			cookie.setPath("/");
@@ -63,6 +65,13 @@ try{
 			
 			//req.getSession().setAttribute(C.userID, loginUser.id);
 			session.setAttribute(C.user, loginUser);
+			session.setAttribute(C.userID, loginUser.id.toString());
+			
+			OnlineService os = new OnlineService();
+			Online online = new Online();
+			online.userID = loginUser.id.toString();
+			online.visitTimestamp = System.currentTimeMillis();
+			os.save(online);
 		}
 		//out.println(" nickname : " +nickname);
 		//out.println(" headUrl : " +headUrl);
